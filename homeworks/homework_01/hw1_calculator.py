@@ -32,3 +32,4 @@ def calculator(x, y, operator):
             return x / y
         except TypeError:
             return None
+    return None
