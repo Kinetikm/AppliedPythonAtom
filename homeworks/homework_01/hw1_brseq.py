@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
 
 
 def is_bracket_correct(input_string):
@@ -10,4 +9,17 @@ def is_bracket_correct(input_string):
     :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
     :return: True or False
     '''
-    raise NotImplementedError
+    queue = []
+    n = len(input_string)
+    opn = '{[('
+    cls = '}])'
+    for i in range(n):
+        if input_string[i] in opn:
+            queue.append(input_string[i])
+        else:
+            if len(queue) == 0:
+                return False
+            if opn.find(queue[-1]) != cls.find(input_string[i]):
+                return False
+            queue.pop(-1)
+    return len(queue) == 0
