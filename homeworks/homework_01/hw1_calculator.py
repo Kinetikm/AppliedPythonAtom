@@ -23,6 +23,6 @@ def calculator(x, y, operator):
             else:
                 return x / y
         else:
-            return None
+            return AssertionError
     except TypeError:
         return None
