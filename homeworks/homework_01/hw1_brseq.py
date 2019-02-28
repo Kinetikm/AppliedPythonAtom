@@ -40,3 +40,20 @@ def is_bracket_correct(input_string):
             return False
 
     return not bool(sum(counters.values()))
+
+
+def is_bracket_correct_internet(input_string):
+    """
+    Метод проверяющий является ли поданная скобочная
+     последовательность правильной (скобки открываются и закрываются)
+     не пересекаются
+    :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
+    :return: True or False
+    """
+    while '()' in input_string or '[]' in input_string or '{}' in input_string:
+        input_string = input_string.replace('()', '')
+        input_string = input_string.replace('[]', '')
+        input_string = input_string.replace('{}', '')
+
+    # Возвращаем True, если input_string с пустой строкой
+    return not input_string
