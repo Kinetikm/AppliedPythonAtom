@@ -11,6 +11,11 @@ def calculator(x, y, operator):
     :return: результат операции или None, если операция не выполнима
     """
     try:
+        try:
+            x = x ** 1
+            y = y ** 1
+        except TypeError:
+            return None
         if operator == 'plus':
             return x + y
         elif operator == 'minus':
