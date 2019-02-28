@@ -26,7 +26,7 @@ def calculator(x, y, operator):
         except TypeError:
             return None
     elif operator == 'divide':
-        if x == 0:
+        if y == 0:
             return None
         try:
             return x / y
