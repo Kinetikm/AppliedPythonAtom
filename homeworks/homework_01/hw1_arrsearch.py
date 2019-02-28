@@ -23,10 +23,10 @@ def find_indices(input_list, n):
     for i in range(size):
         if n - input_list[i] != input_list[i]:
             try:
-                return i + 1, mp[n - input_list[i]][0] + 1
+                return i, mp[n - input_list[i]][0]
             except KeyError:
                 continue
         else:
             if len(mp[input_list[i]]) > 1:
-                return mp[input_list[i]][0] + 1, mp[input_list[i]][1] + 1
+                return mp[input_list[i]][0], mp[input_list[i]][1]
     return None
