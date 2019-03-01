@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import sys
 
 
 def simpl(lst):
@@ -12,6 +13,9 @@ def simpl(lst):
     for i in lst:
         ans += simpl(i)
     return ans
+
+
+sys.setrecursionlimit(500000)
 
 
 def invert_dict(source_dict):
