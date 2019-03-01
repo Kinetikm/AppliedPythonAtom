@@ -17,9 +17,7 @@ def find_indices(input_list, n):
     # перенос значений списка в словарь значение - индексы
     input_dict = dict()  # {}
     for i in range(len(input_list)):
-        if not input_dict.get(input_list[i]):
-            input_dict[input_list[i]] = []
-        input_dict[input_list[i]].append(i)
+        input_dict.setdefault(input_list[i], []).append(i)
 
     # если разница n и текущего элемента ссылается
     # на существующий элемент, то получается искомое
