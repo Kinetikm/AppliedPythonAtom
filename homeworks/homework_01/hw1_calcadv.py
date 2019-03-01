@@ -97,7 +97,6 @@ def advanced_calculator(input_string):
         for i in range(len(sequence)):
             if sequence[i] not in '+-*/()':
                 sequence[i] = float(sequence[i])
-
         for i in range(len(sequence) - 1):
             if isinstance(sequence[i], float) \
                     and isinstance(sequence[i + 1], float):
@@ -115,7 +114,8 @@ def advanced_calculator(input_string):
                 # '-','1' -> ' ','-1'
                 sequence[i + 1] *= -1
                 if i == 0 or sequence[i - 1] == '(' \
-                        or sequence[i - 1] == '/':
+                        or sequence[i - 1] == '/' \
+                        or sequence[i - 1] == '*':
                     sequence[i] = ' '
                 else:
                     sequence[i] = '+'
@@ -155,11 +155,11 @@ def advanced_calculator(input_string):
                         output_array.append(operations_stack[-1])
                         operations_stack.pop(-1)
                     operations_stack.append(i)
-
         while len(operations_stack) > 0:
             output_array.append(operations_stack[-1])
             operations_stack.pop()
         stack = []
+        print(output_array)
         for i in output_array:
             if isinstance(i, float):
                 stack.append(i)
@@ -178,5 +178,6 @@ def advanced_calculator(input_string):
             return stack[0]
         else:
             return None
+        return None
     except Exception:
         return None
