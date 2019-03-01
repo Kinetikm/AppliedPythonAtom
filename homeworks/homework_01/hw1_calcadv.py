@@ -56,7 +56,7 @@ def advanced_calculator(input_string):
     input_string = str(input_string)
     input_string = rm(input_string, '  ', ' ')
     for i in range(1, len(input_string) - 1):
-        if input_string[i] == ' '\
+        if input_string[i] == ' ' \
                 and input_string[i - 1] in nums \
                 and input_string[i + 1] in nums:
             return None
@@ -116,7 +116,6 @@ def advanced_calculator(input_string):
                 '/': lambda x, y: x / y,
                 '*': lambda x, y: x * y
                 }
-
     operations_stack = []  # для избежания лишних обращений к try/except
     output_array = []
     for i in sequence:
@@ -130,19 +129,20 @@ def advanced_calculator(input_string):
                     operations_stack.pop(-1)
                     cur = operations_stack[-1]
                 operations_stack.pop()
-            elif len(operations_stack) == 0 or i == '(':
+            elif len(operations_stack) == 0:
                 operations_stack.append(i)
-            elif priority[operations_stack[-1]] >= priority[i]:
-                output_array.append(operations_stack[-1])
-                operations_stack.pop(-1)
-                operations_stack.append(i)
+            elif i == '(':
+                operations_stack.append('(')
             else:
+                while len(operations_stack) > 0 \
+                        and priority[operations_stack[-1]] >= priority[i]:
+                    output_array.append(operations_stack[-1])
+                    operations_stack.pop(-1)
                 operations_stack.append(i)
 
     while len(operations_stack) > 0:
         output_array.append(operations_stack[-1])
         operations_stack.pop()
-
     stack = []
     for i in output_array:
         if isinstance(i, float):
