@@ -9,7 +9,8 @@ def simpl(lst):
     while len(qu) > 0:
         nxt = qu[-1]
         qu.pop()
-        if type(nxt) == type(1) or type(nxt) == type('') or type(nxt) == type(Ellipsis):
+        if type(nxt) in [type(int(1)), type(float(1.0)),
+                         type(''), type(Ellipsis)]:
             ans.append(nxt)
         else:
             for i in nxt:
