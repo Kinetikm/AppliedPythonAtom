@@ -24,6 +24,6 @@ def is_bracket_correct(input_string):
             break
         i += 1
     if index1 == 0 and index2 == 0 and index3 == 0:
-        return 1
+        return True
     else:
-        return 0
+        return False
