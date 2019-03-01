@@ -6,13 +6,14 @@ def simpl(lst):
     ans = list()
     qu = list()
     qu.append(lst)
+    mp = {}
     while len(qu) > 0:
         nxt = qu[-1]
         qu.pop()
-        if type(nxt) in [type(int(1)), type(float(1.0)),
-                         type(''), type(Ellipsis)]:
+        try:
+            mp[nxt] = 1
             ans.append(nxt)
-        else:
+        except TypeError:
             for i in nxt:
                 qu.append(i)
     return ans
