@@ -56,9 +56,10 @@ def advanced_calculator(input_string):
     input_string = str(input_string)
     input_string = rm(input_string, '  ', ' ')
     for i in range(1, len(input_string) - 1):
-        if input_string[i] == ' ' and input_string[i - 1] in nums and input_string[i + 1] in nums:
+        if input_string[i] == ' '\
+                and input_string[i - 1] in nums \
+                and input_string[i + 1] in nums:
             return None
-    input_string = rm(input_string, ' ', '')
     input_string = rm(input_string, ' ', '')
     input_string = rm(input_string, '++', '+')
     input_string = rm(input_string, '--', '+')
@@ -80,6 +81,8 @@ def advanced_calculator(input_string):
     if not is_bracket_correct(input_string):
         return None
     sequence = input_string.split()
+    if len(sequence) == 0:
+        return None
     if sequence[0] == '+':
         sequence = sequence[1::]
     for i in range(len(sequence)):
@@ -87,7 +90,8 @@ def advanced_calculator(input_string):
             sequence[i] = float(sequence[i])
 
     for i in range(len(sequence) - 1):
-        if isinstance(sequence[i], float) and isinstance(sequence[i + 1], float):
+        if isinstance(sequence[i], float) \
+                and isinstance(sequence[i + 1], float):
             return None
         if isinstance(sequence[i], float) and sequence[i + 1] == '(':
             return None
