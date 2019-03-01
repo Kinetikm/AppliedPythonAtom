@@ -2,6 +2,18 @@
 # coding: utf-8
 
 
+def simpl(lst):
+    try:
+        for _ in lst:
+            break
+    except TypeError:
+        return [lst]
+    ans = []
+    for i in lst:
+        ans += simpl(i)
+    return ans
+
+
 def invert_dict(source_dict):
     '''
     Функция которая разворачивает словарь, т.е.
@@ -11,17 +23,11 @@ def invert_dict(source_dict):
     '''
     ans = {}
     for key in source_dict:
-        try:
-            for i in source_dict[key]:
-                ans[i] = []
-        except TypeError:
-            ans[source_dict[key]] = []
+        for i in simpl(source_dict[key]):
+            ans[i] = []
     for key in source_dict:
-        try:
-            for i in source_dict[key]:
-                ans[i].append(key)
-        except TypeError:
-            ans[source_dict[key]].append(key)
+        for i in simpl(source_dict[key]):
+            ans[i].append(key)
     for key in ans:
         try:
             if len(ans[key]) == 1:
