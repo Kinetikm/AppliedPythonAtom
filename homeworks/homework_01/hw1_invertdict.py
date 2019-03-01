@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
-import sys
-sys.setrecursionlimit(100000)
 
 
 def simpl(lst):
-    try:
-        for _ in lst:
-            break
-    except TypeError:
-        return [lst]
-    ans = []
-    for i in lst:
-        ans += simpl(i)
+    ans = list()
+    qu = list()
+    qu.append(lst)
+    while len(qu) > 0:
+        nxt = qu[-1]
+        qu.pop()
+        try:
+            for i in nxt:
+                qu.append(i)
+        except TypeError:
+            ans.append(nxt)
     return ans
 
 
