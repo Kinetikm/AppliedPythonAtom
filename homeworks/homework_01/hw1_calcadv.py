@@ -51,8 +51,8 @@ def advanced_calculator(input_string):
         return None
     try:
         input_string = str(input_string)
-        possible_symbols = '0123456789()-+/*. '
-        nums = '01234567890'
+        possible_symbols = '0123456789()-+/*. 	'
+        nums = '0123456789'
         for i in input_string:
             if i not in possible_symbols:
                 return None
