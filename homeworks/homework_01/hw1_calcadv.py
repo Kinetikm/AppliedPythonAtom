@@ -47,7 +47,8 @@ def advanced_calculator(input_string):
     :param input_string: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
-
+    if input_string is None:
+        return None
     possible_symbols = '0123456789()-+/*. '
     nums = '01234567890'
     for i in input_string:
