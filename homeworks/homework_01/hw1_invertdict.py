@@ -9,4 +9,23 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
-    raise NotImplementedError
+    ans = {}
+    for key in source_dict:
+        try:
+            for i in source_dict[key]:
+                ans[i] = []
+        except TypeError:
+            ans[source_dict[key]] = []
+    for key in source_dict:
+        try:
+            for i in source_dict[key]:
+                ans[i].append(key)
+        except TypeError:
+            ans[source_dict[key]].append(key)
+    for key in ans:
+        try:
+            if len(ans[key]) == 1:
+                ans[key] = ans[key][0]
+        except KeyError:
+            continue
+    return ans
