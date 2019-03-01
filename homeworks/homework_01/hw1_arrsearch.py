@@ -22,6 +22,6 @@ def find_indices(input_list, n):
             if n - input_list[i] in dictionary:
                 return i, dictionary[n - input_list[i]][0]
         else:
-            if len(dictionary[input_list[i]] >= 2):
+            if len(dictionary[input_list[i]]) >= 2:
                 return i, dictionary[input_list[i]][1]
     return None
