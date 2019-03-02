@@ -26,8 +26,3 @@ def calculator(x, y, operator):
     if operator == "mult":
         return x * y 
     return None
-    
-
-    raise NotImplementedError
-
-#print(calculator(140.28,140.28,'power'))
