@@ -24,5 +24,5 @@ def calculator(x, y, operator):
         else:
             return None
     if operator == "mult":
-        return x * y 
+        return x * y
     return None
