@@ -14,6 +14,8 @@ def advanced_calculator(input_string):
     try:
         if type(eval(input_string)) == tuple:
             return None
+        if "[" in input_string or "{" in input_string:
+            return None
         return eval(input_string)
     except:
         return None
