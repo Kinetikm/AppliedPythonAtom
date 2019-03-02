@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+from bisect import bisect_left
 
 
 def find_indices(input_list, n):
@@ -13,4 +14,10 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
-    raise NotImplementedError
+    input_dict = {}
+    for index, el in enumerate(input_list):
+        res = input_dict.get(n - el)
+        if res is not None:
+            return (index, res)
+        input_dict[el] = index
+    return None
