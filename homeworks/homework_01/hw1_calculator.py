@@ -3,6 +3,22 @@
 
 
 def calculator(x, y, operator):
+    try:
+        if operator == 'plus':
+            return x + y
+        elif operator == 'minus':
+            return x - y
+        elif operator == 'mult':
+            return x * y
+        elif operator == 'divide':
+            if y == 0:
+                return None
+            else:
+                return x / y
+        else:
+            return None
+    except Exception:
+        return None
     '''
     Простенький калькулятор в прямом смысле. Работает c числами
     :param x: первый агрумент
@@ -10,4 +26,4 @@ def calculator(x, y, operator):
     :param operator: 4 оператора: plus, minus, mult, divide
     :return: результат операции или None, если операция не выполнима
     '''
-    raise NotImplementedError
+    #raise NotImplementedError
