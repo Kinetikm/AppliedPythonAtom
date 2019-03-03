@@ -22,3 +22,5 @@ def calculator(x, y, operator):
         else:
             return x / y
     raise NotImplementedError
+
+print (calculator(1, 1, "plus"))
