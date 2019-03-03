@@ -11,6 +11,8 @@ def spot_priority(symbol):
         return -1
 
 def advanced_calculator(input_string):
+    if len(input_string) == 0:
+        return None
     i = 0
     minus = 0
     stack = []
