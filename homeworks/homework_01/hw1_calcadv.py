@@ -10,6 +10,7 @@ def spot_priority(symbol):
     else:
         return -1
 
+
 def advanced_calculator(input_string):
     if len(input_string) == 0:
         return None
@@ -47,7 +48,7 @@ def advanced_calculator(input_string):
         else:
             j = spot_priority(input_string[i])
             if j != -1:
-                if input_string[i] == '-' and (i == 0 or input_string[i - 1] == '('): 
+                if input_string[i] == '-' and (i == 0 or input_string[i-1] == '('):
                     if input_string[i+1] == '(':
                         out.append('0')
                         stack.append('-')
