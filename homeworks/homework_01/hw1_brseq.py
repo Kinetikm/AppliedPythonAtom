@@ -4,9 +4,9 @@
 
 def is_bracket_correct(input_string):
     i = 0
-    index1 = 0 # счетчик, отвечающй за ()
-    index2 = 0 # счетчик, отвечающй за []
-    index3 = 0 # счетчик, отвечающй за {}
+    index1 = 0
+    index2 = 0
+    index3 = 0
     while i < len(input_string):
         if input_string[i] == '(':
             index1 += 1
