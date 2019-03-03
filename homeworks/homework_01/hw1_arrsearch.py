@@ -3,14 +3,16 @@
 
 
 def find_indices(input_list, n):
-    '''
-    Метод возвращает индексы двух различных
-    элементов listа, таких, что сумма этих элементов равна
-    n. В случае, если таких элементов в массиве нет,
-    то возвращается None
-    Ограничение по времени O(n)
-    :param input_list: список произвольной длины целых чисел
-    :param n: целевая сумма
-    :return: tuple из двух индексов или None
-    '''
+    d = {} 
+    i = 0
+    while i < len(input_list):
+        d[input_list[i]] = i
+        i += 1
+    i = 0
+    while i < len(input_list):
+        j = d.get(n-input_list[i], -1)
+        if j != i and j != -1:
+            return (i, j)
+        i += 1
+    return None
     raise NotImplementedError
