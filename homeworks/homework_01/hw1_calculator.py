@@ -3,7 +3,7 @@
 
 
 def calculator(x, y, operator):
-    if type(x) != int or type(x) != float or type(y) != int or type(y) != float:
+    if type(x) != int and type(x) != float or type(y) != int and type(y) != float:
         return None
     if operator == "plus":
         return x+y
@@ -19,4 +19,3 @@ def calculator(x, y, operator):
     else:
         return None
     raise NotImplementedError
-    
