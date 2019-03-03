@@ -14,21 +14,21 @@ def is_bracket_correct(input_string):
     sum2 = 0
     sum3 = 0
     for char in input_string:
-    	if char == "{":
-    		sum1 += 1
-    	if char == "}":
-    		sum1 -= 1
-    	if char == "[":
-    		sum2 += 1
-    	if char == "]":
-    		sum2 -= 1
-    	if char == "(":
-    		sum3 += 1
-    	if char == ")":
-    		sum3 -= 1
+        if char == "{":
+            sum1 += 1
+        if char == "}":
+            sum1 -= 1
+        if char == "[":
+            sum2 += 1
+        if char == "]":
+            sum2 -= 1
+        if char == "(":
+            sum3 += 1
+        if char == ")":
+            sum3 -= 1
     if sum1 == 0 and sum2 == 0 and sum3 == 0:
-    	return True
+        return True
     else:
-    	return False
+        return False
 
     raise NotImplementedError
