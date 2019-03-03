@@ -11,4 +11,5 @@ def check_palindrom(input_string):
     False иначе
     '''
     length = len(input_string)
-    return input_string[length//2:] == input_string[:length//2 + length%2][::-1]
+    return input_string[length // 2:] == \
+        input_string[:length // 2 + length % 2][::-1]
