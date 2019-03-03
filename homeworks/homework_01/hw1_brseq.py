@@ -7,16 +7,22 @@ def is_bracket_correct(input_string):
     i = 0
     while i < len(input_string):
         if input_string[i] == '}':
+            if len(stack) == 0:
+                return False
             if stack[len(stack)-1] == '{':
                 stack.pop()
             else:
                 return False
         elif input_string[i] == ']':
+            if len(stack) == 0:
+                return False
             if stack[len(stack)-1] == '[':
                 stack.pop()
             else:
                 return False
         elif input_string[i] == ')':
+            if len(stack) == 0:
+                return False
             if stack[len(stack)-1] == '(':
                 stack.pop()
             else:

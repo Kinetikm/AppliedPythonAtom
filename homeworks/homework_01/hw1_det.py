@@ -11,7 +11,13 @@ def calculate_determinant(list_of_lists):
     result = 0
     i = 0
     if len(list_of_lists) == 2:
-        return list_of_lists[0][0]*list_of_lists[1][1]-list_of_lists[0][1]*list_of_lists[1][0]
+        a11 = list_of_lists[0][0]
+        a22 = list_of_lists[1][1]
+        a12 = list_of_lists[0][1]
+        a21 = list_of_lists[1][0]
+        return a11*a22-a12*a21
+    if len(list_of_lists) == 1:
+        return list_of_lists[0][0]
     while i < len(list_of_lists):
         j = 0
         help_list = list_of_lists.copy()
@@ -27,4 +33,3 @@ def calculate_determinant(list_of_lists):
         i += 1
     return result
     raise NotImplementedError
-
