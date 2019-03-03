@@ -17,6 +17,8 @@ def reverse(number):
     '''
 
     ost = 0
+    if number == 0:
+        return 0
     if number < 0:
         number = -number
         while ost == 0:
