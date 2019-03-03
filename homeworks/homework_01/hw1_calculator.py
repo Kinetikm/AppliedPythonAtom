@@ -26,4 +26,3 @@ def calculator(x, y, operator):
         if operator == "divide":
             return x / y
     return None
-
