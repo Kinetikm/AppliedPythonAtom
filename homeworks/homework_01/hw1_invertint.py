@@ -3,7 +3,7 @@
 
 
 def reverse(number):
-    '''
+    """
     Метод, принимающий
     на вход
     int и
@@ -14,7 +14,7 @@ def reverse(number):
      исходное число
     :return:
     инвертированное число
-    '''
+    """
 
     ost = 0
     if number == 0:
