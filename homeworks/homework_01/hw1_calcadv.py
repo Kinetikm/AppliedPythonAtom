@@ -14,6 +14,8 @@ def spot_priority(symbol):
 def advanced_calculator(input_string):
     if len(input_string) == 0:
         return None
+    if len(input_string) == 1 and not input_string.isdigit():
+        return None
     i = 0
     minus = 0
     stack = []
@@ -92,24 +94,24 @@ def advanced_calculator(input_string):
                 return None
             if out[i] == '+':
                 out.pop(i)
-                out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
+                out.insert(i-2, out.pop(i-1)+out.pop(i-2))
                 i -= 1
             elif out[i] == '-':
                 out.pop(i)
-                out.insert(i-2, float(out.pop(i-2))-float(out.pop(i-2)))
+                out.insert(i-2, out.pop(i-2)-out.pop(i-2))
                 i -= 1
             elif out[i] == '*':
                 out.pop(i)
-                out.insert(i-2, float(out.pop(i-1))*float(out.pop(i-2)))
+                out.insert(i-2, out.pop(i-1)*out.pop(i-2))
                 i -= 1
             elif out[i] == '/':
                 out.pop(i)
-                out.insert(i-2, float(out.pop(i-2))/float(out.pop(i-2)))
+                out.insert(i-2, out.pop(i-2)/out.pop(i-2))
                 i -= 1
         else:
             i += 1
 
-    return float(out[0])    
+    return float(out[0])
     raise NotImplementedError
     
 print(advanced_calculator(input()))
