@@ -10,16 +10,27 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    a = 1
-    if number < 0:
-        a = -1
-        number = -number
-    number1 = 0
+
     ost = 0
-    while ost == 0:
-        ost = number % 10
-        number = number // 10
-        number1 = number1 * 10
-        number1 = number1 + ost
-    return number1 * a
+    if number < 0:
+        number = -number
+        while ost == 0:
+            ost = number % 10
+            if ost == 0:
+                number = number/10
+        b = int(number)
+        st = str(b)
+        st = st[::-1]
+        a = int(st)
+        return -a
+    else:
+        while ost == 0:
+            ost = number % 10
+            if ost == 0:
+                number = number / 10
+        b = int(number)
+        st = str(b)
+        st = st[::-1]
+        a = int(st)
+        return a
     raise NotImplementedError
