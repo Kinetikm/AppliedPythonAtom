@@ -10,7 +10,11 @@ def calculator(x, y, operator):
     :param operator: 4 оператора: plus, minus, mult, divide
     :return: результат операции или None, если операция не выполнима
     '''
-    if type(x) != int and type(x) != float or type(y) != int and type(y) != float or (y == 0 and operator == 'divide'):
+    if type(x) != int and type(x) != float:
+        return None
+    if type(y) != int and type(y) != float:
+        return None
+    if (y == 0 and operator == 'divide'):
         return None
     else:
         if operator == "plus":
@@ -18,7 +22,7 @@ def calculator(x, y, operator):
         if operator == "minus":
             return x - y
         if operator == "mult":
-            return x * y 
+            return x * y
         if operator == "divide":
             return x / y
     return None
