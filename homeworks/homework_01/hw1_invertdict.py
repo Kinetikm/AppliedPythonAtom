@@ -24,10 +24,21 @@ def invert_dict(source_dict):
         a = source_dict[key]
         if type(a) is list or type(a) is set or type(a) is tuple:
             s = list(a)
-            back[key] = pars(s)
+            s = pars(s)
+            for val in s:
+                if val in back:
+                    s = []
+                    s.append(back[val])
+                    s.append(key)
+                    back[val] = s
+                else:
+                    back[val] = key
         else:
-            back[key] = a
+            if a in back:
+                s = []
+                s.append(back[a])
+                s.append(key)
+                back[a] = s
+            else:
+                back[a] = key
     return back
-
-
-# print(invert_dict({1 : ["sa",[2, [4] ]], 2:("sa"),3:[22]}))
