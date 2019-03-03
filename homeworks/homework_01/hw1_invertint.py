@@ -16,27 +16,16 @@ def reverse(number):
     инвертированное число
     """
 
-    ost = 0
-    if number == 0:
-        return 0
     if number < 0:
-        number = -number
-        while ost == 0:
-            ost = number % 10
-            number = number/10
-        number = number*10
-        st = str(int(number))
-        st = st[::-1]
-        a = int(st)
-        return -a
-    if number > 0:
-        while ost == 0:
-            ost = number % 10
-            number = number / 10
-        number = number * 10
-        st = str(int(number))
-        st = st[::-1]
-        a = int(st)
-        return a
+        k = -1
+    else:
+        k = 1
+    number = abs(number)
+    a = 0
+    while abs(number) > 0:
+        l1 = number % 10
+        number = number // 10
+        a = a * 10 + l1
+    return k * a
     raise NotImplementedError
 
