@@ -9,9 +9,9 @@ def calculator(x, y, operator):
         return x-y
     if operator == "divide":
         if y != 0:
-            return None
-        else:
             return x/y
+        else:
+            return None
     if operator == "mult":
         return x*y
     raise NotImplementedError
