@@ -75,19 +75,21 @@ def advanced_calculator(input_string):
 
     i = 0
     while i < len(out):
+        if out[i] != '+' and out[i] != '-' and out[i] != '*' and out[i] != '/':
+            j = 0
+            while j < len(out[i]):
+                if out[i][j] != '.' and not out[i][j].isdigit() and out[i][j] != '-':
+                    return None
+                j += 1
+            out[i] = float(out[i])
+        i += 1
+    i = 0
+    while i < len(out):
         if out[i] == '+' or out[i] == '-' or out[i] == '*' or out[i] == '/':
             if i < 2:
                 return None
-            j = 0
-            while j < len(out[i-1]):
-                if out[i-1][j] != '.' and not out[i-1][j].isdigit():
-                    return None
-                j += 1
-            j = 0
-            while j < len(out[i-2]):
-                if out[i-2][j] != '.' and not out[i-2][j].isdigit():
-                    return None
-                j += 1
+            if type(out[i-1]) != float or type(out[i-2]) != float:
+                return None
             if out[i] == '+':
                 out.pop(i)
                 out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
@@ -109,3 +111,5 @@ def advanced_calculator(input_string):
 
     return float(out[0])    
     raise NotImplementedError
+    
+print(advanced_calculator(input()))
