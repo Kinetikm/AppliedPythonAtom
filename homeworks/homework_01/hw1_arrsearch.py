@@ -3,7 +3,7 @@
 
 
 def find_indices(input_list, n):
-    d = {} 
+    d = {}
     i = 0
     while i < len(input_list):
         d[input_list[i]] = i
