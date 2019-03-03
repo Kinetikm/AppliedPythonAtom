@@ -29,7 +29,7 @@ def reverse(number):
         st = st[::-1]
         a = int(st)
         return -a
-    else:
+    if number > 0:
         while ost == 0:
             ost = number % 10
             number = number / 10
