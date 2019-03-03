@@ -18,7 +18,7 @@ def reverse(number):
     i = 1
     while i < len(number):
         h += number[i]
-        i += 1        
+        i += 1
     number = int(h)
     if minus:
         number *= -1
