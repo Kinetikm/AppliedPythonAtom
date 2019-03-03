@@ -15,6 +15,8 @@ def is_bracket_correct(input_string):
         if char == "{" or char == "(" or char == "[":
             count.append(char)
         else:
+            if len(count) == 0:
+                return False
             val = count.pop()
             if char == "}" and val != "{":
                 return False
@@ -27,5 +29,3 @@ def is_bracket_correct(input_string):
     else:
         return False
     raise NotImplementedError
-
-print (is_bracket_correct("({}{[]})"))
