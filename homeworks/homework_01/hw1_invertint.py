@@ -17,9 +17,9 @@ def reverse(number):
         while ost == 0:
             ost = number % 10
             if ost == 0:
-                number = number/10
-        b = int(number)
-        st = str(b)
+                number = number//10
+
+        st = str(number)
         st = st[::-1]
         a = int(st)
         return -a
@@ -27,10 +27,10 @@ def reverse(number):
         while ost == 0:
             ost = number % 10
             if ost == 0:
-                number = number / 10
-        b = int(number)
-        st = str(b)
+                number = number // 10
+        st = str(number)
         st = st[::-1]
         a = int(st)
         return a
     raise NotImplementedError
+
