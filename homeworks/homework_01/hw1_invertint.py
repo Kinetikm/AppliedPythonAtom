@@ -9,4 +9,8 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    raise NotImplementedError
+    sign = -1 if number < 0 else 1
+    number = abs(number)
+    listOfDigits = [int(digit) for digit in str(number)]
+    listOfDigits.reverse()
+    return sign * int("".join(map(str, listOfDigits)))
