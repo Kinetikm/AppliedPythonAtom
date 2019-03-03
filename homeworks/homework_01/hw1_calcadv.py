@@ -57,7 +57,7 @@ def advanced_calculator(input_string):
                 else:
                     if stack:
                         Help = stack.pop()
-                        while  j <= spot_priority(Help):
+                        while j <= spot_priority(Help):
                             out.append(Help)
                             if stack:
                                 Help = stack.pop()
@@ -75,28 +75,37 @@ def advanced_calculator(input_string):
 
     i = 0
     while i < len(out):
-        if out[i] == '+':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '-':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-2))-float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '*':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-1))*float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '/':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-2))/float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '^':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-2))**float(out.pop(i-2)))
-            i -= 1
+        if out[i] == '+' or out[i] == '-' or out[i] == '*' or out[i] == '/':
+            if i < 2:
+                return None
+            j = 0
+            while j < len(out[i-1]):
+                if out[i-1][j] != '.' and not out[i-1][j].isdigit():
+                    return None
+                j += 1
+            j = 0
+            while j < len(out[i-2]):
+                if out[i-2][j] != '.' and not out[i-2][j].isdigit():
+                    return None
+                j += 1
+            if out[i] == '+':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '-':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-2))-float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '*':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-1))*float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '/':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-2))/float(out.pop(i-2)))
+                i -= 1
         else:
             i += 1
 
-    return float(out[0])     
+    return float(out[0])    
     raise NotImplementedError
