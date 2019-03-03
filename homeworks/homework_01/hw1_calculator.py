@@ -25,7 +25,10 @@ def calculator(x, y, operator):
             else:
                 return x / y
         if operator == "power":
-            return x ** y
+            if y.is_integer():
+            	return x ** y
+            else:
+            	return None
     except ValueError:
         return None
     raise NotImplementedError
