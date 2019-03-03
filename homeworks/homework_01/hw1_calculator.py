@@ -14,4 +14,6 @@ def calculator(x, y, operator):
             return None
     if operator == "mult":
         return x*y
+    if operator == "power":
+        return x**y
     raise NotImplementedError
