@@ -24,6 +24,7 @@ def calculator(x, y, operator):
                 return None
             else:
                 return x / y
+        return None
         raise NotImplementedError
     except ValueError:
         return None
