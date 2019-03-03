@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def advanced_calculator(input_string):
     '''
     Калькулятор на основе обратной польской записи.
