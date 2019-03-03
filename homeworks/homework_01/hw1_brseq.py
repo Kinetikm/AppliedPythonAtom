@@ -3,28 +3,29 @@
 
 
 def is_bracket_correct(input_string):
+    stack = []
     i = 0
-    index1 = 0
-    index2 = 0
-    index3 = 0
     while i < len(input_string):
-        if input_string[i] == '(':
-            index1 += 1
-        elif input_string[i] == ')':
-            index1 -= 1
-        elif input_string[i] == '[':
-            index2 += 1
+        if input_string[i] == '}':
+            if stack[len(stack)-1] == '{':
+                stack.pop()
+            else:
+                return False
         elif input_string[i] == ']':
-            index2 -= 1
-        elif input_string[i] == '{':
-            index3 += 1
-        elif input_string[i] == '}':
-            index3 -= 1
-        if index1 < 0 or index2 < 0 or index3 < 0:
-            break
+            if stack[len(stack)-1] == '[':
+                stack.pop()
+            else:
+                return False
+        elif input_string[i] == ')':
+            if stack[len(stack)-1] == '(':
+                stack.pop()
+            else:
+                return False
+        else:
+            stack.append(input_string[i])
         i += 1
-    if index1 == 0 and index2 == 0 and index3 == 0:
-        return True
-    else:
+    if stack:
         return False
+    else:
+        return True
     raise NotImplementedError
