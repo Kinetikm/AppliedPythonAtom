@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 def reverse(number):
     '''
     Метод, принимающий на вход
@@ -16,19 +15,18 @@ def reverse(number):
         number = -number
         while ost == 0:
             ost = number % 10
-            if ost == 0:
-                number = number//10
-
-        st = str(number)
+            number = number/10
+        number = number*10
+        st = str(int(number))
         st = st[::-1]
         a = int(st)
         return -a
     else:
         while ost == 0:
             ost = number % 10
-            if ost == 0:
-                number = number // 10
-        st = str(number)
+            number = number / 10
+        number = number * 10
+        st = str(int(number))
         st = st[::-1]
         a = int(st)
         return a
