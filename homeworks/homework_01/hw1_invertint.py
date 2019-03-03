@@ -9,6 +9,19 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    for i in range(len(number), 0, -1):
-        rev += number[i-1]
+
+    bl = 0
+    tmp = str(number)
+    if tmp[0] == '-':
+        tmp = tmp[1:]
+        bl = 1
+
+    rev = ""
+    for i in range(len(tmp), 0, -1):
+        rev += tmp[i-1]
+
+    if bl == 1:
+        # tmp = '-' + tmp
+        return -int(rev)
+
     return int(rev)
