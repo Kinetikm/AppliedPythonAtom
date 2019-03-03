@@ -10,6 +10,8 @@ def calculator(x, y, operator):
     :param operator: 4 оператора: plus, minus, mult, divide
     :return: результат операции или None, если операция не выполнима
     '''
+    if x is None or y is None:
+        return None
     try:
         float(x)
         float(y)
