@@ -12,5 +12,3 @@ def calculator(x, y, operator):
         elif operator == "divide" and y != 0:
             return x/y
     return None
-
-print(calculator(3, 23, "mult"))
