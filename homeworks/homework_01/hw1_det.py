@@ -1,25 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
+import copy
 
 
-def calculate_minor(num, a):
-    m = []
-    for index in range(1, len(a)):
-        row = []
-        if num == 0:
-            row = a[index][1:]
-        elif num == len(a) - 1:
-            row = a[index][:(len(a) - 1)]
-        else:
-            row = a[index][:num] + a[index][num + 1:]
-        m.append(row)
-    if len(m) == 1:
-        return m[0][0]
-    if len(m) == 2:
-        return m[0][0] * m[1][1] - m[0][1] * m[1][0]
-    minor = 0
-    for i in range(0, len(m)):
-        minor += (-1) ** i * m[0][i] * calculate_minor(i, m)
+def calculate_minor(a, i, j):
+    minor = copy.deepcopy(a)
+    del minor[i]
+    for i in range(len(a[0]) - 1):
+        del minor[i][j]
     return minor
 
 
@@ -44,8 +32,9 @@ def calculate_determinant(list_of_lists):
     determinant = 0
     k = 1
     for i in range(n):
-        determinant += list_of_lists[0][i] * calculate_minor(i, list_of_lists) * k
+        determinant += list_of_lists[0][i] * calculate_determinant(calculate_minor(list_of_lists, 0, i)) * k
         k *= -1
     return determinant
 
-    raise NotImplementedError
+
+
