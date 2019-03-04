@@ -3,6 +3,8 @@
 
 
 def help_func(key, value, new_dict):
+    if type(value) == set:
+        value = list(value)
     if type(value) == list or type(value) == tuple:
         j = 0
         while j < len(value):
