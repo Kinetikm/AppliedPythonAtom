@@ -22,7 +22,8 @@ def invert_dict(source_dict):
         return dictionary
 
     def rekurs(res, element, k):
-        if type(element) is list or type(element) is tuple or type(element) is set:
+        if type(element) is list or type(element) is tuple or type(element) is \
+                set:
             for elem in element:
                 res = rekurs(res, copy.deepcopy(elem), k)
         else:
