@@ -6,7 +6,7 @@ class Stack:
     def __init__(self):
         self.items = []
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.items == []
 
     def push(self, item):
@@ -56,7 +56,7 @@ def is_bracket_correct(input_string):
                 if map1[br] != tmp:
                     return False
 
-    if s.isEmpty():
+    if s.is_empty():
         return True
 
     return False
