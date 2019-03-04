@@ -16,6 +16,7 @@ def find_indices(input_list, n):
     for i in range(len(input_list)):
         try:
             j = input_list.index(n - input_list[i])
-            if j != i: return i, j
+            if j != i:
+                return i, j
     return None
-    raise NotImplementedError
+raise NotImplementedError
