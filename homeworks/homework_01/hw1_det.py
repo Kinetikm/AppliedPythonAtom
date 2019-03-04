@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
 import copy
 
 
@@ -34,4 +32,6 @@ def calculate_determinant(list_of_lists):
         determinant += list_of_lists[0][i] * calculate_determinant(calculate_minor(list_of_lists, 0, i)) * k
         k *= -1
     return determinant
+
+
 raise NotImplementedError
