@@ -2,11 +2,9 @@
 # coding: utf-8
 
 
-def reverse(number):
-    '''
-    Метод, принимающий на вход int и
-    возвращающий инвертированный int
-    :param number: исходное число
-    :return: инвертированное число
-    '''
-    raise NotImplementedError
+def reverse (number):
+    buf = 0
+    while a:
+        buf=buf*10+number%10
+        number/=10
+    return buf
