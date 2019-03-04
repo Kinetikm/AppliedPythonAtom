@@ -14,4 +14,3 @@ def reverse(number):
         return buf * (-1)
     else:
         return buf
-
