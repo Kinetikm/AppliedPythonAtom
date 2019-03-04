@@ -3,11 +3,15 @@
 
 
 def is_bracket_correct(input_string):
-    '''
-    Метод проверяющий является ли поданная скобочная
-     последовательность правильной (скобки открываются и закрываются)
-     не пересекаются
-    :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
-    :return: True or False
-    '''
-    raise NotImplementedError
+    dic = {')': '(', ']': '[', '}': '{'}
+    stek = []
+    for c in input_string:
+        if c in dic.values():
+            stek.append(c)
+        elif c in dic.keys() and stek == []:
+            return False
+        elif c in dic.keys() and stek[-1] == dic[c]:
+            stek.pop()
+        elif c in dic.keys() and stek[-1] != dic[c]:
+            return False
+    return stek == []
