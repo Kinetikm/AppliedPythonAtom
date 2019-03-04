@@ -5,6 +5,6 @@
 def reverse(number):
     buf = 0
     while number:
-        buf=buf*10 + number % 10
-        number /= 10
+        buf = buf*10 + number % 10
+        number = number // 10
     return buf
