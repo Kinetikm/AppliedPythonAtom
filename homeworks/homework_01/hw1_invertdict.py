@@ -2,11 +2,26 @@
 # coding: utf-8
 
 
-def invert_dict(source_dict):
-    '''
-    Функция которая разворачивает словарь, т.е.
-    каждому значению ставит в соответствие ключ.
-    :param source_dict: dict
-    :return: new_dict: dict
-    '''
-    raise NotImplementedError
+def invert_dict(source_dict,NewDict=None):
+    BufDict = {}
+    ForBuf = list()
+    if NewDict is None:
+        NewDict = {}
+    for key, value in source_dict.items():
+        if type(value) != int and type(value) != float and type(value) != str and (value!=Ellipsis):
+            for iter in value:
+                BufDict.update({key: iter})
+                NewDict = invert_dict({key: iter}, NewDict)
+        else:
+            if not value in NewDict:
+                NewDict.update({value: key})
+            else:
+                if type(NewDict[value]) == list:
+                    NewDict[value].append(key)
+                else:
+                    ForBuf = list()
+                    BUFFER = NewDict[value]
+                    ForBuf.append(BUFFER)
+                    ForBuf.append(key)
+                    NewDict.update({value: ForBuf})
+    return NewDict
