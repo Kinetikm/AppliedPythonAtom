@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def calculator(x, y, operator):
-    if (type(x) == float and type(y) == float):
+    if type(x) == float and type(y) == float:
         if operator == "plus":
             return x+y
         elif operator == "minus":
