@@ -11,7 +11,7 @@ def invert_dict(source_dict, NewDict=None):
         NewDict = {}
     for key, value in source_dict.items():
         if type(value) != int and type(value) != float and \
-                type(value) != str and (value!=Ellipsis):
+                type(value) != str and (value != Ellipsis):
             for iter in value:
                 BufDict.update({key: iter})
                 NewDict = invert_dict({key: iter}, NewDict)
