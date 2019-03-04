@@ -19,8 +19,3 @@ def is_bracket_correct(input_string):
             return False
         i += 1
     return result
-
-
-str = input()
-
-print(is_bracket_correct(str))
