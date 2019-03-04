@@ -3,6 +3,8 @@
 
 
 def invert_dict(source_dict,NewDict=None):
+    if source_dict == "":
+        return {}
     BufDict = {}
     ForBuf = list()
     if NewDict is None:
@@ -13,7 +15,7 @@ def invert_dict(source_dict,NewDict=None):
                 BufDict.update({key: iter})
                 NewDict = invert_dict({key: iter}, NewDict)
         else:
-            if not value in NewDict:
+            if  value not in NewDict:
                 NewDict.update({value: key})
             else:
                 if type(NewDict[value]) == list:
