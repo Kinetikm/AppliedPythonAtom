@@ -36,7 +36,7 @@ def calculate_determinant(list_of_lists):
     m = len(list_of_lists)
     if m != n:
         return None
-    for i in range(1, len(list_of_lists) - 1):
+    for i in range(1, len(list_of_lists)):
         if m != len(list_of_lists[i]):
             return None
     if n == 1:
