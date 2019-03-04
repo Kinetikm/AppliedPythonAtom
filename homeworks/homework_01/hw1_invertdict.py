@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# CHET NE VZLETELO
 
 def invert_dict(source_dict):
     '''
@@ -10,44 +9,39 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
-#     new_dict = {}
-#
-#     if not source_dict:
-#         return source_dict
-#     for k, v in source_dict.items():
-#         if isinstance(v, (list, tuple, set)):
-#             for v2 in get1List(v):
-#                 helper(k, v2, new_dict)
-#         else:
-#             helper(k, v, new_dict)
-#
-#     return new_dict
-#
-#
-# def helper(k, v, dict):
-#     if v in dict.keys():
-#         if isinstance(dict[v], list):
-#             dict[v].append(k)
-#         else:
-#             tmp = dict[v]
-#             dict[v] = [tmp, k]
-#     else:
-#         dict[v] = k
-#
-# def get1List(lst):
-#     tmp = []
-#     tmp.append(findList(lst))
-#     return tmp
-#
-# def findList(lst):
-#     tmp = []
-#     if not lst:
-#         return
-#     if isinstance(lst, (list, tuple, set)):
-#         for i in lst:
-#             findList(i)
-#     else:
-#         tmp.append(lst)
-#     return tmp
 
-    raise NotImplementedError
+    inv_map = {}
+
+    if not source_dict:
+        return source_dict
+
+    for k, v in source_dict.items():
+        if isinstance(v, (list, tuple, set)):
+            flat_list = []
+            f1(v, flat_list)
+            for v2 in flat_list:
+                if v2 in inv_map:
+                    if not isinstance(inv_map[v2], list):
+                        tmp = inv_map[v2]
+                        inv_map[v2] = [tmp]
+                    inv_map[v2].append(k)
+                else:
+                    inv_map[v2] = k
+        else:
+            if v in inv_map:
+                if not isinstance(inv_map[v], list):
+                    tmp = inv_map[v]
+                    inv_map[v] = [tmp]
+                inv_map[v].append(k)
+            else:
+                inv_map[v] = k
+
+    return inv_map
+
+
+def f1(strct, flat_list):
+    for sublist in strct:
+        if isinstance(sublist, (list, tuple, set)):
+            f1(sublist, flat_list)
+        else:
+            flat_list.append(sublist)
