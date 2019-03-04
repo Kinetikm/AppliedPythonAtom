@@ -1,13 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
-def calculator(x, y, operator):
-    '''
-    Простенький калькулятор в прямом смысле. Работает c числами
-    :param x: первый агрумент
-    :param y: второй аргумент
-    :param operator: 4 оператора: plus, minus, mult, divide
-    :return: результат операции или None, если операция не выполнима
-    '''
+def calculator(a, b, operator):
+    if isinstance(a, (float, int)) and isinstance(b, (float, int)):
+        if operator.lower() == "plus":
+            return a + b
+        elif operator.lower() == "minus":
+            return a - b
+        elif operator.lower() == "mult":
+            return a * b
+        elif operator.lower() == "divide" and not (b == 0 or b == 0.0):
+            return a / b
+        else:
+            return None
+    else:
+        return None
     raise NotImplementedError
