@@ -3,4 +3,4 @@
 
 
 def find_indices(input_list, n):
-	raise NotImplementedError
+    raise NotImplementedError
