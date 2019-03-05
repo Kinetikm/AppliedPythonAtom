@@ -94,5 +94,3 @@ def is_bracket_correct(input_string):
         if not result:
             return result
     return result
-
-print(is_bracket_correct(input()))
