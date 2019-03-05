@@ -13,4 +13,4 @@ def reverse(number):
         number = number // 10
         ret = ret * 10
         ret = ret + dig
-    return ret*sign
+    return ret * sign
