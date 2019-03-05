@@ -10,21 +10,22 @@ def is_bracket_correct(input_string):
                     input_string[i] == "(":
                 a.append(input_string[i])
             else:
-                if len(a) == 0 and i != len(input_string)-1:
+                print(len(a))
+                if len(a) == 0:
                     return None
-                if a[-1] == "[":
+                if a[len(a)-1] == "[":
                     if input_string[i] == "]":
-                        del a[-1]
+                        del a[len(a)-1]
                     else:
                         return None
-                elif a[-1] == "(":
+                elif a[len(a)-1] == "(":
                     if input_string[i] == ")":
-                        del a[-1]
+                        del a[len(a)-1]
                     else:
                         return None
-                elif a[-1] == "{":
+                elif a[len(a)-1] == "{":
                     if input_string[i] == "}":
-                        del a[-1]
+                        del a[len(a)-1]
                     else:
                         return None
         if len(a) == 0:
