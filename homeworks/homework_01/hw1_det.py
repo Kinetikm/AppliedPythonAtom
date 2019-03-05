@@ -11,10 +11,6 @@ def calculate_determinant(list_of_lists):
     if len(list_of_lists) != len(list_of_lists[0]):
         return None
 
-    for i in range(len(list_of_lists)):
-        for j in range(len(list_of_lists)):
-            print(list_of_lists[i][j], end=' ')
-        print(' ')
     for i in range(len(list_of_lists) - 1):
         for j in range(i + 1, len(list_of_lists)):
             d = list_of_lists[j][i]
