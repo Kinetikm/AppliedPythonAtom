@@ -17,8 +17,9 @@ def is_bracket_correct(input_string):
             continue
         if ((bracket == ')' or bracket == '}' or bracket == ']') and
                 len(stack) != 0):
-            if ((stack[-1] == '(' and bracket == ')') or (stack[-1] ==
-                '{' and bracket == '}') or (stack[-1] == '[' and bracket == ']')):
+            if ((stack[-1] == '(' and bracket == ')') or
+                (stack[-1] == '{' and bracket == '}') or
+                    (stack[-1] == '[' and bracket == ']')):
                 del stack[-1]
             else:
                 print(stack)
