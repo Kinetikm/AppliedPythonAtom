@@ -22,12 +22,14 @@ def calculate_determinant(list_of_lists):
         a = list_of_lists[0][0] * list_of_lists[1][1]
         b = list_of_lists[0][1] * list_of_lists[1][0]
         return a - b
-    det = 0
     for i in range(n):
-        myList = copy.deepcopy(list_of_lists)
-        for j in range(1, n):
-            myList[j].pop(i)
-        myList.pop(0)
-        det += (-1) ** (i + 2) * calculate_determinant(myList)
+    	for j in range(i + 1, n):
+    		x = (-1) * list_of_lists[j][i] / list_of_lists[i][i]
+    		for k in range(n):
+    			list_of_lists[j][k] += (list_of_lists[i][k] * x)
+    det = 1
+    for i in range(n):
+    	det *= list_of_lists[i][i]
     return det
     raise NotImplementedError
+print (calculate_determinant([[282.776, 264.011, 291.324], [16.077, -222.778, -175.664], [143.43, 154.597, -40.907]]))
