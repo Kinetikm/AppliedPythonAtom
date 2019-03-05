@@ -3,8 +3,8 @@
 
 
 def is_bracket_correct(input_string):
-    a=[]
-    if type(input_string)==str:
+    a = []
+    if type(input_string) == str:
         for i in range(len(input_string)):
             if input_string[i] == "{" or input_string[i] == "[" or \
                     input_string[i] == "(":
