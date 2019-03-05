@@ -4,16 +4,16 @@
 
 def calculator(x, y, operator):
         try:
-                x=float(x)
-                y=float(y)
+                x = float(x)
+                y = float(y)
                 if operator == 'plus':
-                    return x+y
+                    return x + y
                 if operator == 'minus':
-                    return x-y
+                    return x - y
                 if operator == 'mult':
-                    return x*y
+                    return x * y
                 if operator == 'divide':
-                    return x/y
+                    return x / y
         except ZeroDivisionError:
             return None
         except TypeError:
