@@ -9,11 +9,11 @@ def is_bracket_correct(input_string):
             or len(input_string) % 2 == 1:
         return False
 
-    def one(str):
+    def one(st):
         kr = 1
         kv = 0
         fi = 0
-        for symb in str:
+        for symb in st:
             if symb == '[':
                 kv += 1
             elif symb == '{':
@@ -32,11 +32,11 @@ def is_bracket_correct(input_string):
                 return kv == 0 and fi == 0
         return kv == 0 and fi == 0 and kr == 0
 
-    def two(str):
+    def two(st):
         kr = 0
         kv = 1
         fi = 0
-        for symb in str:
+        for symb in st:
             if symb == '[':
                 kv += 1
             elif symb == '{':
@@ -55,11 +55,11 @@ def is_bracket_correct(input_string):
                 return kr == 0 and fi == 0
         return kv == 0 and fi == 0 and kr == 0
 
-    def three(str):
+    def three(st):
         kr = 0
         kv = 0
         fi = 1
-        for symb in str:
+        for symb in st:
             if symb == '[':
                 kv += 1
             elif symb == '{':
@@ -86,6 +86,6 @@ def is_bracket_correct(input_string):
             result = two(input_string[i + 1:])
         elif input_string[i] == '{':
             result = three(input_string[i + 1:])
-        if result == False:
+        if not False:
             return result
     return result
