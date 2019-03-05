@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
+import copy
 
 def calculate_determinant(list_of_lists):
     '''
@@ -21,10 +21,12 @@ def calculate_determinant(list_of_lists):
         return a - b
     det = 0
     for i in range(n):
-        myList = list_of_lists[:]
+        myList = copy.deepcopy(list_of_lists)
         for j in range(1, n):
             myList[j].pop(i)
         myList.pop(0)
         det += (-1) ** (i + 2) * calculate_determinant(myList)
     return det
     raise NotImplementedError
+
+print (calculate_determinant([[1, 2, 3], [1, 2, 4], [5, 4, 6]]))
