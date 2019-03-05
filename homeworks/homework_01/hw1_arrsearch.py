@@ -13,4 +13,11 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
+    myDict = {}
+    for i in range(len(input_list)):
+        try:
+            return (i, myDict[n - input_list[i]])
+        except KeyError:
+            myDict[input_list[i]] = i
+    return None
     raise NotImplementedError
