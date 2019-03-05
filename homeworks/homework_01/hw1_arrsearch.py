@@ -13,4 +13,12 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
+    myDict = dict()
+    for i in range(len(input_list)):
+        if input_list[i] not in myDict:
+            myDict[input_list[i]] = i
+    for key in myDict:
+        if (n - key) in myDict:
+            return (myDict[key], myDict[n - key])
+    return
     raise NotImplementedError
