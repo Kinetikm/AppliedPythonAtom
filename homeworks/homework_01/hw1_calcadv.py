@@ -10,9 +10,9 @@ def advanced_calculator(input_string):
     :param input_string: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
+    if input_string.find('**') != -1:
+        return
     try:
-        if input_string.find('**') != -1:
-            return
         result = eval(input_string)
         if isinstance(result, int) or isinstance(result, float):
             return result
