@@ -12,21 +12,21 @@ def is_bracket_correct(input_string):
             else:
                 print(len(a))
                 if len(a) == 0:
-                    return None
+                    return False
                 if a[len(a)-1] == "[":
                     if input_string[i] == "]":
                         del a[len(a)-1]
                     else:
-                        return None
+                        return False
                 elif a[len(a)-1] == "(":
                     if input_string[i] == ")":
                         del a[len(a)-1]
                     else:
-                        return None
+                        return False
                 elif a[len(a)-1] == "{":
                     if input_string[i] == "}":
                         del a[len(a)-1]
                     else:
-                        return None
+                        return False
         if len(a) == 0:
             return True
