@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 def calculator(x, y, operator):
-    try:
-        if (operator== 'plus'):
-            return (x + y)
-        if operator == "minus":
-            return x - y
-        if operator == "mult":
-            return x * y
-        if operator == 'divide':
-            return (x / y)
+        if (operator == 'plus'):
+            return (x+y)
+        elif operator == "minus":
+            return x-y
+        elif operator == "mult":
+            return x*y
+        elif operator=='divide':
+            if y!=0:
+                return (x/y)
+            else:
+                return(None)
         else:
-            print('None')
-    except:
-        print('None')
+            return(None)
