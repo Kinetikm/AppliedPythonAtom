@@ -11,7 +11,8 @@ def is_bracket_correct(input_string):
             or len(input_string) % 2 == 1:
         return False
 
-    if input_string[len(input_string) - 1] == '(' or input_string[len(input_string) - 1] == '[' \
+    if input_string[len(input_string) - 1] == '(' or \
+            input_string[len(input_string) - 1] == '[' \
             or input_string[len(input_string) - 1] == '{':
         return False
 
