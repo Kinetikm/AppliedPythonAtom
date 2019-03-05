@@ -16,7 +16,7 @@ def calculate_determinant(list_of_lists):
             RemoveS(matr2_0, count, 0)
             k=k+((-1)**(count+2)) * list_of_lists[count][0] * \
               Determinant(matr2_0)
-        return k
+            return k
     else:
-        return matr[0][0] * list_of_lists[1][1]-\
+        return list_of_lists[0][0] * list_of_lists[1][1]-\
                list_of_lists[0][1] * list_of_lists[1][0]
