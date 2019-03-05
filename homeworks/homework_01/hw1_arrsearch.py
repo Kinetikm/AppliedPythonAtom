@@ -25,12 +25,13 @@ def find_indices(input_list, n):
         i += 1
     for key in dictionary:
         if (n - key) in dictionary:
-            a = dictionary[key] if type(dictionary[key]) is not list else dictionary[key][0]
-            b = dictionary[n - key] if type(dictionary[n - key]) is not list else dictionary[n - key][0]
+            a = dictionary[key] if type(dictionary[key]) is not list \
+                else dictionary[key][0]
+            b = dictionary[n - key] if type(dictionary[n - key]) is not list \
+                else dictionary[n - key][0]
             if a != b:
                 return a, b
             else:
                 if type(dictionary[key]) is list and len(dictionary[key]) > 1:
                     return a, dictionary[key][1]
     return None
-    
