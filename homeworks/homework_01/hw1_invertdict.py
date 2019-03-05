@@ -9,4 +9,8 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
+    myDict = {}
+    for key in source_dict:
+    	myDict[source_dict[key]] = key
+    return myDict
     raise NotImplementedError
