@@ -2,12 +2,9 @@
 # coding: utf-8
 
 
-def check_palindrom(input_string):
-    '''
-    Метод проверяющий строку на то, является ли
-    она палиндромом.
-    :param input_string: строка
-    :return: True, если строка являестя палиндромом
-    False иначе
-    '''
-    raise NotImplementedError
+def Polin(string):
+    if type(string)==str:
+        strBuf = string[::-1]
+        if strBuf == string:
+            return True
+    return False
