@@ -10,6 +10,7 @@ def advanced_calculator(input_string):
     :param input_string: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
+
     if input_string.find('**') != -1:
         return
     try:
@@ -19,5 +20,4 @@ def advanced_calculator(input_string):
         return
     except BaseException:
         return
-    print('Hi')
     raise NotImplementedError
