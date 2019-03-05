@@ -7,14 +7,16 @@ def is_bracket_correct(input_string):
     for i in input_string:
         if i == "(" or i == "[" or i == "{":
             list_bracket.append(i)
+        elif len(list_bracket) == 0:
+            return False
         elif i == ")":
-            if list_bracket.pop() != "(" or len(list_bracket) == 0:
+            if list_bracket.pop() != "(":
                 return False
         elif i == "]":
-            if list_bracket.pop() != "[" or len(list_bracket) == 0:
+            if list_bracket.pop() != "[":
                 return False
         elif i == "}":
-            if list_bracket.pop() != "{" or len(list_bracket) == 0:
+            if list_bracket.pop() != "{":
                 return False
         else:
             return False
