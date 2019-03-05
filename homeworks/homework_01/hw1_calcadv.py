@@ -11,8 +11,12 @@ def advanced_calculator(input_string):
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
     try:
+        if input_string.find('**') != -1:
+            return
         result = eval(input_string)
-        return result
+        if isinstance(result, int) or isinstance(result, float):
+            return result
+        return
     except BaseException:
         return
     raise NotImplementedError
