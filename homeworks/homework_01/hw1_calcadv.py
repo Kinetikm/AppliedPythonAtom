@@ -19,4 +19,5 @@ def advanced_calculator(input_string):
         return
     except BaseException:
         return
+    print('Hi')
     raise NotImplementedError
