@@ -31,7 +31,3 @@ def calculate_determinant(list_of_lists):
         return list_of_lists[0][0]
     else:
         return None
-
-
-
-
