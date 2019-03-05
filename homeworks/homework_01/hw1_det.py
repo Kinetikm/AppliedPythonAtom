@@ -2,6 +2,7 @@
 # coding: utf-8
 import copy
 
+
 def calculate_determinant(list_of_lists):
     '''
     Метод, считающий детерминант входной матрицы,
@@ -15,6 +16,8 @@ def calculate_determinant(list_of_lists):
     for myList in list_of_lists:
         if len(myList) != n:
             return None
+    if n == 1:
+        return list_of_lists[0][0]
     if n == 2:
         a = list_of_lists[0][0] * list_of_lists[1][1]
         b = list_of_lists[0][1] * list_of_lists[1][0]
@@ -28,4 +31,3 @@ def calculate_determinant(list_of_lists):
         det += (-1) ** (i + 2) * calculate_determinant(myList)
     return det
     raise NotImplementedError
-
