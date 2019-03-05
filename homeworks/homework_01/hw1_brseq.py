@@ -5,7 +5,8 @@
 def is_bracket_correct(input_string):
     if input_string == '':
         return True
-    if input_string[0] == ')' or input_string == ']' or input_string == '}' or len(input_string) % 2 == 1:
+    if input_string[0] == ')' or input_string == ']' or input_string == '}' \
+            or len(input_string) % 2 == 1:
         return False
 
     def one(str):
