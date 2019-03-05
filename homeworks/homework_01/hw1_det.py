@@ -29,4 +29,3 @@ def calculate_determinant(list_of_lists):
     return det
     raise NotImplementedError
 
-print (calculate_determinant([[1, 2, 3], [1, 2, 4], [5, 4, 6]]))
