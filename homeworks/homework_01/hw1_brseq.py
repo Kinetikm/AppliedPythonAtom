@@ -8,13 +8,13 @@ def is_bracket_correct(input_string):
         if i == "(" or i == "[" or i == "{":
             list_bracket.append(i)
         elif i == ")":
-            if list_bracket.pop() != "(" or len(list_backet) == 0:
+            if list_bracket.pop() != "(" or len(list_bracket) == 0:
                 return False
         elif i == "]":
-            if list_bracket.pop() != "[" or len(list_backet) == 0:
+            if list_bracket.pop() != "[" or len(list_bracket) == 0:
                 return False
         elif i == "}":
-            if list_bracket.pop() != "{" or len(list_backet) == 0:
+            if list_bracket.pop() != "{" or len(list_bracket) == 0:
                 return False
         else:
             return False
