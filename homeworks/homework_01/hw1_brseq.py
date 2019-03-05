@@ -8,13 +8,13 @@ def is_bracket_correct(input_string):
         if i == "(" or i == "[" or i == "{":
             list_bracket.append(i)
         elif i == ")":
-            if list_bracket.pop() != "(":
+            if list_bracket.pop() != "(" or len(list_backet) == 0:
                 return False
         elif i == "]":
-            if list_bracket.pop() != "[":
+            if list_bracket.pop() != "[" or len(list_backet) == 0:
                 return False
         elif i == "}":
-            if list_bracket.pop() != "{":
+            if list_bracket.pop() != "{" or len(list_backet) == 0:
                 return False
         else:
             return False
@@ -25,4 +25,4 @@ def is_bracket_correct(input_string):
      не пересекаются
     :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
     :return: True or False
-    '''   
+    '''
