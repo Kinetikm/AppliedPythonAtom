@@ -1,12 +1,18 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 # coding: utf-8
 
 
 def is_bracket_correct(input_string):
+    result = True
+
     if input_string == '':
         return True
     if input_string[0] == ')' or input_string == ']' or input_string == '}' \
             or len(input_string) % 2 == 1:
+        return False
+
+    if input_string[len(input_string) - 1] == '(' or input_string[len(input_string) - 1] == '[' \
+            or input_string[len(input_string) - 1] == '{':
         return False
 
     def one(st):
@@ -78,7 +84,6 @@ def is_bracket_correct(input_string):
                 return kr == 0 and fi == 0
         return kv == 0 and fi == 0 and kr == 0
 
-    result = True
     for i in range(len(input_string)):
         if input_string[i] == '(':
             result = one(input_string[i + 1:])
@@ -86,6 +91,8 @@ def is_bracket_correct(input_string):
             result = two(input_string[i + 1:])
         elif input_string[i] == '{':
             result = three(input_string[i + 1:])
-        if not False:
+        if not result:
             return result
     return result
+
+print(is_bracket_correct(input()))
