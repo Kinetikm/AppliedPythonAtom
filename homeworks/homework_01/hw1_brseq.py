@@ -26,7 +26,7 @@ def is_bracket_correct(input_string):
                     return False
             else:
                 return False
-        except KeyError:
+        except IndexError:
             return False
     return True
     raise NotImplementedError
