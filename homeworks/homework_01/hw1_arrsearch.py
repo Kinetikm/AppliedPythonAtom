@@ -17,11 +17,10 @@ def find_indices(input_list, n):
     i = 0
     for k in input_list:
         if n - k in d.keys():
-            A = (i, d[n - k])
+            return (i, d[n - k])
             break
         else:
             d[k] = i
-            A = None
         i += 1
-    return A
+    return None
     raise NotImplementedError
