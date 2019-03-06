@@ -38,4 +38,4 @@ def invert_dict(source_dict):
                     new_dict[i] = [tmp, key]
             else:
                 new_dict[i] = key
-    raise NotImplementedError
+    # raise NotImplementedError
