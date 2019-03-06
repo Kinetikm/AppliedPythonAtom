@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def reverse(number):
     res = 0
     flag = False
