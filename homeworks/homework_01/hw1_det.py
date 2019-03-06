@@ -16,7 +16,7 @@ def calculate_determinant(list_of_lists):
         if len(i) != n:
             return None
     if n == 1:
-        return list_of_lists
+        return list_of_lists[0][0]
     return det([i for i in range(n)], [i for i in range(n)], list_of_lists)
 
 
@@ -26,5 +26,5 @@ def det(_str, _col, A):
     for i in range(len(_str)):
         t_str = _str[:]
         t_str.remove(_str[i])
-        determ += (-1) ** (i % 2) * A[_str[i]][_col[0]] * det(t_str, t_col, A)
+        determ += (-1) ** (i % 2) * A[i][0] * det(t_str, t_col, A)
     return determ
