@@ -3,6 +3,12 @@
 
 
 def check_palindrom(input_string):
+    a = input_string
+    b = a[::-1]
+    if a == b:
+        return True
+    else:
+        return False
     '''
     Метод проверяющий строку на то, является ли
     она палиндромом.
