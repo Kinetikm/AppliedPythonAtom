@@ -121,7 +121,7 @@ def advanced_calculator(input_string):
                     except ValueError:
                         num = 'Is it necessarily?'
                     else:
-                        return None           
+                        return None
             else:
                 try:
                     num = float(help_list[i+1])
