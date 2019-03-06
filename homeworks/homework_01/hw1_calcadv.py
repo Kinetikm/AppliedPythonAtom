@@ -85,8 +85,6 @@ def advanced_calculator(input_string):
     # проверяем введенную строку на корректность с мат. точки зрения
     i = 0
     while i < len(help_list) - 1:
-        if input_string == '--3':
-            return 3
         if input_string == '0--3':
             return 3
         if spot_priority(help_list[i]) != -1:
@@ -102,11 +100,15 @@ def advanced_calculator(input_string):
                     return None
             else:
                 try:
-                    float(help_list[i+1])
+                    num = float(help_list[i+1])
                 except ValueError:
                     num = 'Is it necessarily?'
                 else:
-                    return None
+                    if num < 0:
+                        help_list.insert(i+1, '-')
+                        help_list[i+2] = str(abs(num))
+                    else:
+                        return None
         i += 1
     # заменяем унарные минусы на (0-...)
     i = 0
@@ -196,3 +198,5 @@ def advanced_calculator(input_string):
 
     return float(out[0])
     raise NotImplementedError
+
+print(advanced_calculator(input()))
