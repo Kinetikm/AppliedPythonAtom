@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c94464a8-5f9e-4299-aac8-57250756e170" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/AppliedPythonAtom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AppliedPythonAtom.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_brseq.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_brseq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_calculator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_invertdict.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_invertdict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_invertint.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_invertint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_palindrom.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_palindrom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homeworks/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homeworks/homework_01/hw1_det.py" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/homework_01/hw1_det.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/homeworks/homework_01/hw1_brseq.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="675">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -66,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/homeworks/homework_01/hw1_arrsearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="60">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -137,20 +136,20 @@
         <option value="$USER_HOME$/PycharmProjects/untitled2/словарь.py" />
         <option value="$PROJECT_DIR$/tests/test_hw_01.py" />
         <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_invertdict.py" />
-        <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_arrsearch.py" />
         <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_invertint.py" />
         <option value="$USER_HOME$/PycharmProjects/untitled2/test.py" />
         <option value="$USER_HOME$/PycharmProjects/untitled1/1.py" />
         <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_palindrom.py" />
         <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_brseq.py" />
         <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_calculator.py" />
+        <option value="$PROJECT_DIR$/homeworks/homework_01/hw1_arrsearch.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="25" />
-    <option name="width" value="1155" />
+    <option name="width" value="1853" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
@@ -169,6 +168,12 @@
               <item name="AppliedPythonAtom" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="homeworks" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="AppliedPythonAtom" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="homeworks" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="homework_01" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -217,7 +222,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/homeworks" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/untitled1" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -363,7 +368,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18360655" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -503,7 +507,7 @@
     <entry file="file://$PROJECT_DIR$/homeworks/homework_01/hw1_brseq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
         </state>
       </provider>
     </entry>
@@ -516,8 +520,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/homeworks/homework_01/hw1_arrsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="60">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
         </state>
       </provider>
     </entry>
