@@ -26,8 +26,5 @@ def advanced_calculator(input_string):
         else:
             stack.append(i)
 
-    return stack[0]
+#    return stack[0]
     raise NotImplementedError
-
-
-

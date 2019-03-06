@@ -18,12 +18,12 @@ def calculate_determinant(list_of_lists):
 
     # check for none
     if rows != columns:
-        return "None"
+        return None
 
     m = 0
     while m < len(list_of_lists) - 1:
         if len(list_of_lists[m]) != len(list_of_lists[m + 1]):
-            return "None"
+            return None
         m += 1
 
     # determinant
