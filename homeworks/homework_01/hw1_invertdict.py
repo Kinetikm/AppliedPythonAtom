@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def rep(list3):
     newlist = []
     for i in list3:
@@ -27,4 +28,3 @@ def invert_dict(source_dict):
                 a[i] = [a[i]] + [key]
 
     return (a)
-
