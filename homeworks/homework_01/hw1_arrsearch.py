@@ -3,7 +3,8 @@
 
 
 def find_indices(input_list, n):
-    d = dict()
+    d = dict()#создаем пустой словарь
+    
     s = input_list
     i = 0
     t = 0
