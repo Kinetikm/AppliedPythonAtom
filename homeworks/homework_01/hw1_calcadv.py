@@ -8,7 +8,7 @@ def advanced_calculator(input_string):
     '''
 
     split_string = input_string.split(' ')
-    
+
     stack = []
     for i in split_string:
         if i == '+' and len(stack) >= 2:
