@@ -2,6 +2,7 @@
 # coding: utf-8
 
 
+import numpy.linalg as m
 def calculate_determinant(list_of_lists):
     '''
     Метод, считающий детерминант входной матрицы,

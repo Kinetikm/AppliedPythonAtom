@@ -10,4 +10,6 @@ def advanced_calculator(input_string):
     :param input_string: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
+
+
     raise NotImplementedError
