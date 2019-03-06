@@ -3,13 +3,6 @@
 
 
 def reverse(number):
-    '''
-    Метод, принимающий на вход int и
-    возвращающий инвертированный int
-    :param number: исходное число
-    :return: инвертированное число
-    '''
-
     reversed_number = 0
     if number >= 0:
         while number > 0:
