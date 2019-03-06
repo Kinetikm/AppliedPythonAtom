@@ -13,4 +13,23 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
+
+    sorted_list = sorted(input_list)
+
+    left = 0
+    right = len(sorted_list) - 1
+
+    while left != right:
+        sum = sorted_list[left] + sorted_list[right]
+        if sum < n:
+            left += 1
+        elif sum > n:
+            right -= 1
+        else:
+            return left, right
+
+    return "None"
+
     raise NotImplementedError
+
+
