@@ -103,7 +103,6 @@ def advanced_calculator(input_string):
             j += 1
         i += 1
     i = 0
-    print(help_list)
     while i < len(help_list) - 1:
         if spot_priority(help_list[i]) != -1:
             if help_list[i+1] == ')' or spot_priority(help_list[i+1]) != -1:
