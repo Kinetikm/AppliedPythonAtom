@@ -3,6 +3,8 @@
 
 
 def invert_dict(source_dict):
+    if source_dict == '':
+        return True
     dictionary = {}
     for k, v in source_dict.items():
         dictionary[v] = dictionary.get(v, [])
