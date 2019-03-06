@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def find_indices(input_list, n):
         for i in input_list:
                 k = n - i
