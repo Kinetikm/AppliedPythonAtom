@@ -11,4 +11,3 @@ def find_indices(input_list, n):
         else:
             di[n-input_list[ind1]] = ind1
     return None
-

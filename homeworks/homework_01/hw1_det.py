@@ -33,7 +33,8 @@ def calculate_determinant(l_o_l):
             return None
 
 
-# row_ind - индекс след.после row строки (С НЕГО начинать счет) и row_col - индекс столбца, где первый ненудевой элемент
+# row_ind - индекс след.после row строки (С НЕГО начинать счет)
+# row_col - индекс столбца, где первый ненудевой элемент
 def lin_transformation(matrix, row, row_ind, col_ind):
     for i in range(row_ind, len(matrix)):
         koef = 0
