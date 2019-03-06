@@ -1,2 +1,2 @@
-def convert(a):
-    return str(a).rstrip("0")[::-1]
+def reverse(number):
+    return str(number).rstrip("0")[::-1]

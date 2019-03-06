@@ -1,11 +1,11 @@
-def validation_bracket_string(s):
+def is_bracket_correct(input_string):
     temp = ['[]', '{}', '()']
-    ind = s.find
+    ind = input_string.find
     while (True):
-        dlina = len(s)
+        dlina = len(input_string)
         for skob in temp:
-            s = s.replace(skob, '')
-        if dlina == len(s):
+            input_string = input_string.replace(skob, '')
+        if dlina == len(input_string):
             break
     if s == '':
         return True
