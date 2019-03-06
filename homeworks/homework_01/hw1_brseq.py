@@ -3,7 +3,7 @@
 
 
 def is_bracket_correct(input_string):
-    bracket = ['(' ,')' ,'[',']' ,'{' ,'}']
+    bracket = ['(', ')', '[', ']', '{', '}']
     count = []
     for i in input_string:
         if i in bracket:
