@@ -3,11 +3,15 @@
 
 
 def calculator(x, y, operator):
-    '''
-    Простенький калькулятор в прямом смысле. Работает c числами
-    :param x: первый агрумент
-    :param y: второй аргумент
-    :param operator: 4 оператора: plus, minus, mult, divide
-    :return: результат операции или None, если операция не выполнима
-    '''
-    raise NotImplementedError
+    if format(type(x)) == format(type(1)) or format(type(x)) == format(type(1.0)):
+        if format(type(y)) == format(type(1)) or format(type(y)) == format(type(1.0)):
+            if operator == "plus":
+                return x + y
+            if operator == "minus":
+                return x - y
+            if operator == "mult":
+                return x * y
+            if operator == "divide":
+                if y != 0:
+                    return x / y
+        return None
