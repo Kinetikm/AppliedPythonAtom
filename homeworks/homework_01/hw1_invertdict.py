@@ -4,9 +4,9 @@
 
 def invert_dict(source_dict):
     dictionary = {}
-    for i in source_dict:
-        value = source_dict.get(i)
-        dictionary.setdefault(value, []).append(i)
+    for k, v in source_dict.items():
+        dictionary[v] = dictionary.get(v, [])
+        dictionary[v].append(k)
     return dictionary
 
 
