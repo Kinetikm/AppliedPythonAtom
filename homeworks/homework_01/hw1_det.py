@@ -2,6 +2,7 @@
 # coding: utf-8
 import copy
 
+
 def calculate_determinant(list_of_lists):
 	res = 0
 	m = len ( list_of_lists )

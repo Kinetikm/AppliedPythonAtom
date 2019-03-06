@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def advanced_calculator(input_string):
 	if input_string.isalpha() or len (input_string) == 0:
 		return None

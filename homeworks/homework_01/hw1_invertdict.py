@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def getvalues(v):
     res = []
     if type(v) in [list, tuple, set]:
