@@ -1,13 +1,16 @@
-def calculator(a, b, operator):
-    if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+#!/usr/bin/env python
+# coding: utf-8
+
+def calculator(x, y, operator):
+    if isinstance(x, (int, float)) and isinstance(y, (int, float)):
         if operator == "minus":
-            return a - b
+            return x - y
         if operator == "plus":
-            return a + b
+            return x + y
         if operator == "mult":
-            return a * b
+            return x * y
         if operator == "divide":
-            return a / b
+            return x / y
         else:
             return None
     else:

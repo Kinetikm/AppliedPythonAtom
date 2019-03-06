@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 def invert_dict(source_dict):
     new_dict = {}
     for key in source_dict.keys():
