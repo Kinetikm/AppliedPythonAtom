@@ -12,4 +12,3 @@ def find_indices(input_list, n):
             MyDict.update({k: j})
     return None
 
-
