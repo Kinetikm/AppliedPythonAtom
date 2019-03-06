@@ -10,6 +10,7 @@ def spot_priority(symbol):
     else:
         return -1
 
+
 def is_bracket_correct(input_string):
     i = 0
     j = 0
@@ -25,6 +26,7 @@ def is_bracket_correct(input_string):
         return True
     else:
         return False
+
 
 def advanced_calculator(input_string):
     # проверяем, содержит ли строка символы
@@ -168,22 +170,27 @@ def advanced_calculator(input_string):
 
     i = 0
     while i < len(out):
-        if out[i] == '+':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '-':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-2))-float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '*':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-1))*float(out.pop(i-2)))
-            i -= 1
-        elif out[i] == '/':
-            out.pop(i)
-            out.insert(i-2, float(out.pop(i-2))/float(out.pop(i-2)))
-            i -= 1
+        if out[i] == '+' or out[i] == '-' or out[i] == '*' or out[i] == '/':
+            if i < 2:
+                return None
+            if out[i] == '+':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-1))+float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '-':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-2))-float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '*':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-1))*float(out.pop(i-2)))
+                i -= 1
+            elif out[i] == '/':
+                out.pop(i)
+                out.insert(i-2, float(out.pop(i-2))/float(out.pop(i-2)))
+                i -= 1
+            else:
+                i += 1
         else:
             i += 1
 
