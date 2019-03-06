@@ -22,8 +22,3 @@ def calculator(x, y, operator):
         return None
     except ValueError:
         return None
-
-
-
-
-
