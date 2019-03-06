@@ -17,6 +17,6 @@ def find_indices(input_list, n):
     for i in range (len(input_list)):
         if input_list[i] not in dict_list:
             dict_list[input_list[i]] = i
-        elif n - input_list[i] in dict_list:
+        if n - input_list[i] in dict_list:
             return (dict_list[n - input_list[i]], i)
     return None
