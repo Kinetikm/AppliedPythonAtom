@@ -13,17 +13,15 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
+    d = {}
     i = 0
-    j = 0
     for k in input_list:
-        if n - k in input_list and i != input_list.index(n - k):
-            a = i
-            b = input_list.index(n - k)
-            j = 1
+        if n - k in d.keys():
+            A = (i, d[n - k])
             break
+        else:
+            d[k] = i
+            A = None
         i += 1
-    if j:
-        return tuple([a, b])
-    else:
-        return None
+    return A
     raise NotImplementedError
