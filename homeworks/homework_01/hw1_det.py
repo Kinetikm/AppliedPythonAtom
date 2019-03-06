@@ -15,10 +15,8 @@ def calculate_determinant(list_of_lists):
             return matrix[0][0]
         else:
             for j in range(len(matrix)):
-                sum_m += ((- 1) ** (2 + j)) * matrix[0][j] * det(minor(matrix, j))
+                sum_m += ((- 1) ** (2 + j)) * matrix[0][j] * \
+                         det(minor(matrix, j))
             return sum_m
 
     return det(list_of_lists)
-
-
-print(calculate_determinant([[58.472, 222.501], [-233.389, -47.711]]))
