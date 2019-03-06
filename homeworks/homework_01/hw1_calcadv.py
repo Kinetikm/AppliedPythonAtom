@@ -214,5 +214,3 @@ def advanced_calculator(input_string):
 
     return float(out[0])
     raise NotImplementedError
-
-print(advanced_calculator(input()))
