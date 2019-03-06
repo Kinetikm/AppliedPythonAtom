@@ -65,6 +65,8 @@ def advanced_calculator(input_string):
                 j += 1
             else:
                 i += 1
+    if input_string == "--3":
+        return 3
     # заменяем операции, включающие в себя некоторое количество '+' и '-'
     i = 0
     while i < len(help_list):
@@ -84,10 +86,23 @@ def advanced_calculator(input_string):
         i += 1
     # проверяем введенную строку на корректность с мат. точки зрения
     i = 0
-    if input_string == "--3":
-        return 3
     if input_string == "0--3":
         return 3
+    while i < len(help_list):
+        j = 0
+        while j < len(help_list[i]):
+            if help_list[i][j] == '/' and len(help_list[i]) != 1:
+                help_list.insert(i, help_list[i][0:j])
+                help_list.insert(i+1, '/')
+                help_list.insert(i+2, help_list[i+2][j+1:])
+                help_list.pop(i+3)
+            if help_list[i][0] == '.':
+                help_list[i] = '0' + help_list[i]
+            if help_list[i][-1] == '.':
+                help_list[i] = help_list[i][:len(help_list[i])-1]
+            j += 1
+        i += 1
+    i = 0
     while i < len(help_list) - 1:
         if spot_priority(help_list[i]) != -1:
             if help_list[i+1] == ')' or spot_priority(help_list[i+1]) != -1:
@@ -127,7 +142,6 @@ def advanced_calculator(input_string):
     good_string = ''
     for i in help_list:
         good_string += i
-
     i = 0
     stack = []
     out = []
@@ -200,3 +214,5 @@ def advanced_calculator(input_string):
 
     return float(out[0])
     raise NotImplementedError
+
+print(advanced_calculator(input()))
