@@ -9,3 +9,4 @@ def find_indices(input_list, n):
                     input_list.index(n-a)
         else:
             return None
+    return None
