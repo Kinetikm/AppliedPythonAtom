@@ -19,10 +19,10 @@ def calculate_determinant(list_of_lists):
 
 
 def det(_str, _col, A):
-    determinant = 0
+    determ = 0
     t_col = _col[1:]
     for i in range(len(_str)):
         t_str = _str[:]
         t_str.remove(_str[i])
-        determinant += (-1) ** (i % 2) * A[_str[i]][_col[0]] * det(t_str, t_col, A)
-return determinant
+        determ += (-1) ** (i % 2) * A[_str[i]][_col[0]] * det(t_str, t_col, A)
+return determ
