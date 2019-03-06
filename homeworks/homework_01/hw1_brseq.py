@@ -3,6 +3,7 @@
 
 
 def is_bracket_correct(input_string):
+    
     a = '()'
     b = '[]'
     c = '{}'
