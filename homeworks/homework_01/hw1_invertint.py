@@ -14,4 +14,3 @@ def reverse(number):
         number1 = number1 * 10
         number1 = number1 + ost
     return number1*k
-    raise NotImplementedError

@@ -19,4 +19,3 @@ def calculate_determinant(a):
             del ind[i]
         b = b + a[0][i]*calculate_determinant(a1)*(-1)**i
     return b
-    raise NotImplementedError

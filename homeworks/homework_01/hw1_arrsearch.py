@@ -13,4 +13,3 @@ def find_indices(input_list, n):
     if b == ():
         return None
     return b
-    raise NotImplementedError

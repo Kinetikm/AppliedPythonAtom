@@ -17,4 +17,3 @@ def calculator(x, y, operator):
         return x/y
     else:
         return None
-    raise NotImplementedError
