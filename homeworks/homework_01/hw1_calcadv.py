@@ -32,13 +32,17 @@ def input_string_modifications(input_string):
     input_string = " ".join(input_string.split())
     while "+ +" in input_string:
         input_string = input_string.replace("+ +", '+')
-    if "* *" in input_string or "- *" in input_string or "- /" in input_string or \
+    if "* *" in input_string or "- *" in input_string or \
+            "- /" in input_string or \
             "+ *" in input_string or "+ /" in input_string:
         return None
     for i in range(len(input_string)):
-        if input_string[i] == " " and not input_string[i + 1] in operations and not input_string[i - 1] in operations:
+        if input_string[i] == " " and not input_string[
+                                              i + 1] in operations and not \
+                input_string[i - 1] in operations:
             return None
-        if input_string[i] == "-" and input_string[i + 1] != " " and not input_string[i - 2] in operations:
+        if input_string[i] == "-" and input_string[i + 1] != " " and not \
+                input_string[i - 2] in operations:
             input_string = input_string[:i - 1] + " +" + input_string[i - 1:]
     return input_string
 
@@ -51,8 +55,10 @@ def from_input_string_to_pol(input_string):
         return None
     for token in input_string.split(" "):
         if token in operations:
-            if len(operators) > 0 and operations_weights[token] <= operations_weights[operators[-1]]:
-                while len(operators) > 0 and operations_weights[token] <= operations_weights[operators[-1]]:
+            if len(operators) > 0 and operations_weights[token] <= \
+                    operations_weights[operators[-1]]:
+                while len(operators) > 0 and operations_weights[token] <= \
+                        operations_weights[operators[-1]]:
                     string.append(operators.pop())
             operators.append(token)
             continue

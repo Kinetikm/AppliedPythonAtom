@@ -19,5 +19,5 @@ def find_indices(input_list, n):
         if input_list[i] in difference_dict:
             return difference_dict.get(input_list[i]), i
         else:
-            difference_dict[n-input_list[i]] = i
+            difference_dict[n - input_list[i]] = i
     return None

@@ -18,7 +18,8 @@ def determinant(matrix, multiplier):
                         buff.append(matrix[j][k])
                 matrix_residue.append(buff)
             sign *= -1
-            result += multiplier * determinant(matrix_residue, sign * matrix[0][i])
+            result += multiplier * determinant(matrix_residue,
+                                               sign * matrix[0][i])
         return result
 
 
