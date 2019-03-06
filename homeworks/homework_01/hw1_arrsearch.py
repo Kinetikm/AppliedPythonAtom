@@ -6,7 +6,7 @@ def find_indices(input_list, n):
     MyDict = {}
     for j in range(len(input_list)):
         k = input_list[j]
-        if MyDict.get(n-input_list[j]) != None:
+        if MyDict.get(n-input_list[j]) is not None:
             return [MyDict.get(n-input_list[j]), j]
         if k not in MyDict:
             MyDict.update({k: j})
