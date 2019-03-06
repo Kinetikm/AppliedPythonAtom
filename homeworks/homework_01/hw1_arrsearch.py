@@ -11,6 +11,6 @@ def find_indices(input_list, n):
             if input_list[i] + input_list[j] == n:
                 a = (i, j)
                 return a
-            j = j + 1
-        i = i + 1
+            j += 1
+        i += 1
     return
