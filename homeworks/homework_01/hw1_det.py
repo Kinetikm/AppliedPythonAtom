@@ -50,4 +50,3 @@ def calculate_determinant(list_of_lists):
                                            * list_of_lists[j][i]
 
     return det
-    raise NotImplementedError

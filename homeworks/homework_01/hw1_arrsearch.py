@@ -29,7 +29,3 @@ def find_indices(input_list, n):
             return left, right
 
     return "None"
-
-    raise NotImplementedError
-
-

@@ -42,7 +42,3 @@ def is_bracket_correct(input_string):
     return counter_round == 0 and\
            counter_fancy == 0 and\
            counter_square == 0
-    raise NotImplementedError
-
-
-

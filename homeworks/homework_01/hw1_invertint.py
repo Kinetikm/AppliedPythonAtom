@@ -27,5 +27,3 @@ def reverse(number):
         return result
     else:
         return -result
-
-    raise NotImplementedError
