@@ -17,9 +17,9 @@ def calculator(x, y, operator):
         return None
     if type(y) in exeption:
         return None
-    if y == None:
+    if y is None:
         return None
-    if x == None:
+    if x is None:
         return None
 
     elif operator == 'plus':

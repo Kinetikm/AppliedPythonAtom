@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def reverse(number):
-    '''
-    Метод, принимающий на вход int и
-    возвращающий инвертированный int
-    :param number: исходное число
-    :return: инвертированное число
-    '''
-    print(number)
     a = number
     b = str(a)
     mas = []
@@ -24,4 +18,3 @@ def reverse(number):
     for i in mas:
         invert += i
     return int(invert)
-
