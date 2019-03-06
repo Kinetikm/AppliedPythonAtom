@@ -3,28 +3,35 @@
 
 
 def calculate_determinant(list_of_lists):
-    def calculate_determinant(list_of_lists):
     if len(list_of_lists) == 0:
         return None
     for l in list_of_lists:
         if len(l) != len(list_of_lists):
             return None
-    det = 0
-    if len(list_of_lists) == 1:
-        return list_of_lists[0][0]
-    if len(list_of_lists) == 2:
-        return list_of_lists[0][0]*list_of_lists[1][1]\
-            -list_of_lists[1][0]*list_of_lists[0][1]
-    if len(list_of_lists) > 2:
-        i = 0
-        while i < len(list_of_lists):
-            sup_matr = list_of_lists[::]
-            sup_matr.pop(0)
-            j = 0
+    sup_matr = list_of_lists[::]
+    i = 0
+    while i < len(sup_matr):
+        if sup_matr[i][i] == 0:
+            j = i + 1
             while j < len(sup_matr):
-                sup_matr[j].pop(i)
+                if sup_matr[j][i] != 0:
+                    tmp = sup_matr[i]
+                    sup_matr[i] = sup_matr[j]
+                    sup_matr[j] = tmp
+                    break
                 j += 1
-            det += list_of_lists[0][i]*(1**i)*\
-                calculate_determinant(sup_matr)
-            i += 1
-        return det
+        k = i + 1
+        while k < len(sup_matr):
+            x = sup_matr[k][i] / sup_matr[i][i]
+            m = i + 1
+            while m < len(sup_matr):
+                sup_matr[k][m] -= sup_matr[i][m] * x
+                m += 1
+            k += 1
+        i += 1
+    res = 1
+    i = 0
+    while i < len(sup_matr):
+        res *= sup_matr[i][i]
+        i += 1
+    return res
