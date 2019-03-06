@@ -14,7 +14,7 @@ def find_indices(input_list, n):
     :return: tuple из двух индексов или None
     '''
     dict_list = {}
-    for i in range (len(input_list)):
+    for i in range(len(input_list)):
         if input_list[i] not in dict_list:
             dict_list[input_list[i]] = i
         if n - input_list[i] in dict_list:
