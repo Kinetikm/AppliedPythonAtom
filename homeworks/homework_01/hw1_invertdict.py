@@ -14,8 +14,8 @@ def rep(list3):
 
 def invert_dict(source_dict):
     if not isinstance(source_dict, dict):
-        return source_dict
-    a = {}
+        return None
+    a = dict()
     b = 0
     for key, value in source_dict.items():
         if type(value) != list and type(value) != tuple and type(value) != set:
@@ -23,8 +23,8 @@ def invert_dict(source_dict):
         value = rep(value)
         for i in value:
             if i not in a.keys():
-                a[str(i)] = str(key)
+                a[i] = key
             else:
-                a[str(i)] = [a[str(i)]] + [str(key)]
+                a[i] = [a[i]] + [key]
 
-    return (a)
+    return a
