@@ -7,7 +7,7 @@
      :param input_string: строка, содержащая выражение
      :return: результат выполнение операции, если строка валидная - иначе None
 '''
-
+raise NotImplementedError
 
 def rev(char):
     if char == ')':

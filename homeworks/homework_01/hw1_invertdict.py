@@ -7,7 +7,7 @@
     :param source_dict: dict
     :return: new_dict: dict
 '''
-
+raise NotImplementedError
 
 def list_opener(inlist):
     easylist = []
