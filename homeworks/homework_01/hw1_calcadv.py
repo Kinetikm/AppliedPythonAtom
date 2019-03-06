@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 def advanced_calculator(input_string):
-    '''
-    Калькулятор на основе обратной польской записи.
-    Разрешенные операции: открытая скобка, закрытая скобка,
-     плюс, минус, умножить, делить
-    :param input_string: строка, содержащая выражение
-    :return: результат выполнение операции, если строка валидная - иначе None
-    '''
-    raise NotImplementedError
+	if input_string.isalpha() or len (input_string) == 0:
+		return None
+	bad = ['**','//','%','<<','>>','&','|','<','>','<=','>=','==','not','and','or']
+	for i in bad:
+		if (input_string.find(i) != -1):
+			return None
+	try :
+		x = eval(input_string)
+	except:
+		return None
+	return x if (type(x) is int or type(x) is float) else None
