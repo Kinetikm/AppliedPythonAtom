@@ -10,7 +10,8 @@ def open(source_dict):
     :return: new_list: list
     """
     new_list = []
-    if isinstance(source_dict, list) or isinstance(source_dict, set) or isinstance(source_dict, tuple):
+    if isinstance(source_dict, list) or isinstance(source_dict, set)\
+            or isinstance(source_dict, tuple):
         for i in source_dict:
             new_list += open(i)
     else:
