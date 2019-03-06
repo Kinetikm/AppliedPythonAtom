@@ -2,21 +2,13 @@
 # coding: utf-8
 
 
-# def calculate_determinant(list_of_lists):
-#     '''
-#     Метод, считающий детерминант входной матрицы,
-#     если это возможно, если невозможно, то возвращается
-#     None
-#     Гарантируется, что в матрице float
-#     :param list_of_lists: список списков - исходная матрица
-#     :return: значение определителя или None
-#     '''
-#     raise NotImplementedError
 def calculate_determinant(l_of_l):
     n = len(l_of_l)
     for list_hor in l_of_l:
         if len(list_hor) != n:
             return None
+    if n < 2:
+        return None
     if n > 2:
         i = 1
         t = 0

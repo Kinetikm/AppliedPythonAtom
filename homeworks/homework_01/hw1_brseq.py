@@ -3,13 +3,26 @@
 
 
 def is_bracket_correct(input_string):
-    #
-    # Метод проверяющий является ли поданная скобочная
-    #  последовательность правильной (скобки открываются и закрываются)
-    #  не пересекаются
-    # :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
-    # :return: True or False
-    return '()' in input_string and '[]' in input_string and '{}' in input_string
+    stack = ['.']
+    for bracket in input_string:
+        if bracket == '(' or bracket == '{' or bracket == '[':
+            stack.append(bracket)
+        if bracket == ')':
+            if stack[-1] != '(':
+                return False
+            if stack[-1] == '(':
+                stack.pop()
+        if bracket == '}':
+            if stack[-1] != '{':
+                return False
+            if stack[-1] == '{':
+                stack.pop()
+        if bracket == ']':
+            if stack[-1] != '[':
+                return False
+            if stack[-1] == '[':
+                stack.pop()
+    return stack == ['.']
 
-#
-# print(is_bracket_correct(input('Input string of brackets: ')))
+
+print(is_bracket_correct(''))

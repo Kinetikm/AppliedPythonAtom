@@ -3,21 +3,15 @@
 
 
 def calculator(x, y, operator):
-    if type(x) != float or type(y) != float or type(operator) != str:
-        return None
-    if operator == 'plus':
-        return int(x) + int(y)
-    if operator == 'minus':
-        return int(x) - int(y)
-    if operator == 'mult':
-        return int(x) * int(y)
-    if operator == 'divide':
-        return int(x) / int(y)
-    else:
-        return None
-
-#
-# a = input('Input x: ')
-# b = input('Input y: ')
-# op = input('Input operator: ')
-# print(calculator(a, b, op))
+    if (type(x) == float or type(x) == int) and\
+            (type(y) == float or type(y) == int):
+        if operator == 'plus':
+            return float(x) + float(y)
+        if operator == 'minus':
+            return float(x) - float(y)
+        if operator == 'mult':
+            return float(x) * float(y)
+        if operator == 'divide':
+            return float(x) / float(y)
+        else:
+            return None
