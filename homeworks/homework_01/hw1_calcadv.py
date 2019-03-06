@@ -7,7 +7,7 @@
      :param input_string: строка, содержащая выражение
      :return: результат выполнение операции, если строка валидная - иначе None
 '''
-raise NotImplementedError
+
 
 def rev(char):
     if char == ')':
@@ -210,6 +210,7 @@ def count(oplist):
 
 
 def advanced_calculator(input_string):
+    raise NotImplementedError
     print(input_string)
     flag = Check_valid(input_string)
     if flag is True:

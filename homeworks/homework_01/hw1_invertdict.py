@@ -7,7 +7,7 @@
     :param source_dict: dict
     :return: new_dict: dict
 '''
-raise NotImplementedError
+
 
 def list_opener(inlist):
     easylist = []
@@ -30,6 +30,7 @@ def tuple_opener(intup):
 
 
 def invert_dict(source_dict):
+    raise NotImplementedError
     print(source_dict)
     if type(source_dict) == dict:
         new_dict = {}
