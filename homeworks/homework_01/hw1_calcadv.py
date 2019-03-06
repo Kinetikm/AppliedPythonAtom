@@ -30,6 +30,4 @@ def advanced_calculator(input_string):
     raise NotImplementedError
 
 
-print(advanced_calculator("8 * +"))
-
 
