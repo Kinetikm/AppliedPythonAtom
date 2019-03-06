@@ -6,12 +6,15 @@ def calculator(x, y, operator):
     if (type(x) == float or type(x) == int) and\
             (type(y) == float or type(y) == int):
         if operator == 'plus':
-            return float(x) + float(y)
+            return x + y
         if operator == 'minus':
-            return float(x) - float(y)
+            return x - y
         if operator == 'mult':
-            return float(x) * float(y)
+            return x * y
         if operator == 'divide':
-            return float(x) / float(y)
+            if float(y) == 0.0:
+                return None
+            else:
+                return x / y
         else:
             return None

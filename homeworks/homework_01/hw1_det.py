@@ -39,3 +39,5 @@ def calculate_determinant(l_of_l):
 # print(calculate_determinant(a))
 # a = [[1, 2], [4, 6]]
 # print(calculate_determinant(a))
+a = [[]]
+print(calculate_determinant(a))
