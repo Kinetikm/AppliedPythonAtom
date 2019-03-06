@@ -45,4 +45,4 @@ def calculate_determinant(list_of_lists):
         determinant += list_of_lists[0][i] * \
                        calculate_minor(i, list_of_lists) * k
         k *= -1
-return determinant
+    return determinant
