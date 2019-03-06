@@ -20,7 +20,7 @@ def is_bracket_correct(input_string):
                 return False
         else:
             return False
-    return True
+    return list_bracket == 0
     '''
     Метод проверяющий является ли поданная скобочная
      последовательность правильной (скобки открываются и закрываются)
