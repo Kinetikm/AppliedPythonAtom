@@ -27,7 +27,7 @@ def invert_dict(source_dict):
         for key in d.keys():
             lst = []
             if isinstance(d[key], (list, set, tuple)):
-                for value in set(unpack(d[key])):
+                for value in unpack(d[key]):
                     M.append([key, value])
             else:
                 M.append([key, d[key]])
@@ -46,12 +46,9 @@ def invert_dict(source_dict):
                     N.append([ll, M[i][1]])
                 elif i == j and index == 0 and M[j][1] not in bank:
                     N.append([M[i][0], M[i][1]])
-        A = []
-        B = []
+        P = {}
         for i in range(len(N)):
-            A.append(N[i][1])
-            B.append(N[i][0])
-        P = dict(zip(A, B))
+            P.setdefault(N[i][1], N[i][0])
         return P
     else:
         return source_dict
