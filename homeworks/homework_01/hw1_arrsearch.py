@@ -9,4 +9,3 @@ def find_indices(input_list, n):
                         a = (input_list.index(i), input_list.index(k))
                 return a
         return None
-
