@@ -25,4 +25,4 @@ def det(_str, _col, A):
         t_str = _str[:]
         t_str.remove(_str[i])
         determ += (-1) ** (i % 2) * A[_str[i]][_col[0]] * det(t_str, t_col, A)
-return determ
+    return determ
