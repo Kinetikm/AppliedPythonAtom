@@ -3,10 +3,10 @@
 
 
 def invert_dict(source_dict):
-    '''
-    Функция которая разворачивает словарь, т.е.
-    каждому значению ставит в соответствие ключ.
-    :param source_dict: dict
-    :return: new_dict: dict
-    '''
-    raise NotImplementedError
+    invdict = {}
+    for k, v in source_dict.items():
+        invdict.setdefault(v, []).append(k)
+    return invdict
+
+
+# print(invert_dict({'a': 3, 'c': 2, 'b': 2, 'e': 3, 'd': 1, 'f': 2}))
