@@ -25,6 +25,6 @@ def invert_dict(source_dict):
             if i not in a.keys():
                 a[i] = key
             else:
-                a[i] = [a[i]] + [key]
+                a[i] = rep([a[i]]) + [key]
 
     return a
