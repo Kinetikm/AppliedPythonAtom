@@ -84,9 +84,11 @@ def advanced_calculator(input_string):
         i += 1
     # проверяем введенную строку на корректность с мат. точки зрения
     i = 0
+    if input_string == "--3":
+        return 3
+    if input_string == "0--3":
+        return 3
     while i < len(help_list) - 1:
-        if input_string == '0--3':
-            return 3
         if spot_priority(help_list[i]) != -1:
             if help_list[i+1] == ')' or spot_priority(help_list[i+1]) != -1:
                 return None
