@@ -11,5 +11,3 @@ def find_indices(input_list, n):
             second_index = input_list.index(temp)
             return second_index, first_index
         s.add(input_list[i])
-
-print(find_indices([],0))

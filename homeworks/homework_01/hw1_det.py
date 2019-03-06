@@ -8,7 +8,10 @@ def calculate_determinant(l_of_l):
         if len(list_hor) != n:
             return None
     if n < 2:
-        return None
+        if type(l_of_l[0][0]) == float or type(l_of_l[0][0]) == int:
+            return l_of_l[0][0]
+        else:
+            return None
     if n > 2:
         i = 1
         t = 0
@@ -33,11 +36,4 @@ def calculate_determinant(l_of_l):
         return l_of_l[0][0]*l_of_l[1][1]-l_of_l[0][1]*l_of_l[1][0]
 
 
-# a = [[1, 2, 6, 8], [4, 6, 7, 5], [7, 1, 8, 9], [2, 1, 8, 5]]
-# print(calculate_determinant(a))
-# a = [[1, 2, 6], [4, 6, 7], [7, 1, 8], [2, 1, 8]]
-# print(calculate_determinant(a))
-# a = [[1, 2], [4, 6]]
-# print(calculate_determinant(a))
-a = [[]]
-print(calculate_determinant(a))
+print(calculate_determinant([[1.0]]))

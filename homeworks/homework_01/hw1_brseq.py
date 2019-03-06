@@ -23,6 +23,3 @@ def is_bracket_correct(input_string):
             if stack[-1] == '[':
                 stack.pop()
     return stack == ['.']
-
-
-print(is_bracket_correct(''))
