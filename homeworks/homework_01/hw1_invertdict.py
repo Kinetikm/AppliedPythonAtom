@@ -23,8 +23,8 @@ def invert_dict(source_dict):
         value = rep(value)
         for i in value:
             if i not in a.keys():
-                a[i] = key
+                a[str(i)] = str(key)
             else:
-                a[i] = [a[i]] + [key]
+                a[str(i)] = [a[str(i)]] + [str(key)]
 
     return (a)
