@@ -22,4 +22,3 @@ def calculator(x, y, operator):
         if operator == "mult":
             return c*d
     raise print("None") 
-    raise NotImplementedError 

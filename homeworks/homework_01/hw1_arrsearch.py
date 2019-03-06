@@ -19,4 +19,3 @@ def find_indices(input_list, n):
         if a.count(c)>0:
             return (a.index(a[i]),a.index(c))
         else: "None"
-    raise NotImplementedError
