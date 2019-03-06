@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-
 def find_indices(input_list, n):
     MyDict = {}
     for j in range(len(input_list)):
@@ -12,4 +11,6 @@ def find_indices(input_list, n):
         if k not in MyDict:
             MyDict.update({k: j})
     return None
+
+
 
