@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 
 def is_bracket_correct(input_string):
@@ -32,4 +30,3 @@ def is_bracket_correct(input_string):
         return True
     else:
         return False
-
