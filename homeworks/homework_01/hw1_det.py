@@ -11,4 +11,18 @@ def calculate_determinant(list_of_lists):
     :param list_of_lists: список списков - исходная матрица
     :return: значение определителя или None
     '''
-    raise NotImplementedError
+    n = len(list_of_lists)
+    for i in list_of_lists:
+        if len(i) != n:
+            return None
+    return det([i for i in range(n)], [i for i in range(n)], list_of_lists)
+
+
+def det(_str, _col, A):
+    determinant = 0
+    t_col = _col[1:]
+    for i in range(len(_str)):
+        t_str = _str[:]
+        t_str.remove(_str[i])
+        determinant += (-1) ** (i % 2) * A[_str[i]][_col[0]] * det(t_str, t_col, A)
+return determinant
