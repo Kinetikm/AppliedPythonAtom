@@ -15,6 +15,8 @@ def calculate_determinant(list_of_lists):
     for i in list_of_lists:
         if len(i) != n:
             return None
+    if n == 1:
+        return list_of_lists
     return det([i for i in range(n)], [i for i in range(n)], list_of_lists)
 
 
