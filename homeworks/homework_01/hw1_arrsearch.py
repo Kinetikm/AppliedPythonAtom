@@ -13,4 +13,3 @@ def find_indices(input_list, n):
     return None
 
 
-
