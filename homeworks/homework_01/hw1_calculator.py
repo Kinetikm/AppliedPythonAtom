@@ -21,5 +21,3 @@ def calculator(x, y, operator):
             return "None"
     if operator == "mult":
         return x * y
-    
-    raise NotImplementedError
