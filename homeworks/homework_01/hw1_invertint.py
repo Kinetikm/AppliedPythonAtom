@@ -9,8 +9,6 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    if not (isinstance(number, int)):
-        return None
     if number == 0:
         return 0
     sign = 1
@@ -23,4 +21,4 @@ def reverse(number):
             break
         else:
             newstr = newstr[1::1]
-    return int(newstr) * sign
+    return (int(newstr) * sign)
