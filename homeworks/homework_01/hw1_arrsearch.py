@@ -13,4 +13,11 @@ def find_indices(input_list, n):
     :param n: целевая сумма
     :return: tuple из двух индексов или None
     '''
-    raise NotImplementedError
+    dd = {}
+    for i in range(len(input_list)):
+        if input_list[i] in dd.keys():
+            out = (i, dd[input_list[i]])
+            return out
+        else:
+            dd[n - input_list[i]] = i
+    return None
