@@ -8,7 +8,7 @@ def func(d_val, result_dict, k):
             result_dict[d_val] = k
         elif type(result_dict.get(d_val)) != list and type(
                 result_dict.get(d_val)) != set and type(
-            result_dict.get(d_val)) != tuple:
+                result_dict.get(d_val)) != tuple:
             result_dict[d_val] = [result_dict.get(d_val), k]
         else:
             result_dict.get(d_val).append(k)
