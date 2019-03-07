@@ -3,7 +3,6 @@
 
 
 def is_bracket_correct(input_string):
-    print(input_string)
     b_op = ('(', '[', '{')
     b_cl = (')', ']', '}')
     stack = []
