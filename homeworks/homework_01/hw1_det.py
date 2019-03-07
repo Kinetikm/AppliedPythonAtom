@@ -3,6 +3,7 @@
 
 
 def calculate_determinant(list_of_lists):
+    #raise NotImplementedError
     length=len(list_of_lists)
     for i in list_of_lists:
         if len(i)!=length:

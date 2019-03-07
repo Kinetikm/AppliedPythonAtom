@@ -1,6 +1,35 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+     
+def advanced_calculator(input_string):
+     #raise NotImplementedError
+     if (is_bracket_correct(input_string)==False):
+          return None
+     print()
+     print(input_string)
+     symbols="+-*/(). 0123456789"
+     for i in input_string:
+          if i not in symbols:
+               #print("плохой символ ",i)
+               return(None)
+     input_string=input_string.replace ("-- ", "+")
+     input_string=input_string.replace ("--", "")
+     input_string=input_string.replace ("++", "")
+     input_string=input_string.replace ("+-", "-")
+     input_string=input_string.replace ("+ -", " - ")
+     input_string=input_string.replace ("- -", " + ")
+     print(input_string)
+     pol=norm_into_pol(input_string)
+     print("Pol ",pol)
+     if (pol=="!!!"):
+          return(None)
+     elif (type(pol)==str):
+        a=polish_write(pol)
+        print(a)
+        return(a)
+     else:
+          return(None)
 
 def is_bracket_correct(input_string):
      stack=[]
@@ -36,9 +65,6 @@ def is_bracket_correct(input_string):
 def polish_write(input_string):
      operators = {"+", "-", "*", "/"}
      stack = []
-     #input_string=input_string.replace ("mult", " * ")
-     #input_string=input_string.replace ("divide", " / ")
-     #string = ''.join([input_string[i] for i in range(len(input_string)) if i%2==0])
      string=input_string
      string=string.replace ("()","")
      string=string.replace ("+", " + ")
@@ -74,26 +100,33 @@ def polish_write(input_string):
                except:
                     return None
      print(stack)
-     try:
+     if (len(stack)==1):
           return stack.pop()
-     except:
+     else:
           return(None)
 
 def norm_into_pol(input_string):
      input_string=input_string+"|"
      input_string=input_string.replace ("--", "")
+     input_string=input_string.replace (". ", ".0 ")
+     input_string=input_string.replace (" .", " 0.")
+     input_string=input_string.replace ("+", " + ")
+     input_string=input_string.replace ("-", " - ")
+     input_string=input_string.replace ("*", " * ")
+     input_string=input_string.replace ("/", " / ")
+     if (input_string.find("/n",0,len(input_string)-1)!=-1 or input_string.find("()",0,len(input_string)-1)!=-1):
+          return("!!!")
      l1=list() #k
      l2=list() #m
      lv=""
      i=0
      while(i<=len(input_string)):
           letter=input_string[i]
-          print()
-          print("eto l1", l1)
-          print("eto l2", l2)
-          print("eto letter",letter)
-          print("eto lv",lv)
-          #return("!!!")
+          # print()
+          # print("eto l1", l1)
+          # print("eto l2", l2)
+          # print("eto letter",letter)
+          # print("eto lv",lv)
           if (letter ==")"):
                if (lv=="|"):
                     return("!!!") #5
@@ -103,20 +136,21 @@ def norm_into_pol(input_string):
                          if (lv=="("):
                               lv=""
                          i+=1
-                         i+=1
                     else:
                          i+=1
                          lv=''
+                    
                   
                else: #2
                     l1.append(lv)
                     if (len(l2)>0 and lv!=""):
                          lv=l2.pop()
-                         if (lv=="("):
+                         if (lv=="(" and len(l2)>0 ):
                               lv=""
                     else:
                          lv=""
-     
+                         i+=1
+               
           elif (letter =="+" or letter=="-"):
                if (lv=="|" or lv=="("): #1
                     l2.append(lv)
@@ -132,12 +166,14 @@ def norm_into_pol(input_string):
                          lv=l2.pop()
                     else:
                          lv=""
+                    #i+=1 #!
      
           elif (letter =="*"  or letter =="/"):
                if (lv=="*" or lv=="/"): #2
                     l1.append(lv)
                     if (len(l2)>0):
                          lv=l2.pop()
+                         i+=1 #!
                     else:
                          lv=""
                elif(lv!=""): #1
@@ -150,26 +186,26 @@ def norm_into_pol(input_string):
                     i+=1
           
           elif (letter =="|"):
-               if (lv=="|" or lv==""): #4
+               if (lv=="|" or lv=="" and len(l2)==0): #4
                     l2.reverse()
                     result_string="".join(l1)
                     return (result_string)
-               elif(lv=="("): #5
+               elif (lv=="("): #5
                     return("!!!")
                else: #2
+                    print("END")
                     l1.append(lv)
                     if (len(l2)>0):
-                         lv=l2.pop()
-                    else:
-                         l1.append(lv)
+                         #lv=l2.pop()
+                         #l1.append(lv)
                          l2.reverse()
                          for li in l2:
                               if (li==")" or li=="(") :
                                    return("!!!")
                               else:
                                    l1.append(li)
-                         result_string="".join(l1)
-                         return (result_string)
+                    result_string="".join(l1)
+                    return (result_string)
      
           elif(letter=="("):
                if(lv==""):
@@ -182,20 +218,11 @@ def norm_into_pol(input_string):
           else:
                l1.append(letter)
                i+=1
-
-def advanced_calculator(input_string):
-     #raise NotImplementedError
-     if (is_bracket_correct(input_string)==False):
-          return None
+          if ( letter ==" " and lv=="" and len(l2)!=0):
+               lv=l2.pop()
+          
      print()
-     print(input_string)
-     pol=norm_into_pol(input_string)
-     print("Pol ",pol)
-     if (pol=="!!!"):
-          return(None)
-     elif (type(pol)==str):
-        a=polish_write(pol)
-        print(a)
-        return(a)
-     else:
-          return(None)
+     print("eto l1", l1)
+     print("eto l2", l2)
+     print("eto letter",letter)
+     print("eto lv",lv)
