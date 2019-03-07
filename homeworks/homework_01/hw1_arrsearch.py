@@ -12,7 +12,7 @@ def find_indices(input_list, n):
     while i != j:
         if (a[i]+a[j] == n):
             return(input_list.ind(a[i]), input_list.ind(a[j]))
-        elif (a[i]+a[j] > n):
+        elif (a[i]+a[j] < n):
             i += 1
         else:
             j -= 1
