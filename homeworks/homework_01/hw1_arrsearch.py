@@ -11,7 +11,7 @@ def find_indices(input_list, n):
     a.sort()
     while i != j:
         if (a[i]+a[j] == n):
-            return(input_list.ind(a[i]), input_list.ind(a[j]))
+            return(input_list.index(a[i]), input_list.index(a[j]))
         elif (a[i]+a[j] < n):
             i += 1
         else:
