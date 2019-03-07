@@ -2,7 +2,13 @@
 # coding: utf-8
 
 
-def invert_dict(source_dict):
-    newdict={v:[i for i in source_dict.keys() if v in source_dict[i]] for k,v in source_dict.items() for v in v}
-    #print(newdict)
-    return newdict
+def invert_dict(dict1):
+    intended_dict ={}
+    try:
+        for k, v in dict1.items():
+            for i in v:
+                intended_dict.setdefault(i, []).append(k)
+    except AttributeError:
+        return dict1
+    else:
+        return intended_dict
