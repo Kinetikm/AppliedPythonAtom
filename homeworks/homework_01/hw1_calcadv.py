@@ -159,5 +159,3 @@ def advanced_calculator(input_string):
         return stack_nums[0]
     else:
         return None
-
-print(advanced_calculator('++4'))
