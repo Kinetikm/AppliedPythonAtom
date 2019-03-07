@@ -9,4 +9,4 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    raise NotImplementedError
+    return str(number).rstrip("0")[::-1] 
