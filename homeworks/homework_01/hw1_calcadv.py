@@ -1,13 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import re
+
 
 def advanced_calculator(input_string):
-    '''
-    Калькулятор на основе обратной польской записи.
-    Разрешенные операции: открытая скобка, закрытая скобка,
-     плюс, минус, умножить, делить
-    :param input_string: строка, содержащая выражение
-    :return: результат выполнение операции, если строка валидная - иначе None
-    '''
+    try:
+        s = re.findall("[0-9]", input_string)
+        if len(s) == 0 or "**" in input_string:
+            return None
+
+        for ss in input_string:
+            if "," in ss or "[" in ss or "]" in ss or ss.isalpha():
+                return None
+        return eval(input_string)
+    except (SyntaxError, TypeError):
+        return None
+
     raise NotImplementedError
