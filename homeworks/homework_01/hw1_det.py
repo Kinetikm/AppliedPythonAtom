@@ -3,7 +3,7 @@
 
 
 def calculate_determinant(list_of_lists):
-      size = len(list_of_lists)
+    size = len(list_of_lists)
     if size > 1:
         res = 1
         for i in range(size):
