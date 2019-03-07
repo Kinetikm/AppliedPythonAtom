@@ -18,7 +18,8 @@ def calculator(x, y, operator):
         if operator == "mult":
             return x * y
         if operator == "divide":
-            return x / y
+		    if y!=0:
+                return x / y
         else:
             return None
     else:
