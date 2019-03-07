@@ -2,13 +2,11 @@
 # coding: utf-8
 
 
-import operator
-
-OPERATORS = {
-    '+': operator.add, 
-    '-': operator.sub, 
-    '*': operator.mul, 
-    '/': operator.truediv
+opers = {
+    "+": lambda x, y: x + y,
+    "-": lambda x, y: x - y,
+    "*": lambda x, y: x * y,
+    "/": lambda x, y: x / y,
 }
 
 def calc(string):
