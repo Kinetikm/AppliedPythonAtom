@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def is_zeros(M, k):
     m, n = -1, -1
     if M[k][k] != 0:
@@ -32,7 +33,7 @@ def calculate_determinant(list_of_lists):
     :return: значение определителя или None
     '''
     M = list_of_lists
-    if (M == None):
+    if (M is None):
         return None
     n = len(M)
     flag = True

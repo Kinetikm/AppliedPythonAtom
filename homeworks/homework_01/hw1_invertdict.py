@@ -3,7 +3,7 @@
 
 
 def expand(y, l):
-    if not (isinstance(y,(tuple,set,list))):
+    if not (isinstance(y, (tuple, set, list))):
         l.append(y)
     else:
         for i in y:
@@ -17,7 +17,7 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
-    Dic=source_dict
+    Dic = source_dict
     if not isinstance(Dic, dict):
         return None
     else:

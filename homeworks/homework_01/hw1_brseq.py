@@ -22,7 +22,7 @@ def is_bracket_correct(input_string):
                     ((str[i] is "{") or (str[i] is "(") or (str[i] is "[")):
                 i = i + 1
             if i != len(str):
-                p= str[i-1] + str[i]
+                p = str[i-1] + str[i]
                 if (p == "[]") or (p == "{}") or (p == "()"):
                     if i == (len(str)-1):
                         Str = str[:i-1]
