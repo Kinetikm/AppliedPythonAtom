@@ -10,15 +10,14 @@ def calculator(x, y, operator):
     :param operator: 4 оператора: plus, minus, mult, divide
     :return: результат операции или None, если операция не выполнима
     '''
-        if x.isdigit() & y.isdigit():
-        c=float(x)
-        d=float(y)
-        if operator == "plus":
-            return c+d
-        if operator == "minus":
-            return c-d
-        if operator == "divide":
-            return c/d
-        if operator == "mult":
-            return c*d
+    if (type(a)==int or type(a)==float):
+        if (type(b)==int or type(b)==float):
+            if operator == "plus":
+                return a+b
+            if operator == "minus":
+                return a-b
+            if operator == "divide":
+                return a/b
+            if operator == "mult":
+                return a*b
     raise print("None") 
