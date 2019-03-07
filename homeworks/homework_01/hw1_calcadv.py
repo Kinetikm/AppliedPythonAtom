@@ -11,6 +11,7 @@
 
 
 def advanced_calculator(input_string):
+    raise NotImplementedError  # не доработал все случаи
     if len(input_string) == 0:
         return None
 
