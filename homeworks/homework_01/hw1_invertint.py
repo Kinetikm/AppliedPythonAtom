@@ -10,4 +10,7 @@ def reverse(number):
     :return: инвертированное число
     '''
     if str(number).isdigit():
-        return int(str(number).rstrip("0")[::-1])
+        if (number != 0):
+            return int(str(number).rstrip("0")[::-1])
+        else:
+            return 0
