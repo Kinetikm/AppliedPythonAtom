@@ -2,163 +2,139 @@
 # coding: utf-8
 
 
-class Stack:
-
-    def __init__(self):
-        self.items = []
-
-    def is_empty(self):
-        return self.items == []
-
-    def push(self, item):
-        self.items.append(item)
-
-    def pop(self):
-        return self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items) - 1]
-
-    def size(self):
-        return len(self.items)
-
-
-def advanced_calculator(input_string):
+def advanced_calculator(input):
     '''
     Калькулятор на основе обратной польской записи.
     Разрешенные операции: открытая скобка, закрытая скобка,
      плюс, минус, умножить, делить
-    :param input_string: строка, содержащая выражение
+    :param input: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
+    for i in range(10):
+        input = input.replace(str(i) + " ", str(i) + "|")
+    while " " in input:
+        input = input.replace(" ", "")
+    while "\t" in input:
+        input = input.replace("\t", "")
+    while "--" in input:
+        input = input.replace("--", "+")
+    while "++" in input:
+        input = input.replace("++", "+")
+    while "+-" in input:
+        input = input.replace("+-", "-")
+    while "(-" in input:
+        input = input.replace("(-", "(0-")
+    while "/-" in input:
+        input = input.replace("/-", "*(0-1)/")
+    while "*-" in input:
+        input = input.replace("*-", "*(0-1)*")
+    if len(input) > 0 and (input[0] is "-" or input[0] is "+"):
+        input = "0" + input
+    unit = ""
+    output_list = []
+    st = []
 
-    infix_list = cast(input_string)
-    postfix_list = infix_to_postfix(infix_list)
+    def is_op(operator):
+        return operator is "+" or operator is "-" or operator is "/" or operator is "*"
 
-    while True:
-        bool = 0
-        for idx, val in enumerate(postfix_list):
-            if idx == len(postfix_list) - 1:
-                break
-            if val == '+' and postfix_list[idx+1] == '-' or val == '-' and postfix_list[idx+1] == '+':
-                postfix_list = postfix_list[:idx-1] + ['-'] + postfix_list[:idx+2]
-                bool += 1
-                break
-            if val == '-' and postfix_list[idx+1] == '-' or val == '+' and postfix_list[idx+1] == '+':
-                postfix_list = postfix_list[:idx-1] + ['-'] + postfix_list[:idx+2]
-                bool += 1
-                break
-        if bool == 0:
-            break
-
-    stack = []
-    sp = 0
-    for val in postfix_list:
+    while len(input) > 0:
+        
+        if is_op(input[0]):
+            if len(unit) > 0:
+                try:
+                    output_list.append(float(unit))
+                    unit = ""
+                except (TypeError, ValueError):
+                    return None
+            
+            while len(st) > 0 and st[len(st) - 1] is not "(":
+                if st[len(st) - 1] is '*' or input[0] is '+' \
+                   or st[len(st) - 1] is '/' or input[0] is '-':
+                    output_list.append(st.pop())
+                else:
+                    break
+            st.append(input[0])
+            input = input[1:]
+        
+        elif input[0] is "(":
+            if len(unit) > 0:
+                return None
+            st.append("(")
+            input = input[1:]
+        
+        elif input[0] is ")":
+            if len(unit) == 0:
+                return None
+            try:
+                output_list.append(float(unit))
+                unit = ""
+            except (TypeError, ValueError):
+                return None
+        
+            input = input[1:]
+        
+            try:
+                unit = st.pop()
+                while unit is not "(":
+                    output_list.append(unit)
+                    unit = st.pop()
+                unit = ""
+            except IndexError:
+                return None
+        
+        elif input[0].isdigit() or input[0] is ".":
+            unit += input[0]
+            input = input[1:]
+        
+        elif input[0] is "|":
+            output_list.append(float(unit))
+            unit = ""
+            input = input[1:]
+        
+        else:
+            return None
+    
+    if len(unit) > 0:
         try:
-            if val == '+':
-                stack[sp - 2] = stack[sp - 2] + stack[sp - 1]
-                sp -= 1
-
-            if val == '-':
-                stack[sp - 2] = stack[sp - 2] - stack[sp - 1]
-                sp -= 1
-
-            if val == '*':
-                stack[sp - 2] = stack[sp - 2] * stack[sp - 1]
-                sp -= 1
-
-            if val == '/':
-                stack[sp - 2] = stack[sp - 2] / stack[sp - 1]
-                sp -= 1
-
-            if represents_int(val):
-                stack.append(val)
-                sp += 1
-        except ZeroDivisionError:
+            output_list.append(float(unit))
+            unit = ""
+        except (ValueError, TypeError):
             return None
-        except ValueError:
-            return None
-        except IndexError:
-            return None
+    
+    while len(st) > 0:
+        output_list.append(st.pop())
+    
     try:
-        answer = stack[sp-1]
+        
+        while len(output_list) > 0:
+            
+            unit = output_list.pop(0)
+            
+            if isinstance(unit, float):
+                st.append(unit)
+            
+            else:
+                unit2 = st.pop()
+                unit1 = st.pop()
+                
+                if unit is "+":
+                    st.append(unit1 + unit2)
+                
+                elif unit is "-":
+                    st.append(unit1 - unit2)
+                
+                elif unit is "/":
+                    try:
+                        st.append(unit1 / unit2)
+                    except ZeroDivisionError:
+                        return None
+                
+                elif unit is "*":
+                    st.append(unit1 * unit2)
     except IndexError:
         return None
-
-    return answer
-
-
-def cast(input_string):
-    return "".join(input_string.split())\
-        .replace('+', ' + ')\
-        .replace('-', ' - ')\
-        .replace('*', ' * ')\
-        .replace('/', ' / ')\
-        .replace('(', ' ( ')\
-        .replace(')', ' ) ')\
-        .split()
-
-
-def infix_to_postfix(input_list):
-    s = Stack()
-    lst = []
-
-    for elem in input_list:
-
-        if represents_int(elem):
-            lst.append(elem)
-
-        if elem == '(':
-            s.push(elem)
-
-        if elem == ')':
-            fl = True
-            while fl:
-                while not s.is_empty():
-                    tmp = s.pop()
-                    if tmp == '(':
-                        fl = False
-                        continue
-                    else:
-                        lst.append(tmp)
-
-        if elem == '/' or elem == '*' or elem == '+' or elem == '-':
-            if s.is_empty():
-                s.push(elem)
-                continue
-            while pop_elems_by_prior(elem, s.peek()):
-                lst.append(s.pop())
-                if s.is_empty():
-                    break
-            s.push('/')
-
-    while not s.is_empty():
-        lst.append(s.pop())
-
-    return lst
-
-
-def pop_elems_by_prior(elem, peek):
-    priorities = {
-        '(': 1,
-        ')': 1,
-        '+': 2,
-        '-': 2,
-        '*': 3,
-        '/': 3,
-    }
-
-    if priorities[elem] <= priorities[peek]:
-        return True
-    return False
-
-
-def represents_int(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
-
-if __name__ == '__main__':
-    print(infix_to_postfix('2+1*'))
+    
+    if len(st) != 1:
+        return None
+    
+    return st[0]
