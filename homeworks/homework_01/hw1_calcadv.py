@@ -17,14 +17,18 @@ def advanced_calculator(input_string):
 
     args = []
     i = 0
+    filtr = True
     while i < len(input_string):
         try:
-            int(input_string[i])
+            if filtr is True:
+                int(input_string[i])
+            if filtr is False:
+                filtr = True
             num = ''
             dot = False
             while True:
                 if input_string[i] is '.':
-                    if len(num) > 0 and dot is False:
+                    if dot is False:
                         num += input_string[i]
                         dot = True
                     else:
@@ -43,6 +47,9 @@ def advanced_calculator(input_string):
                     break
                 i += 1
         except ValueError:
+            if input_string[i] is '.' and filtr is True:
+                filtr = False
+                continue
             if input_string[i] is ' ':
                 i += 1
                 continue
@@ -161,6 +168,10 @@ def advanced_calculator(input_string):
         except KeyError:
             stack_nums.append(value)
     if len(stack_nums) is 1:
-        return float(stack_nums[0])
+        return stack_nums[0]
     else:
         return None
+
+while True:
+	string = input()
+	print(advanced_calculator(string))
