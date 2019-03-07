@@ -14,4 +14,3 @@ def check_palindrom(input_string):
     if reverse_string == input_string:
         return True
     return False
-

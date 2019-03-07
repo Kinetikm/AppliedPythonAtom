@@ -11,9 +11,9 @@ def is_bracket_correct(input_string):
     :return: True or False
     '''
     brdict = {
-        '}' : '{',
-        ')' : '(',
-        ']' : '[',
+        '}': '{',
+        ')': '(',
+        ']': '[',
     }
     stack = []
     if not isinstance(input_string, str):
@@ -27,4 +27,3 @@ def is_bracket_correct(input_string):
             else:
                 return False
     return True
-

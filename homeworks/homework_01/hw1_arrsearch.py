@@ -16,7 +16,6 @@ def find_indices(input_list, n):
     remain_dict = {}
     for i in range(0, len(input_list)):
         remain_dict[str(n - input_list[i])] = i
-    print (remain_dict)
     for k in range(0, len(input_list)):
         rem = input_list[k]
         if (str(rem) in remain_dict) and (k != remain_dict[str(rem)]):
