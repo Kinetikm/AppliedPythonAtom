@@ -11,7 +11,6 @@ def is_bracket_correct(input_string):
     :return: True or False
     '''
     temp = ['[]', '{}', '()']
-    ind = input_string.find
     while (True):
         dlina = len(input_string)
         for skob in temp:
