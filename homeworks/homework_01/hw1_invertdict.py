@@ -3,10 +3,6 @@
 
 
 def invert_dict(source_dict):
-    '''
-    Функция которая разворачивает словарь, т.е.
-    каждому значению ставит в соответствие ключ.
-    :param source_dict: dict
-    :return: new_dict: dict
-    '''
-    raise NotImplementedError
+    newdict={v:[i for i in source_dict.keys() if v in source_dict[i]] for k,v in source_dict.items() for v in v}
+    #print(newdict)
+    return newdict
