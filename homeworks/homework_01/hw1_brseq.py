@@ -12,6 +12,8 @@ def is_bracket_correct(input_string):
             head = a.index(i)
             last.append(head)
         elif i in b:
+            if input_string.index(i) == 0:
+                return False
             if head != b.index(i):
                 return False
             last.pop()
