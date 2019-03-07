@@ -26,8 +26,7 @@ def invert_dict(source_dict):
             else:
                 new_dict[new_new_key] = [new_value]
     for key in new_dict.keys():
-        if new_dict[key].isDigit():
-            if len(new_dict[key]) == 1:
-                val = new_dict[key]
-                new_dict = val[0]
+        if len(new_dict[key]) == 1:
+            val = new_dict[key]
+            new_dict[key] = val[0]
     return new_dict
