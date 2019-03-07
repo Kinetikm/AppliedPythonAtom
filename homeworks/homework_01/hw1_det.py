@@ -2,14 +2,17 @@
 # coding: utf-8
 
 
-
 import copy
+
+
 def minor(A, i, j):
-    M = copy.deepcopy(A) 
+    M = copy.deepcopy(A)
     del M[i]
     for i in range(len(A[0]) - 1):
         del M[i][j]
     return M
+
+
 def calculate_determinant(list_of_lists):
     A = list_of_lists
     for stroka in A:
