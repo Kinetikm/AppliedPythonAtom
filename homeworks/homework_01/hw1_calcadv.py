@@ -50,7 +50,7 @@ def advanced_calculator(input_string):
             if input_string[i] is '.' and filtr is True:
                 filtr = False  # Костыль для чисел вроде .12345
                 continue
-            if input_string[i] is ' ':
+            if input_string[i] is ' ' or input_string[i] is '	':
                 i += 1
                 continue
             if input_string[i] is '(' or input_string[i] is ')':
