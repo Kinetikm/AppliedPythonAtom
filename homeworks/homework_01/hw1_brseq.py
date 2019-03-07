@@ -2,12 +2,18 @@
 # coding: utf-8
 
 
-def is_bracket_correct(input_string):
-    '''
-    Метод проверяющий является ли поданная скобочная
-     последовательность правильной (скобки открываются и закрываются)
-     не пересекаются
-    :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
-    :return: True or False
-    '''
-    raise NotImplementedError
+pairs_1 = {'(': ')', '[': ']', '{': '}'}
+pairs_2 = {')': '(', ']': '[', '}': '{'}
+
+
+def is_bracket_correct(string):
+    stack = []
+    for symbol in string:
+        if symbol in pairs_1.keys():
+            stack.append(symbol)
+        elif symbol in pairs_1.values():
+            if len(stack) == 0:
+                return False
+            if not(stack.pop() == pairs_2.get(str(symbol))):
+                return False
+    return True
