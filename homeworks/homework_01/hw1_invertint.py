@@ -9,8 +9,17 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    if str(number).isdigit():
-        if (number != 0):
-            return int(str(number).rstrip("0")[::-1])
+    fl = False
+    number = str(number)
+    if number[0] == '-':
+        fl = True
+        number = number.replace('-', '')
+        print(number)
+    if number.isdigit():
+        if (number != '0'):
+            val = int(number.rstrip("0")[::-1])
+            if fl:
+                val = -val
+            return val
         else:
             return 0
