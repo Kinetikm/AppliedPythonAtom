@@ -3,31 +3,32 @@
 
 
 def is_bracket_correct(input_string):
-    stack=[]
+    stack = []
+    print(input_string)
     for letter in input_string:
-        if letter=="(":
+        if (letter == "("):
             stack.append("(")
-        elif letter=="[":
+        elif (letter == "["):
             stack.append("[")
-        elif letter=="{":
+        elif (letter == "{"):
             stack.append("{")
         else:
-             try:
-                  if letter==")":
-                      if stack.pop()!='(': 
-                          stack.append(")")
-                  elif letter=="]":
-                      if stack.pop()!="[":
-                          stack.append("]")
-                  elif letter=="}":
-                      if stack.pop()!="{":
-                          stack.append("}")
-                  elif letter==" ":
-                      pass
-             except:
-                  return False
+            try:
+                if (letter == ")"):
+                    if (stack.pop() != '('):
+                        stack.append(")")
+                elif (letter == "]"):
+                    if (stack.pop() != "["):
+                            stack.append("]")
+                elif (letter == "}"):
+                    if (stack.pop() != "{"):
+                            stack.append("}")
+                elif (letter == " "):
+                    pass
+            except:
+                return (False)
     try:
-         stack.pop()
-         return False
+        stack.pop()
+        return (False)
     except:
-         return True
+        return (True)
