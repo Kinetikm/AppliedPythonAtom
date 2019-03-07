@@ -20,4 +20,3 @@ def find_indices(input_list, n):
         except KeyError:
             myDict[input_list[i]] = i
     return None
-    raise NotImplementedError

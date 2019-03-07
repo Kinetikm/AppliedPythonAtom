@@ -22,4 +22,3 @@ def reverse(number):
         return -1*myNumber
     else:
         return myNumber
-    raise NotImplementedError

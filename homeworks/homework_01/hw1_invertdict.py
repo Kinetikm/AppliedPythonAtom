@@ -32,4 +32,3 @@ def invert_dict(source_dict):
                 myDict[item] = [myDict[item]]
                 myDict[item].append(key)
     return myDict
-    raise NotImplementedError
