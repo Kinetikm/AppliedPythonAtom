@@ -12,7 +12,7 @@ def calculate_determinant(list_of_lists):
                 return None
             j = max(range(i, size), key=lambda k: abs(list_of_lists[k][i]))
             if i != j:
-                list_of_lists[i], list_of_lists[j]
+                list_of_lists[i], list_of_lists[j] \
                 = list_of_lists[j], list_of_lists[i]
                 res *= -1
             if list_of_lists[i][i] == 0:
@@ -20,7 +20,7 @@ def calculate_determinant(list_of_lists):
             res *= list_of_lists[i][i]
             for j in range(i + 1, size):
                 b = list_of_lists[j][i] / list_of_lists[i][i]
-                list_of_lists[j] = [list_of_lists[j][k]
+                list_of_lists[j] = [list_of_lists[j][k] \
                 - b * list_of_lists[i][k] for k in range(size)]
         return res
     else:
