@@ -40,4 +40,3 @@ def solve(matrix, mul):
 
 
 def is_square(m): return all(len(row) == len(m) for row in m)
-
