@@ -5,7 +5,7 @@
 def invert_dict(source_dict):
     if not isinstance(source_dict, dict):
         return None
-	intended_dict = {}
+    intended_dict = {}
     for k, v in dict1.items():
         for i in v:
             intended_dict.setdefault(i, []).append(k)
