@@ -9,4 +9,5 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-    return int(str(number).rstrip("0")[::-1])
+    if str(number).isDigit():
+        return int(str(number).rstrip("0")[::-1])
