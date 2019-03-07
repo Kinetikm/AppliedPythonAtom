@@ -8,4 +8,4 @@ def is_bracket_correct(text):
         text = text.replace('[]', '')
         text = text.replace('{}', '')
     return not text
-    raise NotImplementedError	
+    raise NotImplementedError
