@@ -171,7 +171,3 @@ def advanced_calculator(input_string):
         return stack_nums[0]
     else:
         return None
-
-while True:
-	string = input()
-	print(advanced_calculator(string))
