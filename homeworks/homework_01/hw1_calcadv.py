@@ -17,12 +17,12 @@ def advanced_calculator(input_string):
 
     args = []
     i = 0
-    filtr = True #Костыль для чисел вроде .12345
+    filtr = True  # Костыль для чисел вроде .12345
     while i < len(input_string):
         try:
-            if filtr is True: #Костыль для чисел вроде .12345
+            if filtr is True:  # Костыль для чисел вроде .12345
                 int(input_string[i])
-            if filtr is False: #Костыль для чисел вроде .12345
+            if filtr is False:  # Костыль для чисел вроде .12345
                 filtr = True
             num = ''
             dot = False
@@ -47,8 +47,8 @@ def advanced_calculator(input_string):
                     break
                 i += 1
         except ValueError:
-            if input_string[i] is '.' and filtr is True: #Костыль для чисел вроде .12345
-                filtr = False
+            if input_string[i] is '.' and filtr is True:
+                filtr = False  # Костыль для чисел вроде .12345
                 continue
             if input_string[i] is ' ':
                 i += 1
