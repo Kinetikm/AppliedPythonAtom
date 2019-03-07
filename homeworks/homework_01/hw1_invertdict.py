@@ -25,4 +25,8 @@ def invert_dict(source_dict):
                 new_dict[new_new_key].append(new_value)
             else:
                 new_dict[new_new_key] = [new_value]
+    for key in new_dict.keys():
+        if len(new_dict[key]) == 1:
+            val = new_dict[key]
+            new_dict = val[0]
     return new_dict
