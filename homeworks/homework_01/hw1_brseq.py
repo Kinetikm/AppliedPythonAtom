@@ -15,4 +15,3 @@ def is_bracket_correct(input_string):
         return True
     else:
         return False
-    raise NotImplementedError

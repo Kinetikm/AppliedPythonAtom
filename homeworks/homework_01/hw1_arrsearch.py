@@ -15,4 +15,3 @@ def find_indices(input_list, n):
             d[elem] = i
         i = i + 1
     return None
-    raise NotImplementedError

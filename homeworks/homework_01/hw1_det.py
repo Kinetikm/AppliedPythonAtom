@@ -27,4 +27,3 @@ def calculate_determinant(list_of_lists):
         d += A[0][j] * kf * calculate_determinant(minor(A, 0, j))
         kf = -1 * kf
     return d
-    raise NotImplementedError

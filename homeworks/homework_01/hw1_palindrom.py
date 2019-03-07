@@ -9,4 +9,3 @@ def check_palindrom(input_string):
         return True
     else:
         return False
-    raise NotImplementedError
