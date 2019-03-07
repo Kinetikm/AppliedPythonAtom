@@ -9,6 +9,7 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
+	source_dict = dict(source_dict)
     new_dict = {}
     for key in source_dict.keys():
         new_key = source_dict[key]
