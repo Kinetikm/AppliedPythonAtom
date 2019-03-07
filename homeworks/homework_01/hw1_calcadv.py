@@ -161,6 +161,6 @@ def advanced_calculator(input_string):
         except KeyError:
             stack_nums.append(value)
     if len(stack_nums) is 1:
-        return stack_nums[0]
+        return float(stack_nums[0])
     else:
         return None
