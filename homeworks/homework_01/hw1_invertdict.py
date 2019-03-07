@@ -19,7 +19,7 @@ def invert_dict(source_dict):
         else:
             new_key = list(new_key)
         for new_new_key in new_key:
-            if new_new_key in result_d:
+            if new_new_key in new_dict:
                 new_dict[new_new_key].append(new_value)
             else:
                 new_dict[new_new_key] = [new_value]
