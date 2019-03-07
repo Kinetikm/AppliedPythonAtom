@@ -35,7 +35,8 @@ def advanced_calculator(input):
     st = []
 
     def is_op(operator):
-        return operator is "+" or operator is "-" or operator is "/" or operator is "*"
+        return operator is "+" or operator is "-"\
+               or operator is "/" or operator is "*"
 
     while len(input) > 0:
         
