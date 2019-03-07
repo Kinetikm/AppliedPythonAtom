@@ -14,7 +14,7 @@ def invert_dict(source_dict):
     for key in source_dict.keys():
         new_key = source_dict[key]
         new_value = key
-        if type(new_key) == str or type(new_key) == float or type(new_key) == int:
+        if (type(new_key) == str) or (type(new_key) == float) or (type(new_key) == int):
             new_key = [new_key]
         else:
             new_key = list(new_key)
