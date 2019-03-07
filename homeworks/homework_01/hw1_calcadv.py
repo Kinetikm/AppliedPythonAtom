@@ -2,12 +2,23 @@
 # coding: utf-8
 
 
-def advanced_calculator(input_string):
-    '''
-    Калькулятор на основе обратной польской записи.
-    Разрешенные операции: открытая скобка, закрытая скобка,
-     плюс, минус, умножить, делить
-    :param input_string: строка, содержащая выражение
-    :return: результат выполнение операции, если строка валидная - иначе None
-    '''
-    raise NotImplementedError
+import operator
+
+OPERATORS = {
+    '+': operator.add, 
+    '-': operator.sub, 
+    '*': operator.mul, 
+    '/': operator.truediv
+}
+
+def calc(string):
+    if set('[~!@#$%^&_{}";\'\n]').intersection(string):
+        return None
+    stack = [0]
+    for token in string.split(" "):
+        if token in OPERATORS:
+            op2, op1 = stack.pop(), stack.pop()
+            stack.append(OPERATORS[token](op1,op2))
+        elif token:
+            stack.append(float(token))
+    return stack.pop()
