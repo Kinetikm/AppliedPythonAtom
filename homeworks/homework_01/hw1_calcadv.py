@@ -48,6 +48,11 @@ def advanced_calculator(input_string):
                 continue
             if input_string[i] is '(' or input_string[i] is ')':
                 args.append(input_string[i])
+                try:
+                    if input_string[i] is ')' and input_string[i - 1] is '(':
+                        return None
+                except KeyError:
+                    return None
             elif input_string[i] is '*' or input_string[i] is '/':
                 if len(args) is 0:
                     return None
@@ -156,6 +161,6 @@ def advanced_calculator(input_string):
         except KeyError:
             stack_nums.append(value)
     if len(stack_nums) is 1:
-        return int(stack_nums[0])
+        return stack_nums[0]
     else:
         return None
