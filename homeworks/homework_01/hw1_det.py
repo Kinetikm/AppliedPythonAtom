@@ -2,13 +2,29 @@
 # coding: utf-8
 
 
+def det(mat, mul):
+    size = len(mat)
+    if size != 1:
+        sgn = -1
+        s = 0
+        for i in range(size):
+            m = []
+            for j in range(1, size):
+                buff = []
+                for k in range(size):
+                    if k != i:
+                        buff.append(mat[j][k])
+                m.append(buff)
+            sgn *= -1
+            s += mul * det(m, sgn * mat[0][i])
+        return s
+    else:
+        return mul * mat[0][0]
+
+
 def calculate_determinant(list_of_lists):
-    '''
-    Метод, считающий детерминант входной матрицы,
-    если это возможно, если невозможно, то возвращается
-    None
-    Гарантируется, что в матрице float
-    :param list_of_lists: список списков - исходная матрица
-    :return: значение определителя или None
-    '''
+    if list_of_lists == [[]] or len(list_of_lists) != len(list_of_lists[0]):
+        return None
+    else:
+        return det(list_of_lists, 1)
     raise NotImplementedError
