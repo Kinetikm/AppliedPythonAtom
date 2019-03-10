@@ -4,7 +4,7 @@
 import json
 import csv
 from enum import Enum
-from homeworks.homework_02.input.EncodingIdentifier import encodingIdentifier
+from homeworks.homework_02.input.encoding_identifier import encodingIdentifier
 
 
 class FileFormat(Enum):

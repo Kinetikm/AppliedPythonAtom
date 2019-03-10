@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from homeworks.homework_02.input.ReadData import readData
-from homeworks.homework_02.input.ReadData import FileFormat
-from homeworks.homework_02.handlers.ConverterToJSON import convertToJSON
-from homeworks.homework_02.handlers.DataChecker import checkData
+from homeworks.homework_02.input.read_data import readData
+from homeworks.homework_02.input.read_data import FileFormat
+from homeworks.homework_02.handlers.converter_to_json import convertToJSON
+from homeworks.homework_02.handlers.data_checker import checkData
 
 
 def getData(filename):
