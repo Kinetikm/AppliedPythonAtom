@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from .heap import MaxHeap
-import copy
 
 
 class FastSortedListMerger:
