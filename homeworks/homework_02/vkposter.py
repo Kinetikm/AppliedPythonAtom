@@ -9,7 +9,9 @@ from homeworks.homework_02.fastmerger import FastSortedListMerger
 class VKPoster:
 
     def __init__(self):
-        raise NotImplementedError
+        self.posts=dict()
+        self.follows=dict()
+        self.views=dict()
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -19,7 +21,13 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        if user_id in self.posts:
+            self.posts[user_id].append(post_id)
+        else:
+            self.posts[user_id]=list()
+            self.posts[user_id].append(post_id)
+        self.views[post_id]=set()
+        
 
     def user_read_post(self, user_id: int, post_id: int):
         '''
@@ -29,7 +37,12 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        if post_id in self.views:
+            self.views[post_id].add(user_id)
+        else:
+            self.views[post_id]=set()
+            self.views[post_id].add(user_id)
+        
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
         '''
@@ -39,7 +52,11 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        pass
+        if follower_user_id in self.follows:
+            self.follows[follower_user_id].add(followee_user_id)
+        else:
+            self.follows[follower_user_id]=set()
+            self.follows[follower_user_id].add(followee_user_id)
 
     def get_recent_posts(self, user_id: int, k: int)-> list:
         '''
@@ -50,7 +67,14 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        pass
+        lists = list()
+        for people in self.follows[user_id]:
+            lists+=self.posts[people]
+        lists.sort(reverse=True)
+        out = lists[:k]
+        for post in out:
+            self.views[post].add(user_id)
+        return out
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -60,4 +84,10 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        pass
+        lists = list()
+        for users in self.posts:
+            lists+=self.posts[users]
+        #lists.sort(reverse=True)
+        lists.sort()
+        lists.sort(key=lambda x: len(self.views[x]),reverse=True)
+        return lists[:k]
