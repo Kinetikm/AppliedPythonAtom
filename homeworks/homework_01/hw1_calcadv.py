@@ -10,8 +10,8 @@ def advanced_calculator(input_string):
     i = 0
     while i < len(s):
         if s[i] not in ["0", "1", "2", "3", "4", "5",
-                "6", "7", "8", "9", ".", ",", ")",
-                        "(", "-", "+", "*", "/"]:
+                        "6", "7", "8", "9", ".", ",", 
+                        ")", "(", "-", "+", "*", "/"]:
             return None
         i += 1
     for x in ['**', '*/', '/*', '//', '*+', '+*',
@@ -27,6 +27,6 @@ def advanced_calculator(input_string):
     if s[0] == '+':
         s = s[1::]
     try:
-        return float(eval(s))
+        return eval(s)
     except:
         return None
