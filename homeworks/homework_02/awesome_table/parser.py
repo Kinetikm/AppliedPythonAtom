@@ -12,13 +12,17 @@ def _json_parser(file):
     try:
         j_list = json.load(file)
         header = list(j_list[0])
+        if not header:
+            raise UnsupportedFormatException
         body = []
         for row in j_list:
             body.append([row[h_name] for h_name in header])
         return [header] + body
-    except (json.JSONDecodeError, KeyError):
+    except json.JSONDecodeError:
         file.seek(pos)
         return None
+    except (KeyError, IndexError):
+        raise UnsupportedFormatException
 
 
 def _tsv_parser(file):
@@ -26,7 +30,7 @@ def _tsv_parser(file):
     res = list(csv.reader(file, delimiter='\t'))
     if res:
         row_len = len(res[0])
-        if any(map(lambda row: len(row) - row_len, res)):
+        if row_len == 0 or any(map(lambda row: len(row) - row_len, res)):
             file.seek(pos)
             return None
         return res
