@@ -10,16 +10,25 @@ __all__ = ['parse_file']
 def _json_parser(file):
     pos = file.tell()
     try:
-        return json.load(file)
-    except json.JSONDecodeError:
+        j_list = json.load(file)
+        header = list(j_list[0])
+        body = []
+        for row in j_list:
+            body.append([row[h_name] for h_name in header])
+        return [header] + body
+    except (json.JSONDecodeError, KeyError):
         file.seek(pos)
         return None
 
 
 def _tsv_parser(file):
     pos = file.tell()
-    res = list(csv.DictReader(file, delimiter='\t'))
+    res = list(csv.reader(file, delimiter='\t'))
     if res:
+        row_len = len(res[0])
+        if any(map(lambda row: len(row) - row_len, res)):
+            file.seek(pos)
+            return None
         return res
     file.seek(pos)
     return None
