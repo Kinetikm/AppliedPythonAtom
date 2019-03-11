@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from homeworks.homework_02.output.cols_distance import colsDistance
-from homeworks.homework_02.output.line_printer import printLine
+from com.output.cols_distance import colsDistance
+from com.output.line_printer import printLine
 
 
 def createTable(data):
