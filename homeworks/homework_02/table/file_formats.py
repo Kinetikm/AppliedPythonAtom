@@ -1,34 +1,14 @@
 """
-Модуль содержащий методы для определения формата файла
+Методы для определения формата файла
 """
 
-import json
-import csv
-
-
-def _check_json(f_name: str, f_encoding: str) -> bool:
-    """Проверка на формат json"""
-    try:
-        with open(f_name, encoding=f_encoding) as f:
-            json.load(f)
-            return True
-    except json.JSONDecodeError:
-        return False
-
-
-def _check_tsv(f_name: str, f_encoding: str) -> bool:
-    """Проверка на формат tsv"""
-    try:
-        with open(f_name, encoding=f_encoding) as f:
-            csv.reader(f, delimiter="\t")
-            return True
-    except csv.Error:
-        return False
+from json_file.utilities import check_json
+from tsv_file.utilities import check_tsv
 
 
 formats = {
-    'json': _check_json,
-    'tsv': _check_tsv,
+    'json': check_json,
+    'tsv': check_tsv,
 }
 
 

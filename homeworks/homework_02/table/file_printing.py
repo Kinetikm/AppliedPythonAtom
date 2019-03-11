@@ -1,70 +1,13 @@
 """
-Модуль содержащий методы для форматированной печати на экран
+Методы для форматированной печати на экран
 """
 
-import json
-import csv
-
-
-def _read_json(f):
-    """
-    Считывает файл в формате json
-    :param f: объекта файла
-    :return: tuple(заголовки, содержимое) или tuple(None, None)
-    """
-    try:
-        data = json.load(f)
-    except json.JSONDecodeError:
-        return None, None
-
-    # пустой json не считаем валидным
-    if len(data) < 1:
-        return None, None
-
-    headers = data[0].keys()
-
-    # проверка заголовков
-    for item in data:
-        if len(headers) < len(item.keys()):
-            return None, None
-
-    return headers, data
-
-
-def _read_tsv(f):
-    """
-    Считывает файл в формате tsv
-    :param f: объекта файла
-    :return: tuple(заголовки, содержимое) или tuple(None, None)
-    """
-    try:
-        data = csv.reader(f, delimiter="\t")
-    except csv.Error:
-        return None, None
-
-    headers = None
-    content = []
-
-    # получение заголовков и данных
-    for line in data:
-        if headers:
-            # проверка заголовков
-            if len(headers) < len(line):
-                return None, None
-            content.append(dict(zip(headers, line)))
-        else:
-            headers = line
-
-    # tsv без заголовка не считаем валидным
-    if not headers:
-        return None, None
-
-    return headers, content
-
+from json_file.utilities import read_json
+from tsv_file.utilities import read_tsv
 
 formats = {
-    'json': _read_json,
-    'tsv': _read_tsv,
+    'json': read_json,
+    'tsv': read_tsv,
 }
 
 
