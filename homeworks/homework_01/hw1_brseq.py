@@ -10,8 +10,6 @@ def is_bracket_correct(input_string: str):
     :param input_string: строка, содержащая 6 типов скобок (,),[,],{,}
     :return: True or False
     '''
-#    if not isinstance(input_string, str):
-#        raise TypeError("")
     string_list = list(input_string)
     print(string_list)
     openList = ["[", "{", "("]

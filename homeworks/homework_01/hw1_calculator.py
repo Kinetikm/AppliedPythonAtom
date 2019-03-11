@@ -11,8 +11,6 @@ def calculator(x, y, operator):
     :return: результат операции или None, если операция не выполнима
     '''
 
-#    if isinstance(x,str): x = int(x)
-#    if isinstance(y,str): y = float(y)
     if not isinstance(x, (int, float)):
         return None
     if not isinstance(y, (int, float)):

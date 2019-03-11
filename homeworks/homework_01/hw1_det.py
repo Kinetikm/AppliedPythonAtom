@@ -35,5 +35,5 @@ def calculate_determinant(list_of_lists):
     :param list_of_lists: список списков - исходная матрица
     :return: значение определителя или None
     '''
-    #  raise NotImplementedError
+#    raise NotImplementedError
     return det(list_of_lists)

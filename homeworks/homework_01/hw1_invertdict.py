@@ -16,7 +16,6 @@ def invert_dict(source_dict):
     newdict = {}
     for x, val in d.items():
         print("val =", val)
-#        for x in d.keys():
         if isinstance(val, list):
             print("list")
             for val_list in flatten(val):
