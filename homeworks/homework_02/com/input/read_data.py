@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys
 import json
 import csv
 from enum import Enum
@@ -21,7 +20,6 @@ def readData(filename):
             data = json.load(f)
             if len(data) == 0:
                 raise SyntaxError
-            print(data, file=sys.stderr)
             return FileFormat.JSON, data
         except json.decoder.JSONDecodeError:
             pass
@@ -32,7 +30,8 @@ def readData(filename):
             data = []
             for row in reader:
                 data.append(row)
-            print(data, file=sys.stderr)
+            if len(data) == 0:
+                raise SyntaxError
             return FileFormat.TSV, data
         except csv.Error:
             pass
