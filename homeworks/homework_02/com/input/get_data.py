@@ -20,4 +20,6 @@ def getData(filename):
         print("Формат не валиден")
     except SyntaxError:
         print("Формат не валиден")
+    except AttributeError:
+        print("Формат не валиден")
     return None
