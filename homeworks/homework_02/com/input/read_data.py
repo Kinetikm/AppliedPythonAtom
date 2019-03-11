@@ -19,6 +19,8 @@ def readData(filename):
     with open(file=filename, mode="r", encoding=enc) as f:
         try:
             data = json.load(f)
+            if len(data) == 0:
+                raise SyntaxError
             print(data, file=sys.stderr)
             return FileFormat.JSON, data
         except json.decoder.JSONDecodeError:
