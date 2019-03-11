@@ -1,34 +1,33 @@
 import sys
 
-# Ваши импорты
+from json import JSONDecodeError
 from table_package.decoder import check_codec
-from table_package.parser import js
-from table_package.printer import Print_JSON
+from table_package.parser import try_json, try_tsv
+from table_package.printer import Print_JSON, Print_TSV
 
 if __name__ == '__main__':
     filename = sys.argv[1]
 
     cdc = check_codec(filename)
-    data = js(filename, cdc)
-    #    print(data)
+    is_json = True
+    # # if json
+    try:
+        data = try_json(filename, cdc)
+    except JSONDecodeError:
+        is_json = False
+        pass
+    if is_json:
+        jp = Print_JSON(data)
+        jp.print_line()
+        jp.print_head()
+        jp.print_body()
+        jp.print_line()
 
-    jp = Print_JSON(data)
-    jp.print_line()
-    jp.print_head()
-    jp.print_body()
-    jp.print_line()
+    if not is_json:
+        tsv_list = try_tsv(filename, cdc)
 
-    # dic = {}
-    # list = []
-    #
-    # for dic in data:
-    #     for col_name, value in dic.items():
-    #         print(value, end=' ')
-    #     print()
-
-    # for i in data:
-    #     print(type(i))
-    #     for k, v in i.items():
-    #         print(type(k), type(v))
-    #         print(k)
-    #         print(v)
+        tsvp = Print_TSV(tsv_list)
+        tsvp.print_line()
+        tsvp.print_head()
+        tsvp.print_body()
+        tsvp.print_line()
