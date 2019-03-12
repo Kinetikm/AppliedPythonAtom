@@ -5,7 +5,7 @@ import printing
 
 if __name__ == '__main__':
     filename = sys.argv[1]
-    
+
     enc = validity.get_encoding_correct_file(filename)
     if enc == 0:
         print('Файл не валиден')

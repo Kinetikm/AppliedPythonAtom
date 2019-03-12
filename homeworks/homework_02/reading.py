@@ -6,12 +6,14 @@ Created on Tue Mar 12 18:09:57 2019
 """
 import json
 
+
 def read_file(filename, enc):
     try:
         return read_json(filename, enc)
     except UnicodeDecodeError:
         return read_tsv(filename, enc)
-    
+
+
 def read_json(filename, enc):
     with open(filename, 'r', encoding=enc) as f:
         raw_data = json.load(f, object_pairs_hook=dict, parse_int=str)
@@ -23,6 +25,7 @@ def read_json(filename, enc):
             data[i].append(val)
 
     return data
+
 
 def read_tsv(filename, enc):
     with open(filename, 'r', encoding=enc) as tsv:

@@ -3,14 +3,15 @@
 
 
 from homeworks.homework_02.heap import MaxHeap
-from homeworks.homework_02.fastmerger import FastSortedListMerger   
+from homeworks.homework_02.fastmerger import FastSortedListMerger
+
 
 class VKPoster:
 
     def __init__(self):
-        self._posts ={} #ключ user id, параметры - его посты
-        self._read_posts = {} # ключ -пост, параметры - люди, которые его прочитали
-        self._followers = {} # ключ - подписчик, параметры - его подписки
+        self._posts = {}  # ключ user id, параметры - его посты
+        self._read_posts = {}  # ключ-пост, параметры - люди, которые прочитали
+        self._followers = {}  # ключ - подписчик, параметры - его подписки
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -25,7 +26,6 @@ class VKPoster:
         else:
             self._posts[user_id] = list()
             self._posts[user_id].append(post_id)
-        
 
     def user_read_post(self, user_id: int, post_id: int):
         '''
@@ -36,7 +36,7 @@ class VKPoster:
         :return: ничего
         '''
         if post_id in self._read_posts:
-            if self._read_posts[post_id].count(user_id) < 1:          
+            if self._read_posts[post_id].count(user_id) < 1:
                 self._read_posts[post_id].append(user_id)
         else:
             self._read_posts[post_id] = list()
@@ -50,13 +50,13 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        if follower_user_id  in self._followers:
+        if follower_user_id in self._followers:
             self._followers[follower_user_id].append(followee_user_id)
         else:
             self._followers[follower_user_id] = list()
             self._followers[follower_user_id].append(followee_user_id)
 
-    def get_recent_posts(self, user_id: int, k: int)-> list:
+    def get_recent_posts(self, user_id: int, k: int) -> list:
         '''
         Метод который вызывается когда пользователь user_id
         запрашивает k свежих постов людей на которых он подписан.
@@ -70,7 +70,7 @@ class VKPoster:
         for followed_id in followed:
             if followed_id in self._posts:
                 posts = posts + self._posts[followed_id]
-        posts.sort(reverse = True)
+        posts.sort(reverse=True)
         return posts[:k]
 
     def get_most_popular_posts(self, k: int) -> list:
@@ -81,12 +81,13 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        sorted_posts = sorted(self._read_posts.items(), key=lambda x: (len(x[1]), x[0]), reverse = True)
+        sorted_posts = sorted(self._read_posts.items(),
+                              key=lambda x: (len(x[1]), x[0]), reverse=True)
         ret = list()
         if k <= len(sorted_posts):
             pass
         else:
-            k = len(sorted_posts) 
+            k = len(sorted_posts)
         for i in range(k):
             ret.append(sorted_posts[i][0])
         return ret

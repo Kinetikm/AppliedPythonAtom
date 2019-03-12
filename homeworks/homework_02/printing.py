@@ -5,6 +5,7 @@ Created on Tue Mar 12 19:39:44 2019
 @author: User
 """
 
+
 def get_full_length(data):
     return [len(max(column, key=len)) for column in data]
 
