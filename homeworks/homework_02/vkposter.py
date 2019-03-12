@@ -18,35 +18,31 @@ class VKPoster:
         self.posts = {}
         raise NotImplementedError
 
-
     def create_new_user(self, user_id):
         self.users.update({user_id: []})
 
-
     def user_posted_post(self, user_id: int, post_id: int):
         # проверка на существование данного пользователя в базе
-        if self.users.get(user_id) == None:
+        if self.users.get(user_id) is None:
             self.create_new_user(user_id)
 
         self.posts.update({post_id: []})
 
-
     def user_read_post(self, user_id: int, post_id: int):
         # проверка на существование данного поста в базе
-        if self.posts.get(post_id) == None:
+        if self.posts.get(post_id) is None:
             self.posts.update({post_id: ['somebody']})
 
         self.posts[post_id].append(user_id)
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
         # проверка на существование данных пользователей в базе
-        if self.users.get(follower_user_id) == None:
+        if self.users.get(follower_user_id) is None:
             self.create_new_user(follower_user_id)
-        if self.users.get(follower_user_id) == None:
+        if self.users.get(follower_user_id) is None:
             self.create_new_user(followee_user_id)
 
         self.users[follower_user_id].append(followee_user_id)
-
 
     def get_recent_posts(self, user_id: int, k: int) -> list:
         help_list = []
