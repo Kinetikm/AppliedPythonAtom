@@ -73,13 +73,14 @@ class VKPoster:
             for user in self.followers[user_id]:
                 if user in self.reposted_post:
                     for post in self.reposted_post[user]:
-                        if post not in out:
+                        if post not in tmp:
                             tmp.append(post)
             tmp = sorted(tmp, reverse=True)
-            for i in range(min(k, len(self.number_read))):
+            lengh = min(k, len(self.number_read))
+            for i in range(lengh):
                 out.append(tmp[i])
             return out
-        return tmp
+        return out
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
