@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys
-
 
 def printLine(titles, distances, line):
     stringToPrint = "|"
@@ -23,5 +21,4 @@ def printLine(titles, distances, line):
                                      str(line[title]),
                                      " " * 2,
                                      "|"])
-    print(stringToPrint, file=sys.stderr)
     print(stringToPrint)
