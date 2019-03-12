@@ -30,4 +30,4 @@ def get_charset(f_name: str):
             return enc
         except UnicodeError:
             pass
-    return None  # не удалось определить
+    raise UnicodeError("Не удалось определить кодировку файла")
