@@ -15,16 +15,19 @@ class Heap():
     def shift_down(self, i):
         bottom = 2 * i + 2
         top = 2 * i + 1
-        
+
         highest = i
         if (bottom < len(self.heap)) \
-                and comparator_d(self.heap[bottom], self.heap[highest]):
+                and comparator_d(self.heap[bottom],
+                                 self.heap[highest]):
             highest = bottom
         if (top < len(self.heap)) \
-                and comparator_d(self.heap[top], self.heap[highest]):
+                and comparator_d(self.heap[top],
+                                 self.heap[highest]):
             highest = top
         if highest != i:
-            self.heap[i], self.heap[highest] = self.heap[highest], self.heap[i]
+            self.heap[i], self.heap[highest] = \
+                self.heap[highest], self.heap[i]
             self.shift_down(highest)
 
     def build_heap(self):
