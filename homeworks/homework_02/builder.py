@@ -2,7 +2,7 @@ import sys
 
 def printUnderline(underlines):
 	for i in range(underlines):
-		sys.stdout.write('_')
+		sys.stdout.write('-')
 
 def buildTSVTable(input_data, revert):
 	tableSize = len(input_data[0])
