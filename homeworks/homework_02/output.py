@@ -1,4 +1,6 @@
 def output(lists):
+    if len(lists) == 0:
+        raise AssertionError
     n = len(lists[0])
     for spis in lists:
         if len(spis) != n:
