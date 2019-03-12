@@ -3,34 +3,30 @@
 """
 
 import json
-import csv
 
 
-def read_tsv(f_name: str, f_encoding: str):
+def read_tsv(data: str):
     """
-    Считывает файл в формате tsv
-    :param f_name: имя файла
-    :param f_encoding: кодировка
+    Считывает данные в формате tsv
+    :param data: содержимое файла
     :return: заголовки и содержимое файла, tuple или None
     """
+    # разбор tsv данных
+    data = data.strip().split('\n')
+    data = [line.split('\t') for line in data]
+
     headers = None
     content = []
 
-    with open(f_name, encoding=f_encoding) as f:
-        try:
-            data = csv.reader(f, delimiter="\t")
-        except csv.Error:
-            return None, []
-
-        # получение заголовков и данных
-        for line in data:
-            if headers:
-                # проверка заголовков (лучше когда тут только чтение)
-                if len(headers) < len(line):
-                    return None, []
-                content.append(dict(zip(headers, line)))
-            else:
-                headers = line
+    # получение заголовков и данных
+    for line in data:
+        if headers:
+            # проверка заголовков
+            if len(headers) < len(line):
+                return None, []
+            content.append(dict(zip(headers, line)))
+        else:
+            headers = line
 
     # tsv без заголовка не считаем валидным
     if not headers:
@@ -39,16 +35,14 @@ def read_tsv(f_name: str, f_encoding: str):
     return headers, content
 
 
-def read_json(f_name: str, f_encoding: str):
+def read_json(data: str):
     """
-    Считывает файл в формате json
-    :param f_name: имя файла
-    :param f_encoding: кодировка
+    Считывает данные в формате json
+    :param data: содержимое файла
     :return: заголовки и содержимое файла, tuple или None
     """
     try:
-        with open(f_name, encoding=f_encoding) as f:
-            content = json.load(f)
+        content = json.loads(data)
     except json.JSONDecodeError:
         return None, []
 
@@ -74,8 +68,14 @@ def read_file_content(f_name: str, f_encoding: str) -> tuple:
     :param f_encoding: кодировка файла
     :return: заголовки и содержимое файла, tuple или None
     """
+    # чтение файла целиком
+    with open(f_name, mode='r', encoding=f_encoding) as f:
+        data = f.read()
+
+    # определение формата и преобразование к нужному виду
     for f_format, func in formats.items():
-        headers, content = func(f_name=f_name, f_encoding=f_encoding)
+        headers, content = func(data=data)
         if headers:
             return headers, content
+
     raise TypeError("Не удалось получить содержимое файла")
