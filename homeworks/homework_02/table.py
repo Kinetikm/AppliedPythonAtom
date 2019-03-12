@@ -28,13 +28,12 @@ if __name__ == "__main__":
         print("Формат не валиден")
         sys.exit()
 
+        text = ''
     with open(filename, "r", encoding=correct_encoding) as f:
         try:
             text = f.read()
-            if text.find("{") == -1:
-                c = "tsv"
-            else:
-                c = "json"
+            json.loads(text)
+            c = "json"
         except:
             c = "tsv"
 
