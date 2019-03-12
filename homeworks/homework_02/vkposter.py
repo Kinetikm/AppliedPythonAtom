@@ -67,20 +67,19 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        out = []
         tmp = []
-
-        for user in self.followers[user_id]:
-            if user in self.reposted_post:
-                for post in self.reposted_post[user]:
-                    if post not in tmp:
-                        tmp.append(post)
-        tmp = sorted(tmp, reverse=True)
-        lengh = min(k, len(self.number_read))
-        for i in range(lengh):
-            out.append(tmp[i])
-        return out
-
+        out = []
+        if user_id in self.followers:
+            for user in self.followers[user_id]:
+                if user in self.reposted_post:
+                    for post in self.reposted_post[user]:
+                        if post not in tmp:
+                            tmp.append(post)
+            tmp = sorted(tmp, reverse=True)
+            for i in range(min(k, len(tmp))):
+                out.append(tmp[i])
+            return out
+        return tmp
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
