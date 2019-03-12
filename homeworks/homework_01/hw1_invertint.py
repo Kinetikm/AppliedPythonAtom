@@ -18,6 +18,3 @@ def reverse(number):
     for i in range(leng):
         tmp3 += int(tmp1[i]) * (10 ** i)
     return tmp3
-
-
-print(reverse(34567854))

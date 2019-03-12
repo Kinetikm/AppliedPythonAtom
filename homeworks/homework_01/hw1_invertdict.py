@@ -13,6 +13,3 @@ def invert_dict(source_dict):
     :param source_dict: dict
     :return: new_dict: dict
     '''
-
-
-print(invert_dict(dict([("key_1", "value_1"), ("key_2", "value_2")])))
