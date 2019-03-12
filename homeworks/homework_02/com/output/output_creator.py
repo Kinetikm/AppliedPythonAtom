@@ -6,8 +6,7 @@ from com.output.line_printer import printLine
 import sys
 
 
-def createTable(data):
-    titles = ["Название", "Ссылка", "Теги", "Оценка"]
+def createTable(data, titles):
     distances = colsDistance(titles, data)
     tableLen = len(distances) + 1
     for singleDist in distances.values():

@@ -2,8 +2,8 @@
 # coding: utf-8
 
 
-def checkData(data):
-    validKeys = sorted(["Название", "Ссылка", "Теги", "Оценка"])
+def checkData(titles, data):
+    validKeys = sorted(titles)
     for element in data:
         if sorted(element.keys()) != validKeys:
             raise SyntaxError

@@ -7,7 +7,7 @@ import sys
 def printLine(titles, distances, line):
     stringToPrint = "|"
     for title in titles:
-        if title != "Оценка":
+        if "Оценка" not in title:
             stringToPrint = "".join([stringToPrint,
                                      " " * 2,
                                      str(line[title]),

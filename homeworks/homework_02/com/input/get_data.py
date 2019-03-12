@@ -11,9 +11,12 @@ def getData(filename):
     try:
         fileFormat, data = readData(filename)
         if fileFormat != FileFormat.JSON:
+            titles = data[0]
             data = convertToJSON(data)
-        checkData(data)
-        return data
+        else:
+            titles = data[0].keys()
+        checkData(titles, data)
+        return titles, data
     except FileNotFoundError:
         print("Файл не валиден")
     except UnicodeError:
