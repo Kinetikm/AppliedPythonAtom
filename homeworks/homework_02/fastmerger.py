@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from .heap import MaxHeap
+from homeworks.homework_02.heap import MaxHeap
+import copy
 
 
 class FastSortedListMerger:
