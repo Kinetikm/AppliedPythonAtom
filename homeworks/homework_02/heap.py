@@ -24,10 +24,12 @@ class Heap():
 
     def build_heap(self):
         i = 1
-        self.main.append(self.input_inf[0])
-        while i < len(self.input_inf):
-            self.add(self.input_inf[i])
-            i += 1
+        if self.input_inf:
+            self.main.append(self.input_inf[0])
+            while i < len(self.input_inf):
+                self.add(self.input_inf[i])
+                i += 1
+
 
 class MaxHeap(Heap):
 
@@ -37,10 +39,10 @@ class MaxHeap(Heap):
     def extract_maximum(self):
         result = self.main[0]
         i = len(self.main) - 1
-        self.main[0] = self.main[i] # перемещаем последний элемент в корень
+        self.main[0] = self.main[i]  # перемещаем последний элемент в корень
         self.main.pop()
         i = 0
-        while 2*i+1 < len(self.main) - 1: # фактически метод shift down
+        while 2*i+1 < len(self.main) - 1:  # фактически метод shift down
             child_l_i = 2*i+1
             child_r_i = 2*i+2
             if comparator_d(self.main[child_l_i], self.main[child_r_i]):
@@ -52,7 +54,8 @@ class MaxHeap(Heap):
             self.main[change_i] = h
             i = change_i
         return result
- 
+
+
 def comparator_d(x, y):
     if x[0] == y[0]:
         return x[1] >= y[1]
@@ -60,3 +63,4 @@ def comparator_d(x, y):
         return True
     else:
         return False
+
