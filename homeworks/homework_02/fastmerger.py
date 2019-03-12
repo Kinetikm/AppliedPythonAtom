@@ -9,7 +9,7 @@ class FastSortedListMerger:
     @staticmethod
     def merge_first_k(list_of_lists, k):
         help_list = []
-        result_list = []  # итоговый список
+        result_list = []
         i = 0
         # заполним список кортежами следующего вида:
         # (макимальный элемент i-го "подсписка", i)
