@@ -15,8 +15,8 @@ if __name__ == '__main__':
     		callback = builder.buildTSVTable(deparsed[0], [4])
     		#Вторым аргументом передаётся список номеров столбцов, которые будут выровнены по правому краю
     	if callback is False:
-    		print("Файл не валиден")
+    		print("Формат не валиден")
     except ValueError:
-    	print("Формат не валиден")
+    	print("Файл не валиден")
 
     # Ваш код
