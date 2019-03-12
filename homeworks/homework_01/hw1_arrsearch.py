@@ -23,5 +23,3 @@ def find_indices(input_list, n):
             return i, asd
     return None
 
-
-print(find_indices([1, 11, 3, 6, 7, 12, 11, 9], 12))

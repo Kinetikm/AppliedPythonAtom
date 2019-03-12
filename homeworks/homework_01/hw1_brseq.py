@@ -30,6 +30,3 @@ def is_bracket_correct(input_string):
                 return False
     else:
         return True
-
-
-print(is_bracket_correct('{}()[]'))
