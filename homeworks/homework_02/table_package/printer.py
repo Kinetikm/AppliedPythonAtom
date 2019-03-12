@@ -57,8 +57,8 @@ class Print_JSON():
             # if len_c - len_k % 2 != 0:
             #     fg = True
 
-            r_space = int((len_c - len_k) / 2)
-            l_space = len_c - len_k - r_space
+            l_space = int((len_c - len_k) / 2)
+            r_space = len_c - len_k - l_space
 
             for _ in range(l_space + 2):
                 print(" ", end="")
@@ -83,10 +83,14 @@ class Print_JSON():
                 len_v = len(tmp)
                 len_c = self.column_size[i]
 
-                r_space = 2
-                l_space = len_c - len_v
+                if not isinstance(v, int):
+                    l_space = 2
+                    r_space = len_c - len_v + 2
+                else:
+                    l_space = len_c - len_v + 2
+                    r_space = 2
 
-                for _ in range(l_space + 2):
+                for _ in range(l_space):
                     print(" ", end="")
 
                 print(tmp, end="")
@@ -184,10 +188,14 @@ class Print_TSV():
                 len_v = len(tmp)
                 len_c = self.column_size[i]
 
-                r_space = 2
-                l_space = len_c - len_v
+                if _represents_int(v):
+                    l_space = len_c - len_v + 2
+                    r_space = 2
+                else:
+                    l_space = 2
+                    r_space = len_c - len_v + 2
 
-                for _ in range(l_space + 2):
+                for _ in range(l_space):
                     print(" ", end="")
 
                 print(tmp, end="")
@@ -199,3 +207,11 @@ class Print_TSV():
                 i += 1
 
             print()
+
+
+def _represents_int(st):
+    try:
+        int(st)
+        return True
+    except ValueError:
+        return False
