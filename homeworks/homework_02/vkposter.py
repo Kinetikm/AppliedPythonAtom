@@ -85,4 +85,6 @@ class VKPoster:
             lists.append(posts)
         lists.sort(reverse=True)
         lists.sort(key=lambda x: len(self.views[x]), reverse=True)
-        return lists[:k]
+        if len(lists) >= k:
+            return lists[:k]
+        return lists
