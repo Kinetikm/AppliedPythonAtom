@@ -13,7 +13,6 @@ class VKPoster:
         self.__userPosts = {}
         self.__postReadUsers = {}
 
-
     def user_posted_post(self, user_id: int, post_id: int):
         '''
         Метод который вызывается когда пользователь user_id
@@ -59,7 +58,7 @@ class VKPoster:
             self.__follows[follower_user_id] = [followee_user_id]
         return None
 
-    def get_recent_posts(self, user_id: int, k: int)-> list:
+    def get_recent_posts(self, user_id: int, k: int) -> list:
         '''
         Метод который вызывается когда пользователь user_id
         запрашивает k свежих постов людей на которых он подписан.
