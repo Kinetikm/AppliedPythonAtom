@@ -26,6 +26,8 @@ def output(lists):
     for spis in lists[1:]:
         for j in range(n):
             print("|  ", end="")
+            if spis[j] is None:
+                raise AssertionError
             st = str(spis[j])
             if j == n - 1:
                 print(" " * (max[j] - len(str(spis[j]))) + st, end="")
