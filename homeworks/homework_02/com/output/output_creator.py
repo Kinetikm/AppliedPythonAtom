@@ -3,6 +3,7 @@
 
 from com.output.cols_distance import colsDistance
 from com.output.line_printer import printLine
+import sys
 
 
 def createTable(data):
@@ -22,8 +23,11 @@ def createTable(data):
                                       (distances[title] - len(title)) //
                                       2),
                                "|"])
+    print('-' * tableLen, file=sys.stderr)
     print('-' * tableLen)
+    print(titleString, file=sys.stderr)
     print(titleString)
     for line in data:
         printLine(titles, distances, line)
+    print('-' * tableLen, file=sys.stderr)
     print('-' * tableLen)
