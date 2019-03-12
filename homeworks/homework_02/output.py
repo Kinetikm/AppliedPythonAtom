@@ -2,6 +2,8 @@ def output(lists):
     if len(lists) == 0:
         raise AssertionError
     n = len(lists[0])
+    if n < 2:
+        raise AssertionError
     for spis in lists:
         if len(spis) != n:
             raise AssertionError
@@ -26,8 +28,6 @@ def output(lists):
     for spis in lists[1:]:
         for j in range(n):
             print("|  ", end="")
-            if spis[j] is None:
-                raise AssertionError
             st = str(spis[j])
             if j == n - 1:
                 print(" " * (max[j] - len(str(spis[j]))) + st, end="")
