@@ -2,6 +2,7 @@
 # coding: utf-8
 
 
+from homeworks.homework_02.heap import MaxHeap
 from homeworks.homework_02.fastmerger import FastSortedListMerger
 
 
@@ -88,15 +89,24 @@ class VKPoster:
         :param fast_sorted: Использовать ли FastSortedListMerger
         :return: Список из post_id размером К из популярных постов. list
         """
-        # Реализация через FastSortedListMerger
+        # Реализация через FastSortedListMerger - O(N + k * log N)
         if fast_sorted:
             # формирование списка кортежей (популярность, post_id)
             full_list = [(len(val), key) for key, val in self.posts.items()]
-            # использование модифицированной версии merge_first_k
-            return FastSortedListMerger.merge_first_k(None, k, full_list, 1)
 
-        # сортируем посты по убыванию post_id
+            # отдавать не больше чем есть
+            if k > len(full_list):
+                k = len(full_list)
+
+            h = MaxHeap(full_list)
+            first_k = []
+            for i in range(k):
+                first_k.append(h.extract_maximum()[1])
+
+            return first_k
+
+        # сортируем посты по убыванию post_id - O(N * log N)
         fresh_posts = sorted(self.posts, reverse=True)
-        # получаем k постов по их популярности (count)
+        # получаем k постов по их популярности (count) - O(N * log N)
         return sorted(fresh_posts, key=lambda post: len(self.posts[post]),
                       reverse=True)[:k]

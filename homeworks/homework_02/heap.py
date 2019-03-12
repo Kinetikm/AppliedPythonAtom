@@ -66,7 +66,7 @@ class MaxHeap(Heap):
 
     def extract_maximum(self):
         """
-        Извлечение максимального элемента с удалением
+        Извлечение максимального элемента с удалением - O(log N)
         :return: максимальный элемент (корень)
         """
         self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
