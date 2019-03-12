@@ -1,5 +1,3 @@
-
-15 lines (12 sloc) 543 Bytes
 #!/usr/bin/env python
 # coding: utf-8
 
