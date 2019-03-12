@@ -3,11 +3,11 @@
 
 
 def check_palindrom(input_string):
-    compare_string = input_string[::-1].lower()
-    input_string = input_string.lower()
-    input_string.replace(" ", "")
-    compare_string.replace(" ", "")
-    if input_string == compare_string:
-        return True
-    else:
-        return False
+    '''
+    Метод проверяющий строку на то, является ли
+    она палиндромом.
+    :param input_string: строка
+    :return: True, если строка являестя палиндромом
+    False иначе
+    '''
+    raise NotImplementedError
