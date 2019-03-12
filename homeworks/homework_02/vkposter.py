@@ -9,7 +9,7 @@ from homeworks.homework_02.fastmerger import FastSortedListMerger
 class VKPoster:
 
     def __init__(self):
-        raise NotImplementedError
+       
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
