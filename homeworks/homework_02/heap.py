@@ -42,22 +42,26 @@ class MaxHeap(Heap):
         self.main[0] = self.main[i]  # перемещаем последний элемент в корень
         self.main.pop()
         i = 0
-        while 2*i+1 < len(self.main) - 1:  # фактически метод shift down
-            child_l_i = 2*i+1
-            child_r_i = 2*i+2
-            if comparator_d(self.main[child_l_i], self.main[child_r_i]):
-                change_i = child_l_i
-            else:
-                change_i = child_r_i
-            h = self.main[i]
-            self.main[i] = self.main[change_i]
-            self.main[change_i] = h
-            i = change_i
-        if 2*i+1 == len(self.main) - 1:  # случай единственного сына
-            if comparator_d(self.main[2*i+1], self.main[i]):
-                h = self.main[i]
-                self.main[i] = self.main[2*i+1]
-                self.main[2*i+1] = h
+        while 2*i+1 <= len(self.main) - 1:  # фактически метод shift down
+            if 2*i+1 == len(self.main) - 1:  # случай единственного сына
+                change_i = 2*i+1
+                if comparator_d(self.main[change_i], self.main[i]):
+                    h = self.main[i]
+                    self.main[i] = self.main[change_i]
+                    self.main[change_i] = h
+                break
+            else:  # случай двух сыновей
+                child_l_i = 2*i+1
+                child_r_i = 2*i+2
+                if comparator_d(self.main[child_l_i], self.main[child_r_i]):
+                    change_i = child_l_i
+                else:
+                    change_i = child_r_i
+                if comparator_d(self.main[change_i], self.main[i]):
+                    h = self.main[i]
+                    self.main[i] = self.main[change_i]
+                    self.main[change_i] = h
+                i = change_i
         return result
 
 
@@ -68,4 +72,3 @@ def comparator_d(x, y):
         return True
     else:
         return False
-    
