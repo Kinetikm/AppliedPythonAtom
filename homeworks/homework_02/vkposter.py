@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-from homeworks.homework_02.heap import MaxHeap
 from homeworks.homework_02.fastmerger import FastSortedListMerger
 
 
@@ -53,15 +52,23 @@ class VKPoster:
                               {'p_ids': [], 'f_ids': []}
                               )['f_ids'].append(followee_user_id)
 
-    def get_recent_posts(self, user_id: int, k: int)-> list:
+    def get_recent_posts(self, user_id: int, k: int,
+                         fast_sorted: bool = True) -> list:
         """
         Метод который вызывается когда пользователь user_id
         запрашивает k свежих постов людей на которых он подписан.
         :param user_id: id пользователя. Число.
         :param k: Сколько самых свежих постов необходимо вывести. Число.
+        :param fast_sorted: Использовать ли FastSortedListMerger
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         """
+        # Реализация через FastSortedListMerger
+        if fast_sorted:
+            posts = [self.users[folowee]['p_ids']
+                     for folowee in self.users[user_id]['f_ids']]
+            return FastSortedListMerger.merge_first_k(posts, k)
+
         # если пользователя не существует будет выброшена ошибка KeyError
         # по подпискам собираем список уникальных идентификаторов постов
         # уникальность за счёт того что автор поста всегда один
@@ -71,14 +78,23 @@ class VKPoster:
         # сортируем по убыванию и отдаём первые k
         return sorted(posts, reverse=True)[:k]
 
-    def get_most_popular_posts(self, k: int) -> list:
+    def get_most_popular_posts(self, k: int,
+                               fast_sorted: bool = True) -> list:
         """
         Метод который возвращает список k самых популярных постов за все время,
         отсортированных по свежести.
         :param k: Сколько самых свежих популярных постов
         необходимо вывести. Число.
+        :param fast_sorted: Использовать ли FastSortedListMerger
         :return: Список из post_id размером К из популярных постов. list
         """
+        # Реализация через FastSortedListMerger
+        if fast_sorted:
+            # формирование списка кортежей (популярность, post_id)
+            full_list = [(len(val), key) for key, val in self.posts.items()]
+            # использование модифицированной версии merge_first_k
+            return FastSortedListMerger.merge_first_k(None, k, full_list, 1)
+
         # сортируем посты по убыванию post_id
         fresh_posts = sorted(self.posts, reverse=True)
         # получаем k постов по их популярности (count)
