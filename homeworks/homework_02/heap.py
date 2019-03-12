@@ -13,8 +13,9 @@ class Heap():
         self.build_heap()
 
     def shift_down(self, i):
-        top = 2 * i + 1
         bottom = 2 * i + 2
+        top = 2 * i + 1
+        
         highest = i
         if (bottom < len(self.heap)) \
                 and comparator_d(self.heap[bottom], self.heap[highest]):
