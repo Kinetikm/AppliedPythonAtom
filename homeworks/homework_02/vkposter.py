@@ -31,19 +31,19 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        if user_id in self.read_post:
+        if user_id in self.readed_post:
             if post_id not in self.readed_post[user_id]:
                 self.readed_post[user_id].append(post_id)
-                if post_id not in self.number_readt:
+                if post_id not in self.number_read:
                     self.number_read.update({post_id: 1})
                 else:
                     self.number_read[post_id] = self.number_read[post_id] + 1
         else:
             self.readed_post.update({user_id: [post_id]})
-            if post_id not in self.readlist:
+            if post_id not in self.number_read:
                 self.number_read.update({post_id: 1})
             else:
-                self.number_read[post_id] = self.readlist[post_id] + 1
+                self.number_read[post_id] = self.number_read[post_id] + 1
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
         '''
@@ -80,7 +80,7 @@ class VKPoster:
             for i in range(lengh):
                 out.append(tmp[i])
             return out
-        return out
+        return tmp
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
