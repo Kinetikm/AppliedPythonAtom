@@ -53,6 +53,11 @@ class MaxHeap(Heap):
             self.main[i] = self.main[change_i]
             self.main[change_i] = h
             i = change_i
+        if 2*i+1 == len(self.main) - 1:  # случай единственного сына
+            if comparator_d(self.main[2*i+1], self.main[i]):
+                h = self.main[i]
+                self.main[i] = self.main[2*i+1]
+                self.main[2*i+1] = h
         return result
 
 
@@ -63,4 +68,4 @@ def comparator_d(x, y):
         return True
     else:
         return False
-
+    
