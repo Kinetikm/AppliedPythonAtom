@@ -57,8 +57,9 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        return sorted([post_id for follower in self.subscriptions[user_id]
-                       for post_id in self.users[follower]], reverse=True)[:k]
+        return FastSortedListMerger.merge_first_k(
+            [sorted(self.users[follower]) for follower
+             in self.subscriptions[user_id]], k)
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -68,6 +69,12 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        return sorted(sorted(self.posts, reverse=True),
-                      key=lambda post: len(self.posts[post]['users_viewed']),
-                      reverse=True)[:k]
+        h = MaxHeap([(len(spec["users_viewed"]), post_id) for post_id, spec
+                     in self.posts.items()])
+        res = []
+        for _ in range(k):
+            try:
+                res.append(h.extract_maximum()[1])
+            except IndexError:
+                break
+        return res
