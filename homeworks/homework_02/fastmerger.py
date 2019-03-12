@@ -9,7 +9,7 @@ class FastSortedListMerger:
     @staticmethod
     def merge_first_k(list_of_lists, k):
         help_list = []
-        result_list = []  # итоговый список 
+        result_list = []  # итоговый список
         i = 0
         # заполним список кортежами следующего вида:
         # (макимальный элемент i-го "подсписка", i)
@@ -20,7 +20,7 @@ class FastSortedListMerger:
         # переделаем его в кучу
         h = MaxHeap(help_list)  # o(N)
         i = 0
-        while i < k: # o(k)
+        while i < k:  # o(k)
             # извлекаем максимум из кучи
             m = h.extract_maximum()  # o(log(N))
             # добавляем 0-ый элемент кортежа к итоговому списку
