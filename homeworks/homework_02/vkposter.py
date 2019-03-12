@@ -9,7 +9,10 @@ from homeworks.homework_02.fastmerger import FastSortedListMerger
 class VKPoster:
 
     def __init__(self):
-        raise NotImplementedError
+        self.__follows = {}
+        self.__userPosts = {}
+        self.__postReadUsers = {}
+
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -19,7 +22,12 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        try:
+            self.__userPosts[user_id].append(post_id)
+        except KeyError:
+            self.__userPosts[user_id] = [post_id]
+        self.__postReadUsers[post_id] = []
+        return None
 
     def user_read_post(self, user_id: int, post_id: int):
         '''
@@ -29,7 +37,13 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        try:
+            self.__postReadUsers[post_id].index(user_id)
+        except ValueError:
+            self.__postReadUsers[post_id].append(user_id)
+        except KeyError:
+            self.__postReadUsers[post_id] = [user_id]
+        return None
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
         '''
@@ -39,7 +53,11 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        pass
+        try:
+            self.__follows[follower_user_id].append(followee_user_id)
+        except KeyError:
+            self.__follows[follower_user_id] = [followee_user_id]
+        return None
 
     def get_recent_posts(self, user_id: int, k: int)-> list:
         '''
@@ -50,7 +68,23 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        pass
+        postsForUser = []
+        try:
+            for user in self.__follows[user_id]:
+                try:
+                    postsForUser = postsForUser + self.__userPosts[user]
+                except KeyError:
+                    pass
+        except KeyError:
+            return []
+        postsForUser = sorted(postsForUser)
+        recentPosts = []
+        for i in range(k):
+            try:
+                recentPosts.append(postsForUser.pop())
+            except IndexError:
+                return recentPosts
+        return recentPosts
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -60,4 +94,22 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        pass
+        maxLen = 0
+        inverted_dict = {}
+        posts = []
+        topPosts = []
+        for key in self.__postReadUsers:
+            try:
+                inverted_dict[len(self.__postReadUsers[key])].append(key)
+            except KeyError:
+                inverted_dict[len(self.__postReadUsers[key])] = [key]
+            if len(self.__postReadUsers[key]) > maxLen:
+                maxLen = len(self.__postReadUsers[key])
+        for key in range(maxLen + 1):
+            try:
+                posts = posts + sorted(inverted_dict[key])
+            except KeyError:
+                pass
+        for i in range(k):
+            topPosts.append(posts.pop())
+        return topPosts
