@@ -8,7 +8,6 @@ class Heap1:
     через дерево, поэтому вынесена в отдельный файл.
     '''
 
-
     def __init__(self, array):
         self.list = array
         if array:

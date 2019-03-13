@@ -6,7 +6,6 @@ from .heap import MaxHeap
 
 class FastSortedListMerger:
 
-
     @staticmethod
     def merge_first_k(list_of_lists, k):
         '''
@@ -15,5 +14,3 @@ class FastSortedListMerger:
         '''
 
         raise NotImplementedError
-        list_of_first_k = []
-        heap = MaxHeap(list_of_lists)
