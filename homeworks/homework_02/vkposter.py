@@ -87,11 +87,11 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        array = []
+        arrays = []
         out = []
         for post_id, number in self.number_read.items():
-            array.append((number, post_id))
-        heap_ = MaxHeap(array)
+            arrays.append((number, post_id))
+        heap_ = MaxHeap(arrays)
         length = min(k, len(self.number_read))
         i = 0
         while i < length:
