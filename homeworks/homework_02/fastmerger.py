@@ -2,6 +2,7 @@
 # coding: utf-8
 
 from .heap import MaxHeap
+import copy
 
 
 class FastSortedListMerger:
@@ -14,8 +15,9 @@ class FastSortedListMerger:
         '''
         output = []  # результат
         array = []  # массив для построения кучи
+        copy_list = copy.deepcopy(list_of_lists)
         # из каждого списка берем поседний(наибольший) элемент
-        for i, list_ in enumerate(list_of_lists):
+        for i, list_ in enumerate(copy_list):
             # записываем кортеж
             # (значение элемента, из какого списка был взят)
             if list_:
@@ -29,7 +31,7 @@ class FastSortedListMerger:
             output.append(maximum)
             # достаем элемент из того списка,
             # из которого был только что записанный максимум
-            if list_of_lists[number]:
+            if copy_list[number]:
                 tmp = (list_of_lists[number].pop(), number)
                 heap_.add(tmp)  # добавляем его в кучу
         return output
