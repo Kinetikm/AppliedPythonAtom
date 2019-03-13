@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from homeworks.homework_02.heap import MaxHeap
+from homeworks.homework_02.fastmerger import FastSortedListMerger
+
 
 class VKPoster:
 
@@ -67,19 +70,12 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        tmp = []
-        out = []
+        posts = []
         if user_id in self.followers:
             for user in self.followers[user_id]:
                 if user in self.reposted_post:
-                    for post in self.reposted_post[user]:
-                        if post not in tmp:
-                            tmp.append(post)
-            tmp = sorted(tmp, reverse=True)
-            for i in range(min(k, len(tmp))):
-                out.append(tmp[i])
-            return out
-        return tmp
+                    posts.append(self.reposted_post[user])
+        return FastSortedListMerger.merge_first_k(posts, k)
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -89,9 +85,15 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
+        array = []
         out = []
-        tmp = sorted(self.number_read.items(),
-                     key=lambda m: (m[1], m[0]), reverse=True)
-        for i in range(min(k, len(self.number_read))):
-            out.append(tmp[i][0])
+        for post_id, number in self.number_read.items():
+            array.append((number, post_id))
+        heap_ = MaxHeap(array)
+        length = min(k, len(self.number_read))
+        i = 0
+        while i < length:
+            i += 1
+            numbers, post_id = heap_.extract_maximum()
+            out.append(post_id)
         return out
