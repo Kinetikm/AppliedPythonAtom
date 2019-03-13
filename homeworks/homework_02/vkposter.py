@@ -70,6 +70,8 @@ class VKPoster:
                     continue
 
             return sorted(posts_newest, reverse=True)[:k]
+        else:
+            return []
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -85,3 +87,5 @@ class VKPoster:
             buf = sorted(buf, key=lambda rp: len(self.readed_posts[rp]),
                          reverse=True)
             return buf[:k]
+        else:
+            return []
