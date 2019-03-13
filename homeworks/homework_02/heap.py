@@ -10,7 +10,7 @@ class Heap():
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
-        self.sift_up(self.heap, (len(self.heap) - 1))
+        self.sift_up(len(self.heap) - 1)
 
     def sift_down(self, i):
         right = 2 * i + 2
