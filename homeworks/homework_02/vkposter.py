@@ -95,15 +95,15 @@ class VKPoster:
             return None
         else:
             bufer = []
-            most_read = list()
+            most_read_l = list()
             most_read = dict()
             for user in self.read_post:
-                most_read.extend(self.read_post.get(user))
+                most_read_l.extend(self.read_post.get(user))
 
-            most_read.sort()
+            most_read_l.sort()
 
-            most_read = dict.fromkeys(most_read, 0)
-            for p_id in most_read:
+            most_read = dict.fromkeys(most_read_l, 0)
+            for p_id in most_read_l:
                 if p_id in most_read:
                     i = most_read.get(p_id) + 1
                     most_read[p_id] = i
@@ -112,6 +112,6 @@ class VKPoster:
                            reverse=True,
                            key=lambda var: (var[1], var[0]))
             bufer = [var[0] for var in bufer]
-            most_read.clear()
-            most_read = bufer[:k]
-            return most_read
+            most_read_l.clear()
+            most_read_l = bufer[:k]
+            return most_read_l
