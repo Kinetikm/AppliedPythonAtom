@@ -52,7 +52,7 @@ class MaxHeap(Heap):
 
     def extract_maximum(self):
         res = self.heap.pop(0)
-        self.build_heap()
+        self.sift_down(0)
         return res
 
 
