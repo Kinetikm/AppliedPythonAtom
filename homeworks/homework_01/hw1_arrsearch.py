@@ -3,18 +3,16 @@
 
 
 def find_indices(input_list, n):
-    raise NotImplementedError
-    print(input_list, "n=", n)
     i = 0
     j = len(input_list) - 1
-    while i < j:
+    while j > 0:
         if input_list[i] + input_list[j] == n:
-            a = i, j
-            return a
-        elif input_list[i] + input_list[j] < n:
+            return i, j
+        elif i < j - 1:
             i = i + 1
-        elif input_list[i] + input_list[j] > n:
+        elif j > 1:
+            i = 0
             j = j - 1
-    print("None")
+        else:
+            break
     return
-
