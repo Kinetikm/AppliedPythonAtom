@@ -17,4 +17,4 @@ def is_bracket_correct(input_string):
                 if not ((x == '(' and i == ')') or
                         (x == '{' and i == '}') or (x == '[' and i == ']')):
                     return False
-return True if len(count) == 0 else False
+    return True if len(count) == 0 else False
