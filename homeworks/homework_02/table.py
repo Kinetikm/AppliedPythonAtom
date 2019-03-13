@@ -4,31 +4,28 @@ from checker import *
 from maketable import *
 
 
-def print_table(table):
+def new_print_table(table):
     col_width = [max(len(x) for x in col) for col in zip(*table)]
-    length = sum(col_width) + 13
+    length = sum(col_width) + 21
     print('-' * length)
     count = 1
     for line in table:
         if count == 1:
             print(
-                "| " +
-                " | ".join(
+                "|  " +
+                "  |  ".join(
                     "{:^{}}".format(
                         x,
                         col_width[i])for i,
                     x in enumerate(line)) +
-                " |")
+                "  |")
             count += 1
         else:
             print(
-                "| " +
-                " | ".join(
-                    "{:{}}".format(
-                        x,
-                        col_width[i])for i,
-                    x in enumerate(line)) +
-                " |")
+                "|  " + "  |  ".join(
+                    "{:{}}".format(x, col_width[i])for i,
+                    x in enumerate(line[:len(line) - 1])) +
+                "  |  " + '{:>{}}'.format(line[-1], col_width[-1]) + "  |")
     print('-' * length)
 
 
@@ -39,7 +36,7 @@ def print_file(path):
             data = make_json_table(path)
         elif frmt == 'tsv':
             data = make_tsv_table(path)
-        print_table(data)
+        new_print_table(data)
 
 
 if __name__ == '__main__':
