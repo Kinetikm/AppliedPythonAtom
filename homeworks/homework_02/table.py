@@ -1,7 +1,8 @@
 import sys
 
 from access_check import check_json, check_csv, check_format
-from encording_test import check_utf8, check_utf16, check_cp1251, check_encording
+from encording_test import check_utf8, check_utf16, \
+    check_cp1251, check_encording
 from table_print import print_tab
 
 

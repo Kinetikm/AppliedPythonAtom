@@ -1,6 +1,7 @@
 import json
 import csv
-#Файл для проверки формата, те какой формат был передан, передаваться будет дескриптор
+
+
 def check_json(fd):
     buffer = list()
     try:
@@ -12,7 +13,6 @@ def check_json(fd):
         fd.seek(0)
         return False
     return buffer
-
 
 
 def check_csv(fd):
@@ -30,12 +30,10 @@ def check_csv(fd):
 
 def check_format(fd):
     buffer_json = check_json(fd)
-    buffer_tsv =check_csv(fd)
+    buffer_tsv = check_csv(fd)
     if buffer_json:
         return buffer_json
     elif buffer_tsv:
         return buffer_tsv
     else:
         raise Warning
-
-#проверку на формат вставлю потом

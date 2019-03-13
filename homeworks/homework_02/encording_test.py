@@ -1,6 +1,6 @@
-"""Файл для работы с кодировками"""
-"""Готовый файл для проверки кодировки и существования"""
 import json
+
+
 def check_utf8(filename):
     try:
         f = open(filename, encoding="utf8")
@@ -11,6 +11,7 @@ def check_utf8(filename):
     except FileNotFoundError:
         raise FileNotFoundError("file not exists")
     return f
+
 
 def check_utf16(filename):
     try:
@@ -42,20 +43,13 @@ def check_encording(filename):
         f2 = check_utf16(filename)
         f3 = check_cp1251(filename)
         if f1:
-           return f1, "utf8"
+            return f1, "utf8"
         elif f2:
-            return  f2, "utf16"
+            return f2, "utf16"
         elif f3:
-            return  f3, "cp1251"
+            return f3, "cp1251"
         else:
             print("Error")
             raise UnicodeError
     except TypeError:
         raise FileNotFoundError
-
-
-
-
-
-
-
