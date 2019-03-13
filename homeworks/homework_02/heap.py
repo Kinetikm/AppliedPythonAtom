@@ -10,7 +10,7 @@ class Heap():
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
-        self.sift_up(len(self.heap) - 1)
+        self.build_heap()
 
     def sift_down(self, i):
         right = 2 * i + 2
@@ -51,7 +51,7 @@ class MaxHeap(Heap):
 
     def extract_maximum(self):
         res = self.heap.pop(0)
-        self.sift_down(0)
+        self.build_heap()
         return res
 
 
