@@ -1,8 +1,11 @@
 class VKPoster:
+
+
     def __init__(self):
         self.subs = {}
         self.post = {}
         self.autor = {}
+
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -19,6 +22,7 @@ class VKPoster:
             else:
                 self.autor[user_id].append(post_id)
 
+
     def user_read_post(self, user_id: int, post_id: int):
         '''
         Метод который вызывается когда пользователь user_id
@@ -31,6 +35,7 @@ class VKPoster:
             self.user_posted_post(-1, post_id)
         if user_id not in self.post.get(post_id):
             self.post.get(post_id).append(user_id)
+
 
     def user_follow_for(self, follower_user_id: int,
                         followee_user_id: int):
@@ -48,11 +53,12 @@ class VKPoster:
                 self.subs[follower_user_id].append(
                     followee_user_id)
 
+
     def get_recent_posts(self, user_id: int, k: int) -> list:
         '''
         Метод который вызывается когда пользователь user_id
         запрашивает k свежих постов людей на которых он подписан.
-        :param user_id: id пользователя. Число.
+        :param user_id: id пользователя. Числоо.
         :param k: Сколько самых свежих постов необходимоо вывести. Число.
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
@@ -65,6 +71,7 @@ class VKPoster:
         if len(new_list) != 0:
             new_list = sorted(new_list, reverse=True)
         return new_list[:-(len(new_list) - k)]
+
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
