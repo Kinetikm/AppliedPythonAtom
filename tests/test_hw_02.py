@@ -86,7 +86,6 @@ def test_vk_poster():
                 assert ans == vk_poster.get_most_popular_posts(*params)
     return True
 
-
 def test_table():
     data = load_test_data("table")
 
@@ -96,18 +95,12 @@ def test_table():
             with os.fdopen(fd, 'wb') as tmp:
                 tmp.write(test_data)
 
-            out, err = subprocess.Popen(['python',
-                                         'homeworks/homework_02/table.py',
-                                         path],
-                                        stdout=subprocess.PIPE).communicate()
+            out, err = subprocess.Popen(['python', 'homeworks/homework_02/table.py', path], stdout=subprocess.PIPE).communicate()
             assert test_out.strip() == out.decode('utf8').strip()
         finally:
             os.remove(path)
 
     # Not Found
-    out, err = subprocess.Popen(['python',
-                                 'homeworks/homework_02/table.py',
-                                 'path'],
-                                stdout=subprocess.PIPE).communicate()
+    out, err = subprocess.Popen(['python', 'homeworks/homework_02/table.py', 'path'], stdout=subprocess.PIPE).communicate()
     assert 'Файл не валиден' == out.decode('utf8').strip()
     return True
