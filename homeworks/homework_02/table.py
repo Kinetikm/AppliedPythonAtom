@@ -44,7 +44,7 @@ class WorkWithFile:
                 print("Файл не валиден")
                 break
         if not self.enc:
-            print("Формат не валиден")
+            print("Формат не валиден1233455")
 
     def try_json(self):
         with open(self.fn, encoding=self.enc) as input_file:
