@@ -16,7 +16,8 @@ class FastSortedListMerger:
         array = []  # массив для построения кучи
         # из каждого списка берем поседний(наибольший) элемент
         for i, list_ in enumerate(list_of_lists):
-            # записываем кортеж (значение элемента, из какого списка был взят)
+            # записываем кортеж
+            # (значение элемента, из какого списка был взят)
             tmp = (list_.pop(), i)
             array.append(tmp)
         heap_ = MaxHeap(array)  # строим кучу
@@ -25,7 +26,8 @@ class FastSortedListMerger:
             j += 1
             maximum, number = heap_.extract_maximum()
             output.append(maximum)
-            # достаем элемент из того списка,из которого был только что записанный максимум
+            # достаем элемент из того списка,
+            # из которого был только что записанный максимум
             if list_of_lists[number]:
                 tmp = (list_of_lists[number].pop(), number)
                 heap_.add(tmp)  # добавляем его в кучу
