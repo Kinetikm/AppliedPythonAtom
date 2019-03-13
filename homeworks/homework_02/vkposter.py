@@ -20,8 +20,6 @@ class VKPoster:
         return
 
     def user_read_post(self, user_id: int, post_id: int):
-        print('user_id', user_id)
-        print('post_id', post_id)
         if self.read_post.get(post_id):
             if self.read_post.get(post_id).count(user_id) == 0:
                 fill_dict(self.read_post, post_id, user_id)
@@ -46,12 +44,9 @@ class VKPoster:
         return res
 
     def get_most_popular_posts(self, k: int) -> list:
-        print('k', k)
-        print('rr', self.read_post)
         res0 = sorted(self.read_post.items(),
                       key=lambda kv: (len(kv[1]), kv[0]), reverse=True)
         res = ([x for x, y in res0])[0:k]
-        print('res', res)
         return res
 
 

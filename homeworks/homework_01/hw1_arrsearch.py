@@ -3,6 +3,7 @@
 
 
 def find_indices(input_list, n):
+    raise NotImplementedError
     print(input_list, "n=", n)
     i = 0
     j = len(input_list) - 1
@@ -16,3 +17,4 @@ def find_indices(input_list, n):
             j = j - 1
     print("None")
     return
+
