@@ -24,7 +24,7 @@ class Heap():
                 comparator_d(self._heap[left], self._heap[largest]):
             largest = left
 
-         if right < len(self._heap) and \
+        if right < len(self._heap) and \
                 comparator_d(self._heap[right], self._heap[largest]):
             largest = right
         if largest != i:
