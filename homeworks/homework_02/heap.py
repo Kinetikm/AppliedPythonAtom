@@ -10,7 +10,7 @@ class Heap():
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
-        self.build_heap()
+        self.sift_up(self.heap, len(self.heap) - 1)
 
     def sift_down(self, i):
         right = 2 * i + 2
@@ -29,6 +29,15 @@ class Heap():
             self.heap[i], self.heap[largest] = \
                 self.heap[largest], self.heap[i]
             self.sift_down(largest)
+
+    def sift_up(self, i):
+        while i > 0:
+            parent = (i - 1) // 2
+            if comparator_d(self.heap[parent], self.heap[i]):
+                return
+            self.heap[i], self.heap[parent] \
+                = self.heap[parent], self.heap[i]
+            i = parent
 
     def build_heap(self):
         for i in range(len(self.heap) // 2, -1, -1):
