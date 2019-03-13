@@ -7,7 +7,7 @@ class Heap():
     def __init__(self, array):
         self._heap = array[:]
         self.build_heap()
-        
+
     def sift_up(self, element_index):
         _list = self._heap
         parent = (index - 1) // 2
@@ -29,7 +29,7 @@ class Heap():
             largest = right
         if largest != i:
             self._heap[i], self._heap[largest] = self._heap[largest], self._heap[i]
-            self.siftdown(largest)    
+            self.sift_down(largest)
 
     def add(self, elem_with_priority):
         self._heap.append(elem_with_priority)
