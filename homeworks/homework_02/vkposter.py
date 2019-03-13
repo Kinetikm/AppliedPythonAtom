@@ -86,7 +86,7 @@ class VKPoster:
         :return: Список из post_id размером К из популярных постов. list
         '''
         array = []
-        out = []
+        outs = []
         for post_id, number in self.number_read.items():
             array.append((number, post_id))
         heap_ = MaxHeap(array)
@@ -95,5 +95,5 @@ class VKPoster:
         while i < length:
             i += 1
             numbers, post_id = heap_.extract_maximum()
-            out.append(post_id)
-        return out
+            outs.append(post_id)
+        return outs
