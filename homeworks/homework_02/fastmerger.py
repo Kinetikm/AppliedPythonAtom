@@ -18,8 +18,9 @@ class FastSortedListMerger:
         for i, list_ in enumerate(list_of_lists):
             # записываем кортеж
             # (значение элемента, из какого списка был взят)
-            tmp = (list_.pop(), i)
-            array.append(tmp)
+            if list_:
+                tmp = (list_.pop(), i)
+                array.append(tmp)
         heap_ = MaxHeap(array)  # строим кучу
         j = 0  # счетщик длинны исходного списка
         while j != k and heap_.heap:
