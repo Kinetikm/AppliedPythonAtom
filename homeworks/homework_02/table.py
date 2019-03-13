@@ -68,12 +68,10 @@ def print_file(path):
         else:
             print('Формат не валиден')
 
-'''
+
 if __name__ == '__main__':
     try:
         filename = sys.argv[1]
         print_file(filename)
     except(IndexError, AssertionError):
         print('Формат не валиден')
-'''
-print_file('files/posts-utf8.json')
