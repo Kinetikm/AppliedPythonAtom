@@ -19,7 +19,7 @@ def is_cp1251(f_name):
 def is_utf16(f_name):
     try:
         with open(f_name, encoding='utf16') as f:
-             f.read(1)
+            f.read(1)
     except UnicodeError:
         return False
     return True

@@ -17,7 +17,8 @@ def print_table(data):
         print('|', end='')
         for j in range(len(data[i])):
             if i == 0:
-                print(' ' * (((max_lengths[j] - len(str(data[i][j]))) // 2) + 1)
+                print(' ' * (((max_lengths[j] - len(str(data[i][j]))) // 2)
+                             + 1)
                       , data[i][j],
                       ' ' * ((max_lengths[j] - len(str(data[i][j]))) // 2)
                       , '|', end='')
@@ -25,7 +26,9 @@ def print_table(data):
                 if len(str(data[i][j])) == 1:
                     print(' ' * len(data[0][j]), data[i][j], ' |', end='')
                 else:
-                    print(' ', data[i][j], ' ' * (max_lengths[j] - len(str(data[i][j]))), '|', end='')
+                    print(' ', data[i][j], ' ' * (max_lengths[j] -
+                                                  len(str(data[i][j]))),
+                          '|', end='')
         print()
     print('-' * (sum(max_lengths) + 5 * len(max_lengths) + 1))
     return

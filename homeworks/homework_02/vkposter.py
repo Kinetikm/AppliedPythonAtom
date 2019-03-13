@@ -66,5 +66,3 @@ class VKPoster:
             if len(res_list) == len(popular):
                 break
         return res_list
-
-
