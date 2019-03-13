@@ -90,8 +90,8 @@ class VKPoster:
         '''
         heap_sort = True
         if heap_sort:
-            lists = [(len(self._posted_posts.get(i)[1]), i)
-                      for i in list(self._posted_posts.keys())]
+            lists = [(
+                len(self._posted_posts.get(i)[1]), i) for i in list(self._posted_posts.keys())]
             heap = MaxHeap(lists)
             return [heap.extract_maximum()[1] for i in range(k)]
         else:
