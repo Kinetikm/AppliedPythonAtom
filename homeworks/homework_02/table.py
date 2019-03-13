@@ -7,6 +7,20 @@ from maketable import *
 def new_print_table(table):
     col_width = [max(len(x) for x in col) for col in zip(*table)]
     length = sum(col_width) + 21
+    for tline in table:
+        test = (
+                "|  " +
+                "  |  ".join(
+                    "{:^{}}".format(
+                        x,
+                        col_width[i])for i,
+                    x in enumerate(tline)) +
+                "  |")
+        test2 = (
+                "|  " + "  |  ".join(
+                    "{:{}}".format(x, col_width[i])for i,
+                    x in enumerate(tline[:len(tline) - 1])) +
+                "  |  " + '{:>{}}'.format(tline[-1], col_width[-1]) + "  |")
     print('-' * length)
     count = 1
     for line in table:
@@ -49,6 +63,5 @@ if __name__ == '__main__':
     try:
         filename = sys.argv[1]
         print_file(filename)
-    except(IndexError):
+    except(IndexError, AssertionError):
         print('Формат не валиден')
-
