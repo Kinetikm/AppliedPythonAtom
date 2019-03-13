@@ -43,7 +43,7 @@ class WorkWithFile:
             except FileNotFoundError:
                 print("Файл не валиден")
                 break
-        if not enc:
+        if not self.enc:
             print("Формат не валиден")
 
     def try_json(self):
