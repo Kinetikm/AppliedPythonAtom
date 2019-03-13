@@ -14,7 +14,7 @@ def is_bracket_correct(input_string):
                     x = count.pop()
                 except:
                     return False
-                if not ((x == '(' and i == ')') 
-                        or (x == '{' and i == '}') or (x == '[' and i == ']')):
+                if not ((x == '(' and i == ')') or
+                        (x == '{' and i == '}') or (x == '[' and i == ']')):
                     return False
     return True if len(count) == 0 else False
