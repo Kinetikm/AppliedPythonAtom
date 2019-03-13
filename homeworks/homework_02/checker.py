@@ -6,14 +6,13 @@ import os
 def check_tsv(file2):
     finallines = []
     for i in file2:
+        if len(i) == 0:
+            return False
         finallines.append(i)
-    flag = 1
     size = len(finallines[0])
     for i in finallines:
         if len(i) != size:
-            flag = flag * 0
-    if flag == 0:
-        return False
+            return False
     return True
 
 

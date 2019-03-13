@@ -39,12 +39,16 @@ def print_file(path):
         lensum = 0
         for i in data:
             lensum += len(i)
-        if lensum != 0:
+        if lensum != 0 and len(data) >= 1:
             new_print_table(data)
         else:
             print('Формат не валиден')
 
 
 if __name__ == '__main__':
-    filename = sys.argv[1]
-    print_file(filename)
+    try:
+        filename = sys.argv[1]
+        print_file(filename)
+    except(IndexError):
+        print('Формат не валиден')
+
