@@ -2,6 +2,10 @@
 # coding: utf-8
 
 
+def main():
+    print('WOrking')
+
+
 def find_indices(input_list, n):
     i = 0
     j = len(input_list) - 1
