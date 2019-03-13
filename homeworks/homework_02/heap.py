@@ -5,22 +5,52 @@
 class Heap():
 
     def __init__(self, array):
-        pass
+        self._heap = array[:]
+        self.build_heap()
+        
+    def sift_up(self, element_index):
+        _list = self._heap
+        parent = (index - 1) // 2
+        while index > 0 and comparator_d(_list[index], _list[parent]):
+            _list[index], _list[parent] = _list[parent], _list[index]
+            index = parent
+            parent = (index - 1) // 2
+
+    def sift_down(self, i):
+        left = 2 * i + 1
+        right = 2 * i + 2
+        largest = i
+        if left < len(self._heap) and \
+                comparator_d(self._heap[left], self._heap[largest]):
+            largest = left
+
+         if right < len(self._heap) and \
+                comparator_d(self._heap[right], self._heap[largest]):
+            largest = right
+        if largest != i:
+            self._heap[i], self._heap[largest] = self._heap[largest], self._heap[i]
+            self.siftdown(largest)    
 
     def add(self, elem_with_priority):
-        pass
+        self._heap.append(elem_with_priority)
+        self.sift_up(len(self._heap) - 1)
 
     def build_heap(self):
-        pass
+        for i in reversed(range(len(self._heap) // 2)):
+            self.sift_down(i)
 
 
 class MaxHeap(Heap):
 
     def __init__(self, array):
-        raise NotImplementedError
+        super().__init__(array)
 
     def extract_maximum(self):
-        pass
+        max_elem = self._heap[0]
+        self._heap[0] = self._heap[-1]
+        self._heap.pop(-1)
+        self.sift_down(0)
+        return max_elem
 
 
 def comparator_d(x, y):
