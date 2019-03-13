@@ -8,7 +8,7 @@ def find_indices(input_list, n):
     j = len(input_list) - 1
     while i < j:
         if input_list[i] + input_list[j] == n:
-            a = (i, j)
+            a = i, j
             return a
         elif input_list[i] + input_list[j] < n:
             i = i + 1
