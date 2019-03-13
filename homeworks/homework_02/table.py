@@ -88,28 +88,27 @@ class TablePrint:
                 i = i + 1
 
     def header(self):
-        width = sum(self.sizes)+len(self.sizes)*3
+        width = sum(self.sizes)+len(self.sizes)*5 + 1
         print(self.hline(width))
         i = 0
         tmp = "|"
         for cap in self.caption:
-            tmp = tmp + " " + cap.center(self.sizes[i]) + " |"
+            tmp = tmp + "  " + cap.center(self.sizes[i]) + "  |"
             i = i + 1
         print(tmp)
-        print(self.hline(width))
 
     def body(self):
-        width = sum(self.sizes) + len(self.sizes) * 3
+        width = sum(self.sizes) + len(self.sizes) * 5 + 1
         for line in self.input_date:
             i = 0
             tmp = "|"
             for cap in self.caption:
                 if isinstance(line, dict):
-                    tmp = tmp + " " + self.justify(line[cap],
-                                                   self.sizes[i]) + " |"
+                    tmp = tmp + "  " + self.justify(line[cap],
+                                                    self.sizes[i]) + "  |"
                 else:
-                    tmp = tmp + " " + self.justify(line[i],
-                                                   self.sizes[i]) + " |"
+                    tmp = tmp + "  " + self.justify(line[i],
+                                                    self.sizes[i]) + "  |"
                 i = i + 1
             if tmp:
                 print(tmp)
@@ -128,10 +127,9 @@ class TablePrint:
 
 
 if __name__ == '__main__':
-    filename = sys.argv[1]
 
     # Ваш код
-    a = WorkWithFile(filename)
+    a = WorkWithFile("files/posts-cp1251.json")
     b = TablePrint(a.parsing())
     b.sizing()
     b.header()
