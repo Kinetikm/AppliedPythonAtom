@@ -21,4 +21,4 @@ if __name__ == '__main__':
         for i in range(len(data_format)):
             print(data_format[i])
     else:
-        print('формат не валиден')
+        print('Формат не валиден')

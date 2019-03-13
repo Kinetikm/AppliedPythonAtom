@@ -87,26 +87,27 @@ def test_vk_poster():
     return True
 
 
-# def test_table():
-#     data = load_test_data("table")
-#
-#     for test_data, test_out in data:
-#         fd, path = tempfile.mkstemp()
-#         try:
-#             with os.fdopen(fd, 'wb') as tmp:
-#                 tmp.write(test_data)
-#
-#             out, err = subprocess.Popen(['python',
-#                                          'homeworks/homework_02/table.py',
-#                                          path],
-#                                         stdout=subprocess.PIPE).communicate()
-#             assert test_out.strip() == out.decode('utf8').strip()
-#         finally:
-#             os.remove(path)
-#
-#     # Not Found
-#     out, err = subprocess.Popen(['python',
-#                                  'homeworks/homework_02/table.py', 'path'],
-#                                 stdout=subprocess.PIPE).communicate()
-#     assert 'Файл не валиден' == out.decode('utf8').strip()
-#     return True
+def test_table():
+    data = load_test_data("table")
+
+    for test_data, test_out in data:
+        fd, path = tempfile.mkstemp()
+        try:
+            with os.fdopen(fd, 'wb') as tmp:
+                tmp.write(test_data)
+
+            out, err = subprocess.Popen(['python',
+                                         'homeworks/homework_02/table.py',
+                                         path],
+                                        stdout=subprocess.PIPE).communicate()
+            assert test_out.strip() == out.decode('utf8').strip()
+        finally:
+            os.remove(path)
+
+    # Not Found
+    out, err = subprocess.Popen(['python',
+                                 'homeworks/homework_02/table.py',
+                                 'path'],
+                                stdout=subprocess.PIPE).communicate()
+    assert 'Файл не валиден' == out.decode('utf8').strip()
+    return True
