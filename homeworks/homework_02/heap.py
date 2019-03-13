@@ -10,7 +10,7 @@ class Heap():
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
-        self.sift_up(self.heap, len(self.heap) - 1)
+        self.sift_up(self.heap, (len(self.heap) - 1))
 
     def sift_down(self, i):
         right = 2 * i + 2
@@ -48,7 +48,6 @@ class MaxHeap(Heap):
 
     def __init__(self, array):
         super().__init__(array)
-        raise NotImplementedError
 
     def extract_maximum(self):
         res = self.heap.pop(0)
