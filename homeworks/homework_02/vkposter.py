@@ -76,8 +76,8 @@ class VKPoster:
         '''
         pop_list = []
         pop_list = sorted(self.post.keys(),
-                        key=lambda ForPost: (len(self.post.get(ForPost)),\
-                                             ForPost), reverse=True)
+                          key=lambda ForPost: (len(self.post.get(ForPost)),
+                                               ForPost), reverse=True)
         if len(pop_list) > k:
             return pop_list[:-(len(pop_list) - k)]
         elif k <= 0:
