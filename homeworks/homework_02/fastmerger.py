@@ -32,6 +32,6 @@ class FastSortedListMerger:
             # достаем элемент из того списка,
             # из которого был только что записанный максимум
             if copy_list[number]:
-                tmp = (list_of_lists[number].pop(), number)
+                tmp = (copy_list[number].pop(), number)
                 heap_.add(tmp)  # добавляем его в кучу
         return output
