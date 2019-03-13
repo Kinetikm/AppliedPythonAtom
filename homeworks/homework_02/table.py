@@ -41,7 +41,7 @@ class WorkWithFile:
             except ValueError:
                 continue
             except FileNotFoundError:
-                print("<<<<<Файл не валиден")
+                print("Файл не валиден")
                 break
         if not enc:
             print("Формат не валиден")
@@ -127,9 +127,10 @@ class TablePrint:
 
 
 if __name__ == '__main__':
+    filename = sys.argv[1]
 
     # Ваш код
-    a = WorkWithFile("files/posts-cp1251.json")
+    a = WorkWithFile(filename)
     b = TablePrint(a.parsing())
     b.sizing()
     b.header()
