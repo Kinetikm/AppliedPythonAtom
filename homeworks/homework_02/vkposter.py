@@ -4,7 +4,6 @@
 
 from homeworks.homework_02.heap import MaxHeap
 from homeworks.homework_02.fastmerger import FastSortedListMerger
-import collections
 
 
 class VKPoster:
@@ -79,8 +78,6 @@ class VKPoster:
                 recent_posts.extend(self.published_posts.get(user))
         # buf = recent_posts
         # recent_posts.clear()
-        # for i in range(k + 1):
-        #     recent_posts.append(buf[i])
         recent_posts.sort()
         recent_posts = recent_posts[-k:]
         recent_posts = recent_posts[::-1]
