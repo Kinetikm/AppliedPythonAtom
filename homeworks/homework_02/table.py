@@ -41,7 +41,7 @@ class WorkWithFile:
             except ValueError:
                 continue
             except FileNotFoundError:
-                print("Файл не валиден")
+                print("<<<<<Файл не валиден")
                 break
         if not enc:
             print("Формат не валиден")
