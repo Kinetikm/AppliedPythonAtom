@@ -12,27 +12,27 @@ class Heap():
         self.heap.append(elem_with_priority)
         self.build_heap()
 
-    def shift_down(self, i):
-        bottom = 2 * i + 2
-        top = 2 * i + 1
+    def sift_down(self, i):
+        right = 2 * i + 2
+        left = 2 * i + 1
 
-        highest = i
-        if (bottom < len(self.heap)) \
-                and comparator_d(self.heap[bottom],
-                                 self.heap[highest]):
-            highest = bottom
-        if (top < len(self.heap)) \
-                and comparator_d(self.heap[top],
-                                 self.heap[highest]):
-            highest = top
-        if highest != i:
-            self.heap[i], self.heap[highest] = \
-                self.heap[highest], self.heap[i]
-            self.shift_down(highest)
+        largest = i
+        if (right < len(self.heap)) \
+                and comparator_d(self.heap[right],
+                                 self.heap[largest]):
+            largest = right
+        if (left < len(self.heap)) \
+                and comparator_d(self.heap[left],
+                                 self.heap[largest]):
+            largest = left
+        if largest != i:
+            self.heap[i], self.heap[largest] = \
+                self.heap[largest], self.heap[i]
+            self.sift_down(largest)
 
     def build_heap(self):
         for i in range(len(self.heap) // 2, -1, -1):
-            self.shift_down(i)
+            self.sift_down(i)
 
 
 class MaxHeap(Heap):
