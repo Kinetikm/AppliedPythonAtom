@@ -1,6 +1,7 @@
 import json
 import csv
 
+
 def enc(filename):
     encoding = ['utf-8', 'utf-16', 'cp1251']
     for code in encoding:
