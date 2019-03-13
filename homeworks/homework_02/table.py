@@ -36,7 +36,13 @@ def print_file(path):
             data = make_json_table(path)
         elif frmt == 'tsv':
             data = make_tsv_table(path)
-        new_print_table(data)
+        lensum = 0
+        for i in data:
+            lensum += len(i)
+        if lensum != 0:
+            new_print_table(data)
+        else:
+            print('Формат не валиден')
 
 
 if __name__ == '__main__':

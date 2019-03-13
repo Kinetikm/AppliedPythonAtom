@@ -31,6 +31,7 @@ def check_encoding(path):
 def chech_valid(path):
     if os.path.isfile(path) is False:
         print("Файл не валиден")
+        return False
     else:
         try:
             with open(path, encoding=check_encoding(path)) as fl:
