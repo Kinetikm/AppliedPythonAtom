@@ -42,6 +42,8 @@ class VKPoster:
         return res_list
 
     def get_most_popular_posts(self, k: int) -> list:
+        if k <= 0:
+            return []
         popular = [(k, len(self.posts[k][1])) for k in
                    sorted(self.posts, key=lambda i:
                    len(self.posts.get(i)[1]), reverse=True)]
@@ -61,4 +63,8 @@ class VKPoster:
                 if len(res_list) == k:
                     break
             group_ind -= 1
+            if len(res_list) == len(popular):
+                break
         return res_list
+
+
