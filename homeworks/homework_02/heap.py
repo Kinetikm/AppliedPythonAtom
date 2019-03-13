@@ -10,11 +10,11 @@ class Heap():
 
     def sift_up(self, element_index):
         _list = self._heap
-        parent = (index - 1) // 2
-        while index > 0 and comparator_d(_list[index], _list[parent]):
-            _list[index], _list[parent] = _list[parent], _list[index]
-            index = parent
-            parent = (index - 1) // 2
+        parent = (element_index - 1) // 2
+        while element_index > 0 and comparator_d(_list[element_index], _list[parent]):
+            _list[element_index], _list[parent] = _list[parent], _list[element_index]
+            element_index = parent
+            parent = (element_index - 1) // 2
 
     def sift_down(self, i):
         left = 2 * i + 1
