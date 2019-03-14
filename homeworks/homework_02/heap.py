@@ -20,9 +20,11 @@ class Heap:
         right = 2 * i + 2
 
         largest = i
-        if left < len(self.heap) and comparator_d(self.heap[left], self.heap[i]):
+        if left < len(self.heap) and \
+                comparator_d(self.heap[left], self.heap[i]):
             largest = left
-        if right < len(self.heap) and comparator_d(self.heap[right], self.heap[largest]):
+        if right < len(self.heap) and \
+                comparator_d(self.heap[right], self.heap[largest]):
             largest = right
         if largest != i:
             self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
@@ -33,7 +35,8 @@ class Heap:
             parent = (index - 1) // 2
             if not comparator_d(self.heap[index], self.heap[parent]):
                 return
-            self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+            self.heap[index], self.heap[parent] = \
+                self.heap[parent], self.heap[index]
             index = parent
 
     def pop(self):
