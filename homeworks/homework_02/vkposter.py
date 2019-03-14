@@ -17,7 +17,6 @@ class VKPoster:
         # на первом месте стоит создатель поста
         self.posts = {}
 
-
     def create_new_user(self, user_id):
         self.users.update({user_id: []})
 
