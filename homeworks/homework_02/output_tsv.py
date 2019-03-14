@@ -3,11 +3,11 @@ from printing import *
 
 
 def print_tsv(filename, enc):
-    s = list()
+    text = list()
     with open(filename, encoding=enc) as file:
         sr = csv.reader(file, delimiter="\t")
         for i in sr:
             if len(i) == 0:
                 raise ValueError("Формат не валиден")
-            s.append(i)
-    print_file(s)
+            text.append(i)
+    print_file(text)
