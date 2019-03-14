@@ -1,4 +1,4 @@
-Available_encodings = ['utf8','utf16','cp1251',]
+Available_encodings = ['utf8', 'utf16', 'cp1251']
 
 
 def get_encoding(filename):

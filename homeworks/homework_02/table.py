@@ -16,4 +16,3 @@ if __name__ == '__main__':
         print("Файл не валиден")
     except (ValueError, RuntimeError):
         print("Формат не валиден")
-	
