@@ -32,7 +32,6 @@ class WorkWithFile:
                 f = codecs.open(self.fn, encoding=enc, errors='strict')
                 for _ in f:
                     pass
-                self.enc = enc
                 break
             except UnicodeDecodeError:
                 continue
@@ -43,8 +42,9 @@ class WorkWithFile:
             except FileNotFoundError:
                 print("Файл не валиден")
                 break
+            self.enc = enc
         if not self.enc:
-            print("Формат не валиден1233455")
+            print("Формат не валиден")
 
     def try_json(self):
         with open(self.fn, encoding=self.enc) as input_file:
@@ -55,7 +55,11 @@ class WorkWithFile:
         col_list = []
         with open(self.fn, encoding=self.enc) as input_file:
             line_list = csv.reader(input_file, delimiter="\t")
+            if line_list:
+                length = len(line_list[0])
             for line in line_list:
+                if len(line) != length:
+                    return None
                 col_list.append(line)
             return col_list
 
