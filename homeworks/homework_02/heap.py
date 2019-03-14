@@ -44,7 +44,8 @@ class Heap():
                                 comparator_d(self.heap[child1],
                                              self.heap[
                                                  current]) or comparator_d(
-                                self.heap[child2], self.heap[current]))):
+                                self.heap[child2],
+                                self.heap[current]))):
                 if type(self.heap[1]) is list:
                     ind = max((child1, child2), key=lambda x: self.heap[x][-1])
                 else:
