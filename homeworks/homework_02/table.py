@@ -21,7 +21,7 @@ class WorkWithFile:
             except ValueError:
                 res = self.try_tsv()
             if not res:
-                print("Формат не валиден")
+                print("Формат не валиден1")
             else:
                 return res
 
@@ -44,7 +44,7 @@ class WorkWithFile:
                 break
             self.enc = enc
         if not self.enc:
-            print("Формат не валиден")
+            print("Формат не валиден2")
 
     def try_json(self):
         with open(self.fn, encoding=self.enc) as input_file:
