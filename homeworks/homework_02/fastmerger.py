@@ -12,10 +12,10 @@ class FastSortedListMerger:
         принимает на вход список отсортированных непоубыванию списков и число
         на выходе выдает один список длинной k, отсортированных по убыванию
         '''
-        if list_of_lists == None or len(list_of_lists) == 0:
+        if list_of_lists is None or len(list_of_lists) == 0:
             return []
         max_heap = MaxHeap(list_of_lists)
         arr = [max_heap.extract_maximum() for i in range(k)]
-        return [x for x in arr if x != None]
+        return [x for x in arr if x is not None]
 
 print(FastSortedListMerger.merge_first_k([[1, 2, 3], [3, 4, 5]], 4))

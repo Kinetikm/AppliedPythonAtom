@@ -31,7 +31,7 @@ class Table:
         fmt = '|' + '|'.join('  {:<%d}  ' % l for l in max_fields[:-1]) + '|'
         fmt += '  {:>%d}  |' % max_fields[-1]
         for rec in self.tables:
-            print(fmt.format(*rec.fields),end='\n')
+            print(fmt.format(*rec.fields), end='\n')
         print('-' * max_length)
 
 
