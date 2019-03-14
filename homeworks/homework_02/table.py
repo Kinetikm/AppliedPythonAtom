@@ -1,8 +1,19 @@
 import sys
+from check_encodings import *
+from output_json import *
+from output_tsv import *
 
-# Ваши импорты
 
 if __name__ == '__main__':
-    filename = sys.argv[1]
-
-    # Ваш код
+    try:
+        filename = sys.argv[1]
+        enc = get_encoding(filename)
+        try:
+            print_json(filename, enc)
+        except (ValueError, RuntimeError):
+            print_tsv(filename, enc)
+    except (FileNotFoundError, IndexError):
+        print("Файл не валиден")
+    except (ValueError, RuntimeError):
+        print("Формат не валиден")
+	
