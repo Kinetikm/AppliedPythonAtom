@@ -4,14 +4,13 @@ from checker import *
 from read_file import read_file
 from print_table import print_table
 
-path = 'files/posts-utf8.json'
+# path = 'files/posts-utf8.json'
 
-extensions = check_validation(path)
-if extensions == False:
-    pass
-else:
-    table = read_file(path, extensions)
-    print_table(table)
-
-# if __name__ == '__main__':
-#      path = sys.argv[1]
+if __name__ == '__main__':
+    path = sys.argv[1]
+    extensions = check_validation(path)
+    if extensions is False:
+        pass
+    else:
+        table = read_file(path, extensions)
+        print_table(table)

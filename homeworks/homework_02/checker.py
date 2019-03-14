@@ -2,6 +2,7 @@ import json
 import csv
 import os
 
+
 def check_encoding(path):
     encodings = ['utf-16', 'utf-8', 'cp1251']
     for i in encodings:
