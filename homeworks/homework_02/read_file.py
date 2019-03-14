@@ -1,8 +1,9 @@
 import json
 import csv
+from checker import check_encoding
 
-
-def read_file(path, encoding, extensions):
+def read_file(path, extensions):
+    encoding = check_encoding(path)
     table = []
     if extensions == 'tsv':
         tsv_file = open(path, encoding=encoding)
