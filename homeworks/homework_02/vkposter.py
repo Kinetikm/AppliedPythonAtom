@@ -16,7 +16,7 @@ class VKPoster:
         # списки с id пользователей, которые его прочитали, причем
         # на первом месте стоит создатель поста
         self.posts = {}
-        raise NotImplementedError
+
 
     def create_new_user(self, user_id):
         self.users.update({user_id: []})
