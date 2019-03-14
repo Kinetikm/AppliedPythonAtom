@@ -78,7 +78,7 @@ class MaxHeap(Heap):
                 self.length -= 1
                 self.heap[1], self.heap[self.last] = self.heap[self.last], \
                                                      self.heap[
-                                                         1]  # swap root with last element
+                                                         1]
                 self.last -= 1  # decrement length
                 self.heap.pop(
                     -1)  # pop the root that was moved to the last element
@@ -86,12 +86,12 @@ class MaxHeap(Heap):
                 if self.length <= 2:
                     if type(self.heap[1]) is list:
                         self.heap[1:] = sorted(self.heap[1:], reverse=True,
-                                           key=lambda x: x[
-                                               -1])
+                                               key=lambda x: x[
+                                                   -1])
                     else:
                         self.heap[1:] = sorted(self.heap[1:], reverse=True,
                                                key=lambda x: [x[
-                                                   0],x[1]])
+                                                                  0], x[1]])
                 else:
                     self.bubble_down()
             return maxx
