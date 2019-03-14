@@ -1,8 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 
-class Heap():
+class Heap:
 
     def __init__(self, array):
         self._heap = array[:]
@@ -11,8 +11,10 @@ class Heap():
     def sift_up(self, element_index):
         _list = self._heap
         parent = (element_index - 1) // 2
-        while element_index > 0 and comparator_d(_list[element_index], _list[parent]):
-            _list[element_index], _list[parent] = _list[parent], _list[element_index]
+        while element_index > 0 and comparator_d(_list[element_index],
+                _list[parent]):
+            (_list[element_index], _list[parent]) = (_list[parent],
+                    _list[element_index])
             element_index = parent
             parent = (element_index - 1) // 2
 
@@ -20,15 +22,16 @@ class Heap():
         left = 2 * i + 1
         right = 2 * i + 2
         largest = i
-        if left < len(self._heap) and \
-                comparator_d(self._heap[left], self._heap[largest]):
+        if left < len(self._heap) and comparator_d(self._heap[left],
+                self._heap[largest]):
             largest = left
 
-        if right < len(self._heap) and \
-                comparator_d(self._heap[right], self._heap[largest]):
+        if right < len(self._heap) and comparator_d(self._heap[right],
+                self._heap[largest]):
             largest = right
         if largest != i:
-            self._heap[i], self._heap[largest] = self._heap[largest], self._heap[i]
+            (self._heap[i], self._heap[largest]) = \
+                (self._heap[largest], self._heap[i])
             self.sift_down(largest)
 
     def add(self, elem_with_priority):
