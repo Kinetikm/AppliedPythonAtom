@@ -35,7 +35,7 @@ class VKPoster:
         :return: ничего
         '''
         if post_id not in self.readers:
-            self.readers[post_id]=set()
+            self.readers[post_id] = set()
         self.readers[post_id].add(user_id)
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
@@ -59,7 +59,8 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        lst = [self.posts[x] for x in self.followees[user_id] if x in self.posts]
+        lst = [self.posts[x] for x in self.followees[user_id] if
+               x in self.posts]
         return FastSortedListMerger.merge_first_k(lst, k)
 
     def get_most_popular_posts(self, k: int) -> list:
@@ -70,7 +71,7 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        k = len(self.readers) if k>len(self.readers) else k
+        k = len(self.readers) if k > len(self.readers) else k
         return [y[0] for y in sorted(self.readers.items(),
-                                            key=lambda x: [len(x[1]), x[0]],
-                                            reverse=True)[:k]]
+                                     key=lambda x: [len(x[1]), x[0]],
+                                     reverse=True)[:k]]

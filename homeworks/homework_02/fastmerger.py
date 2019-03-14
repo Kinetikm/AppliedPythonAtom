@@ -17,5 +17,3 @@ class FastSortedListMerger:
         max_heap = MaxHeap(list_of_lists)
         arr = [max_heap.extract_maximum() for i in range(k)]
         return [x for x in arr if x is not None]
-
-print(FastSortedListMerger.merge_first_k([[1, 2, 3], [3, 4, 5]], 4))
