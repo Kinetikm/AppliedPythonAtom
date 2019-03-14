@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from .heap import MaxHeap
+from heap import MaxHeap
 
 
 class FastSortedListMerger:
@@ -12,4 +12,5 @@ class FastSortedListMerger:
         принимает на вход список отсортированных непоубыванию списков и число
         на выходе выдает один список длинной k, отсортированных по убыванию
         '''
-        raise NotImplementedError
+        max_heap = MaxHeap(list_of_lists)
+        return [max_heap.extract_maximum() for i in range(k)]
