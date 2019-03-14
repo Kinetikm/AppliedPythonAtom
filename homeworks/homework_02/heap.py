@@ -78,7 +78,7 @@ class MaxHeap(Heap):
             if type(self.heap[1]) is not list or len(self.heap[1]) == 0:
                 self.length -= 1
                 self.heap[1], self.heap[self.last] = self.heap[self.last], \
-                                                self.heap[1]
+                    self.heap[1]
                 self.last -= 1  # decrement length
                 self.heap.pop(
                     -1)  # pop the root that was moved to the last element
