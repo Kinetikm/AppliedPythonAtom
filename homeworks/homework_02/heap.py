@@ -3,7 +3,6 @@
 
 
 class Heap:
-
     def __init__(self, array):
         self._heap = array[:]
         self.build_heap()
@@ -12,9 +11,9 @@ class Heap:
         _list = self._heap
         parent = (element_index - 1) // 2
         while element_index > 0 and comparator_d(_list[element_index],
-                _list[parent]):
+                                                 _list[parent]):
             (_list[element_index], _list[parent]) = (_list[parent],
-                    _list[element_index])
+                                                     _list[element_index])
             element_index = parent
             parent = (element_index - 1) // 2
 
@@ -23,11 +22,11 @@ class Heap:
         right = 2 * i + 2
         largest = i
         if left < len(self._heap) and comparator_d(self._heap[left],
-                self._heap[largest]):
+                                                   self._heap[largest]):
             largest = left
 
         if right < len(self._heap) and comparator_d(self._heap[right],
-                self._heap[largest]):
+                                                    self._heap[largest]):
             largest = right
         if largest != i:
             (self._heap[i], self._heap[largest]) = \
@@ -44,7 +43,6 @@ class Heap:
 
 
 class MaxHeap(Heap):
-
     def __init__(self, array):
         super().__init__(array)
 
