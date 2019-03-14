@@ -27,9 +27,7 @@ class VKPoster:
         if follower_user_id not in self.subs.keys():
             self.subs[follower_user_id] = [followee_user_id]
         else:
-            if followee_user_id not in self.subs[follower_user_id]:
-                self.subs[follower_user_id].append(
-                    followee_user_id)
+            self.subs[follower_user_id].append(followee_user_id)
 
     def get_recent_posts(self, user_id: int, k: int) -> list:
         new_list = []
