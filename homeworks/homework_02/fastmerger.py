@@ -12,22 +12,16 @@ class FastSortedListMerger:
         принимает на вход список отсортированных непоубыванию списков и число
         на выходе выдает один список длинной k, отсортированных по убыванию
         '''
-        max_list = []
-        _list = []
-
-        for i in range(len(list_of_lists)):
-            if (len(list_of_lists[i]) > 0):
-                _list.append((list_of_lists[i].pop(), i))
-
-        heap = MaxHeap(_list)
-
-        while (k > 0):
-            if (len(heap._heap) == 0):
-                break
-            max_list.append(heap.extract_maximum())
-            elem, list_index = max_list[-1]
-            if (len(list_of_lists[list_index]) > 0):
-                heap.add((list_of_lists[list_index].pop(), list_index))
-            k -= 1
-
-        return [elem[0] for elem in max_list]
+        _list = [i[:] for i in list_of_lists]
+        heap = MaxHeap([(j.pop(), i) for i, j in enumerate(_list)
+                       if len(j) > 0])
+        res = []
+        for i in range(k):
+            try:
+                inner = heap.extract_maximum()
+            except IndexError:
+                return res
+            res.append(inner[0])
+            if len(_list[inner[1]]) > 0:
+                heap.add((_list[inner[1]].pop(), inner[1]))
+        return res
