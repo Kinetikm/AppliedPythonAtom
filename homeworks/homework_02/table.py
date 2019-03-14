@@ -32,7 +32,6 @@ class WorkWithFile:
                 f = codecs.open(self.fn, encoding=enc, errors='strict')
                 for _ in f:
                     pass
-                break
             except UnicodeDecodeError:
                 continue
             except UnicodeError:
