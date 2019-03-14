@@ -1,5 +1,6 @@
 from MetaParser import TableRecord as tr
 
+
 class TsvParser(tr.MetaParser):
     def get_table(self):
 
@@ -11,7 +12,6 @@ class TsvParser(tr.MetaParser):
                 tb.add_record(tr.TableRecord(self.lineParts[i]))
             return tb
 
-
     def __init__(self):
         super().__init__()
         self.lineParts = []
@@ -19,21 +19,19 @@ class TsvParser(tr.MetaParser):
     def parse_file(self, f):
         for line in f.read().splitlines():
             parts = line.split('\t')
-            if len(parts)!=4:
-                self.valid=False
+            if len(parts) != 4:
+                self.valid = False
             else:
                 self.lineParts.append(parts)
 
     def open(self, filename):
         try:
-            with open(filename,"r", encoding="utf8") as f:
+            with open(filename, "r", encoding="utf8") as f:
                 self.parse_file(f)
         except UnicodeDecodeError:
-            self.valid=False
+            self.valid = False
 
         if not self.valid:
-            self.valid=True
-            with open(filename,"r", encoding="cp1251") as f:
+            self.valid = True
+            with open(filename, "r", encoding="cp1251") as f:
                 self.parse_file(f)
-
-

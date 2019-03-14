@@ -7,11 +7,10 @@ from homeworks.homework_02.fastmerger import FastSortedListMerger
 
 
 class VKPoster:
-
     def __init__(self):
-        self.posts=dict()
-        self.followees=dict()
-        self.readers=dict()
+        self.posts = dict()
+        self.followees = dict()
+        self.readers = dict()
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -21,11 +20,11 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        if not user_id in self.posts:
-            self.posts[user_id]=[post_id]
+        if user_id not in self.posts:
+            self.posts[user_id] = [post_id]
         else:
             self.posts[user_id].append(post_id)
-        self.readers[post_id]=set()
+        self.readers[post_id] = set()
 
     def user_read_post(self, user_id: int, post_id: int):
         '''
@@ -35,6 +34,8 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
+        if post_id not in self.readers:
+            self.readers[post_id]=set()
         self.readers[post_id].add(user_id)
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
@@ -45,12 +46,11 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        if not follower_user_id in self.followees:
-            self.followees[follower_user_id]=set()
+        if follower_user_id not in self.followees:
+            self.followees[follower_user_id] = set()
         self.followees[follower_user_id].add(followee_user_id)
 
-
-    def get_recent_posts(self, user_id: int, k: int)-> list:
+    def get_recent_posts(self, user_id: int, k: int) -> list:
         '''
         Метод который вызывается когда пользователь user_id
         запрашивает k свежих постов людей на которых он подписан.
@@ -59,7 +59,8 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        return FastSortedListMerger.merge_first_k([self.posts[x] for x in self.followees[user_id]],k)
+        lst = [self.posts[x] for x in self.followees[user_id] if x in self.posts]
+        return FastSortedListMerger.merge_first_k(lst, k)
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -69,4 +70,7 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        return sorted([y[0] for y in sorted(self.readers.items(),key=lambda x: [len(x[1]),x[0]], reverse=True)[:k]], reverse=True)
+        k = len(self.readers) if k>len(self.readers) else k
+        return [y[0] for y in sorted(self.readers.items(),
+                                            key=lambda x: [len(x[1]), x[0]],
+                                            reverse=True)[:k]]
