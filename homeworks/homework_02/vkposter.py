@@ -25,7 +25,7 @@ class VKPoster:
         if self.users.get(user_id) is None:
             self.create_new_user(user_id)
 
-        self.posts.update({post_id: []})
+        self.posts.update({post_id: [user_id]})
 
     def user_read_post(self, user_id: int, post_id: int):
         # проверка на существование данного поста в базе
@@ -66,7 +66,11 @@ class VKPoster:
         h = MaxHeap(help_list)
         i = 0
         while i < k:
-            result_list.append(h.extract_maximum()[1])
+            # проверяем, есть ли в куче еще элементы для извлечения
+            if h.main:
+                result_list.append(h.extract_maximum()[1])
+            else:
+                break
             i += 1
         return result_list
 
@@ -81,6 +85,10 @@ class VKPoster:
         # преобразуем полученный список в кучу
         h = MaxHeap(help_list)
         while i < k:
-            result_list.append(h.extract_maximum()[1])
+            # проверяем, есть ли в куче еще элементы для извлечения
+            if h.main:
+                result_list.append(h.extract_maximum()[1])
+            else:
+                break
             i += 1
         return result_list
