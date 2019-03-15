@@ -7,7 +7,7 @@ def advanced_calculator(input_string):
                 replace(" ", "")
             input_string = input_string.replace("--", "+").\
                 replace("++", "+")
-            input_string = input_string.replace("+-", "-").\
+            input_string = input_string.replace("+-", "-").\ 
                 replace("-+", "-")
             input_string = input_string.replace("(-", "(0-")
             input_string = input_string.replace("/-", "*(0-1)/").\
