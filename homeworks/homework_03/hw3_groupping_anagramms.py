@@ -3,24 +3,42 @@
 
 
 def groupping_anagramms(words):
-    """
-    Функция, которая группирует анаграммы.
-    Возвращаем массив, где элементом является массив с анаграмами.
-    Пример:  '''Аз есмь строка живу я мерой остр
-                За семь морей ростка я вижу рост
-                Я в мире сирота
-                Я в Риме Ариост'''.split()
-                ->
-                [
-                 ['Аз'], ['есмь', 'семь'],
-                 ['строка', 'ростка'], ['живу', 'вижу'],
-                 ['я', 'я'], ['мерой', 'морей'],
-                 ['остр)'], ['За'], ['рост'], ['Я', 'Я'],
-                 ['в', 'в'], ['мире'], ['сирота'],
-                 ['Риме'], ['Ариост']
-                ]
-    :param words: list of words (words in str format)
-    :return: list of lists of words
-    """
-    # TODO: реализовать функцию
-    raise NotImplementedError
+    if not words:
+        return []
+    i = 0
+    result = []
+    while i < len(words):
+        words[i] = [words[i], False]
+        i += 1
+    i = 0
+    while i < len(words):
+        if not words[i][1]: 
+            h1 = False
+            j = 0
+            help_string1 = words[i][0].lower()
+            while j < len(words):
+                help_string2 = words[j][0].lower()
+                if (not words[j][1] and j != i and 
+                    len(help_string1) == len(help_string2)):
+                    k = 0
+                    h2 = False
+                    while k < len(help_string2):
+                        if help_string1.find(help_string2[k]) == -1:
+                            h2 = True
+                            break
+                        k += 1
+                    if not h2:
+                        if not h1:
+                            result.append([words[j][0]])
+                        else:
+                            result[-1].append(words[j][0])
+                        h1 = True
+                        words[j][1] = True
+                j += 1
+            if not h1:
+                result.append([words[i][0]])
+            else:
+                result[-1].append(words[i][0])
+            words[i][1] = True
+        i += 1
+    return result
