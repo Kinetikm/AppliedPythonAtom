@@ -7,20 +7,28 @@ def groupping_anagramms(words):
         return []
     i = 0
     result = []
+    # каждому слову из изначального списка ставим в соответствие bool:
+    # True <=> анаграмма к слову найдена/доказано ее отсуствие
+    # False <=> иной случай
     while i < len(words):
         words[i] = [words[i], False]
         i += 1
     i = 0
     while i < len(words):
-        if not words[i][1]: 
+        # проверяем, не является ли слово анаграммой к уже пройденному
+        if not words[i][1]:
+            # h1 показывает, была ли найдена к слову хотя бы одна анаграмма
             h1 = False
             j = 0
-            help_string1 = words[i][0].lower()
+            help_string1 = words[i][0].lower()  # нижний регистр
             while j < len(words):
-                help_string2 = words[j][0].lower()
-                if (not words[j][1] and j != i and 
-                    len(help_string1) == len(help_string2)):
+                help_string2 = words[j][0].lower()  # нижний регистр
+                # сразу отсеиваем пройденные слова, само слово, а также
+                # уже проверенные слова
+                if (not words[j][1] and j != i and
+                   len(help_string1) == len(help_string2)):
                     k = 0
+                    # h2 показывает, найдено ли несовпадение букв
                     h2 = False
                     while k < len(help_string2):
                         if help_string1.find(help_string2[k]) == -1:

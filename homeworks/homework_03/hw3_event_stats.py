@@ -6,16 +6,24 @@ class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
+        # словарь, ключами которого являются id пользователей, а значениями -
+        # списки моментов времени, в которые было совершено действие
         self.inf = {}
 
     def register_event(self, user_id, time):
+        # проверяем, существует ли в базе данный пользователь
         if self.inf.get(user_id) is None:
             self.inf[user_id] = []
+        # добавляем момент времени
         self.inf[user_id].append(time)
 
     def query(self, count, time):
         result = 0
         for i in self.inf.keys():
+            # j_left - индекс первого момента времени > time - FIVE_MIN
+            # j_right - индекс последнего момента времени <= time
+            # тогда число элементов в соответствующем списке и есть количество
+            # действий, совершенных пользователем за заданный полуинтервал
             j_left, j_right = -1, -1
             j = len(self.inf[i]) - 1
             while j >= 0:
