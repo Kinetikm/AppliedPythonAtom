@@ -2,6 +2,9 @@
 # coding: utf-8
 
 
+from collections import defaultdict
+
+
 def groupping_anagramms(words):
     """
     Функция, которая группирует анаграммы.
@@ -22,5 +25,12 @@ def groupping_anagramms(words):
     :param words: list of words (words in str format)
     :return: list of lists of words
     """
-    # TODO: реализовать функцию
-    raise NotImplementedError
+    anagrams = defaultdict(list)
+
+    for word in words:
+        # сортировка (в нижнем регистре) и обратный сбор слова
+        # O(N * log N)
+        sorted_word = ''.join(sorted(word.lower()))
+        anagrams[sorted_word].append(word)
+
+    return list(anagrams.values())
