@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from collections import deque, Counter
+from collections import Counter
 
 
 class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        self.events = deque()
+        self.events = []
 
     def register_event(self, user_id, time):
-        self.events.appendleft((user_id, time))
+        self.events.append((user_id, time))
 
     def query(self, count, time):
         cnt_dict = Counter()
