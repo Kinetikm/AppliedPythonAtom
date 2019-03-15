@@ -84,6 +84,7 @@ class VKPoster:
             help_list.append((len(self.posts[i])-1, i))
         # преобразуем полученный список в кучу
         h = MaxHeap(help_list)
+        i = 0
         while i < k:
             # проверяем, есть ли в куче еще элементы для извлечения
             if h.main:
