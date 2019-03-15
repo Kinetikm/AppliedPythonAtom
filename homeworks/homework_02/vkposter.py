@@ -25,7 +25,12 @@ class VKPoster:
         if self.users.get(user_id) is None:
             self.create_new_user(user_id)
 
-        self.posts.update({post_id: [user_id]})
+        # пробуем найти id пользователя в списке тех, кто уже читал пост,
+        # чтобы убрать учет повторного прочтения
+        try:
+            self.posts[post_id].index(user_id)
+        except ValueError: # id не найден
+            self.posts[post_id].append(user_id)
 
     def user_read_post(self, user_id: int, post_id: int):
         # проверка на существование данного поста в базе
