@@ -6,27 +6,30 @@ class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.inf = {}
 
     def register_event(self, user_id, time):
-        """
-        Этот метод регистрирует событие активности пользователя.
-        :param user_id: идентификатор пользователя
-        :param time: время (timestamp)
-        :return: None
-        """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        if self.inf.get(user_id) is None:
+            self.inf[user_id] = []
+        self.inf[user_id].append(time)
 
     def query(self, count, time):
-        """
-        Этот метод отвечает на запросы.
-        Возвращает количество пользователей, которые за последние 5 минут
-        (на полуинтервале времени (time - 5 min, time]), совершили ровно count действий
-        :param count: количество действий
-        :param time: время для рассчета интервала
-        :return: activity_count: int
-        """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        result = 0
+        for i in self.inf.keys():
+            j_left, j_right = -1, -1
+            j = len(self.inf[i]) - 1
+            while j >= 0:
+                if self.inf[i][j] <= time:
+                    j_right = j
+                    break
+                j -= 1
+            j = 0
+            while j < len(self.inf[i]):
+                if self.inf[i][j] > time - TEventStats.FIVE_MIN:
+                    j_left = j
+                    break
+                j += 1
+            if j_left != -1 and j_right != -1:
+                if len(self.inf[i][j_left:j_right+1]) == count:
+                    result += 1
+        return result
