@@ -23,22 +23,21 @@ class HashMap:
         self.__el_num = 0
 
     def get(self, key, default_value=None):
-        for item in self.__buckets:
-            if item is not None:
-                for el in item:
-                    if el.key == key:
-                        return el.value
+        index = self._get_index(self._get_hash(key))
+        if self.__buckets[index] is not None:
+            for item in self.__buckets[index]:
+                if item.get_key() == key:
+                    return item.get_value()
         return default_value
 
     def put(self, key, value):
-        for bucket in self.__buckets:
-            if bucket is not None:
-                for item in bucket:
-                    if item.key == key:
-                        item.value = value
-                        return
-
         index = self._get_index(self._get_hash(key))
+        if self.__buckets[index] is not None:
+            for item in self.__buckets[index]:
+                if item.get_key() == key:
+                    item.value = value
+                    return
+
         self.__el_num += 1
         if self.__buckets[index] is None:
             self.__buckets[index] = [self.Entry(key, value)]
@@ -50,7 +49,8 @@ class HashMap:
     def __len__(self):
         return self.__el_num
 
-    def _get_hash(self, key):
+    @staticmethod
+    def _get_hash(key):
         return hash(key)
 
     def _get_index(self, hash_value):
@@ -68,8 +68,12 @@ class HashMap:
                 for item in el)
 
     def _resize(self):
-        self.__buckets += [None]*self.__size
+        self.__el_num = 0
+        items = self.items()
         self.__size *= 2
+        self.__buckets = [None]*self.__size
+        for item in items:
+            self.put(item[0], item[1])
 
     def __str__(self):
         res = 'buckets: {'
@@ -83,9 +87,9 @@ class HashMap:
         return res
 
     def __contains__(self, item):
-        for el in self.__buckets:
-            if el is not None:
-                for it in el:
-                    if it.key == item:
-                        return True
+        index = self._get_index(self._get_hash(item))
+        if self.__buckets[index] is not None:
+            for el in self.__buckets[index]:
+                if el.get_key() == item:
+                    return True
         return False
