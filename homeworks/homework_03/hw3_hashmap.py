@@ -45,7 +45,7 @@ class HashMap:
             if not(None in self.__buckets):
                 self._resize()
             return
-        self.__buckets[index].append(self.Entry(key,value))
+        self.__buckets[index].append(self.Entry(key, value))
 
     def __len__(self):
         return self.__el_num

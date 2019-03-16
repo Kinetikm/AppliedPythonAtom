@@ -13,4 +13,3 @@ def groupping_anagramms(words):
             res_dict[sorted_word].append(word)
 
     return list(res_dict.values())
-
