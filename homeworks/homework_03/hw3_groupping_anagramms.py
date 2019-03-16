@@ -24,7 +24,7 @@ def groupping_anagramms(words):
             while j < len(words):
                 help_string2 = words[j][0].lower()  # нижний регистр
                 # сразу отсеиваем пройденные слова, само слово, а также
-                # уже проверенные слова
+                # слова с другой длиной
                 if (not words[j][1] and j != i and
                    len(help_string1) == len(help_string2)):
                     k = 0
