@@ -23,6 +23,8 @@ class HashSet(HashMap):
         return super().values()
 
     def intersect(self, another_hashset):
-        # TODO метод, возвращающий новый HashSet
-        #  элементы - пересечение текущего и другого
-        raise NotImplementedError
+        res = HashSet()
+        for item in another_hashset.items():
+            if item.get_key() in self.keys():
+                res.put(item.get_key(), item.get_value())
+        return res
