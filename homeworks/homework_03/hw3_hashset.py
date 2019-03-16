@@ -26,4 +26,3 @@ class HashSet(HashMap):
         # TODO метод, возвращающий новый HashSet
         #  элементы - пересечение текущего и другого
         raise NotImplementedError
-
