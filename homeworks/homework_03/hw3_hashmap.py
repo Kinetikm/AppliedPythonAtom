@@ -3,8 +3,9 @@
 
 
 class HashMap:
-    fill_factor =  1/3
+    fill_factor = 1/3
     exp_coeff = 2
+
     class Entry:
         def __init__(self, key, value):
             self.inf = (key, value)
@@ -30,7 +31,7 @@ class HashMap:
             i += 1
 
     def get(self, key, default_value=None):
-        h = hash(key)%self.max_size
+        h = hash(key) % self.max_size
         i = 0
         while i < len(self.map[h]):
             if self.map[h][i].get_key() == key:
@@ -39,7 +40,7 @@ class HashMap:
         return default_value
 
     def put(self, key, value):
-        h = hash(key)%self.max_size
+        h = hash(key) % self.max_size
         element = self.Entry(key, value)
         if not self.map[h]:
             self.map[h].append(element)
