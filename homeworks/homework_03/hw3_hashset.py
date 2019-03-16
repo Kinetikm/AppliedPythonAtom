@@ -8,7 +8,7 @@ class HashSet(HashMap):
 
     # не увидел смысла переопределять __init__
     # (разве что ради переобозначения атрибута map)
- 
+
     def get(self, value):
         if self.map[hash(value) % self.max_size].count(value):
             return True
@@ -17,7 +17,7 @@ class HashSet(HashMap):
     def put(self, value):
         if not self.map[hash(value) % self.max_size].count(value):
             self.map[hash(value) % self.max_size].append(value)
- 
+
         # встает вопрос о необходимости расширения hashset
         # в случае ее присутствия необходимо переопределить метод _resize
 
