@@ -5,6 +5,8 @@ import copy
 
 
 def revert_linked_list(head):
+    if head is None:
+        return None
     # проверяем, присуствует ли хотя бы два элемента в списке
     if head.next_node is not None:
         # далее работаем с копиями объектов
