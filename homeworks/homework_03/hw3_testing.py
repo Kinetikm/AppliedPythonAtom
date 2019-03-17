@@ -2,11 +2,15 @@
 # coding: utf-8
 
 
+import os  # mkdir
+import shutil  # удаление папки с файлами
+
+
 class Requester:
-    '''
+    """
     Какой-то класс, который умеет делать запросы
      к удаленному серверу
-    '''
+    """
     def get(self, host, port, filename):
         return "Fail"
 
@@ -15,9 +19,9 @@ class Requester:
 
 
 class RemoteFileReader(Requester):
-    '''
+    """
     Класс для работы с файлами на удаленном сервере
-    '''
+    """
     def __init__(self, host, port):
         self._host = host
         self._port = port
@@ -30,10 +34,10 @@ class RemoteFileReader(Requester):
 
 
 class OrdinaryFileWorker(RemoteFileReader):
-    '''
+    """
     Класс, который работает как с локальными
      так и с удаленными файлами
-    '''
+    """
     def transfer_to_remote(self, filename):
         with open(filename, "r") as f:
             super().write_file(filename, f.readlines())
@@ -43,22 +47,56 @@ class OrdinaryFileWorker(RemoteFileReader):
             f.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
-    '''
+class MockRemoteFileReader(RemoteFileReader):
+    """
+    Mock класса для работы с файлами на удаленном сервере
+    """
+    MOCKED_READ_DIR = 'homeworks/homework_03/test_dir'
+    MOCKED_WRITE_DIR = 'tmpf'
+
+    def __init__(self):
+        """Создание объекта"""
+        if self.MOCKED_WRITE_DIR not in os.listdir("."):
+            os.mkdir(self.MOCKED_WRITE_DIR, mode=0o777)
+
+    def __del__(self):
+        """Удаление объекта"""
+        if self.MOCKED_WRITE_DIR in os.listdir("."):
+            shutil.rmtree(self.MOCKED_WRITE_DIR)
+
+    def read_file(self, filename):
+        filename = filename.replace(self.MOCKED_WRITE_DIR, self.MOCKED_READ_DIR)
+        with open(filename + ".tmp", "r") as f:
+            return f.read()
+
+    def write_file(self, filename, data):
+        filename = filename.replace(self.MOCKED_READ_DIR, self.MOCKED_WRITE_DIR)
+        with open(filename + ".tmp", mode='w') as f:
+            f.writelines(data)
+
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, MockRemoteFileReader):
+    """
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
+
       при transfer_to_remote считывал filename
      из локальной директории ./test_dir и сохранял filename.tmp
      в локальной директории ./tmpf
+
       при transfer_to_local считывал filename.tmp
      из локальной директории ./test_dir и сохранял в filename
      в локальной директории ./tmpf
+
       при удалении объекта директория ./tmp должна удаляться
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
-    '''
-    def __init__(self):
-        raise NotImplementedError
+    """
+    def transfer_to_remote(self, filename):
+        super().transfer_to_remote(self.MOCKED_READ_DIR + '/' + filename)
+
+    def transfer_to_local(self, filename):
+        super().transfer_to_local(self.MOCKED_WRITE_DIR + '/' + filename)
 
 
 class LLNode:
