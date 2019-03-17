@@ -34,14 +34,16 @@ class LRUCacheDecorator:
             cached = self.cache_data.get(args)
             if cached and \
                     (self.ttl is None or ms_cur_time() - cached[1] <= self.ttl):
-                # обновление в кэше
+                # обновление информации
                 self.cache_data[args] = (cached[0], ms_cur_time())
+                # перемешение вверх
+                self.cache_data.move_to_end(args, last=False)
                 return cached[0]
 
             # записи в кэше нет или устарела, вычисляем
             result = func(*args, **kwargs)
 
-            # вытесняем старую(LRU) запись если кэш заполнен
+            # вытесняем последнюю запись если кэш заполнен
             if self.size >= self.maxsize:
                 self.cache_data.popitem(last=True)
             else:
