@@ -3,10 +3,6 @@
 
 
 class HashMap:
-    '''
-    Давайте сделаем все объектненько,
-     поэтому внутри хешмапы у нас будет Entry
-    '''
     class Entry:
         def __init__(self, key, value):
             '''
@@ -14,69 +10,101 @@ class HashMap:
             :param key: ключ
             :param value: значение
             '''
+            self._key_ = key
+            self._value_ = value
 
         def get_key(self):
             # TODO возвращаем ключ
-            raise NotImplementedError
+            return self._key_
 
         def get_value(self):
             # TODO возвращаем значение
-            raise NotImplementedError
+            return self._value_
 
         def __eq__(self, other):
             # TODO реализовать функцию сравнения
-            raise NotImplementedError
+            if self._key_ == other._key_:
+                return True
+            else:
+                return False
 
     def __init__(self, bucket_num=64):
-        '''
-        Реализуем метод цепочек
-        :param bucket_num: число бакетов при инициализации
-        '''
-        raise NotImplementedError
+        self.table = [None] * bucket_num
 
     def get(self, key, default_value=None):
-        # TODO метод get, возвращающий значение,
-        #  если оно присутствует, иначе default_value
-        raise NotImplementedError
+        num = self._get_index(self._get_hash(key))
+        if self.table[num] is not None:
+            for item in self.table[num]:
+                if item.get_key() == key:
+                    return item.get_value()
+        return default_value
 
     def put(self, key, value):
-        # TODO метод put, кладет значение по ключу,
-        #  в случае, если ключ уже присутствует он его заменяет
-        raise NotImplementedError
+        num = self._get_index(self._get_hash(key))
+        if self.table[num] is None:
+            self.table[num] = [self.Entry(key, value)]
+            return
+        for item in self.table[num]:
+            if item.get_key() == key:
+                item._value_ = value
+                return
+        self.table[num].append(self.Entry(key, value))
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
-        raise NotImplementedError
+        sum = 0
+        for i in range(len(self.table)):
+            if self.table[i] is not None:
+                sum = sum + len(self.table[i])
+        return sum
 
     def _get_hash(self, key):
-        # TODO Вернуть хеш от ключа,
-        #  по которому он кладется в бакет
-        raise NotImplementedError
+        return hash(key)
 
     def _get_index(self, hash_value):
         # TODO По значению хеша вернуть индекс элемента в массиве
-        raise NotImplementedError
+        return hash_value % len(self.table)
 
     def values(self):
         # TODO Должен возвращать итератор значений
-        raise NotImplementedError
+        buffer = []
+        for item in self.table:
+            if item is not None:
+                for i in item:
+                    buffer.append(i.get_value())
+        return buffer
 
     def keys(self):
         # TODO Должен возвращать итератор ключей
-        raise NotImplementedError
+        buffer = []
+        for item in self.table:
+            if item is not None:
+                for i in item:
+                    buffer.append(i.get_key())
+        return buffer
 
     def items(self):
         # TODO Должен возвращать итератор пар ключ и значение (tuples)
-        raise NotImplementedError
+        buffer = []
+        for item in self.table:
+            if item is not None:
+                for i in item:
+                    buffer.append((i.get_key(), i.get_value()))
+        return buffer
 
     def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
-        raise NotImplementedError
+        self.table = self.table + [None] * len(self.table)
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
-        raise NotImplementedError
+        return "buckets: {}, items: {}".format(self.table, self.items())
 
     def __contains__(self, item):
         # TODO Метод проверяющий есть ли объект (через in)
-        raise NotImplementedError
+        for itemB in self.table:
+            if itemB is not None:
+                for i in itemB:
+                    if i._key_ == item:
+                        return True
+        return False

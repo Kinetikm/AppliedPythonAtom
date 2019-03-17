@@ -6,8 +6,7 @@ class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.events = {}
 
     def register_event(self, user_id, time):
         """
@@ -16,8 +15,10 @@ class TEventStats:
         :param time: время (timestamp)
         :return: None
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        if user_id in self.events.keys():
+            self.events[user_id].append(time)
+        else:
+            self.events[user_id] = [time]
 
     def query(self, count, time):
         """
@@ -28,5 +29,12 @@ class TEventStats:
         :param time: время для рассчета интервала
         :return: activity_count: int
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        activity_count = 0
+        for i in self.events.values():
+            quantity = 0
+            for j in i:
+                if time - self.FIVE_MIN < j and j <= time:
+                    quantity = quantity + 1
+            if quantity == count and quantity != 0:
+                activity_count = activity_count + 1
+        return activity_count
