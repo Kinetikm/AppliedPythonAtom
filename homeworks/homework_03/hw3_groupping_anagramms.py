@@ -23,4 +23,22 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
-    raise NotImplementedError
+    def isanag(a, b):
+        l1 = list(a.lower())
+        l2 = list(b.lower())
+        if len(l1) != len(l2):
+            return False
+        l1 = l1.sort()
+        l2 = l2.sort()
+        if l1 == l2:
+            return True
+        return False
+
+    lists = list()
+    for i in range(len(words)):
+        for j in range(i + 1, len(words)):
+            if isanag(words[i], words[j]):
+                l = list()
+                l.append(words[i])
+                l.append(words[j])
+    return lists
