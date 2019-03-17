@@ -181,5 +181,5 @@ class HashMap:
         for l in self.lists:
             spisok += list(l)
         for i in spisok:
-            if item == i.get_value() or item == i.get_key():
+            if item == i.get_key():
                 return True
