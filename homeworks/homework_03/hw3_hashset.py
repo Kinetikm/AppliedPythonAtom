@@ -29,7 +29,7 @@ class HashSet(HashMap):
         # TODO метод, возвращающий новый HashSet
         #  элементы - пересечение текущего и другого
         result_hashset = HashSet()
-        for i in super().items():
-            if i in another_hashset:
+        for i in another_hashset.values():
+            if i in self:
                 result_hashset.put(i)
         return result_hashset
