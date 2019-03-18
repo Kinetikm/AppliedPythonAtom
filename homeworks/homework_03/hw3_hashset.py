@@ -17,9 +17,9 @@ class HashSet(HashMap):
                 return True
         return False
 
-    def put(self, key, value):
+    def put(self, value):
         # TODO метод put, нужно переопределить данный метод
-        super().put(key, value)
+        super().put(super()._get_index(super()._get_hash(value)))
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
