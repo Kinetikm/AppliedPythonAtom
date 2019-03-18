@@ -11,11 +11,7 @@ class HashSet(HashMap):
 
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
-        other = self.Entry(key, key)
-        for i in self.__table[self._get_index(self._get_hash(key))]:
-            if i == other:
-                return True
-        return False
+        return True if key in self else default_value
 
     def put(self, value):
         # TODO метод put, нужно переопределить данный метод
