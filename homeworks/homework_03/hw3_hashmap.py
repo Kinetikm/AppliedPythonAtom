@@ -53,7 +53,7 @@ class HashMap:
         self.__table = [[] for i in range(self.__size)]
         self.__buckets = 0  # Количество заполненных ячеек
         # Процент заполненности таблицы.
-        self.__percent = self.__buckets / self.____size
+        self.__percent = self.__buckets / self.__size
 
     def get(self, key, default_value=None):
         # TODO метод get, возвращающий значение,
