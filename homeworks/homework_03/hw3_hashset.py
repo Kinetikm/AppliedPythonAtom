@@ -19,7 +19,7 @@ class HashSet(HashMap):
 
     def put(self, key, value):
         # TODO метод put, нужно переопределить данный метод
-        super().put(key, None)
+        super().put(key, value)
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
