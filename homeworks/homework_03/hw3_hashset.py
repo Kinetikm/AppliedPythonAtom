@@ -12,14 +12,14 @@ class HashSet(HashMap):
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
         other = self.Entry(key, key)
-        for i in self.bucket_list[self._get_index(self._get_hash(key))]:
+        for i in self.__table[self._get_index(self._get_hash(key))]:
             if i == other:
                 return True
         return False
 
     def put(self, value):
         # TODO метод put, нужно переопределить данный метод
-        super().put(super()._get_index(super()._get_hash(value)), value)
+        super().put(value, value)
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
