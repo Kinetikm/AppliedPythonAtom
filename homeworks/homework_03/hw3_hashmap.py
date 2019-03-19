@@ -7,6 +7,7 @@ class HashMap:
     Давайте сделаем все объектненько,
      поэтому внутри хешмапы у нас будет Entry
     '''
+
     class Entry:
         def __init__(self, key, value):
             '''
@@ -110,7 +111,7 @@ class HashMap:
             if lst:
                 for elem in lst:
                     item_list.append((elem.get_key(),
-                                          elem.get_value()))
+                                      elem.get_value()))
 
         return (item for item in item_list)
 
