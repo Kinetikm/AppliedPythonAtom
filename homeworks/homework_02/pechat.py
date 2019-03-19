@@ -6,7 +6,7 @@ def print_file(text: list):
     if len(text) < 1:
         raise ValueError("Формат не валиден")
     for i in text:
-        if len(i) != len(text[0]) or len(i) == 0:
+        if (len(i) != len(text[0])) or (len(i) == 0):
             raise ValueError("Формат не валиден")
     lengths = []
     for i in range(len(text[0])):
