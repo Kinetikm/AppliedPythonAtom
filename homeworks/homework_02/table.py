@@ -9,7 +9,6 @@ from proverka_kodirovki import *
 from json import *
 from tsv import *
 
-
 if __name__ == '__main__':
     filename = argv[1]
 
