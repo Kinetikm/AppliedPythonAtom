@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
 
 
 kodirovki = ['utf8', 'utf16', 'cp1251']

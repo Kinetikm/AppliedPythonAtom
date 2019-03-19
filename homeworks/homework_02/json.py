@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
-
 
 import json
 from pechat import *

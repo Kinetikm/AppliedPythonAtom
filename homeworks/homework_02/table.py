@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
 
 
 from sys import argv
@@ -14,7 +13,7 @@ if __name__ == '__main__':
 
     try:
         filename = argv[1]
-        enc = get_encoding(filename)
+        enc = get_kod(filename)
         try:
             print_json(filename, enc)
         except (ValueError, RuntimeError):
