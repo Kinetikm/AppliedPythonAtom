@@ -35,7 +35,7 @@ def groupping_anagramms(words):
             words_dict[tmp].append(word)
 
     for key, value in words_dict.items():
-        
+
         if len(value) > 1:
             result_list.append(value)
     return result_list
