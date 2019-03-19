@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-
 from sys import argv
 from proverka_kodirovki import *
 from json import *

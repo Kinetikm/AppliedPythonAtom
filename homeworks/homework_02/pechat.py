@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-
 def print_file(text: list):
     if len(text) < 1:
         raise ValueError("Формат не валиден")

@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-
 kodirovki = ['utf8', 'utf16', 'cp1251']
 
 
