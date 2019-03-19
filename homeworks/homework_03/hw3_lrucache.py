@@ -12,20 +12,27 @@ class _LRUCacheDecorator:
         self.clock = ttl
         self.max_size = maxsize
         self.func = function
-        self.last = None
 
     def __call__(self, *args, **kwargs):
-        print(self.cache)
-        if self.clock is not None and time.time() - self.init_time >= self.clock:
-            self.cache = {}
-        if self.cache.get(args) is None:
+        if self.cache.get(args) is None or\
+                (self.clock and time.time() - self.init_time >= self.clock):
             res = self.func(*args, **kwargs)
             if len(self.cache) == self.max_size:
-                del self.cache[self.last]
+                found = min(self.cache.items(), key=lambda el: el[1][1])
+                if found[1][1] != self.cache[self.last][1]:
+                    del self.cache[found[0]]
+                else:
+                    del self.cache[self.last]
+
+            if self.cache.get(args) is None:
+                self.cache[args] = [res, 1]
+            else:
+                self.cache[args][1] += 1
             self.last = args
-            self.cache[args] = res
             return res
-        return self.cache.get(args)
+
+        self.cache[args][1] += 1
+        return self.cache.get(args)[0]
 
 
 def LRUCacheDecorator(function=None, maxsize=10, ttl=10):
