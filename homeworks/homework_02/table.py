@@ -25,9 +25,3 @@ if __name__ == '__main__':
     except (ValueError, RuntimeError):
         print("Формат не валиден")
 
-
-# In[ ]:
-
-
-5/
-
