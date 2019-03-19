@@ -23,4 +23,19 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
-    raise NotImplementedError
+    # приходит массив слов
+    groupped_anagrams = []
+    for Word in words:
+        word = Word.lower()
+        letters = set(word)
+        for anagrams in groupped_anagrams:
+            for anagram in anagrams:
+                if(letters == set(anagram.lower())):
+                    anagrams.append(Word)
+                    Word = None
+                break
+            if Word is None:
+                break
+        if Word is not None:
+            groupped_anagrams.append([Word])
+    return groupped_anagrams
