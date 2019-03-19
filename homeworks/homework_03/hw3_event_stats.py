@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import collections
 
 
 class TEventStats:
@@ -7,7 +8,7 @@ class TEventStats:
 
     def __init__(self):
         # TODO: реализовать метод
-        raise NotImplementedError
+        self.activity = collections.deque()
 
     def register_event(self, user_id, time):
         """
@@ -17,7 +18,8 @@ class TEventStats:
         :return: None
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+
+        self.activity.appendleft((time, user_id))
 
     def query(self, count, time):
         """
@@ -29,4 +31,15 @@ class TEventStats:
         :return: activity_count: int
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+        activity_count = 0
+        time_dict = {}
+        for tmp in self.activity:
+            if time - self.FIVE_MIN < tmp[0] <= time:
+                if tmp[1] in time_dict:
+                    time_dict[tmp[1]] = time_dict.get(tmp[1]) + 1
+                else:
+                    time_dict[tmp[1]] = 1
+        for user, counts in time_dict.items():
+            if counts == count:
+                activity_count += 1
+        return activity_count
