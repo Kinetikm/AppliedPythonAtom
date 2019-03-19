@@ -7,7 +7,7 @@ from pechat import *
 
 
 def print_json(filename, enc):
-    text = []
+    text = list()
     with open(filename, encoding=enc) as file:
         try:
             sr = json.load(file)

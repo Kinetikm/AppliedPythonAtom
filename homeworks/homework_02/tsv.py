@@ -7,7 +7,7 @@ from pechat import *
 
 
 def print_tsv(filename, enc):
-    text = []
+    text = list()
     with open(filename, encoding=enc) as file:
         sr = csv.reader(file, delimiter="\t")
         for i in sr:
