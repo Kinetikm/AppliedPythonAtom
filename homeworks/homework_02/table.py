@@ -9,6 +9,7 @@ from proverka_kodirovki import *
 from json import *
 from tsv import *
 
+
 if __name__ == '__main__':
     filename = argv[1]
 
@@ -23,4 +24,10 @@ if __name__ == '__main__':
         print("Файл не валиден")
     except (ValueError, RuntimeError):
         print("Формат не валиден")
+
+
+# In[ ]:
+
+
+5/
 

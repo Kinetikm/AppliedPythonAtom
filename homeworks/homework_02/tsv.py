@@ -7,6 +7,7 @@
 import csv
 from pechat import *
 
+
 def print_tsv(filename, enc):
     text = []
     with open(filename, encoding=enc) as file:

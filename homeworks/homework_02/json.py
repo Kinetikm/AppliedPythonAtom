@@ -22,6 +22,6 @@ def print_json(filename, enc):
             raise ValueError("Формат не валиден")
         except IndexError:
             raise RuntimeError("Формат не валиден")
-            
+
     print_file(text)
 

@@ -6,6 +6,7 @@
 
 kodirovki = ['utf8', 'utf16', 'cp1251']
 
+
 def get_kod(filename):
     for kod in kodirovki:
         try:
