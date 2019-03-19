@@ -16,4 +16,3 @@ def get_kod(filename):
         except UnicodeError:
             continue
     print("Формат не валиден")
-

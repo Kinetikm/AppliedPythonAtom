@@ -27,4 +27,3 @@ def print_file(text: list):
             print(output.format(k, width=lengths[j]), end='')
         print("|")
     print("-" * (sum(lengths) + 5 * len(lengths) + 1))
-

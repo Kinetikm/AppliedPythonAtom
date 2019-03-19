@@ -24,4 +24,3 @@ def print_json(filename, enc):
             raise RuntimeError("Формат не валиден")
 
     print_file(text)
-

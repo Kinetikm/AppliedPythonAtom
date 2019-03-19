@@ -17,4 +17,3 @@ def print_tsv(filename, enc):
                 raise ValueError("Формат не валиден")
             text.append(i)
     print_file(text)
-
