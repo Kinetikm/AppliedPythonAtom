@@ -92,9 +92,17 @@ class HashMap:
                     buffer.append((i.get_key(), i.get_value()))
         return buffer
 
+    # def _resize(self):
+    #     # TODO Время от времени нужно ресайзить нашу хешмапу
+    #     self.table = self.table + [None] * len(self.table)
+
     def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
-        self.table = self.table + [None] * len(self.table)
+        NewTable = HashMap(2 * len(self.table))
+        for item in self.items():
+            NewTable.put(item[0], item[1])
+        self.table = NewTable
+        del NewTable
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
