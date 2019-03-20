@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+from collections import deque
+import time
 
 
 class LRUCacheDecorator:
@@ -10,10 +12,30 @@ class LRUCacheDecorator:
         :param ttl: время в млсек, через которое кеш
                     должен исчезнуть
         '''
-        # TODO инициализация декоратора
-        #  https://www.geeksforgeeks.org/class-as-decorator-in-python/
-        raise NotImplementedError
+        self.maxsize = maxsize
+        self.ttl = ttl
+        self.cache = deque()
+        self.timestart = time.time()
 
-    def __call__(self, *args, **kwargs):
+    def put(self, function, result):
+        if len(self.cache) < self.maxsize:
+            self.cache.appendleft({'args': function, 'result': result})
+        else:
+            self.cache.pop()
+            self.cache.appendleft({'args': function, 'result': result})
+
+    def __call__(self, function):
         # TODO вызов функции
-        raise NotImplementedError
+        def _def_(*args, **kwargs):
+            if self.ttl and time.time() - self.timestart > self.ttl:
+                self.cache = deque()
+            for i in self.cache:
+                if i['args'] == (args, kwargs):
+                    self.cache.remove(i)
+                    self.cache.appendleft(i)
+                    return i['result']
+            result = function(*args, **kwargs)
+            self.put((args, kwargs), result)
+            return result
+        self.timestart = time.time()
+        return _def_
