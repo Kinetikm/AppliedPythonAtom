@@ -8,5 +8,13 @@ def revert_linked_list(head):
     :param head: LLNode
     :return: new_head: LLNode
     """
-    # TODO: реализовать функцию
-    raise NotImplementedError
+    if head is None:
+        return None
+    prev = None
+    after = None
+    while head:
+        after = head.next_node
+        head.next_node = prev
+        prev = head
+        head = after
+    return prev
