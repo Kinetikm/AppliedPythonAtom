@@ -56,6 +56,7 @@ class MockFileWorker(RemoteFileReader):
         with open(filename + ".tmp", "w") as f:
             f.writelines(data)
 
+
 class MockOrdinaryFileWorker(OrdinaryFileWorker, MockFileWorker):
     '''
     Необходимо отнаследовать данный класс так, чтобы
@@ -71,7 +72,7 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, MockFileWorker):
      если еще не создана
     '''
     def __init__(self):
-        if not 'tmpf' in os.listdir():
+        if 'tmpf' not in os.listdir():
             os.mkdir('tmpf')
 
     def __del__(self):
@@ -79,7 +80,7 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, MockFileWorker):
             shutil.rmtree('tmpf')
 
     def transfer_to_remote(self, filename):
-        super().transfer_to_remote('homeworks/homework_03/test_dir/' + filename)
+        super().transfer_to_remote('homeworks/homework_03/test_dir/'+filename)
 
     def transfer_to_local(self, filename):
         super().transfer_to_local('tmpf/' + filename)
