@@ -23,4 +23,12 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
+    book = {}
+    for word in words:
+        sort_word = str(sorted(word.lower()))
+        if sort_word in book.keys():
+            book[sort_word].append(word)
+        else:
+            book[sort_word] = [word]
+    return list(book.values())
     raise NotImplementedError
