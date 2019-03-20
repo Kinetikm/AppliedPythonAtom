@@ -2,6 +2,7 @@
 # coding: utf-8
 from collections import Counter, deque
 
+
 class TEventStats:
     FIVE_MIN = 300
 
@@ -15,7 +16,7 @@ class TEventStats:
         :param time: время (timestamp)
         :return: None
         """
-        self._actions.append_left({'user': user_id, 'time': time})
+        self._actions.appendleft({'user': user_id, 'time': time})
 
     def query(self, count, time):
         """
