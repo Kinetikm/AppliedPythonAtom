@@ -5,7 +5,7 @@
 class VKPoster:
 
     def __init__(self):
-        self.subs = {}
+        self.subs = dict()
         self.post = dict()
         self.autor = dict()
 
