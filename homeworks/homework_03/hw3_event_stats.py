@@ -6,7 +6,7 @@ class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        self.users_dict = dict()
+        self.users_dict = {}
 
     def register_event(self, user_id, time):
         """
@@ -36,7 +36,7 @@ class TEventStats:
                 if (time >= action_time) and (action_time > time - self.FIVE_MIN):
                     count_actions_t += 1
             if count_actions_t == count:
-                if count != 0:
+                if count > 0:
                     activity_count += 1
                 else:
                     for action_time in self.users_dict.get(user):
