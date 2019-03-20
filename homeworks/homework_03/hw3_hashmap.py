@@ -60,7 +60,7 @@ class HashMap:
             for i in self.buckets[pos]:
                 if i.get_key() == key:
                     i.value = value
-        else
+        else:
             self.buckets[pos].append(self.Entry(key, value))
             self.EntryNumb += 1
         self._resize()
