@@ -43,20 +43,3 @@ class TEventStats:
                 activity_count += 1
 
         return activity_count
-
-        # raise NotImplementedError
-#
-# a=TEventStats()
-# a.register_event(122, 1552565081)
-# a.register_event(123, 1552565082)
-# a.register_event(124, 1552565092)
-# a.register_event(124, 1552565093)
-# a.register_event(123, 1552565100)
-# a.register_event(125, 1552565482)
-#
-# print(a.query(2, 1552565101))
-# print(a.query(1, 1552565493))
-# print(a.query(1, 1552565181))
-# print(a.query(0, 1552565181))
-
-

@@ -34,4 +34,3 @@ def groupping_anagramms(words):
             anagrams.append([i])
 
     return anagrams
-
