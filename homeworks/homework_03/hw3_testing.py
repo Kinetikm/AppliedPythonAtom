@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
+
 
 class Requester:
-    '''
+    """
     Какой-то класс, который умеет делать запросы
      к удаленному серверу
-    '''
+    """
     def get(self, host, port, filename):
         return "Fail"
 
@@ -15,9 +17,9 @@ class Requester:
 
 
 class RemoteFileReader(Requester):
-    '''
+    """
     Класс для работы с файлами на удаленном сервере
-    '''
+    """
     def __init__(self, host, port):
         self._host = host
         self._port = port
@@ -30,10 +32,10 @@ class RemoteFileReader(Requester):
 
 
 class OrdinaryFileWorker(RemoteFileReader):
-    '''
+    """
     Класс, который работает как с локальными
      так и с удаленными файлами
-    '''
+    """
     def transfer_to_remote(self, filename):
         with open(filename, "r") as f:
             super().write_file(filename, f.readlines())
@@ -44,7 +46,7 @@ class OrdinaryFileWorker(RemoteFileReader):
 
 
 class MockOrdinaryFileWorker(OrdinaryFileWorker):
-    '''
+    """
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
       при transfer_to_remote считывал filename
@@ -56,9 +58,49 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
       при удалении объекта директория ./tmp должна удаляться
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
-    '''
+    """
+
     def __init__(self):
-        raise NotImplementedError
+        self.tst_dir = './homeworks/homework_03/test_dir'
+        self.tmpf_dir = './tmpf'
+
+        if os.path.exists(self.tmpf_dir):
+            self.__del_tmpf()
+        os.makedirs(self.tmpf_dir)
+
+    def __del_tmpf(self):
+        # рекурсивно удаляем все содежимое
+        for f in os.listdir(self.tmpf_dir):
+            os.remove(self.tmpf_dir + '/' + f)
+        # удаление пустой
+        os.rmdir(self.tmpf_dir)
+
+    def transfer_to_remote(self, filename):
+        # считывает filename из ./test_dir
+        # сохраняет filename.tmp в ./tmpf
+        try:
+            with open(self.tst_dir + '/' + filename, 'r') as fr:
+                with open(self.tmpf_dir + '/' + filename + '.tmp', 'w') as fw:
+                    for line in fr:
+                        fw.write(line)
+
+        except FileNotFoundError:
+            return
+
+    def transfer_to_local(self, filename):
+        # считывает filename.tmp из ./test_dir
+        # сохраняет в filename в ./tmpf
+        try:
+            with open(self.tst_dir + '/' + filename + '.tmp', 'r') as fr:
+                with open(self.tmpf_dir + '/' + filename, 'w') as fw:
+                    for line in fr:
+                        fw.write(line)
+        except FileNotFoundError:
+            return
+
+    def __del__(self):
+        if os.path.exists(self.tmpf_dir):
+            self.__del_tmpf()
 
 
 class LLNode:
