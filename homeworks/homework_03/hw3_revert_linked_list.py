@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def revert_linked_list(head):
     """
     A -> B -> C should become: C -> B -> A
@@ -8,14 +9,14 @@ def revert_linked_list(head):
     :return: new_head: LLNode
     """
     # TODO: реализовать функцию
-    #raise NotImplementedError
-    new_head=None
-    while head != None:
+    # raise NotImplementedError
+    new_head = None
+    while head is not None:
         print(head.value)
-        tmp=head
-        head=tmp.next_node
-        tmp.next_node=new_head
-        new_head=tmp
+        tmp = head
+        head = tmp.next_node
+        tmp.next_node = new_head
+        new_head = tmp
     return new_head
 
 # class Node:

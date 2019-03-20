@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 import time
+import copy
+from collections import deque, Counter
+
 
 class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
         # TODO: реализовать метод
-        #raise NotImplementedError
-        self.log={}
+        # raise NotImplementedError
+        self.log = {}
 
     def register_event(self, user_id, time):
         """
@@ -18,14 +21,12 @@ class TEventStats:
         :return: None
         """
         # TODO: реализовать метод
-        #raise NotImplementedError
-        print('register: '+str(user_id)+' '+str(time))
+        # raise NotImplementedError
         if self.log.get(user_id) is None:
-            self.log[user_id]=[time]
+            self.log[user_id] = [time]
         else:
             self.log[user_id].append(time)
-            self.log[user_id]=sorted(self.log[user_id])
-
+            self.log[user_id] = sorted(self.log[user_id])
 
     def query(self, count, time):
         """
@@ -38,34 +39,17 @@ class TEventStats:
         """
         # TODO: реализовать метод
         # raise NotImplementedError
-        print('query: '+str(count)+' '+str(time))
-        print(time- self.FIVE_MIN)
-        keys=self.log.keys()
-        log=self.log
+        keys = self.log.keys()
+        log = copy.deepcopy(self.log)
         if count != 0:
             for usr in keys:
-                while len(log[usr])>0 and log[usr][0] < time - self.FIVE_MIN:
+                while len(
+                        log[usr]) > 0 and log[usr][0] not in range(
+                        time - self.FIVE_MIN,
+                        time):
                     log[usr].pop(0)
-                # for i in range(len(self.log[usr])):
-                #     if i>len(self.log[usr]):
-                #             break
-                #     if self.log[usr][i] < time - self.FIVE_MIN:
-                #         self.log[usr].pop(i)         
         cnt = 0
         for usr in keys:
-            if len(log[usr])==count:
-                cnt+=1
+            if len(log[usr]) == count:
+                cnt += 1
         return cnt
-
-
-a=TEventStats()
-a.register_event(122, 1552565081)
-a.register_event(123, 1552565082)
-a.register_event(124, 1552565092)
-a.register_event(124, 1552565093)
-a.register_event(123, 1552565100)
-a.register_event(125, 1552565482)
-print(a.query(2, 1552565101))
-print(a.query(1, 1552565493))
-print(a.query(1, 1552565181))
-print(a.query(0, 1552565181))

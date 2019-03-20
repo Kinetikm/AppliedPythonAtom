@@ -24,7 +24,7 @@ class HashMap:
             return self.value
 
         def __eq__(self, other):
-            return self.value == other
+            return self.key == other
 
     def __init__(self, bucket_num=64):
         '''
@@ -44,7 +44,6 @@ class HashMap:
             for entry in self.map[key_hash]:
                 if entry.get_key() == key:
                     return entry.get_value()
-
         return default_value
 
     def put(self, key, value):
@@ -53,6 +52,9 @@ class HashMap:
         temp_hash = self._get_hash(key)
         key_hash = self._get_index(temp_hash)
         key_value = self.Entry(key, value)
+
+        if self.__len__ == self.size:
+            self._resize()
 
         if self.map[key_hash] is None:
             self.map[key_hash] = list([key_value])
@@ -71,19 +73,15 @@ class HashMap:
             if entry is not None:
                 if len(entry) > 1:
                     for i in entry:
-                        counter+=1
+                        counter += 1
                 else:
-                    counter+=1
+                    counter += 1
         return counter
 
     def _get_hash(self, key):
         # TODO Вернуть хеш от ключа,
         #  по которому он кладется в бакет
-        hash_value = 0
-        for char in str(key):
-            hash_value += ord(char)
-
-        return hash_value
+        return hash(key)
 
     def _get_index(self, hash_value):
         # TODO По значению хеша вернуть индекс элемента в массиве
@@ -91,37 +89,50 @@ class HashMap:
 
     def values(self):
         # TODO Должен возвращать итератор значений
-        raise NotImplementedError
+        # raise NotImplementedError
+        vals = []
+        for i in self.map:
+            if i is not None:
+                for entry in i:
+                    vals.append(entry.get_value())
+        return vals
 
     def keys(self):
         # TODO Должен возвращать итератор ключей
-        raise NotImplementedError
+        # raise NotImplementedError
+        vals = []
+        for i in self.map:
+            if i is not None:
+                for entry in i:
+                    vals.append(entry.get_key())
+        return vals
 
     def items(self):
         # TODO Должен возвращать итератор пар ключ и значение (tuples)
-        raise NotImplementedError
+        # raise NotImplementedError
+        vals = []
+        for i in self.map:
+            if i is not None:
+                for entry in i:
+                    val = (entry.get_key(), entry.get_value())
+                    vals.append(val)
+        return vals
 
     def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
-        raise NotImplementedError
+        # raise NotImplementedError
+        add = [None] * self.size
+        self.map.extend(add)
+        self.size = self.size * 2
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
-        raise NotImplementedError
+        # raise NotImplementedError
+        # vals = self.items()
+        # return ("{"+', '.join("{0}: {1}".format(i,j) for i, j in vals) +'}')
+        return "buckets: {}, items: {}".format(self.size, self.__len__())
 
     def __contains__(self, item):
         # TODO Метод проверяющий есть ли объект (через in)
-        raise NotImplementedError
-
-
-a = HashMap()
-a.put('bob', 4)
-a.put('a', 3)
-a.put('bbo', 2)
-a.put('zuy', 19)
-a.put('a', 3)
-
-print(a.map)
-
-print(a.get('bob'))
-print(len(a))
+        # raise NotImplementedError
+        return item in self.keys()

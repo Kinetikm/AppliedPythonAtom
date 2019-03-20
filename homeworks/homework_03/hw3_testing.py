@@ -1,4 +1,4 @@
-    #!/usr/bin/env python
+#!/usr/bin/env python
 # coding: utf-8
 
 
@@ -7,6 +7,7 @@ class Requester:
     Какой-то класс, который умеет делать запросы
      к удаленному серверу
     '''
+
     def get(self, host, port, filename):
         return "Fail"
 
@@ -18,6 +19,7 @@ class RemoteFileReader(Requester):
     '''
     Класс для работы с файлами на удаленном сервере
     '''
+
     def __init__(self, host, port):
         self._host = host
         self._port = port
@@ -34,6 +36,7 @@ class OrdinaryFileWorker(RemoteFileReader):
     Класс, который работает как с локальными
      так и с удаленными файлами
     '''
+
     def transfer_to_remote(self, filename):
         with open(filename, "r") as f:
             super().write_file(filename, f.readlines())
@@ -57,6 +60,7 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
+
     def __init__(self):
         raise NotImplementedError
 
