@@ -2,6 +2,7 @@
 # coding: utf-8
 from collections import defaultdict
 
+
 def groupping_anagramms(words):
     """
     Функция, которая группирует анаграммы.
