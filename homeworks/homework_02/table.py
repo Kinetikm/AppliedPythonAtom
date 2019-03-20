@@ -1,16 +1,12 @@
 import sys
 
-from checker import *
-from read_file import read_file
-from print_table import print_table
+from print_table import *
 
-# path = 'files/posts-utf8.json'
+# path = 'files/posts-cp1251.json'
 
 if __name__ == '__main__':
-    path = sys.argv[1]
-    extensions = check_validation(path)
-    if extensions is False:
-        pass
-    else:
-        table = read_file(path, extensions)
-        print_table(table)
+    try:
+        filename = sys.argv[1]
+        print_file(filename)
+    except(IndexError, AssertionError):
+        print('Формат не валиден')

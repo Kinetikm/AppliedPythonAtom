@@ -27,9 +27,12 @@ def check_encoding(path):
 def check_file(file):
     temp = []
     for i in file:
+        if len(i) == 0:
+            return False
         temp.append(i)
+    size = len(temp[0])
     for i in temp:
-        if len(i) != len(temp[0]):
+        if len(i) != size:
             return False
     return True
 
@@ -38,25 +41,28 @@ def check_validation(path):
     if os.path.isfile(path) is False:
         print('Файл не валиден')
         return False
-
-    encoding = check_encoding(path)
-    try:
-        with open(path, encoding=encoding) as json_file:
-            json_reader = json.load(json_file)
-            if json_reader:
-                return 'json'
-    except json.decoder.JSONDecodeError:
+    else:
+        encoding = check_encoding(path)
         try:
-            with open(path, encoding=encoding) as tsv_file:
-                tsv_reader = csv.reader(tsv_file, delimiter="\t")
-                if tsv_reader and (check_file(tsv_reader) is True):
-                    return 'tsv'
-                else:
-                    print('Формат не валиден')
-                    return False
-        except tsv.decoder.TSVDecodeError:
-            print('Формат не валиден')
-            return False
+            with open(path, encoding=encoding) as json_file:
+                json_reader = json.load(json_file)
+                json_file.close()
+                return 'json'
+        except BaseException:
+            try:
+                with open(path, encoding=encoding) as tsv_file:
+                    tsv_reader = csv.reader(tsv_file, delimiter="\t")
+                    if check_file(tsv_reader) is False:
+                        print('Формат не валиден')
+                        tsv_file.close()
+                        return False
+                    else:
+                        tsv_file.close()
+                        return 'tsv'
+            except BaseException:
+                print('Формат не валиден')
+                tsv_file.close()
+                return False
 
 
 # def check_validation(path, encoding):
