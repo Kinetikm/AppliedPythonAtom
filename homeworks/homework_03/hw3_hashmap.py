@@ -37,7 +37,7 @@ class HashMap:
         '''
         self.buckets = bucket_num * [None]
         self.EntryNumb = 0
-        self.occupancy = len(self) / len(self.buckets)
+        self.occupancy = self.EntryNumb / bucket_num
 
     def get(self, key, default_value=None):
         # TODO метод get, возвращающий значение,
@@ -63,7 +63,7 @@ class HashMap:
         else:
             self.buckets[pos].append(self.Entry(key, value))
             self.EntryNumb += 1
-        self._resize()
+        self.occupancy = self.EntryNumb / len(self.buckets)
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
@@ -80,13 +80,13 @@ class HashMap:
 
     def values(self):
         # TODO Должен возвращать итератор значений
-        return [j.key for i in self.buckets if i is not None
+        return [j.value for i in self.buckets if i is not None
                 for j in i]
 
     def keys(self):
         # TODO Должен возвращать итератор ключей
-        return [(j.key, j.value) for i in self.buckets
-                if i is not None for j in i]
+        return [j.key for i in self.buckets if i is not None
+                for j in i]
 
     def items(self):
         # TODO Должен возвращать итератор пар ключ и значение (tuples)
@@ -95,9 +95,7 @@ class HashMap:
 
     def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
-        self.occupancy = len(self) / len(self.buckets)
-        if self.occupancy > 2/3:
-            self.buckets += (len(self.buckets) // 2) * [None]
+        self.buckets += (len(self.buckets) // 2) * [None]
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
