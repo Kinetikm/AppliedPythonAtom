@@ -30,7 +30,7 @@ class HashMap:
             equal = self.key == other.key
             return equal
 
-    def __init__(self, buckets_num=64):
+    def __init__(self, bucket_num=64):
         '''
         Реализуем метод цепочек
         :param buckets_num: число бакетов при инициализации
