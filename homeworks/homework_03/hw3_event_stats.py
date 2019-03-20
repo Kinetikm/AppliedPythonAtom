@@ -18,7 +18,7 @@ class TEventStats:
         if self.users_dict.get(user_id):
             self.users_dict[user_id] = time
         else:
-            self.users_dict[user_id] = time
+            self.users_dict[user_id] = [time]
 
     def query(self, count, time):
         """
