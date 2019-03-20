@@ -22,7 +22,7 @@ def groupping_anagramms(words):
     :param words: list of words (words in str format)
     :return: list of lists of words
     """
-     _list = {}
+    _list = {}
     for word in words:
         sorted_word  = ''.join(sorted(word.lower()))
         if sorted_word  not in _list.keys():
