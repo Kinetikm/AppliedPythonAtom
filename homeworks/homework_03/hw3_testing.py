@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
+import shutil
 
 
 class Requester:
@@ -58,7 +60,22 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
      если еще не создана
     '''
     def __init__(self):
-        raise NotImplementedError
+        if not os.path.exists('tmpf'):
+            os.makedirs('tmpf')
+
+    def __del__(self):
+        if 'tmpf' in os.listdir('.'):
+            shutil.rmtree('tmpf')
+
+    def transfer_to_local(self, filename):
+        with open('./homeworks/homework_03/test_dir/' + filename + '.tmp') as f:
+            with open('./tmpf/' + filename, 'w') as f1:
+                f1.writelines(f.read())
+
+    def transfer_to_remote(self, filename):
+        with open('./homeworks/homework_03/test_dir/' + filename, 'r') as f:
+            with open('./tmpf/' + filename + '.tmp', 'w') as f1:
+                f1.writelines(f.read())
 
 
 class LLNode:
