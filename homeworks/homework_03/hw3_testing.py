@@ -84,10 +84,10 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
      если еще не создана
     '''
     def transfer_to_remote(self, filename):
-        super().transfer_to_remote(self.MOCKED_READ_DIR + '/' + filename)
+        super().transfer_to_remote(self.TEST_READ_DIR + '/' + filename)
 
     def transfer_to_local(self, filename):
-        super().transfer_to_local(self.MOCKED_WRITE_DIR + '/' + filename)
+        super().transfer_to_local(self.TEST_WRITE_DIR + '/' + filename)
 
 
 class LLNode:
