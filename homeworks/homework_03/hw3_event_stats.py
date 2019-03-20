@@ -6,7 +6,7 @@ class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        self.users_dict = dict()
+        self.users_dict = {}
 
     def register_event(self, user_id, time):
         """
@@ -16,9 +16,9 @@ class TEventStats:
         :return: None
         """
         if self.users_dict.get(user_id):
-            self.users_dict[user_id] = time
+            self.users_dict[user_id].append(time)
         else:
-            self.users_dict[user_id] = time
+            self.users_dict[user_id] = [time]
 
     def query(self, count, time):
         """
