@@ -32,4 +32,4 @@ class TEventStats:
             if time - self.FIVE_MIN < event['time'] <= time:
                 event_count[event['user']] += 1
 
-        return list(event_count.values()).count(event_count)
+        return list(event_count.values()).count(count)
