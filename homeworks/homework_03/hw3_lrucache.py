@@ -17,12 +17,11 @@ class LRUCacheDecorator:
         self.size = 0
         self.cached = OrderedDict()
     def __call__(self, func):
-
         def wrapper(*args, **kwargs):
             cached = self.cached.get(args)
             if cached and \
-                    (self.ttl is None or int(round(time() * 1000)) - cached[1] <= self.ttl):
-                self.cached[args] = (cached[0], int(round(time() * 1000)))
+                    (self.ttl is None or int(round(time.time() * 1000)) - cached[1] <= self.ttl):
+                self.cached[args] = (cached[0], int(round(time.time() * 1000)))
                 self.cached.move_to_end(args, last=False)
                 return cached[0]
             result = func(*args, **kwargs)
@@ -30,7 +29,7 @@ class LRUCacheDecorator:
                 self.cached.popitem(last=True)
             else:
                 self.size += 1
-            self.cached[args] = (result, int(round(time() * 1000)))
+            self.cached[args] = (result, int(round(time.time() * 1000)))
             return result
 
         return wrapper
