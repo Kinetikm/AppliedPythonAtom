@@ -16,7 +16,7 @@ class TEventStats:
         :return: None
         """
         if self.users_dict.get(user_id):
-            self.users_dict[user_id] = time
+            self.users_dict[user_id].append(time)
         else:
             self.users_dict[user_id] = [time]
 
