@@ -63,7 +63,7 @@ class HashMap:
         else:
             self.buckets[pos].append(self.Entry(key, value))
             self.EntryNumb += 1
-        self.occupancy = self.EntryNumb / len(self.buckets)
+        self._resize()
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
@@ -95,7 +95,9 @@ class HashMap:
 
     def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
-        self.buckets += (len(self.buckets) // 2) * [None]
+        self.occupancy = self.EntryNumb / len(self.buckets)
+        if self.occupancy > 2/3:
+            self.buckets += (len(self.buckets) // 2) * [None]
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
