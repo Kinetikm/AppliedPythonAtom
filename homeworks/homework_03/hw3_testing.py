@@ -44,11 +44,22 @@ class OrdinaryFileWorker(RemoteFileReader):
             super().write_file(filename, f.readlines())
 
     def transfer_to_local(self, filename):
-        with open(filename, "w") as f:
+        with open(filename, 'w') as f:
             f.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
+class InheritedClass(RemoteFileReader):
+
+    def write_file(self, filename, data):
+        with open('./tmpf/' + os.path.basename(filename) + '.tmp', 'w') as f:
+            f.writelines(data)
+
+    def read_file(self, filename):
+        with open('homeworks/homework_03/test_dir/' + os.path.basename(filename) + '.tmp', 'r') as f:
+            return f.read()
+
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, InheritedClass):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -75,15 +86,11 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
         except FileNotFoundError:
             pass
 
-    def transfer_to_local(self, filename):
-        with open("homeworks/homework_03/test_dir/" + filename + '.tmp', 'r') as f1:
-            with open("./tmpf/" + filename, 'w') as f2:
-                f2.writelines(f1.read())
-
     def transfer_to_remote(self, filename):
-        with open('homeworks/homework_03/test_dir/' + filename, 'r') as f1:
-            with open('./tmpf/' + filename + '.tmp', 'w') as f2:
-                f2.writelines(f1.read())
+        super().transfer_to_remote('homeworks/homework_03/test_dir/' + filename)
+
+    def transfer_to_local(self, filename):
+        super().transfer_to_local('./tmpf/' + filename)
 
 
 class LLNode:
