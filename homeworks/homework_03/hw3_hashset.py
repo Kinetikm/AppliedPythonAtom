@@ -25,4 +25,4 @@ class HashSet(HashMap):
         for item in united_values:
             if item in another_hashset.values() and item in self.values():
                 new_HashSet.put(item)
-        return new_HashSet
+        return new_HadhSet
