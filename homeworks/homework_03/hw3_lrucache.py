@@ -16,6 +16,7 @@ class LRUCacheDecorator:
         self.ttl = ttl
         self.size = 0
         self.cached = OrderedDict()
+        
     def __call__(self, func):
         def wrapper(*args, **kwargs):
             cached = self.cached.get(args)
