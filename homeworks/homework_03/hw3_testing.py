@@ -56,12 +56,12 @@ class LocalFileWorker(RemoteFileReader):
 
     def read_file(self, filename):
         filename = filename.replace(self.TEST_WRITE_DIR, self.TEST_READ_DIR)
-        with open(filename + ".tmp", "r") as f:
+        with open(f"{filename}.tmp", "r") as f:
             return f.read()
 
     def write_file(self, filename, data):
         filename = filename.replace(self.TEST_READ_DIR, self.TEST_WRITE_DIR)
-        with open(filename + ".tmp", mode='w') as f:
+        with open(f"{filename}.tmp", mode='w') as f:
             f.writelines(data)
 
     def __del__(self):
@@ -84,10 +84,10 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
      если еще не создана
     '''
     def transfer_to_remote(self, filename):
-        super().transfer_to_remote(self.TEST_READ_DIR + '/' + filename)
+        super().transfer_to_remote(f'{self.TEST_READ_DIR}/{filename}')
 
     def transfer_to_local(self, filename):
-        super().transfer_to_local(self.TEST_WRITE_DIR + '/' + filename)
+        super().transfer_to_local(f'{self.TEST_WRITE_DIR}/{filename}')
 
 
 class LLNode:
