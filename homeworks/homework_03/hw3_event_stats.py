@@ -2,7 +2,6 @@
 # coding: utf-8
 import time
 import copy
-from collections import deque, Counter
 
 
 class TEventStats:

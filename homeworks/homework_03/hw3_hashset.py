@@ -40,7 +40,8 @@ class HashSet(HashMap):
         ret = HashSet()
         val = self.values()
         val2 = another_hashset.values()
-        val.extend(val2)
+        # val.extend(val2)
         for i in val:
-            ret.put(i)
+            if i in val2:
+                ret.put(i)
         return ret
