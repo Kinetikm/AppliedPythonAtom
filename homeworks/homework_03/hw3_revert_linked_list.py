@@ -17,4 +17,3 @@ def revert_linked_list(head):
         b = head
         head = a
     return b
-

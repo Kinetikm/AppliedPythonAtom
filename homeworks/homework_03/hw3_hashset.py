@@ -20,9 +20,10 @@ class HashSet(HashMap):
     return super().keys()
 
     def intersect(self, another_hashset):
+        raise NotImplementedError
         new_HashSet = HashSet()
         united_values = self.values() + another_hashset.values()
         for item in united_values:
             if item in another_hashset.values() and item in self.values():
                 new_HashSet.put(item)
-        return new_HadhSet
+        return new_HashSet

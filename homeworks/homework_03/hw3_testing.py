@@ -34,7 +34,7 @@ class OrdinaryFileWorker(RemoteFileReader):
             super().write_file(filename, f.readlines())
 
     def transfer_to_local(self, filename):
-     with open(filename, "w") as f:
+        with open(filename, "w") as f:
             f.write(super().read_file(filename))
 
 
@@ -52,7 +52,7 @@ class LocalFileWorker(RemoteFileReader):
 
     def write_file(self, filename, data):
         with open(self.TMPF + '/' + os.path.basename(filename) + '.tmp', 'w') as f:
-            d.writelines(data)
+            f.writelines(data)
 
     def __del__(self):
         if self.TMPF in os.listdir("."):
@@ -70,7 +70,7 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
 
 class LLNode:
     def __init__(self, value, next_node):
-        self.value ==value
+        self.value = value
         self.next_node = next_node
 
     def __repr__(self):
