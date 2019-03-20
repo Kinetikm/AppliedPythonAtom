@@ -33,9 +33,9 @@ class HashMap:
     def __init__(self, bucket_num=64):
         '''
         Реализуем метод цепочек
-        :param buckets_num: число бакетов при инициализации
+        :param bucket_num: число бакетов при инициализации
         '''
-        self.buckets = buckets_num * [None]
+        self.buckets = bucket_num * [None]
         self.EntryNumb = 0
         self.occupancy = len(self) / len(self.buckets)
 
