@@ -32,7 +32,7 @@ class HashMap:
         x = self._get_hash(key)
         y = self._get_index(x)
         if self.hash_bucket[y] is not None:
-            for i in self.hash_bucket(y):
+            for i in self.hash_bucket[y]:
                 if i.get_key() == key:
                     return i.get_value()
         return default_value
@@ -60,7 +60,7 @@ class HashMap:
 
     def _get_hash(self, key):
         raise NotImplementedError
-    return hash(key)
+        return hash(key)
 
     def _get_index(self, hash_value):
         raise NotImplementedError
