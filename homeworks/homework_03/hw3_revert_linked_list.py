@@ -11,8 +11,8 @@ def revert_linked_list(head):
     prev = None
 
     while head:
-        next = head.next
-        head.next = prev
+        next = head.next_node
+        head.next_node = prev
         prev = head
         head = next
     return prev
