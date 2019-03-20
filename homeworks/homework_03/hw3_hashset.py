@@ -1,4 +1,4 @@
-from homeworks.homework_03.hw3_hashmap.py import HashMap
+from homeworks.homework_03.hw3_hashmap import HashMap
 
 
 class HashSet(HashMap):
@@ -17,13 +17,12 @@ class HashSet(HashMap):
 
     def values(self):
 
-    return super().keys()
+        return super().keys()
 
     def intersect(self, another_hashset):
-        raise NotImplementedError
         new_HashSet = HashSet()
         united_values = self.values() + another_hashset.values()
         for item in united_values:
             if item in another_hashset.values() and item in self.values():
                 new_HashSet.put(item)
-        return new_HashSet
+        return new_HadhSet
