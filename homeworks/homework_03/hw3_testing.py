@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
+import shutil
 
 
 class Requester:
@@ -43,7 +45,18 @@ class OrdinaryFileWorker(RemoteFileReader):
             f.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
+class MockFileWorker(RemoteFileReader):
+    def read_file(self, filename):
+        filename = filename.replace('tmpf', 'homeworks/homework_03/test_dir')
+        with open(filename + ".tmp", "r") as f:
+            return f.read()
+
+    def write_file(self, filename, data):
+        filename = filename.replace('homeworks/homework_03/test_dir', 'tmpf')
+        with open(filename + ".tmp", "w") as f:
+            f.writelines(data)
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, MockFileWorker):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -58,7 +71,18 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
      если еще не создана
     '''
     def __init__(self):
-        raise NotImplementedError
+        if not 'tmpf' in os.listdir():
+            os.mkdir('tmpf')
+
+    def __del__(self):
+        if 'tmpf' in os.listdir():
+            shutil.rmtree('tmpf')
+
+    def transfer_to_remote(self, filename):
+        super().transfer_to_remote('homeworks/homework_03/test_dir/' + filename)
+
+    def transfer_to_local(self, filename):
+        super().transfer_to_local('tmpf/' + filename)
 
 
 class LLNode:
