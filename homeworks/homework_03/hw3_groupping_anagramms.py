@@ -22,5 +22,11 @@ def groupping_anagramms(words):
     :param words: list of words (words in str format)
     :return: list of lists of words
     """
-    # TODO: реализовать функцию
-    raise NotImplementedError
+     _list = {}
+    for word in words:
+        sorted_word  = ''.join(sorted(word.lower()))
+        if sorted_word  not in _list.keys():
+            _list[sorted_word ] = [word]
+        else:
+            _list.get(sorted_word ).append(word)
+    return list(_list.values())
