@@ -117,7 +117,7 @@ class HashMap:
         # TODO Метод проверяющий есть ли объект (через in)
         pos = self._get_index(self._get_hash(item))
 
-         if self._hash_bucket[pos] is None:
+        if self._hash_bucket[pos] is None:
             return False
         for entry in self._hash_bucket[pos]:
             if entry._key == item:
