@@ -32,7 +32,7 @@ class RemoteFileReader(Requester):
         return super().post(self._host, self._port, filename, data)
 
 
-class LocFileRead(RemoteFileReader):
+class OrdinaryFileWorker(RemoteFileReader):
     '''
     Класс, который работает как с локальными
      так и с удаленными файлами
@@ -47,7 +47,7 @@ class LocFileRead(RemoteFileReader):
             fid.write(super().read_file(filename))
 
 
-class MockOrdinary(LocFileRead):
+class LocFileRead(RemoteFileReader):
     def __init__(self):
         if not os.path.exists('./tmpf'):
             os.makedirs('./tmpf')
@@ -70,7 +70,7 @@ class MockOrdinary(LocFileRead):
             fid.writelines(data)
 
 
-class MockOrdinaryFileWorker(LocFileRead, MockOrdinary):
+class MockOrdinaryFileWorker(OrdinaryFileWorker, LocFileRead):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -88,13 +88,13 @@ class MockOrdinaryFileWorker(LocFileRead, MockOrdinary):
     def __init__(self):
         raise NotImplementedError
 
-    def transfer_to_local(self, filename):
-        with open('./tmpf/' + filename, "w") as fid:
-            fid.write(super().read_file(filename))
-
     def transfer_to_remote(self, filename):
         with open("./homeworks/homework_03/test_dir/" + filename, "r") as fid:
             super().write_file(filename, fid.readlines())
+
+    def transfer_to_local(self, filename):
+        with open('./tmpf/' + filename, "w") as fid:
+            fid.write(super().read_file(filename))
 
 
 class LLNode:
