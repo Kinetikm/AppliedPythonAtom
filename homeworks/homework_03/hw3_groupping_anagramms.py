@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+from collections import defaultdict
 
 
 def groupping_anagramms(words):
@@ -22,5 +23,10 @@ def groupping_anagramms(words):
     :param words: list of words (words in str format)
     :return: list of lists of words
     """
-    # TODO: реализовать функцию
-    raise NotImplementedError
+    list_lens = defaultdict(list)
+    for word in words:
+        word_lower = word.lower()
+        list_lens[frozenset(
+            [(ch, word_lower.count(ch)) for ch in set(word_lower)])].append(
+            word)
+    return [emb for emb in list_lens.values()]

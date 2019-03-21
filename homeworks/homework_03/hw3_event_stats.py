@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
+from collections import defaultdict
 
 
 class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.events = defaultdict(list)
 
     def register_event(self, user_id, time):
         """
@@ -16,8 +16,7 @@ class TEventStats:
         :param time: время (timestamp)
         :return: None
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.events[user_id].append(time)
 
     def query(self, count, time):
         """
@@ -28,5 +27,8 @@ class TEventStats:
         :param time: время для рассчета интервала
         :return: activity_count: int
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        result = 0
+        for ts in self.events.values():
+            res_sum = sum(time - 300 < t < time for t in ts)
+            result += 1 if res_sum == count != 0 else 0
+        return result
