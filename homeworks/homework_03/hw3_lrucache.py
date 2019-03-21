@@ -19,19 +19,15 @@ class _LRUCacheDecorator:
             res = self.func(*args, **kwargs)
             if len(self.cache) == self.max_size:
                 found = min(self.cache.items(), key=lambda el: el[1][1])
-                if found[1][1] != self.cache[self.last][1]:
-                    del self.cache[found[0]]
-                else:
-                    del self.cache[self.last]
+                del self.cache[found[0]]
 
             if self.cache.get(args) is None:
-                self.cache[args] = [res, 1]
+                self.cache[args] = [res, time.time()]
             else:
-                self.cache[args][1] += 1
-            self.last = args
+                self.cache[args][1] = time.time()
             return res
 
-        self.cache[args][1] += 1
+        self.cache[args][1] = time.time()
         return self.cache.get(args)[0]
 
 
