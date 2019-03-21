@@ -23,4 +23,13 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
-    raise NotImplementedError
+    if words:
+        chars_to_words = {}
+        for word in words:
+            chars = "".join(sorted(word.lower()))
+            if chars not in chars_to_words:
+                chars_to_words.update({chars: []})
+            chars_to_words[chars].append(word)
+        return chars_to_words.values()
+    else:
+        return []

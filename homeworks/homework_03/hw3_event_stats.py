@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from collections import deque
+
 
 class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
         # TODO: реализовать метод
-        raise NotImplementedError
+        self.events = deque()
 
     def register_event(self, user_id, time):
         """
@@ -17,7 +19,7 @@ class TEventStats:
         :return: None
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+        self.events.append((user_id, time))
 
     def query(self, count, time):
         """
@@ -29,4 +31,17 @@ class TEventStats:
         :return: activity_count: int
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+        if not self.events:
+            return 0
+        while self.events and time - self.events[0][1] > TEventStats.FIVE_MIN:
+            self.events.popleft()
+        users_to_count = dict()
+        for event in self.events:
+            if event[0] not in users_to_count:
+                users_to_count.update({event[0]: 0})
+            users_to_count[event[0]] += 1
+        full_count = 0
+        for count_for_user in users_to_count.values():
+            if count_for_user == count:
+                full_count += 1
+        return full_count
