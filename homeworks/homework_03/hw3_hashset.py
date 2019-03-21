@@ -12,7 +12,7 @@ class HashSet(HashMap):
 
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
-        return True if super().get(value, default_value) is not None else False
+        return True if super().get(key, default_value) is not None else False
 
     def put(self, key, value=None):
         # TODO метод put, нужно переопределить данный метод
