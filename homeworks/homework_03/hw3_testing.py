@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
 
 
 class Requester:
@@ -7,6 +8,7 @@ class Requester:
     Какой-то класс, который умеет делать запросы
      к удаленному серверу
     '''
+
     def get(self, host, port, filename):
         return "Fail"
 
@@ -18,6 +20,7 @@ class RemoteFileReader(Requester):
     '''
     Класс для работы с файлами на удаленном сервере
     '''
+
     def __init__(self, host, port):
         self._host = host
         self._port = port
@@ -34,16 +37,40 @@ class OrdinaryFileWorker(RemoteFileReader):
     Класс, который работает как с локальными
      так и с удаленными файлами
     '''
+
     def transfer_to_remote(self, filename):
-        with open(filename, "r") as f:
-            super().write_file(filename, f.readlines())
+        with open(filename, "r") as fid:
+            super().write_file(filename, fid.readlines())
 
     def transfer_to_local(self, filename):
-        with open(filename, "w") as f:
-            f.write(super().read_file(filename))
+        with open(filename, "w") as fid:
+            fid.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
+class Overloader(RemoteFileReader):
+    def __init__(self):
+        if not os.path.exists('./tmpf'):
+            os.makedirs('./tmpf')
+
+    def __del__(self):
+        if os.path.exists('./tmpf'):
+            for file in os.listdir("./tmpf"):
+                f_path = os.path.join("./tmpf", file)
+                if os.path.isfile(f_path):
+                    os.remove(f_path)
+        os.rmdir("./tmpf")
+
+    def read_file(self, filename):
+        with open('./homeworks/homework_03/test_dir/' + filename + ".tmp",
+                  'r') as file:
+            return file.readline()
+
+    def write_file(self, filename, data):
+        with open('./tmpf/' + filename + ".tmp", "w") as fid:
+            fid.writelines(data)
+
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, Overloader):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -57,8 +84,17 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
+
     def __init__(self):
         raise NotImplementedError
+
+    def transfer_to_remote(self, filename):
+        with open("./homeworks/homework_03/test_dir/" + filename, "r") as fid:
+            super().write_file(filename, fid.readlines())
+
+    def transfer_to_local(self, filename):
+        with open('./tmpf/' + filename, "w") as fid:
+            fid.write(super().read_file(filename))
 
 
 class LLNode:
