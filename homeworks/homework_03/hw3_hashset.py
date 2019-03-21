@@ -8,14 +8,13 @@ class HashSet(HashMap):
 
     def __init__(self, bucket_num=64):
         # TODO Сделать правильно =)
-        raise NotImplementedError
         super().__init__(bucket_num)
 
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
         result = super().get(key)
-        if result:
-            return result
+        if result is not None:
+            return True
         else:
             return default_value
 
