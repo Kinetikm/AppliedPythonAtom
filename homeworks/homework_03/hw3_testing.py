@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
+import shutil
 
 
 class Requester:
@@ -43,7 +45,18 @@ class OrdinaryFileWorker(RemoteFileReader):
             f.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
+class LocalFileWorker(RemoteFileReader):
+    def write_file(self, filename, data):
+            pth = "./tmpf/" + os.path.basename(filename) + ".tmp"
+            with open(pth, "w") as fw:
+                fw.writelines(data)
+
+    def read_file(self, filename):
+        with open("homeworks/homework_03/test_dir/" + os.path.basename(filename) + ".tmp", "r") as fr:
+            return fr.read()
+
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -57,8 +70,30 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
+
     def __init__(self):
-        raise NotImplementedError
+        self._create_local_dir("./tmpf")
+ #       self._create_local_dir("./tmp")
+
+    def __del__(self):
+        self._delete_local_dir("./tmpf")
+#        self._delete_local_dir("./tmp")
+
+    def _create_local_dir(self, path):
+        if os.path.isfile(path):
+            os.remove(path)
+        if not os.path.isdir(path):
+            os.mkdir(path)
+
+    def _delete_local_dir(self, path):
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+
+    def transfer_to_remote(self, filename):
+        super().transfer_to_remote("homeworks/homework_03/test_dir/" + filename)
+
+    def transfer_to_local(self, filename):
+        super().transfer_to_local("./tmpf/" + filename)
 
 
 class LLNode:
