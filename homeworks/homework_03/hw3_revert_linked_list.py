@@ -9,14 +9,9 @@ def revert_linked_list(head):
     :return: new_head: LLNode
     """
     prev = None
-    curr = head
-    next = curr.getNextNode()
-
-    while curr:
-        curr.setNextNode(prev)
-        prev = curr
-        curr = next
-        if next:
-            next = next.getNextNode()
+    while head:
+        next = head.next_node
+        head.next_node = prev
+        prev = head
         head = next
     return prev
