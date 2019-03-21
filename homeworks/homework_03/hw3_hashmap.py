@@ -25,9 +25,9 @@ class HashMap:
 
         def __eq__(self, other):
             return self._key == other._key
-        
+
         def __repr__(self):
-            if self._value == None:
+            if self._value is None:
                 return f'{self._key}'
             return f'**key: {self._key}, value: {self._value}**\n'
 
