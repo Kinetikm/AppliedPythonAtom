@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 # coding: utf-8
 
 from homeworks.homework_03.hw3_hashmap import HashMap
@@ -14,10 +14,9 @@ class HashSet(HashMap):
 
         return super().__contains__(key)
 
-    def put(self, key, value):
+    def put(self, key, value=None):
 
-        def put(self, key, value=None):
-            return super().put(key, value)
+        return super().put(key, value)
 
     def __len__(self):
 
@@ -28,7 +27,7 @@ class HashSet(HashMap):
         return super().keys()
 
     def intersect(self, another_hashset):
-        r
+
         New_set = HashSet()
         values = self.values() + another_hashset.values()
         for i in values:
