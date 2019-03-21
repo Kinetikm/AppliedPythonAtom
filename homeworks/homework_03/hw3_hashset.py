@@ -17,7 +17,6 @@ class HashSet(HashMap):
     def put(self, key, value):
 
         def put(self, key, value=None):
-
             return super().put(key, value)
 
     def __len__(self):
