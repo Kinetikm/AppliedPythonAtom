@@ -20,4 +20,3 @@ if __name__ == '__main__':
         print('Файл не валиден')
     except (UnicodeError, ValueError):
         print('Формат не валиден')
-        
