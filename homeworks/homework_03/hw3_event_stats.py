@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
+from collections import Counter, deque
 
 
 class TEventStats:
     FIVE_MIN = 300
 
     def __init__(self):
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.events = deque()
 
     def register_event(self, user_id, time):
         """
@@ -16,8 +16,7 @@ class TEventStats:
         :param time: время (timestamp)
         :return: None
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        self.events.append({'user_id': user_id, 'time': time})
 
     def query(self, count, time):
         """
@@ -28,5 +27,8 @@ class TEventStats:
         :param time: время для рассчета интервала
         :return: activity_count: int
         """
-        # TODO: реализовать метод
-        raise NotImplementedError
+        events_count = Counter()
+        for event in self.events:
+            if time - self.FIVE_MIN < event['time'] <= time:
+                events_count[event['user_id']] += 1
+        return list(events_count.values()).count(count)
