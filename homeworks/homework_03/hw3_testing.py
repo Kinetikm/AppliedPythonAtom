@@ -73,11 +73,11 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
 
     def __init__(self):
         self._create_local_dir("./tmpf")
- #       self._create_local_dir("./tmp")
+#       self._create_local_dir("./tmp")
 
     def __del__(self):
         self._delete_local_dir("./tmpf")
-#        self._delete_local_dir("./tmp")
+#       self._delete_local_dir("./tmp")
 
     def _create_local_dir(self, path):
         if os.path.isfile(path):
