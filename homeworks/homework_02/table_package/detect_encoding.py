@@ -8,7 +8,7 @@ def detect_enc(filename):
     for x in enc_list:
         try:
             with open(filename, "r", encoding=x) as f:
-                f.read(2)
+                f.read()
                 encoding = x
                 break
         except UnicodeError:

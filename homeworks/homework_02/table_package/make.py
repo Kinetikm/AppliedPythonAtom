@@ -15,7 +15,7 @@ def make_table(data):
         for x, y in enumerate(row):
             try:
                 count_spaces[x]
-            except:
+            except Exception:
                 raise Exception
     print("-" * (5 * columns + sum(count_spaces) + 1))
     column_names = data.pop(0)

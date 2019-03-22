@@ -22,5 +22,5 @@ if __name__ == '__main__':
         data = r_tsv(filename, encoding)
     try:
         make_table(data)
-    except:
+    except Exception:
         print("Формат не валиден")
