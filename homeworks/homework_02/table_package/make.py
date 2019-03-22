@@ -11,6 +11,12 @@ def make_table(data):
         for row in data:
             spaces = max(spaces, len(str(row[col])))
         count_spaces.append(spaces)
+    for row in data:
+        for x, y in enumerate(row):
+            try:
+                count_spaces[x]
+            except IndexError:
+                raise IndexError
     print("-" * (5 * columns + sum(count_spaces) + 1))
     column_names = data.pop(0)
     for x, y in enumerate(column_names):
