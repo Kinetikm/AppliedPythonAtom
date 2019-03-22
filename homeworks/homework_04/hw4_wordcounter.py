@@ -24,17 +24,13 @@ def word_count_inference(path_to_dir):
         специальный ключ "total" для суммы слов во всех файлах
     """
 
-    try:
-        manager = Manager()
-        cnt = manager.dict()
+    manager = Manager()
+    cnt = manager.dict()
 
-        for f in os.listdir(path_to_dir):
-            p = Process(target=count_words, args=(path_to_dir, f, cnt))
-            p.start()
-            p.join()
+    for f in os.listdir(path_to_dir):
+        p = Process(target=count_words, args=(path_to_dir, f, cnt))
+        p.start()
+        p.join()
 
-        cnt['total'] = sum(cnt.values())
-        return cnt
-
-    except UnicodeError:
-        return {}
+    cnt['total'] = sum(cnt.values())
+    return cnt
