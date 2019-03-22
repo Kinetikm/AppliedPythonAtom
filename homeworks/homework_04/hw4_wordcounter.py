@@ -2,7 +2,8 @@
 # coding: utf-8
 
 from multiprocessing import Process, Manager
-import glob, os
+import glob
+import os
 from os import listdir
 from os.path import isfile, join
 
