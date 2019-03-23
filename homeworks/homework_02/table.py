@@ -20,6 +20,8 @@ if __name__ == '__main__':
         data = r_json(filename, encoding)
     except ValueError:
         data = r_tsv(filename, encoding)
+    except KeyError:
+        print("Формат не валиден")
     try:
         make_table(data)
     except Exception:

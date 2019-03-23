@@ -10,7 +10,9 @@ def r_json(filename, encoding):
             blank = json.load(file)
             data.append(list(blank[0].keys()))
             for x in blank:
+                if list(x.keys()) != blank[0]:
+                    raise KeyError
                 data.append(list(x.values()))
         except json.JSONDecodeError:
-            raise ValueError("Формат не валиден")
+            raise ValueError
     return data
