@@ -1,12 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Mar 23 22:09:57 2019
+#!/usr/bin/env python
+# coding: utf-8
 
-@author: dmitry
-"""
-
-from multiprocessing import Queue, Process
+from multiprocessing import Process, Queue
 import os
 
 
@@ -28,6 +23,16 @@ def counter(info):
 
 
 def word_count_inference(path_to_dir):
+    '''
+    Метод, считающий количество слов в каждом файле из директории
+    и суммарное количество слов.
+    Слово - все, что угодно через пробел, пустая строка "" словом не считается,
+    пробельный символ " " словом не считается. Все остальное считается.
+    Решение должно быть многопроцессным. Общение через очереди.
+    :param path_to_dir: путь до директории с файлами
+    :return: словарь, где ключ - имя файла, значение - число слов +
+        специальный ключ "total" для суммы слов во всех файлах
+    '''
     q = Queue()
     q1 = Queue()
     word_counter = 0
