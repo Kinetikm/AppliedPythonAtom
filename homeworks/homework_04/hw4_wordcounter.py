@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Process, Manager
-import os
+from homeworks.homework_04.com.wordcounter import files_processing
+from homeworks.homework_04.com.wordcounter import path_processing
 
 
 def word_count_inference(path_to_dir):
@@ -16,4 +16,8 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    raise NotImplementedError
+    files = path_processing.getFiles(path_to_dir)
+    if files:
+        return files_processing.parseFiles(files)
+    else:
+        return {"total": 0}
