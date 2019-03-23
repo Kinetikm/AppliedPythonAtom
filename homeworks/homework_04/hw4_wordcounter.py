@@ -11,7 +11,7 @@ def get_files(path_to_dir, q1):
 
 
 def get_info(q, filename):
-    with open('test_data/' + filename, 'r', encoding='UTF8') as f:
+    with open('./homeworks/homework_04/test_data/' + filename, 'r', encoding='UTF8') as f:
         q.put(f.readlines())
 
 
