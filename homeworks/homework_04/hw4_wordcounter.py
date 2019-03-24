@@ -31,10 +31,13 @@ def word_count_inference(path_to_dir):
         wordmap['total'] += counter
 
     wordmap['total'] = 0
-    for file in list_of_files:
-        process = Process(target=count_words_in_file, args=(path_to_dir, file, wordmap))
-        list_of_procs.append(process)
-        process.start()
+    try:
+        for file in list_of_files:
+            process = Process(target=count_words_in_file, args=(path_to_dir, file, wordmap))
+            list_of_procs.append(process)
+            process.start()
+    except FileExistsError:
+        return
     for pr in list_of_procs:
         pr.join()
     return wordmap
