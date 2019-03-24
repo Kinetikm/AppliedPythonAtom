@@ -45,5 +45,7 @@ def words_counter(filename):
 
 def create_deque(path_to_dir):
     files = deque()
-    files.append(os.listdir(path_to_dir))
+    files_list = os.listdir(path_to_dir)
+    for file in files_list:
+        files.append(file)
     return files
