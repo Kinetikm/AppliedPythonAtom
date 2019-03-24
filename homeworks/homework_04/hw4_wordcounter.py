@@ -24,7 +24,7 @@ def word_count_inference(path_to_dir):
     with p:
         while files_list:
             filename = files_list.pop()
-            count = p.apply(words_counter, (path_to_dir + "/" + filename,)).get()
+            count = p.apply_async(words_counter, (path_to_dir + "/" + filename,)).get()
             total_count += count
             result_dict.update({filename: count})
     p.close()
