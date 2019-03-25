@@ -9,7 +9,7 @@ from os import listdir
 results_dict = {}
 
 
-def read_file(filename, path_to_dir, results_dict):
+def read_file(filename, path_to_dir):
     with open(path_to_dir + '/' + filename, "r") as file:
         results_dict[filename] = len(file.read().split())
 
@@ -27,7 +27,7 @@ def word_count_inference(path_to_dir):
     '''
     pool = Pool(8)
     allfiles = listdir(path_to_dir)
-    pool.map(partial(read_file, path_to_dir, results_dict), allfiles)
+    pool.map(partial(read_file, path_to_dir), allfiles)
     pool.close()
     pool.join()
     results_dict['total'] = sum(results_dict.values())
