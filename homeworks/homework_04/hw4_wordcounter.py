@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager
 import os
 
 
-def function(path_to_dir, name_of_file, result):
+def func(path_to_dir, name_of_file, result):
     file = open(path_to_dir + os.sep + name_of_file, encoding='utf8')
     num_of_words = 0
     char = file.read(1)
@@ -32,9 +32,9 @@ def word_count_inference(path_to_dir):
     tasks = []
     len_max = 4  # максимальное количество запущенных процессов одновременно
     for name_of_file in list_of_files:
-        tasks.append(Process(target=function,
-                            args=(path_to_dir, name_of_file, result)))
-        tasks[-1].start()
+        task = Process(target=func, args=(path_to_dir, name_of_file, result))
+        tasks.append(task)
+        task.start()
         i = 0
         while len(tasks) == len_max:
             if not tasks[i].is_alive():
