@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Pool
+from multiprocessing import Pool, Manager
 from functools import partial
 from os import listdir
 
@@ -9,8 +9,8 @@ from os import listdir
 results_dict = {}
 
 
-def read_file(filename, path_to_dir):
-    with open(path_to_dir + '/' + filename, "r") as file:
+def read_file(path_to_dir, filename):
+    with open(path_to_dir + '/' + filename) as file:
         results_dict[filename] = len(file.read().split())
 
 
