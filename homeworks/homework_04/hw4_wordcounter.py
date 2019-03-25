@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Pool, Manager
+from multiprocessing import Pool
 from functools import partial
 from os import listdir
 
 
-results_dict = {}
+results_dict, results_dict['total']  = {}, 0
 
 
 def read_file(path_to_dir, filename):
