@@ -28,7 +28,7 @@ def word_count_inference(path_to_dir):
     fullpaths = map(lambda x: f'{path_to_dir}/{x}', os.listdir(path_to_dir))
     p.map(counter, fullpaths)
     words = {}
-    for filename, c in out:
+    for filename, c in p.map(counter, fullpaths):
         words[filename] = c
     words["total"] = sum(words.values())
     return words
