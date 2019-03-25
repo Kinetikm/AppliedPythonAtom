@@ -33,7 +33,7 @@ def word_count_inference(path_to_dir):
     len_max = 4  # максимальное количество запущенных процессов одновременно
     for name_of_file in list_of_files:
         tasks.append(Process(target=function,
-                    args=(path_to_dir, name_of_file, result)))
+                            args=(path_to_dir, name_of_file, result)))
         tasks[-1].start()
         i = 0
         while len(tasks) == len_max:
