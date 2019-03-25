@@ -30,7 +30,7 @@ def groupping_anagramms(words):
             in_dict.setdefault(tmp, [])
             in_dict[tmp].append(word)
         else:
-            words_dict[tmp] = [word]
+            in_dict[tmp] = [word]
     for key, value in in_dict.items():
         if len(value) > 1:
             res.append(value)
