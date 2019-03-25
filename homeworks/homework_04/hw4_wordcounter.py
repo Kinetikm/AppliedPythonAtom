@@ -6,9 +6,6 @@ from subprocess import Popen, PIPE, STDOUT
 import os
 
 
-words = Manager().dict()
-
-
 def counter(filename):
     cmd = f"cat {filename} | wc -w"
     ps = Popen(cmd, shell=True, stdout=PIPE, stderr=STDOUT)
@@ -27,10 +24,11 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    p = Pool()
+    p = Pool(5)
     fullpaths = map(lambda x: f'{path_to_dir}/{x}', os.listdir(path_to_dir))
     p.map(counter, fullpaths)
-    p.close()
-    p.join()
+    words = {}
+    for filename, c in out:
+        words[filename] = c
     words["total"] = sum(words.values())
     return words
