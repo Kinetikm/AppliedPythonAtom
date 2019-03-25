@@ -10,10 +10,14 @@ dict_return = Manager().dict()
 
 def dict_count():
     while queue.qsize() > 0:
-        path_to_dir, filename = queue.get()
-        with open(path_to_dir + '/' + filename, "r", encoding='utf8') as file:
-            dict_return[filename] = len(file.read().split())
-        queue.task_done()
+        try:
+            path_to_dir, filename = queue.get()
+            with open(path_to_dir + '/' + filename, "r",
+                      encoding='utf8') as file:
+                dict_return[filename] = len(file.read().split())
+            queue.task_done()
+        except EOFError:
+            return
 
 
 def word_count_inference(path_to_dir):
