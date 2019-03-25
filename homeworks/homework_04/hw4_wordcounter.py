@@ -8,7 +8,6 @@ from multiprocessing import Process, Queue
 import os
 from time import time
 import threading
-from chardet.universaldetector import UniversalDetector
 
 
 class WordCounter:
@@ -30,22 +29,6 @@ class WordCounter:
         except FileNotFoundError:
             print("this dir is not correct!")
             self.files = None
-
-    def _get_codec(self, filename):
-        detector = UniversalDetector()
-        try:
-            with open(filename, 'rb') as file:
-                for line in file:
-                    detector.feed(line)
-                    if detector.done:
-                        break
-                if os.path.getsize(filename) == 0:
-                    return "empty"
-                detector.close()
-                result = detector.result['encoding']
-                return result
-        except FileNotFoundError:
-            return None
 
     def _edit_filepath(self, filename):
         path = self.path_to_dir.replace("\\", "/")
@@ -79,13 +62,8 @@ class WordCounter:
         while True:
             filename = queue1.get()
             fullname = self._edit_filepath(filename)
-            codec = self._get_codec(fullname)
-            if codec is None:
-                print("file not found")
-            elif codec == "empty":
-                count_words = 0
-            else:
-                count_words = self._get_count_words(fullname, codec)
+            codec = "utf-8"
+            count_words = self._get_count_words(fullname, codec)
             d_dict[filename] = count_words
             queue2.put(d_dict)
             if filename == self.last_file:
