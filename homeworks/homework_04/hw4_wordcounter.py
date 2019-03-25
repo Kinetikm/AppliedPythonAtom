@@ -11,7 +11,7 @@ results_dict = {}
 
 def read_file(filename, path_to_dir, results_dict):
     with open(path_to_dir + '/' + filename, "r") as file:
-        return len(file.read().split())
+        results_dict[filename] = len(file.read().split())
 
 
 def word_count_inference(path_to_dir):
