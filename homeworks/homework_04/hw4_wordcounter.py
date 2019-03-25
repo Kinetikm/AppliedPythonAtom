@@ -7,7 +7,7 @@ import os
 
 def count_words_in_file(queue, main_dict):
     while not queue.empty():
-        file_path, name = queue
+        file_path, name = queue.get()
         try:
             with open(file_path + '/' + name, "r", encoding='utf8') as file:
                 main_dict[name] = len(file.read().split())
@@ -38,7 +38,8 @@ def word_count_inference(path_to_dir):
         procs.append(p)
         p.start()
     for p in procs:
-        p.join()
+        if p.is_alive():
+            p.join()
 
     main_dict['total'] = sum(main_dict.values())
-    raise NotImplementedError
+    return main_dict
