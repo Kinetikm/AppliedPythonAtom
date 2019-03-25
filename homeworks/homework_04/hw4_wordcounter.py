@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 from multiprocessing import Process, Manager
 import os
 
 
-def count_words_in_file(queue, main_dict):
+def count_words(queue, main_dict):
     while not queue.empty():
         file_path, name = queue.get()
         try:
@@ -30,11 +31,10 @@ def word_count_inference(path_to_dir):
     main_dict = Manager().dict()
     queue = Manager().Queue()
     procs = []
-    file_names = list(os.listdir(path_to_dir))
-    for name in file_names:
+    for name in list(os.listdir(path_to_dir)):
         queue.put((path_to_dir, name))
     for _ in range(4):
-        p = Process(target=count_words_in_file, args=(queue, main_dict))
+        p = Process(target=count_words, args=(queue, main_dict))
         procs.append(p)
         p.start()
     for p in procs:
