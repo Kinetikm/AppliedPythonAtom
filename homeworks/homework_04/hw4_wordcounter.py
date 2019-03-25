@@ -30,11 +30,15 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
+    processes = []
     for file in os.listdir(path_to_dir):
         queue.put((path_to_dir, file))
     for i in range(4):
         process = Process(target=dict_count)
         process.start()
+        processes.append(process)
+
+    for process in processes:
         process.join()
 
     dict_return['total'] = sum(dict_return.values())
