@@ -39,7 +39,8 @@ def word_count_inference(path_to_dir):
         process.start()
 
     for process in processes:
-        process.join()
+        if process.is_alive():
+            process.join()
 
     dict_return['total'] = sum(dict_return.values())
     return dict_return
