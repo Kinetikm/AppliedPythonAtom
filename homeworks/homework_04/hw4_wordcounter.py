@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-from multiprocessing import Manager
+from multiprocessing import Manager, Process, Lock
 import os
-from threading import Thread
 
 queue = Manager().Queue()
 dict_return = Manager().dict()
@@ -34,10 +33,9 @@ def word_count_inference(path_to_dir):
     for file in os.listdir(path_to_dir):
         queue.put((path_to_dir, file))
     for i in range(4):
-        tread = Thread(target=dict_count)
-        tread.daemon = True
-        tread.start()
+        process = Process(target=dict_count)
+        process.start()
+        process.join()
 
-    queue.join()
     dict_return['total'] = sum(dict_return.values())
     return dict_return
