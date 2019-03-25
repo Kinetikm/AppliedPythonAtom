@@ -35,8 +35,8 @@ def word_count_inference(path_to_dir):
         queue.put((path_to_dir, file))
     for i in range(4):
         process = Process(target=dict_count)
-        process.start()
         processes.append(process)
+        process.start()
 
     for process in processes:
         process.join()
