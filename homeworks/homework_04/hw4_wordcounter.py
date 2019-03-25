@@ -34,7 +34,7 @@ def word_count_inference(path_to_dir):
     for name_of_file in list_of_files:
         tasks.append(Process(target=function,
                     args=(path_to_dir, name_of_file, result)))
-        tasks[-1].start() 
+        tasks[-1].start()
         i = 0
         while len(tasks) == len_max:
             if not tasks[i].is_alive():
