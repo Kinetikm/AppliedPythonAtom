@@ -24,11 +24,11 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    p = Pool(5)
+    p = Pool(10)
     fullpaths = map(lambda x: f'{path_to_dir}/{x}', os.listdir(path_to_dir))
-    p.map(counter, fullpaths)
+    out = p.map(counter, fullpaths)
     words = {}
-    for filename, c in p.map(counter, fullpaths):
+    for filename, c in out:
         words[filename] = c
     words["total"] = sum(words.values())
     return words
