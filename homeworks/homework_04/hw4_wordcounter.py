@@ -1,8 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Process, Manager
+from multiprocessing import Process, Manager, Pool, Queue
 import os
+
+
+def splitter(queues, words):
+    while not queues.empty():
+        item = queues.get_nowait()
+        if item is None:
+            break
+        else:
+            with open(item, 'r') as ident:
+                words[item.split('/')[-1]] = len(ident.read().split())
 
 
 def word_count_inference(path_to_dir):
@@ -16,4 +26,21 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    raise NotImplementedError
+    q = Queue()
+    words = Manager().dict()
+    targs = []
+
+    for file in os.listdir(path_to_dir):
+        q.put(path_to_dir+'/'+file)
+
+    for _ in range(2):
+        targ = Process(target=splitter, args=(q, words))
+        targs.append(targ)
+        targ.start()
+
+    for targ in targs:
+        targ.join()
+
+    words['total'] = sum(words.values())
+
+    return words
