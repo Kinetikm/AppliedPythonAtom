@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 from multiprocessing import Process, Manager
 import os
 
@@ -28,18 +27,18 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    main_dict = Manager().dict()
+    out_dict = Manager().dict()
     queue = Manager().Queue()
     procs = []
     for name in list(os.listdir(path_to_dir)):
         queue.put((path_to_dir, name))
     for _ in range(4):
-        p = Process(target=count_words, args=(queue, main_dict))
+        p = Process(target=count_words, args=(queue, out_dict))
         procs.append(p)
         p.start()
     for p in procs:
         if p.is_alive():
             p.join()
 
-    main_dict['total'] = sum(main_dict.values())
-    return main_dict
+    out_dict['total'] = sum(out_dict.values())
+    return out_dict
