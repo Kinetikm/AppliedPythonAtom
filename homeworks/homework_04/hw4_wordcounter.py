@@ -1,8 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-from multiprocessing import Process, Manager
+from multiprocessing import Manager
 import os
+from threading import Thread
+
+queue = Manager().Queue()
+dict_return = Manager().dict()
+
+
+def dict_count():
+    while queue.qsize() > 0:
+        path_to_dir, filename = queue.get()
+        with open(path_to_dir + '/' + filename, "r", encoding='utf8') as file:
+            dict_return[filename] = len(file.read().split())
+        queue.task_done()
 
 
 def word_count_inference(path_to_dir):
@@ -16,4 +27,13 @@ def word_count_inference(path_to_dir):
     :return: словарь, где ключ - имя файла, значение - число слов +
         специальный ключ "total" для суммы слов во всех файлах
     '''
-    raise NotImplementedError
+    for file in os.listdir(path_to_dir):
+        queue.put((path_to_dir, file))
+    for i in range(4):
+        tread = Thread(target=dict_count)
+        tread.daemon = True
+        tread.start()
+
+    queue.join()
+    dict_return['total'] = sum(dict_return.values())
+    return dict_return
