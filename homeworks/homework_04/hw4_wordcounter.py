@@ -26,22 +26,6 @@ class Word_counter:
             print("this dir is not correct!")
             self.files = None
 
-    def _get_encoding(self, filename):
-        detector = UniversalDetector()
-        try:
-            with open(filename, 'rb') as fh:
-                for line in fh:
-                    detector.feed(line)
-                    if detector.done:
-                        break
-                if os.path.getsize(filename) == 0:
-                    return "empty"
-                detector.close()
-                result = detector.result['encoding']
-                return result
-        except FileNotFoundError:
-            return None
-
     def _form_path_files(self, filename):
         path = self.path_to_dir.replace("\\", "/")
         path = path.strip("/")
@@ -75,13 +59,9 @@ class Word_counter:
         while True:
             filename = q.get()
             fullname = self._form_path_files(filename)
-            codec = self._get_encoding(fullname)
-            if codec is None:
-                print("file not found")
-            elif codec == "empty":
-                num_words1 = 0
-            else:
-                num_words1 = self._get_count_words(fullname, codec)
+            #codec = self._get_encoding(fullname)
+            codec = "utf-8"
+            num_words1 = self._get_count_words(fullname, codec)
 
             d_dict[filename] = num_words1
             q1.put(d_dict)
