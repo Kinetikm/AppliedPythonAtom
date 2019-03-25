@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from multiprocessing import Process, Manager
+from multiprocessing import Process, Manager, Pool
 from subprocess import Popen, PIPE, STDOUT
 import os
 
@@ -11,9 +11,7 @@ words = Manager().dict()
 
 def counter(filename):
     cmd = f"cat {filename} | wc -w"
-    ps = Popen(cmd, shell=True,
-                          stdout=PIPE,
-                          stderr=STDOUT)
+    ps = Popen(cmd, shell=True, stdout=PIPE, stderr=STDOUT)
     output = int(ps.communicate()[0].strip())
     return os.path.split(filename)[-1], output
 
