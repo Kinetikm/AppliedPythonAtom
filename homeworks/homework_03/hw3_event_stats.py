@@ -8,7 +8,6 @@ class TEventStats:
     def __init__(self):
         # TODO: реализовать метод
         self.user_act = {}
-        raise NotImplementedError
 
     def register_event(self, user_id, time):
         """
@@ -22,7 +21,6 @@ class TEventStats:
             self.user_act[user_id] = [time]
         else:
             self.user_act[user_id].append(time)
-        raise NotImplementedError
 
     def query(self, count, time):
         """
@@ -46,4 +44,3 @@ class TEventStats:
                 continue
 
         return activity_count
-        raise NotImplementedError
