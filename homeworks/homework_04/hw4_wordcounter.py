@@ -31,7 +31,7 @@ def word_count_inference(path_to_dir):
     for file in os.listdir(path_to_dir):
         q.put(file)
     with Pool(4) as p:
-        while q.empty() == False:
+        while q.empty() is False:
             file = q.get()
             path_to_file = path_to_dir + '/' + file
             amount_of_words = p.apply(amount_of_files_words, (path_to_file,))
