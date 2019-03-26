@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+from collections import OrderedDict
 
 
 def groupping_anagramms(words):
@@ -23,4 +24,16 @@ def groupping_anagramms(words):
     :return: list of lists of words
     """
     # TODO: реализовать функцию
-    raise NotImplementedError
+    lettersets = OrderedDict()
+    result = []
+    for word in words:
+        print(word)
+        lowerword = word.lower()
+        letters = list(lowerword)
+        jumbled_letters = ''.join(sorted(letters))
+        if jumbled_letters not in lettersets.keys():
+            lettersets[jumbled_letters] = []
+        lettersets[jumbled_letters].append(word)
+    for v in lettersets.values():
+        result.append(v)
+    return result
