@@ -33,14 +33,14 @@ class TEventStats:
         """
         # TODO: реализовать метод
         activity_count = 0
-        for user, timestamp in self.act.items():
+        for user, timestamp in self.user_act.items():
             index = 0
             for t in timestamp:
                 if 0 <= time - t < self.FIVE_MIN:
                     index += 1
-            if index == count:
-                activity_count += 1
             if index != 0 and count != 0:
                 continue
-
+            if index == count:
+                activity_count += 1
+            
         return activity_count
