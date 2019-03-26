@@ -24,13 +24,16 @@ def word_count_inference(path_to_dir):
     for file in os.listdir(path_to_dir):
         q.put((path_to_dir, file))
 
-    tasks = [Process(target=word_counter, args=(q, word_cnt)) for _ in range(2)]
+    try:
+        tasks = [Process(target=word_counter, args=(q, word_cnt)) for _ in range(2)]
 
-    for task in tasks:
-        task.start()
+        for task in tasks:
+            task.start()
 
-    for task in tasks:
-        task.join()
+        for task in tasks:
+            task.join()
+    except FileExistsError:
+        return
 
     return word_cnt
 
