@@ -8,7 +8,7 @@ class LRUCacheDecorator:
 
     def __init__(self, maxsize, ttl):
         '''
-        :param maxsi4ze: максимальный размер кеша
+        :param maxsize: максимальный размер кеша
         :param ttl: время в млсек, через которое кеш
                     должен исчезнуть
         '''
@@ -16,9 +16,9 @@ class LRUCacheDecorator:
         self.time = ttl
         self.cache = {}
         self.realsize = 0
-
-    def __call__(self, *args, **kwargs):
         
+    def __call__(self, function):
+
         def Time():
             return time.time() * 1000
 
@@ -41,4 +41,4 @@ class LRUCacheDecorator:
             self.cache[key] = (function(*args, **kwargs), Time())
             return self.cache[key][0]
 
-        return internal
+    return internal
