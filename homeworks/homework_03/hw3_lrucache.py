@@ -41,4 +41,4 @@ class LRUCacheDecorator:
             self.cache[key] = (function(*args, **kwargs), Time())
             return self.cache[key][0]
 
-    return internal
+        return internal
