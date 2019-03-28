@@ -16,7 +16,7 @@ class LRUCacheDecorator:
         self.time = ttl
         self.cache = {}
         self.realsize = 0
-        
+
     def __call__(self, function):
 
         def Time():
