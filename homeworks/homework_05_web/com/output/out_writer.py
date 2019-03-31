@@ -3,6 +3,7 @@
 
 import csv
 
+
 def outputData(data, filename):
     with open(file=filename, mode='w', newline='') as f:
         fnames = ['link', 'username', 'count_comment']

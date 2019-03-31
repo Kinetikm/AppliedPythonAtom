@@ -10,9 +10,9 @@ async def parseLink(link):
     username_to_count = dict()
     async with aiohttp.ClientSession() as session:
         async with session.get(link,
-                               headers = {'Content-type': 'text/html',
-                                          'User-Agent': generate_user_agent(),
-                                          'Content-Encoding': 'utf-8'},
+                               headers={'Content-type': 'text/html',
+                                        'User-Agent': generate_user_agent(),
+                                        'Content-Encoding': 'utf-8'},
                                ) as resp:
             if resp.status != 200:
                 return link, username_to_count
