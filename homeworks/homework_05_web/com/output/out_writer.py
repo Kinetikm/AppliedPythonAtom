@@ -1,0 +1,4 @@
+
+
+def outputData(data):
+    pass
