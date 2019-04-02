@@ -101,5 +101,5 @@ if __name__ == '__main__':
     filename = 'top_user_comments.csv'
     links = sys.argv[1:4]
     res = main_method(filename, links[:])
-    if res != links:
+    if len(res) != len(links):
         print(f'Некоторые ссылки не были корректно обработаны: {set(links) - set(res)}')
