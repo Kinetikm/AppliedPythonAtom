@@ -7,8 +7,6 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-  && (echo "deb http://cran.mtu.edu/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list \
-  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9) \
   && apt-get update -q && apt-get upgrade -y -q \
   && apt-get install -y -q --no-install-recommends libcurl4-openssl-dev \
                                               libssl1.0.0 \
@@ -24,7 +22,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 
 WORKDIR /workspace
 RUN chmod -R 777 /workspace
-COPY requirements.txt /workspace
+COPY ../requirements.txt /workspace
 
 RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
      chmod +x ~/miniconda.sh && \
