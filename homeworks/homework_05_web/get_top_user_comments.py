@@ -18,7 +18,7 @@ def parser(html):
     tags_a = soup.findAll(
         "a", attrs={"class": ["user-info user-info_inline"], "data-user-login": [True]}
     )
-    users_list = [ tags_a[i]["data-user-login"] for i in range(len(tags_a))]
+    users_list = [tags_a[i]["data-user-login"] for i in range(len(tags_a))]
     comment_d = OrderedDict(Counter(users_list).most_common())
     return comment_d
 
