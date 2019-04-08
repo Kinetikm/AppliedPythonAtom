@@ -20,23 +20,22 @@ class CSRMatrix:
             a[row_ind[k], col_ind[k]] = data[k]
         """
         self.A = np.array([])
+        self.IA = np.array([0])
         self.JA = np.array([])
-
         if isinstance(init_matrix_representation, tuple) and len(init_matrix_representation) == 3:
-            self.IA = np.zeros(int(np.max(init_matrix_representation[0])) + 1)
-            self.A = np.append(self.A, init_matrix_representation[2])
             self.JA = np.append(self.JA, init_matrix_representation[1])
-            for i in init_matrix_representation[0]:
-                self.IA[init_matrix_representation[0][i] + 1:] += 1
+            self.IA = np.zeros(init_matrix_representation[0][-1] + 2)
+            self.A = np.append(self.A, init_matrix_representation[2])
+            for i in init_matrix_representation[0]:  # переделываем индексы
+                self.IA[i + 1:] += 1
         elif isinstance(init_matrix_representation, np.ndarray):
-            self.IA = np.zeros(int(init_matrix_representation.shape[0]) + 1)
-            for i in np.arange(0, init_matrix_representation.shape[0]):
-                self.IA[i + 1] = self.IA[i]
-                for j in np.arange(0, init_matrix_representation.shape[1]):
-                    if init_matrix_representation[i][j] and init_matrix_representation[i][j] != 0:
-                        self.A = np.append(self.A, init_matrix_representation[i][j])
-                        self.JA = np.append(self.JA, j)
-                        self.IA[i + 1] += 1
+            self.A = np.append(self.A, init_matrix_representation[np.nonzero(init_matrix_representation)])
+            for i in np.arange(init_matrix_representation.shape[0]):
+                self.JA = np.append(self.JA, np.nonzero(init_matrix_representation[i, :]))
+            val_ia = 0
+            for i in np.arange(init_matrix_representation.shape[0]):
+                val_ia += init_matrix_representation[i, :][np.nonzero(init_matrix_representation[i, :])].shape[0]
+                self.IA = np.append(self.IA, val_ia)
         else:
             raise ValueError
 
