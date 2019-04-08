@@ -64,25 +64,23 @@ class CSRMatrix:
             raise KeyError
         if value == 0:
             return
-        if not self.A:  # матрица пуста
-            self.A = np.array([value])  # вставляем
-            self.IA[i + 1:] += 1
-            self.JA[0] = j
-        else:  # матрица не пуста
-            j1 = int(self.IA[i] - 1)
-            # есть ли в (i, j) элемент ?
-            for ind in np.arange(self.self.IA[i], self.self.IA[i + 1]):
-                ind = int(ind)
-                if self.JA[ind] == j:  # в (i, j) есть элемент
-                    self.A[ind] = value  # вставляем
-                elif self.JA[ind] > j:
-                    # ячейка (i, j) пуста
+        push = False
+        for k in np.arange(self.IA[i], self.IA[i + 1]):
+            if self.JA[k] == j:
+                self.A[k] = value
+                push = True  # заменили просто
+                break
+        if not push:
+            if self.IA[i + 1] - self.IA[i] == 0:
+                self.A = np.insert(self.A, self.IA[i + 1], value)
+                self.JA = np.insert(self.JA, self.IA[i + 1], j)
+                self.IA[i + 1:] += 1
+            for k in np.arange(self.IA[i], self.IA[i + 1]):
+                if (j < self.JA[k]) | (k == np.arange(self.IA[i], self.IA[i + 1])[-1]):
+                    self.A = np.insert(self.A, k + 1, value)
+                    self.IA[i + 1:] += 1
+                    self.JA = np.insert(self.JA, k + 1, j)
                     break
-                j1 = ind
-            #  вставляем.
-            self.A = np.insert(self.A, j1 + 1, value)
-            self.IA[i + 1:] += 1
-            self.JA = np.insert(self.JA, j1 + 1, j)
 
     def to_dense(self):
         """
