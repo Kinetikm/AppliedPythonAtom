@@ -46,14 +46,14 @@ class CSRMatrix:
         Be careful, i and j may have invalid values (-1 / bigger that matrix size / etc.).
         """
         if i > len(self.IA) - 1 or j > np.max(self.JA):
-            raise KeyError
+            return None
         if i < 0 or j < 0:
-            raise KeyError
+            return None
         for k in np.arange(self.IA[i], self.IA[i + 1]):
             k1 = int(k)
             if self.JA[k1] == j:
                 return self.A[k1]
-            return 0
+        return 0
 
     def set_item(self, i, j, value):
         """
@@ -65,7 +65,7 @@ class CSRMatrix:
         if value == 0:
             return
         if not self.A:  # матрица пуста
-            self.A[0] = np.array([value])  # вставляем
+            self.A = np.array([value])  # вставляем
             self.IA[i + 1:] += 1
             self.JA[0] = j
         else:  # матрица не пуста
