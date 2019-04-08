@@ -28,8 +28,8 @@ def simplex_method(a, b, c):
     main_matrix[:, m:-1] = np.eye(n + 1, n + 1)
     while min(main_matrix[-1, :]) < 0:
         pivot_column = main_matrix[-1, :].argmin()
-        pivot_row = (main_matrix[:-1, -1] / main_matrix[:-1,
-                                            pivot_column]).argmin()
+        matrix = main_matrix[:-1, -1] / main_matrix[:-1, pivot_column]
+        pivot_row = matrix.argmin()
         main_matrix[pivot_row, :] /= main_matrix[pivot_row, pivot_column]
         for i in range(n + 1):
             if i != pivot_row:
@@ -40,10 +40,3 @@ def simplex_method(a, b, c):
     for i in range(len(index[0])):
         result_x[index[1][i]] = main_matrix[index[0][i], -1]
     return result_x
-
-
-a = np.array([[2, 3, 2], [1, 1, 2]])
-b = np.array([1000, 800])
-c = np.array([7, 8, 10])
-
-x = simplex_method(a, b, c)
