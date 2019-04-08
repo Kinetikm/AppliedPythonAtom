@@ -21,13 +21,15 @@ class CSRMatrix:
         """
         self.A = np.array([])
         self.JA = np.array([])
-        self.IA = np.zeros(int(np.max(init_matrix_representation[0])) + 2)
+
         if isinstance(init_matrix_representation, tuple) and len(init_matrix_representation) == 3:
+            self.IA = np.zeros(int(np.max(init_matrix_representation[0])) + 1)
             self.A = np.append(self.A, init_matrix_representation[2])
             self.JA = np.append(self.JA, init_matrix_representation[1])
             for i in np.arange(0, init_matrix_representation.shape[1]):
                 self.IA[init_matrix_representation[0][i] + 1:] += 1
         elif isinstance(init_matrix_representation, np.ndarray):
+            self.IA = np.zeros(int(init_matrix_representation.shape[0]) + 1)
             for i in np.arange(0, init_matrix_representation.shape[0]):
                 self.IA[i + 1] = self.IA[i]
                 for j in np.arange(0, init_matrix_representation.shape[1]):
