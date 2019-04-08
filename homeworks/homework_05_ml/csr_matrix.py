@@ -26,7 +26,7 @@ class CSRMatrix:
             self.IA = np.zeros(int(np.max(init_matrix_representation[0])) + 1)
             self.A = np.append(self.A, init_matrix_representation[2])
             self.JA = np.append(self.JA, init_matrix_representation[1])
-            for i in np.arange(0, init_matrix_representation[0]):
+            for i in  init_matrix_representation[0]:
                 self.IA[init_matrix_representation[0][i] + 1:] += 1
         elif isinstance(init_matrix_representation, np.ndarray):
             self.IA = np.zeros(int(init_matrix_representation.shape[0]) + 1)
@@ -64,7 +64,7 @@ class CSRMatrix:
             raise KeyError
         if value == 0:
             return
-        if not self.A[0]:  # матрица пуста
+        if not self.A:  # матрица пуста
             self.A[0] = value  # вставляем
             self.IA[i + 1:] += 1
             self.JA[0] = j
