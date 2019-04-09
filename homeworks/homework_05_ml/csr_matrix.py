@@ -84,5 +84,5 @@ class CSRMatrix:
             i = int(i)
             for j in np.arange(self.ia[i], self.ia[i+1]):
                 k = int(self.ja[int(j)])
-                result[i][k] = self.a[k]
+                result[i][k] = self.a[int(j)]
         return result
