@@ -81,9 +81,9 @@ class CSRMatrix:
                     break
                 elif i == self.IA[i + 1]:
                     self.A = np.concatenate(
-                        (self.A[:k + 1], [value], self.A[k + 1:]))
+                        (self.A[:k], [value], self.A[k:]))
                     self.JA = np.concatenate(
-                        (self.JA[:k + 1], [j], self.JA[k + 1:]))
+                        (self.JA[:k], [j], self.JA[k:]))
                     self.IA[i + 1:] = self.IA[i + 1:] + 1
                     break
             else:
