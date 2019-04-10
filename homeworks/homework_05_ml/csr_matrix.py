@@ -96,6 +96,3 @@ class CSRMatrix:
                 k = int(self.ja[int(j)])
                 result[i][k] = self.a[int(j)]
         return result
-
-q = CSRMatrix(([2, 1, 0], [1, 0, 3], [5, 1, 4]))
-print(q.to_dense())
