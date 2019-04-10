@@ -3,14 +3,8 @@
 
 import numpy as np
 
+
 class CSRMatrix:
-    """
-           :param init_matrix_representation: can be usual dense matrix
-           or
-           (row_ind, col, data) tuple with np.arrays,
-               where data, row_ind and col_ind satisfy the relationship:
-               a[row_ind[k], col_ind[k]] = data[k]
-           """
     def __init__(self, init_matrix):
         self.A = np.array([], dtype=int)
         self.IA = np.array([], dtype=int)
@@ -97,5 +91,3 @@ class CSRMatrix:
                 k = self.JA[j]
                 res[i][k] = self.A[j]
         return res
-
-
