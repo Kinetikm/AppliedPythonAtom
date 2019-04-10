@@ -11,6 +11,16 @@ class CSRMatrix:
         self.a = np.zeros(1)
         self.ja = np.zeros(1)
         if isinstance(init_matrix, tuple) and len(init_matrix) == 3:
+            help_list = []
+            for k in np.arange(0, len(init_matrix[2])):
+                help_list.append((init_matrix[0][k], init_matrix[1][k],
+                                  init_matrix[2][k]))
+            help_list = sorted(help_list, key=lambda x: x[0])
+            init_matrix = ([], [], [])
+            for k in np.arange(0, len(help_list)):
+                init_matrix[0].append(help_list[k][0])
+                init_matrix[1].append(help_list[k][1])
+                init_matrix[2].append(help_list[k][2])
             self.ia = np.zeros(np.max(init_matrix[0])+2)
             for k in np.arange(0, len(init_matrix[2])):
                 if init_matrix[2][k]:
@@ -86,3 +96,6 @@ class CSRMatrix:
                 k = int(self.ja[int(j)])
                 result[i][k] = self.a[int(j)]
         return result
+
+q = CSRMatrix(([2, 1, 0], [1, 0, 3], [5, 1, 4]))
+print(q.to_dense())
