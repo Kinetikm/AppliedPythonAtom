@@ -31,7 +31,7 @@ class CSRMatrix:
             self.shape = (
                 np.amax(row_indexes) + 1, np.amax(column_indexes) + 1)
             self.A = np.array([])
-            self.IA = np.zeros(self.shape[1] + 1).astype(int)
+            self.IA = np.zeros(self.shape[0] + 1).astype(int)
             self.JA = np.array([]).astype(int)
             for i in range(len(data)):
                 self.set_item(row_indexes[i], column_indexes[i], data[i])
@@ -42,7 +42,7 @@ class CSRMatrix:
             column_indexes = np.where(delete_zeros_condition)[1].astype(int)
             data = init_matrix_representation[delete_zeros_condition]
             self.A = np.array([])
-            self.IA = np.zeros(self.shape[1] + 1).astype(int)
+            self.IA = np.zeros(self.shape[0] + 1).astype(int)
             self.JA = np.array([]).astype(int)
             for i in range(len(data)):
                 self.set_item(row_indexes[i], column_indexes[i], data[i])
