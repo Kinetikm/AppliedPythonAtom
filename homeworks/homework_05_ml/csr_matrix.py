@@ -3,26 +3,51 @@
 
 import numpy as np
 
-
 class CSRMatrix:
+    """
+           :param init_matrix_representation: can be usual dense matrix
+           or
+           (row_ind, col, data) tuple with np.arrays,
+               where data, row_ind and col_ind satisfy the relationship:
+               a[row_ind[k], col_ind[k]] = data[k]
+           """
     def __init__(self, init_matrix):
         self.A = np.array([], dtype=int)
         self.IA = np.array([], dtype=int)
         self.JA = np.array([], dtype=int)
         if isinstance(init_matrix, tuple) and len(init_matrix) == 3:
             self.IA = np.array([0])
-            init_0 = np.array(init_matrix[0])
-            init_1 = np.array(init_matrix[1])
-            init_2 = np.array(init_matrix[2])
+
+            rows = {}
+            for item in sorted(list(zip(init_matrix[0], init_matrix[1], init_matrix[2])), key=lambda el: el[0]):
+                if rows.get(item[0]):
+                    rows[item[0]].append(item)
+                else:
+                    rows[item[0]] = [item]
+
+            zipped = []
+            for i in sorted(rows.keys()):
+                rows.get(i).sort(key=lambda el: el[1])
+                zipped.append(rows.get(i))
+
+            init_0 = np.array([], dtype=int)
+            init_1 = np.array([], dtype=int)
+            init_2 = np.array([], dtype=int)
+            for each_list in zipped:
+                for item in each_list:
+                    init_0 = np.append(init_0, item[0])
+                    init_1 = np.append(init_1, item[1])
+                    init_2 = np.append(init_2, item[2])
+
             nonzero_indices = init_2.nonzero()
             self.A = np.append(self.A, init_2[nonzero_indices])
             self.JA = np.append(self.JA, init_1[nonzero_indices])
             _, cnt = np.unique(init_0[nonzero_indices], return_counts=True)
             self.IA = np.append(self.IA, cnt.cumsum(dtype=int))
-            self.col_num = np.unique(init_1).size  # количество строк итак сможем вычислить по IA
+            self.col_num = np.unique(init_1).size + 1  # количество строк итак сможем вычислить по IA
         elif isinstance(init_matrix, np.ndarray):
             self.A = init_matrix[init_matrix.nonzero()]
-            ia_list = np.array([int(0)])
+            ia_list = np.array([0])
             for row in init_matrix:
                 self.JA = np.append(self.JA, row.nonzero())
                 try:
@@ -64,7 +89,6 @@ class CSRMatrix:
         self.A = np.insert(self.A, self.IA[i + 1], value)
         self.JA = np.insert(self.JA, self.IA[i + 1], j)
         self.IA[i + 1:] += 1
-        return
 
     def to_dense(self):
         res = np.zeros([self.IA.size - 1, self.col_num])
@@ -73,3 +97,5 @@ class CSRMatrix:
                 k = self.JA[j]
                 res[i][k] = self.A[j]
         return res
+
+
