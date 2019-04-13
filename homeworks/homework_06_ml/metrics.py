@@ -13,9 +13,9 @@ def mse(y_true, y_hat, derivative=False):
     :return: loss
     """
     n = y_true.size()
-    if derivative == False:
+    if derivative is False:
         loss = (1 / n) * np.sum((y_true - y_hat) ** 2)
-    elif derivative == True:
+    elif derivative is True:
         #  не понял по какому аргументу брать производную. и как поступать со знаком. взял производную по прогнозу.
         loss = -(2 / n) * np.sum(y_true - y_hat)
     return loss
