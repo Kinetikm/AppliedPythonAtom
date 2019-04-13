@@ -38,3 +38,4 @@ def r2_score(y_true, y_hat):
     """
     mean = np.mean(y_true)
     loss = 1 - ((np.sum((y_true - y_hat) ** 2)) / (np.sum((mean - y_true) ** 2)))
+    return loss
