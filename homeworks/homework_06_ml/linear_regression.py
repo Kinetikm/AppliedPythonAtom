@@ -28,8 +28,8 @@ class LinearRegression:
         for item in range(iteration):
             self.weights[:-1] -= 2 * self.gradient / X_train.shape[0] * \
                                  (y_test - y_train) @ X_train
-            self.weights[-1] -= 2 * self.gradient / X_train.shape[0] * \
-                                (y_test - y_train).sum()
+            self.weights[-1] -= 2 * self.gradient / X_train.shape[0] * (
+                    y_test - y_train).sum()
             if self.name_reg == 'L1':
                 self.weights -= self.gradient * np.sign(self.weights)
             elif self.name_reg == 'L2':
