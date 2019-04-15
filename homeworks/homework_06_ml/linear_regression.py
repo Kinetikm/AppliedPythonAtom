@@ -12,7 +12,7 @@ class LinearRegression:
         :param alpha: regularizarion coefficent
         """
         self.lr = lambda_coef
-        assert regulatization in (None, 'L1, L2'), \
+        assert regulatization in (None, 'L1', 'L2'), \
             "Wrong regularization value"
         self.reg = regulatization
         self.reg_coef = alpha
@@ -29,37 +29,35 @@ class LinearRegression:
         """
         assert x_train.shape[0] == y_train.shape[0], \
             "X and y shapes mismatch"
+        x_ = np.hstack((np.ones((x_train.shape[0], 1)), x_train))
+        n = len(y_train)
 
         # инициализация весов небольшими значениями
         # и иниц.истории
-        self.W = np.random.normal(scale=0.001, size=x_train.shape[1])
+        self.W = np.random.normal(scale=0.001, size=x_.shape[1])
         self.history = np.zeros(n_epochs)
 
-        self._max = x_train.max(axis=0)
-        self._min = x_train.min(axis=0)
-        x_train = (x_train - self._min) / (self._max - self._min)
-        X = np.hstack((np.ones(x_train.shape[0], 1), x_train))
-        N = len(y_train)
+        self._isTrain = True
 
         # обучение
         for epoch in range(n_epochs):
-
-            l_coef = 1.0
+            r_coef = 0.0
             if self.reg == 'L1':
-                l_coef = self.reg_coef * np.ones(X.shape[1]) / 2
+                r_coef = self.reg_coef * np.ones(x_.shape[1]) / 2
             elif self.reg == 'L2':
-                l_coef = self.lr * self.W
+                r_coef = self.reg_coef * self.W
 
             y_hat = self.predict(x_train)
-            self.W -= (2 * self.lr / N) * (np.dot(X.T, y_hat - y_train) + l_coef)
-            self.history[epoch] = mse(y_hat - y_train)
+            self.W -= (2 * self.lr / n) * (np.dot(x_.T, y_hat - y_train) + r_coef)
+            self.history[epoch] = mse(y_hat, y_train)
 
-            if np.abs(self.history[epoch] - self.history[epoch + 1]) < eps:
+            if np.abs(self.history[epoch] - self.history[epoch - 1]) < eps:
                 self.history = self.history[:epoch + 1]
-                self._isTrain = True
                 break
 
-        self._isTrain = True
+        self.coef_ = self.W[1:]
+        self.intercept_ = self.W[0]
+        print("Done")
 
     def predict(self, x_test):
         """
@@ -67,9 +65,8 @@ class LinearRegression:
         :param x_test: test data for predict in
         :return: y_test: predicted values
         """
-        assert (not self._isTrain), "Model not trained"
-        x_test = (x_test - self._min) / (self._max - self._min)
-        x_test = np.hstack([np.ones(x_test.shape[1]), x_test])
+        assert self._isTrain, "Model not trained"
+        x_test = np.hstack([np.ones((x_test.shape[0], 1)), x_test])
         return np.dot(x_test, self.W)
 
     def get_weights(self):
@@ -77,5 +74,5 @@ class LinearRegression:
         Get weights from fitted linear model
         :return: weights array
         """
-        assert (not self._isTrain), "Model not trained"
+        assert self._isTrain, "Model not trained"
         return self.W
