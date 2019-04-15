@@ -43,7 +43,7 @@ class LinearRegression:
                     r[0] = 0
                 else:
                     r = 0
-                self.w -= (-2) * self.lambda_coef * x_vect.T @ (y_train - (x_vect @ self.w)) + r
+                self.w -= (-2) * self.learning_rate * x_vect.T @ (y_train - (x_vect @ self.w)) + r
                 prediction = self.predict(X_train)
                 history[it + 1] = mse(y_train, prediction)
                 if np.abs(history[it + 1] - history[it]) < delta:
