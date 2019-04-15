@@ -28,8 +28,8 @@ def mae(y_true, y_hat):
     :param y_hat: vector of estimated target values
     :return: loss
     """
-    n = y_true.shape[0]
-    loss = (1 / n) * np.sum((np.abs(y_true - y_hat)))
+    n1 = y_true.shape[0]
+    loss = (1 / n1) * np.sum((np.abs(y_true - y_hat)))
     return loss
 
 
