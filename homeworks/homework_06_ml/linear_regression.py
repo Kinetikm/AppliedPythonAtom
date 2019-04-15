@@ -59,7 +59,7 @@ class LinearRegression:
         :param X_test: test data for predict in
         :return: y_test: predicted values
         """
-        assert getattr(self, 'train') == False, 'Model is not fitted'
+        assert getattr(self, 'train') is False, 'Model is not fitted'
         x_test = np.hstack([np.ones((X_test.shape[0], 1)), X_test])
         return x_test.dot(self.w)
 
@@ -68,6 +68,6 @@ class LinearRegression:
         Get weights from fitted linear model
         :return: weights array
         """
-        assert getattr(self, 'train') == False, 'Model is not fitted'
+        assert getattr(self, 'train') is False, 'Model is not fitted'
         # assert getattr(self, 'w', 0) != 0, 'Model is not fitted'
         return self.w
