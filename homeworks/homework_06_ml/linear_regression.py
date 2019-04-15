@@ -46,8 +46,9 @@ class LinearRegression:
                 self.w -= (-2) * self.learning_rate * x_vect.T @ (y_train - (x_vect @ self.w)) + r
                 prediction = self.predict(X_train)
                 history[it + 1] = mse(y_train, prediction)
-                if np.abs(history[it + 1] - history[it]) < delta:
-                    break
+                if (it > 0):
+                    if np.abs(history[it + 1] - history[it]) < delta:
+                        break
             # coef = self.w[1:] intercept = self.w[0]
             self.train = True
             return self
