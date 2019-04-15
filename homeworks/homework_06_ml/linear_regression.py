@@ -35,6 +35,9 @@ class LinearRegression:
         self.W = np.random.normal(scale=0.001, size=x_train.shape[1])
         self.history = np.zeros(n_epochs)
 
+        self._max = x_train.max(axis=0)
+        self._min = x_train.min(axis=0)
+        x_train = (x_train - self._min) / (self._max - self._min)
         X = np.hstack((np.ones(x_train.shape[0], 1), x_train))
         N = len(y_train)
 
@@ -65,7 +68,7 @@ class LinearRegression:
         :return: y_test: predicted values
         """
         assert (not self._isTrain), "Model not trained"
-
+        x_test = (x_test - self._min) / (self._max - self._min)
         x_test = np.hstack([np.ones(x_test.shape[1]), x_test])
         return np.dot(x_test, self.W)
 
