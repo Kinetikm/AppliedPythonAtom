@@ -32,6 +32,7 @@ def mae(y_true, y_hat):
     loss = (1 / n) * np.sum((np.abs(y_true - y_hat)))
     return loss
 
+
 def r2_score(y_true, y_hat):
     """
     R^2 regression loss
