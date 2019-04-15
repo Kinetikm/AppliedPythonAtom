@@ -23,9 +23,7 @@ class LinearRegression:
         :param y_train: target values for training data
         :return: None
         """
-        #self.weights = np.hstack((self.weights, np.ones(X_train.shape[0])))
-        #self.weights = 0.01 * self.weights
-        self.weights = np.ones(X_train.shape[1]+1)
+        self.weights = np.ones(X_train.shape[1] + 1)
         y_test = self._predict(X_train)
         for item in range(iteration):
             self.weights[:-1] -= 2 * self.gradient / X_train.shape[0] * \
