@@ -43,13 +43,14 @@ class LinearRegression:
                     r[0] = 0
                 else:
                     r = 0
-                self.w -= (-2) * self.learning_rate * x_vect.T @ (y_train - (x_vect @ self.w)) + r
                 prediction = self.predict(X_train)
+                self.w -= (-2/ x_vect.shape[0]) *( self.learning_rate * x_vect.T.dot(
+                        (prediction - y_train)) + r)
                 history[it + 1] = mse(y_train, prediction)
                 if (it > 0):
                     if np.abs(history[it + 1] - history[it]) < delta:
                         break
-            # coef = self.w[1:] intercept = self.w[0]
+            # coef = self.r[1:] intercept = self.r[0]
             self.train = True
             return self
 
