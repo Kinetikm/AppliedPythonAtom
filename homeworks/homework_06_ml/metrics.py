@@ -12,7 +12,7 @@ def mse(y_true, y_hat, derivative=False):
     :param y_hat: vector of estimated target values
     :return: loss
     """
-    n = y_true.size()
+    n = y_true.shape[0]
     if derivative is False:
         loss = (1 / n) * np.sum((y_true - y_hat) ** 2)
     elif derivative is True:
@@ -28,10 +28,9 @@ def mae(y_true, y_hat):
     :param y_hat: vector of estimated target values
     :return: loss
     """
-    n = y_true.size()
-    loss = (1 / n) * np.sum((np.abs(y_true - y_hat)) ** 2)
+    n = y_true.shape[0]
+    loss = (1 / n) * np.sum((np.abs(y_true - y_hat)))
     return loss
-
 
 def r2_score(y_true, y_hat):
     """
