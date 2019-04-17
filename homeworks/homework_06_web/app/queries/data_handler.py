@@ -19,7 +19,7 @@ def upload_file():
     if 'file' not in request.files or not request.files['file'].filename:
         abort(400)
 
-    #Добавление в бд
+    # Добавление в бд
     file = Files(filename=request.files['file'].filename)
 
     with transaction():
@@ -57,7 +57,7 @@ def file_info(fileid):
     fileinf = db.session.query(Files, func.count(Data.fileid).label('count_rows'))\
         .join(Files.data)\
         .group_by(Files.fileid)\
-        .having(Files.fileid==fileid)\
+        .having(Files.fileid == fileid)\
         .first()
 
     return jsonify(

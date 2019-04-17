@@ -12,12 +12,14 @@ DB_CONFIG = {
 class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_CONFIG['username']}:{DB_CONFIG['password']}@{DB_CONFIG['host']}/{DB_CONFIG['dbname']}?charset=utf8"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_CONFIG['username']}:{DB_CONFIG['password']}" \
+                              f"@{DB_CONFIG['host']}/{DB_CONFIG['dbname']}?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProductionConfig(Config):
     DEBUG = False
+
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True

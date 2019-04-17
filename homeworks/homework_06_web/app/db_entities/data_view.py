@@ -5,6 +5,7 @@ from sqlalchemy import text
 from app.database import db
 from datetime import datetime
 
+
 class Data(db.Model):
     __table_args__ = {'extend_existing': True}
 
@@ -19,7 +20,7 @@ class Data(db.Model):
     low = db.Column(db.Float)
     close = db.Column(db.Float)
     vol = db.Column(db.Integer)
-    
+
     created = db.Column(db.DateTime, default=datetime.now, server_default=text('now()'))
     updated = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, server_default=text('now()'))
 
