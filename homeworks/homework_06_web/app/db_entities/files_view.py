@@ -12,6 +12,8 @@ class Files(db.Model):
     fileid = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(80), nullable=False)
 
+    data = db.relationship("Data", backref='files', lazy="dynamic")
+
     first_download = db.Column(db.DateTime, default=datetime.now, server_default=text('now()'))
     last_download = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, server_default=text('now()'))
 

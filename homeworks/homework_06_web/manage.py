@@ -7,7 +7,7 @@ from app.database import db
 from app.logger import Logger
 from app import create_app
 
-app = create_app(Logger)
+app = create_app()
 migrate = Migrate(app, db)
 manager = Manager(app)
 

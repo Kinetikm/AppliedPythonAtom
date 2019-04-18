@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from app import create_logger
-Logger = create_logger()
+import logging
+import appconfig
+
+
+Logger = logging.getLogger(appconfig.currentConfig.LOGGER_NAME)
