@@ -21,10 +21,6 @@ def create_app():
     Logger.info('Initialize database...')
     db.init_app(app)
     Logger.info('Database initialized')
-    with app.test_request_context():
-        Logger.info('Creating tables...')
-        db.create_all()
-        Logger.info('Tables created...')
 
     import app.queries.data_handler as data_handler
 

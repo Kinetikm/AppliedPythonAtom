@@ -4,5 +4,4 @@
 import logging
 import appconfig
 
-
 Logger = logging.getLogger(appconfig.currentConfig.LOGGER_NAME)

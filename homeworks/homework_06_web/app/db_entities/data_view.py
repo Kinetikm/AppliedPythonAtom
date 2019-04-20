@@ -7,10 +7,11 @@ from datetime import datetime
 
 
 class Data(db.Model):
+    __tablename__ = "Data"
     __table_args__ = {'extend_existing': True}
 
     nodeid = db.Column(db.Integer, primary_key=True)
-    fileid = db.Column(db.Integer, db.ForeignKey('files.fileid'))
+    fileid = db.Column(db.Integer, db.ForeignKey('Files.fileid'))
     ticker = db.Column(db.String(80), nullable=False)
     per = db.Column(db.Integer(), nullable=False)
     date = db.Column(db.Date, nullable=False)
