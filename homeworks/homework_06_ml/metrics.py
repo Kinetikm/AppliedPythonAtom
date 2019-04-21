@@ -37,6 +37,7 @@ def mae(y_true, y_hat):
     """
     # mae = ( 1 / N ) * sum( |y_true[i] - y_hat[i]| )
     # mae = mean( |y_true[i] - y_hat[i]| )
+    # return np.mean(np.abs(y_true - y_hat))
 
     n = len(y_true)
     part_x = [abs(y_true[i] - y_hat[i]) for i in range(n)]
@@ -53,12 +54,5 @@ def r2_score(y_true, y_hat):
     """
     # r2 = 1 - sum( (y_true[i] - y_hat[i]) ^ 2 ) / sum( (y_true[i] - mean) ^ 2 )
     # mean = sum(y_true) / N
-    n = len(y_true)
-    part_x = [(y_true[i] - y_hat[i]) ** 2 for i in range(n)]
-
     m = np.mean(y_true)
-    part_y = [(y_true[i] - m) ** 2 for i in range(n)]
-
-    r2 = 1 - (sum(part_x) / sum(part_y))
-
-    return r2
+    return 1 - np.sum((y_true - y_hat) ** 2) / np.sum((y_true - m) ** 2)
