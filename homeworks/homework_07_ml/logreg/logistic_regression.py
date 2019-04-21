@@ -19,7 +19,7 @@ class LogisticRegression:
         :param alpha: regularizarion coefficent
         """
         self.lam = lambda_coef
-        assert regulatization is None or regulatization == 'L1' or regulatization == 'L2', 'You entered wrong regularization'
+        assert regulatization is None or regulatization == 'L1' or regulatization == 'L2', 'You entered wrong reg'
         self.reg = regulatization
         self.alpha = alpha
         self.coef_ = None
@@ -46,8 +46,8 @@ class LogisticRegression:
                 X_train @ coef_last) - y_train) + self.alpha * 2 * coef_last
 
         def grad_f_L2(self, X_train, y_train, coef_last):
-            return 1 / len(X_train) * X_train.transpose() @ (self.sigmoid(X_train @
-                                                                          coef_last) - y_train) + self.alpha * np.ones(X_train.shape[1])
+            return 1 / len(X_train) * X_train.transpose() @ (self.sigmoid(
+                X_train @coef_last) - y_train) + self.alpha * np.ones(X_train.shape[1])
 
         def normalize(X_train):
             mean = np.mean(X_train, axis=0)

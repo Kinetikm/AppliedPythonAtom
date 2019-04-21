@@ -12,8 +12,8 @@ def logloss(y_true, y_pred):
     :param y_hat: vector of estimated probabilities
     :return: loss
     """
-    sum = y_true @ np.log(y_pred) + (np.ones(len(y_pred)) - \
-                          y_true) @ np.log(np.ones(len(y_pred)) - y_pred)
+    sum = y_true @ np.log(y_pred) + (np.ones(len(y_pred)) -
+                                     y_true) @ np.log(np.ones(len(y_pred)) - y_pred)
     return -sum / len(y_true)
 
 
