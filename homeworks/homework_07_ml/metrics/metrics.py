@@ -12,24 +12,29 @@ def logloss(y, p):
     :param p: vector of estimated probabilities
     :return: loss
     """
-    assert y == p, "Invalid size"
-    loss = (y * np.log(p) + (1 - y) * np.log(1 - p)).mean()
+    if y.size != p.size:
+        print("Size Error")
+        return 0
+    loss = (-1.0 / y.size) * np.sum(y * np.log(p) + (1 - y) * np.log(1 - p)).mean
     return loss
 
 
-def accuracy(y_true, y_hat):
+def accuracy(y_true, y_pred):
     """
     Accuracy
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated class values
     :return: loss
     """
-    assert y_true == y_hat, "Invalid size"
+    if y_true.size != y_pred.size:
+        print("Size Error")
+        return 0
     true = 0
-    for index in (y_hat.size() - 1):
-        if y_true[index] == y_hat[index]:
+    for index in range(len(y_true)):
+        if y_true[index] == y_pred[index]:
             true += 1
-    loss = true / y_hat.size()
+    loss = true / len(y_true)
+    return loss
 
 
 def presicion(y_true, y_pred):
@@ -39,15 +44,21 @@ def presicion(y_true, y_pred):
     :param y_pred: vector of estimated class values
     :return: loss
     """
-    assert y_true == y_pred, "Invalid size"
-    tp = 0
-    fp = 0
-    for index in (y_pred.size() - 1):
-        if y_true[index] == y_pred[index] and y_true[index] == 1:
-            tp += 1
-        if y_true[index] == 0 and y_pred[index] == 1:
-            fp += 1
-    loss = tp / (tp + fp)
+
+    def presicion(y_true, y_pred):
+        if y_true.size != y_pred.size:
+            print("Size Error")
+            return 0
+        tp = 0
+        fp = 0
+        for index in range(len(y_true)):
+            if y_true[index] == y_pred[index] and y_true[index] == 1:
+                tp += 1
+            if y_true[index] == 0 and y_pred[index] == 1:
+                fp += 1
+        print(tp, fp)
+        loss = tp / (tp + fp)
+        return loss
 
 
 def recall(y_true, y_pred):
@@ -57,15 +68,18 @@ def recall(y_true, y_pred):
     :param y_pred: vector of estimated class values
     :return: loss
     """
-    assert y_true == y_pred, "Invalid size"
+    if y_true.size != y_pred.size:
+        print("Size Error")
+        return 0
     tp = 0
     fn = 0
-    for index in (y_pred.size() - 1):
+    for index in range(len(y_true)):
         if y_true[index] == y_pred[index] and y_true[index] == 1:
             tp += 1
         if y_true[index] == 1 and y_pred[index] == 0:
             fn += 1
     loss = tp / (tp + fn)
+    return loss
 
 
 def roc_auc(y_true, y_pred):
@@ -75,12 +89,14 @@ def roc_auc(y_true, y_pred):
     :param y_pred: vector of estimated probabilities
     :return: loss
     """
-    assert y_true == y_pred, "Invalid size"
+    if y_true.size != y_pred.size:
+        print("Size Error")
+        return 0
     tp = 0
     fn = 0
     fp = 0
     tn = 0
-    for index in (y_pred.size() - 1):
+    for index in range(len(y_pred)):
         if y_true[index] == 1:
             if y_true[index] == y_pred[index]:
                 tp += 1
@@ -93,5 +109,5 @@ def roc_auc(y_true, y_pred):
                 fp += 1
     tpr = tp / (tp + fn)
     fpr = fp / (fp + tn)
-    loss = tpr / fpr
+    loss = (1 + tpr - fpr) / 2
     return loss
