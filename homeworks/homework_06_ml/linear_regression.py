@@ -40,7 +40,7 @@ class LinearRegression:
                 r[0] = 0
             else:
                 r = 0
-            prediction = self.predict(x_train)
+            prediction = self.predict(X_train)
             self.w -= (2 / x_train.shape[0]) * self.lambda_coef * (x_train.T.dot(
                 (prediction - y_train)) + r)
             if i % 2 == 0:
@@ -58,12 +58,10 @@ class LinearRegression:
         :param X_test: test data for predict in
         :return: y_test: predicted values
         """
-        if all(X_test[:, 0] == 1):
-            return X_test.dot(self.w)
-        else:
-            ones = np.ones((X_test.shape[0], 1))
-            x_test = np.hstack([ones, X_test])
-            return x_test.dot(self.w)
+
+        ones = np.ones((X_test.shape[0], 1))
+        x_test = np.hstack([ones, X_test])
+        return x_test.dot(self.w)
 
     def get_weights(self):
         """
