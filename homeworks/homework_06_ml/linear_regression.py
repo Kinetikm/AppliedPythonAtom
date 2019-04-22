@@ -34,7 +34,6 @@ class LinearRegression:
         X_train = np.hstack([np.ones(X_train.shape), X_train])
         self.weights = np.ones(X_train.shape[1])
         weights = self.weights
-        print(weights)
         for i in range(max_iteration_number):
             if self.regularization == "L1":
                 mse_alpha = self.alpha * (
@@ -46,7 +45,7 @@ class LinearRegression:
             mse_loss = -2 / X_train.shape[0] * (
                     y_train - X_train @ self.weights) @ X_train + mse_alpha
             self.weights = self.weights - self.lambda_coefficient * mse_loss
-            if all(self.weights - weights) < epsilon:
+            if all(np.abs(self.weights - weights)) < epsilon:
                 break
             weights = self.weights
         self.was_fitted = True
