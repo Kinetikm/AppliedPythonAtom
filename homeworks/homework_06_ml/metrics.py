@@ -17,15 +17,12 @@ def mse(y_true, y_hat, derivative=False):
     # mse = mean( (y_true[i] - y_hat[i]) ^ 2 )
     # mse_derivative = ( -2 / N ) * sum( y_true[i] - y_hat[i] )
     # mse_derivative = -2 * mean( y_true[i] - y_hat[i] )
-
-    n = len(y_true)
+    diff = y_true - y_hat
 
     if derivative:
-        part_x = [(y_true[i] - y_hat[i]) for i in range(n)]
-        return np.mean(part_x) * -2
+        return np.mean(diff) * -2
 
-    part_x = [(y_true[i] - y_hat[i]) ** 2 for i in range(n)]
-    return np.mean(part_x)
+    return np.mean(diff ** 2)
 
 
 def mae(y_true, y_hat):
@@ -37,12 +34,7 @@ def mae(y_true, y_hat):
     """
     # mae = ( 1 / N ) * sum( |y_true[i] - y_hat[i]| )
     # mae = mean( |y_true[i] - y_hat[i]| )
-    # return np.mean(np.abs(y_true - y_hat))
-
-    n = len(y_true)
-    part_x = [abs(y_true[i] - y_hat[i]) for i in range(n)]
-
-    return np.mean(part_x)
+    return np.mean(np.abs(y_true - y_hat))
 
 
 def r2_score(y_true, y_hat):

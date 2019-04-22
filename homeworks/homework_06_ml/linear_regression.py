@@ -30,7 +30,7 @@ class LinearRegression:
 
         # подготовка
         n = len(y_train)
-        steps = np.zeros(n_steps)
+        prev_step = 0
         x_tmp = np.hstack([np.ones((x_train.shape[0], 1)), x_train])
         self.__weights = np.zeros(x_tmp.shape[1])
 
@@ -41,16 +41,17 @@ class LinearRegression:
             if regularization == 'L1':
                 reg_val = alpha * np.ones(x_tmp.shape[1]) / 2
             elif regularization == 'L2':
-                reg_val = alpha * self.__weights
+                reg_val = alpha * self.__weights[1:]
 
             # расчёт
             y_hat = self.predict(x_train)
             self.__weights -= (2 * lambda_coef / n) * (np.dot(x_tmp.T, y_hat - y_train) + reg_val)
 
             # проверка критерия завершения
-            steps[step] = mse(y_hat, y_train)
-            if np.abs(steps[step] - steps[step - 1]) < eps:
+            cur_step = mse(y_hat, y_train)
+            if np.abs(cur_step - prev_step) < eps:
                 break
+            prev_step = cur_step
 
         # запоминание коэффициентов (вес и bias)
         self.intercept_ = self.__weights[0]
