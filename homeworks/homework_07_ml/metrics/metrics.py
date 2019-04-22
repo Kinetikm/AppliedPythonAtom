@@ -5,51 +5,85 @@
 import numpy as np
 
 
-def logloss(y_true, y_pred):
+def logloss(y_true, y_hat):
     """
     logloss
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated probabilities
     :return: loss
     """
-    pass
+    return ((y_true * np.log2(y_hat) + (1 - y_true) * np.log2(
+        1 - y_hat)).sum()) / (len(y_true))
 
 
-def accuracy(y_true, y_pred):
+def accuracy(y_true, y_hat):
     """
     Accuracy
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated class values
     :return: loss
     """
-    pass
+    true_positive, false_positive, true_negative, false_negative = \
+        __confusion_matrix__(y_true, y_hat)
+    return (true_positive + true_negative) / (
+            true_positive + true_negative + false_negative + false_positive)
 
 
-def presicion(y_true, y_pred):
+def precision(y_true, y_hat):
     """
-    presicion
+    precision
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated class values
     :return: loss
     """
-    pass
+    true_positive, false_positive, true_negative, false_negative = \
+        __confusion_matrix__(y_true, y_hat)
+    return true_positive / (true_positive + false_positive)
 
 
-def recall(y_true, y_pred):
+def recall(y_true, y_hat):
     """
-    presicion
+    recall
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated class values
     :return: loss
     """
-    pass
+    true_positive, false_positive, true_negative, false_negative = \
+        __confusion_matrix__(y_true, y_hat)
+    return true_positive / (true_positive + false_negative)
 
 
-def roc_auc(y_true, y_pred):
+def roc_auc(y_true, y_hat):
     """
     roc_auc
     :param y_true: vector of truth (correct) target values
     :param y_hat: vector of estimated probabilities
     :return: loss
+    1 + TPR - FPR
+    -------------   ????
+         2
     """
-    pass
+    true_positive, false_positive, true_negative, false_negative = \
+        __confusion_matrix__(y_true, y_hat)
+    t_p_r = true_positive / (true_positive + false_negative)
+    f_p_r = false_positive / (false_positive + true_negative)
+    return (1 + t_p_r - f_p_r) / 2
+
+
+def __confusion_matrix__(y_true, y_hat):
+    true_positive = 0
+    false_positive = 0
+    true_negative = 0
+    false_negative = 0
+
+    for i in range(len(y_hat)):
+        if y_true[i] == y_hat[i] == 1:
+            true_positive += 1
+        if y_hat[i] == 1 and y_true[i] != y_hat[i]:
+            false_positive += 1
+        if y_true[i] == y_hat[i] == 0:
+            true_negative += 1
+        if y_hat[i] == 0 and y_true[i] != y_hat[i]:
+            false_negative += 1
+
+    return true_positive, false_positive, true_negative, false_negative
