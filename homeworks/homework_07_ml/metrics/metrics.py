@@ -5,13 +5,15 @@
 import numpy as np
 
 
-def logloss(y_true, y_hat):
+def logloss(y_true, y_hat, eps=1e-8):
     """
     logloss
     :param y_true: vector of truth (correct) class values
     :param y_hat: vector of estimated probabilities
+    :param eps: for evading log(1) and log(0)
     :return: loss
     """
+    y_hat = np.clip(y_hat, eps, 1 - eps)
     return ((y_true * np.log2(y_hat) + (1 - y_true) * np.log2(
         1 - y_hat)).sum()) / (len(y_true))
 
@@ -60,7 +62,7 @@ def roc_auc(y_true, y_hat):
     :param y_hat: vector of estimated probabilities
     :return: loss
     1 + TPR - FPR
-    -------------   ????
+    -------------  = S  ????
          2
     """
     true_positive, false_positive, true_negative, false_negative = \
