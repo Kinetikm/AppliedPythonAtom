@@ -54,8 +54,8 @@ class LogisticRegression:
                 prediction = self.predict_proba(X_train).T
                 y_train = y_train.T
                 p = (prediction.T - y_train).T
-                self.w -= ((-2 / x_vect.shape[0]) * (self.learning_rate * x_vect.T.dot(p
-                                                                                       ) + r))
+                self.w -= (2 * (self.learning_rate * x_vect.T.dot(p
+                                                                  ) + r)) / ((1 + delta) ** it)
                 if it % 2 == 0:
                     hist0 = self.w
                 else:
