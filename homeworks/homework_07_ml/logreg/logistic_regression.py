@@ -39,8 +39,7 @@ class LogisticRegression:
 
             for i in range(max_iteration_number):
                 if self.regularization == "L1":
-                    regularization = self.alpha * (
-                            iter_weights / np.abs(iter_weights)) / 2
+                    regularization = self.alpha * np.sign(iter_weights) / 2
                 elif self.regularization == "L2":
                     regularization = self.alpha * iter_weights
                 else:
