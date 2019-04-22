@@ -29,6 +29,15 @@ class LogisticRegression:
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
+    def grad_f(self, X_train, y_train, coef_last, regulator):
+        return 1 / len(X_train) * X_train.transpose() @ (
+            self.sigmoid(X_train @ coef_last) - y_train) + regulator
+
+    def normalize(self, X_train):
+        mean = np.mean(X_train, axis=0)
+        std = np.std(X_train, axis=0)
+        return (X_train - mean) / std
+
     def fit(self, X_train, y_train):
         """
         Fit model using gradient descent method
@@ -37,46 +46,26 @@ class LogisticRegression:
         :return: None
         """
 
-        def grad_f_withoutL(self, X_train, y_train, coef_last):
-            return 1 / \
-                len(X_train) * X_train.transpose() @ (self.sigmoid(X_train @ coef_last) - y_train)
-
-        def grad_f_L1(self, X_train, y_train, coef_last):
-            return 1 / len(X_train) * X_train.transpose() @ (self.sigmoid(
-                X_train @ coef_last) - y_train) + self.alpha * 2 * coef_last
-
-        def grad_f_L2(self, X_train, y_train, coef_last):
-            return 1 / len(X_train) * X_train.transpose() @ (self.sigmoid(
-                X_train @coef_last) - y_train) + self.alpha * np.ones(X_train.shape[1])
-
-        def normalize(X_train):
-            mean = np.mean(X_train, axis=0)
-            std = np.std(X_train, axis=0)
-            return (X_train - mean) / std
-
         assert X_train.shape[0] == y_train.shape[0], 'Invalid dimensions'
 
-        X_train = normalize(X_train)
+        X_train = self.normalize(X_train)
         step = self.lam
         X_train = np.c_[np.ones(X_train.shape[0]), X_train]
         self.coef_ = np.random.randn(X_train.shape[1])
+        regulator = 0
         for i in range(self.n):
             coef_last = np.copy(self.coef_)
             if self.reg is None:
-                self.coef_ = coef_last - step * \
-                    grad_f_withoutL(self, X_train, y_train, coef_last)
+                regulator == 0
             if self.reg == 'L1':
-                self.coef_ = coef_last - step * \
-                    grad_f_L1(self, X_train, y_train, coef_last)
+                regulator = self.alpha * 2 * coef_last
             if self.reg == 'L2':
-                self.coef_ = coef_last - step * \
-                    grad_f_L2(self, X_train, y_train, coef_last)
-
-            if np.all(abs(self.coef_ - coef_last) <
-                      np.zeros(X_train.shape[1]) + 0.000001):
-                self.intercept_ = self.coef_[0]
-                self.coef_ = self.coef_[1:]
-                return
+                regulator == self.alpha * np.ones(X_train.shape[1])
+            self.coef_ = coef_last - step * \
+                self.grad_f(X_train, y_train, coef_last, regulator)
+            err = np.sum(np.abs(self.coef_ - coef_last))
+            if err < 1e-9:
+                break
         self.intercept_ = self.coef_[0]
         self.coef_ = self.coef_[1:]
 
