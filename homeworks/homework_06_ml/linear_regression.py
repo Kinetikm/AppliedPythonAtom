@@ -21,11 +21,12 @@ class LinearRegression:
         :param y_train: target values for training data
         :return: None
         """
-
-        if X_train.shape[0] != y_train.shape[0]:
-            raise KeyError
+        assert X_train.shape[0] == y_train.shape[0], 'Model is not trained'
         self.train = True
-        change = np.zeros(iterations)
+        x_train = np.hstack([np.ones((X_train.shape[0], 1)), X_train])
+        columns = x_train.shape[1]
+        hist0 = 0
+        hist1 = 0
         x_train = np.hstack([np.ones((X_train.shape[0], 1)), X_train])
         columns = x_train.shape[1]
         self.w = np.zeros(columns)
@@ -42,8 +43,11 @@ class LinearRegression:
             prediction = self.predict(x_train)
             self.w -= (2 / x_train.shape[0]) * self.lambda_coef * (x_train.T.dot(
                 (prediction - y_train)) + r)
-            change[i] = mse(y_train, prediction)
-            if i > 0 and np.abs(change[i] - change[i - 1]) < delta:
+            if i % 2 == 0:
+                hist0 = mse(y_train, prediction)
+            else:
+                hist1 = mse(y_train, prediction)
+            if i > 0 and np.abs(hist1 - hist0) < delta:
                 # print(i)
                 break
         return self
@@ -54,7 +58,6 @@ class LinearRegression:
         :param X_test: test data for predict in
         :return: y_test: predicted values
         """
-        assert self.train, 'Model is not trained'
         if all(X_test[:, 0] == 1):
             return X_test.dot(self.w)
         else:
