@@ -98,4 +98,3 @@ class LogisticRegression:
         :return: weights array
         """
         return self.w
-
