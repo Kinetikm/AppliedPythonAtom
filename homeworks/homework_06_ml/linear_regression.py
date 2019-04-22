@@ -40,8 +40,10 @@ class LinearRegression:
             reg_val = 0.0
             if regularization == 'L1':
                 reg_val = alpha * np.ones(x_tmp.shape[1]) / 2
+                reg_val[0] = 0.0
             elif regularization == 'L2':
-                reg_val = alpha * self.__weights[1:]
+                reg_val = alpha * self.__weights
+                reg_val[0] = 0.0
 
             # расчёт
             y_hat = self.predict(x_train)
