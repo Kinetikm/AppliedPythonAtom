@@ -51,11 +51,9 @@ class LinearRegression:
             self.coef_ = coef_last - step * \
                 self.grad_f(X_train, y_train, coef_last, regulator)
 
-            if np.all(abs(self.coef_ - coef_last) <
-                      (np.zeros(X_train.shape[1]) + 0.000001)):
-                self.intercept_ = self.coef_[0]
-                self.coef_ = self.coef_[1:]
-                return
+            err = np.sum(np.abs(self.coef_ - coef_last))
+            if err < 1e-9:
+                break
         self.intercept_ = self.coef_[0]
         self.coef_ = self.coef_[1:]
 
