@@ -35,25 +35,24 @@ class LinearRegression:
         # инициализация весов небольшими значениями
         # и иниц.истории
         self.W = np.random.normal(scale=0.001, size=x_.shape[1])
-        self.history = np.zeros(n_epochs)
-
         self._isTrain = True
 
+        prev_err = 0.0
         # обучение
         for epoch in range(n_epochs):
             r_coef = 0.0
             if self.reg == 'L1':
-                r_coef = self.reg_coef * np.ones(x_.shape[1]) / 2
+                r_coef = np.hstack((0, self.reg_coef * np.ones(x_.shape[1] - 1) / 2))
             elif self.reg == 'L2':
-                r_coef = self.reg_coef * self.W
+                r_coef = np.hstack((self.W[0], self.reg_coef * self.W[1:]))
 
             y_hat = self.predict(x_train)
             self.W -= (2 * self.lr / n) * (np.dot(x_.T, y_hat - y_train) + r_coef)
-            self.history[epoch] = mse(y_hat, y_train)
+            curr_err = mse(y_hat, y_train)
 
-            if np.abs(self.history[epoch] - self.history[epoch - 1]) < eps:
-                self.history = self.history[:epoch + 1]
+            if np.abs(curr_err - prev_err) < eps:
                 break
+            prev_err = curr_err
 
         self.coef_ = self.W[1:]
         self.intercept_ = self.W[0]
