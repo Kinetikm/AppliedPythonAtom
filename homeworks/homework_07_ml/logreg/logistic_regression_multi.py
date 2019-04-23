@@ -4,7 +4,7 @@ import numpy as np
 
 
 class LogisticRegression:
-    def __init__(self, lambda_coef=1.0, regulatization=None, alpha=0.5, n_iter=100):
+    def __init__(self, lambda_coef=1.0, regulatization=None, alpha=1.0, n_iter=100):
         """
         LogReg for Binary case
         :param lambda_coef: constant coef for gradient descent step
@@ -29,12 +29,14 @@ class LogisticRegression:
         """
         assert x_train.shape[0] == y_train.shape[0], \
             "X and y shapes mismatch"
-
         self.mean_, self.std_ = np.mean(x_train), np.std(x_train)
         self.X_train = (x_train - self.mean_) / self.std_
 
+        self.classes_ = np.unique(y_train)
+        assert len(self.classes_) > 1, "Number of classes must be >= 2"
+
         x_tr = np.hstack((np.ones((x_train.shape[0], 1)), x_train))
-        self.W = np.random.normal(scale=0.001, size=x_tr.shape[1])
+        self.W = np.random.normal(scale=0.001, size=(x_tr.shape[1], len(self.classes_)))
 
         # prev_w = np.zeros(self.W.shape)
         for epoch in range(self.n_iter):
@@ -42,11 +44,15 @@ class LogisticRegression:
 
             r_coef = 0.0
             if self.reg == 'L1':
-                r_coef = np.hstack((0, self.reg_rate * np.ones(x_tr.shape[1] - 1) / 2))
+                r0 = np.zeros((self.W.shape[0], 1))
+                r_other = self.reg_rate * np.ones((self.W.shape[0], self.W.shape[1] - 1)) / 2
+                r_coef = np.hstack((r0, r_other))
             elif self.reg == 'L2':
-                r_coef = np.hstack((self.W[0], self.reg_rate * self.W[1:]))
+                r0 = (self.W[:, 0]).reshape((self.W.shape[0], 1))
+                r_other = self.reg_rate * self.W[:, 1:]
+                r_coef = np.hstack((r0, r_other))
 
-            y_hat = self.predict(x_train)
+            y_hat = self.predict_proba(x_train)
             grad = self._grad(y_hat, y_train, x_tr)
             self.W -= self.learn_rate * (grad + r_coef) / len(y_train)
 
@@ -62,27 +68,13 @@ class LogisticRegression:
         """
         Calculate gradient
         """
-        buf = 1 / len(y_true) * np.dot(x.T, y_hat - y_true)
-        return buf
-
-    def _loss(self, y_hat, y_true):
-        """
-        Calculate loss
-        """
-        res = np.sum(np.log(1 + np.exp(-y_true * y_hat)))
-        return res / len(y_true)
-
-    def _predict_proba(self, x_test):
-        """
-        Predict using model.
-        :param x_test: test data for predict in
-        :return: y_test: predicted values
-        """
-        assert self._isTrain, "Model not trained"
-        x_test = (x_test - self.mean_) / self.std_
-        x_test = np.hstack([np.ones((x_test.shape[0], 1)), x_test])
-        z = 1 / (1 + np.exp(-np.dot(x_test, self.W)))
-        return np.vstack((1 - z, z)).T
+        res = []
+        for i in range(len(y_true)):
+            buf = np.zeros(len(self.classes_))
+            buf[y_true] = 1
+            res.append(buf - y_hat[i])
+        res = -np.dot(x.T, np.array(res))
+        return res
 
     def predict_proba(self, x_test):
         """
@@ -91,9 +83,10 @@ class LogisticRegression:
         :return: y_test: predicted values
         """
         assert self._isTrain, "Model not trained"
+        x_test = (x_test - self.mean_) / self.std_
         x_test = np.hstack([np.ones((x_test.shape[0], 1)), x_test])
-        z = 1 / (1 + np.exp(-np.dot(x_test, self.W)))
-        return np.vstack((1 - z, z)).T
+        z = np.dot(x_test, self.W)
+        return 1 / (1 + np.exp(-z))
 
     def predict(self, x_test):
         """
@@ -103,8 +96,8 @@ class LogisticRegression:
         """
         assert self._isTrain, "Model not trained"
         x_test = np.hstack([np.ones((x_test.shape[0], 1)), x_test])
-        z = np.dot(x_test, self.W)
-        return (1 / (1 + np.exp(-z))).astype(int)
+        y_hat = 1 / (1 + np.exp(-np.dot(x_test, self.W)))
+        return np.array([np.argmax(y_i) for y_i in y_hat])
 
     def get_weights(self):
         """
