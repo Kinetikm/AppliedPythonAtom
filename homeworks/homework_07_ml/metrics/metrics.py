@@ -50,7 +50,6 @@ def presicion(y_true, y_pred):
     for i in range(y_true):
         if (y_true[i] == 0 and y_pred[i] == 1):
             FP += 1
-    # формула из лекции
     return TP / (FP + TP)
 
 
@@ -68,7 +67,9 @@ def recall(y_true, y_pred):
     for i in range(y_true):
         if (y_true[i] == 1 and y_pred[i] == 0):
             FN += 1
+
     # формула из лекции
+
     return TP / (TP + FN)
 
 
