@@ -11,12 +11,12 @@ class KNNRegressor:
 
     scaler = StandardScaler()
 
-    def __init__(self, n):
+    def __init__(self, n1):
         '''
         Конструктор
         :param n: число ближайших соседей, которые используются
         '''
-        self.n = n
+        self.n = n1
 
     def fit(self, X, y):
         '''
