@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import numpy as np
+from sklearn.metrics import mean_squared_error
 
 
 class DecisionStumpRegressor:
@@ -13,7 +15,9 @@ class DecisionStumpRegressor:
         Мы должны создать поля, чтобы сохранять наш порог th и ответы для
         x <= th и x > th
         '''
-        raise NotImplementedError
+        self.right = None
+        self.left = None
+        self.th = None
 
     def fit(self, X, y):
         '''
@@ -22,7 +26,23 @@ class DecisionStumpRegressor:
         :param y: целевая переменная (1, num_objects)
         :return: None
         '''
-        raise NotImplementedError
+        y_pred = np.zeros(y.shape)
+        mse = mean_squared_error(y, 0)
+        self.th = np.mean(X)
+        self.right = np.median(y[(y.size // 2) + 1:])
+        self.left = np.median(y[:(y.size // 2) + 1])
+        for i in range(len(X) - 1):
+            th = (X[i] + X[i + 1]) / 2
+            y_left = np.median(y[:i + 1])
+            y_pred[:i + 1] = y_left
+            y_right = np.median(y[i + 1:])
+            y_pred[i + 1:] = y_right
+            mse_1 = mean_squared_error(y, y_pred)
+            if mse >= mse_1:
+                self.th = th
+                self.right = y_right
+                self.left = y_left
+                mse = mse_1
 
     def predict(self, X):
         '''
@@ -30,4 +50,10 @@ class DecisionStumpRegressor:
         :param X: массив размера (1, num_objects)
         :return: массив, размера (1, num_objects)
         '''
-        raise NotImplementedError
+        y_pred = np.zeros(X.shape)
+        for x in X:
+            if x < self.th:
+                y_pred[x] = self.y_left
+            else:
+                y_pred[x] = self.y_right
+        return y_pred
