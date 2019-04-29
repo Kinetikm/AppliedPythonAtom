@@ -31,8 +31,8 @@ class DecisionStumpRegressor:
         qx = np.array([])
         for i in range(1, X.shape[0]):
             th = np.mean(X[i - 1:i + 1])
-            qxi = (np.var(y[:i]) * i + np.var(y[i:]) * (y.shape[0] - i)) / \
-                  y.shape[0]
+            qxi = (np.var(y[:i]) * i + np.var(y[i:]) * (
+                    y.shape[0] - i)) / y.shape[0]
             qx.append(qxi)
         idx = np.argmin(qx)
         self.th, self.rth, self.lth = X[idx], np.mean(y[:idx]), np.mean(
