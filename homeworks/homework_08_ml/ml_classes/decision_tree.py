@@ -114,7 +114,7 @@ class DecisionTreeClassifier:
         '''
         self.root = self.get_split(X, y)
         self.split(1)
-        #self.root = root
+        # self.root = root
 
     def help_predict(self, node, row):
         if row[node['index']] < node['value']:
