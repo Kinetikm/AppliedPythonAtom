@@ -32,11 +32,11 @@ class LogisticRegression:
 
     def regTest(self):
         if self.reg == 'L1':
-            r = self.alpha * np.sign(self.w)
+            r = self.alpha * np.sign(self.weights)
             return r
 
         if self.reg == 'L2':
-            r = self.alpha * self.w
+            r = self.alpha * self.weights
             return r
 
         return 0
