@@ -130,7 +130,7 @@ class DecisionTreeClassifier:
         if not current_tree:
             current_tree = Tree()
             self.init_tree = current_tree
-           #print("create")
+           
 
         print(best_th, best_index)
         current_tree.set_values(best_th, best_index)
@@ -154,7 +154,7 @@ class DecisionTreeClassifier:
         :param X: матрица объектов-признаков (num_objects, num_features)
         :return: вектор предсказанных вероятностей (num_objects, 1)
         '''
-        assert self.init_tree
+        #assert self.init_tree
 
     def predict(self, X, current_tree):
         '''
