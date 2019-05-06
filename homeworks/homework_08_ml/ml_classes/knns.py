@@ -39,7 +39,7 @@ class KNNRegressor:
             # TODO d =
 
             # посчитаю длину вектора (при вычитании получил матрицу, поэтому axis = 1)
-            d = np.linalg.nortm(t - self.x, axis=1) # ord = 2 стоит по-умолчанию
+            d = np.linalg.nortm(t - self.x, axis=1)  # ord = 2 стоит по-умолчанию
 
             # Возьмем индексы n элементов, расстояние до которых минимально
             # результат -> вектор из n элементов
@@ -51,4 +51,3 @@ class KNNRegressor:
             prediction = np.mean(self.y[idx])
             y.append(prediction)
         return y
-
