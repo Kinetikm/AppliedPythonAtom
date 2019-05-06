@@ -7,12 +7,12 @@ class KNNRegressor:
     Построим регрессию с помощью KNN. Классификацию писали на паре
     """
 
-    def __init__(self, n):
+    def __init__(self, k):
         '''
         Конструктор
-        :param n: число ближайших соседей, которые используются
+        :param k: число ближайших соседей, которые используются
         '''
-        raise NotImplementedError
+        self.k = k
 
     def fit(self, X, y):
         '''
@@ -20,7 +20,8 @@ class KNNRegressor:
         :param y: целевая переменная, матрица размерности (num_obj, 1)
         :return: None
         '''
-        raise NotImplementedError
+        self.x = X
+        self.y = y
 
     def predict(self, X):
         '''
@@ -36,10 +37,18 @@ class KNNRegressor:
             # Посчитаем расстояние от всех элементов в тренировочной выборке
             # до текущего примера -> результат - вектор размерности трейна
             # TODO d =
+
+            # посчитаю длину вектора (при вычитании получил матрицу, поэтому axis = 1)
+            d = np.linalg.nortm(t - self.x, axis=1) # ord = 2 стоит по-умолчанию
+
             # Возьмем индексы n элементов, расстояние до которых минимально
             # результат -> вектор из n элементов
             # TODO idx =
+            idx = np.argsort(d)[:self.k]
             # TODO
-            prediction = None
+
+            # усредняем значения, которые дали ближайшие соседи
+            prediction = np.mean(self.y[idx])
             y.append(prediction)
         return y
+
