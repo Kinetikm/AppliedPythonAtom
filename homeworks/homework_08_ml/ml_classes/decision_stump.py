@@ -29,13 +29,13 @@ class DecisionStumpRegressor:
         y_pred = np.zeros(y.shape)
         mse = mean_squared_error(y, 0)
         self.th = np.mean(X)
-        self.right = np.median(y[(y.size // 2) + 1:])
-        self.left = np.median(y[:(y.size // 2) + 1])
+        self.right = np.mean(y[(y.size // 2) + 1:])
+        self.left = np.mean(y[:(y.size // 2) + 1])
         for i in range(len(X) - 1):
             th = (X[i] + X[i + 1]) / 2
-            y_left = np.median(y[:i + 1])
+            y_left = np.mean(y[:i + 1])
             y_pred[:i + 1] = y_left
-            y_right = np.median(y[i + 1:])
+            y_right = np.mean(y[i + 1:])
             y_pred[i + 1:] = y_right
             mse_1 = mean_squared_error(y, y_pred)
             if mse >= mse_1:
