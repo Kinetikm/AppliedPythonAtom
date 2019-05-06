@@ -130,7 +130,7 @@ class DecisionTreeClassifier:
         if not current_tree:
             current_tree = Tree()
             self.init_tree = current_tree
-            print("create")
+           #print("create")
 
         print(best_th, best_index)
         current_tree.set_values(best_th, best_index)
@@ -155,22 +155,6 @@ class DecisionTreeClassifier:
         :return: вектор предсказанных вероятностей (num_objects, 1)
         '''
         assert self.init_tree
-        if not current_tree.left_tree and not current_tree.right_tree:
-            return np.array(
-                [list(current_tree.index.values()) for _ in
-                 range(X.shape[0])])
-        predict = np.ones((X.shape[0], len(self.classes)))
-        if X[X[:, current_tree.index] > current_tree.th].shape[0] != 0:
-            predict[X[:, current_tree.index] > current_tree.th] = \
-                self.predict_proba(
-                    X[X[:, current_tree.index] > current_tree.th],
-                    current_tree.left_tree)
-        if X[X[:, current_tree.index] <= current_tree.th].shape[0] != 0:
-            predict[X[:, self.init_tree.index] <= current_tree.th] = \
-                self.predict_proba(
-                    X[X[:, current_tree.index] <= current_tree.th],
-                    current_tree.right_tree)
-        return predict
 
     def predict(self, X, current_tree):
         '''
@@ -178,23 +162,3 @@ class DecisionTreeClassifier:
         :param X: матрица объектов-признаков (num_objects, num_features)
         :return: вектор предсказаний (num_objects, 1)
         '''
-        assert self.init_tree
-        if (current_tree == None):
-            current_tree = self.init_tree
-
-        if not current_tree.left and not current_tree.right:
-            return np.array([max(current_tree.index,
-                                 key=lambda x: current_tree.index[x])] *
-                            X.shape[0])
-        prediction = np.zeros((X.shape[0],))
-        if X[X[:, current_tree.index] > current_tree.th].shape[0] != 0:
-            prediction[X[:, current_tree.index] > current_tree.th] = \
-                self.predict(
-                    X[X[:, current_tree.index] > current_tree.th],
-                    current_tree.left)
-        if X[X[:, current_tree.index] <= current_tree.th].shape[0] != 0:
-            prediction[X[:, current_tree.index] <= current_tree.th] = \
-                self.predict(
-                    X[X[:, current_tree.index] <= current_tree.th],
-                    current_tree.right)
-        return prediction
