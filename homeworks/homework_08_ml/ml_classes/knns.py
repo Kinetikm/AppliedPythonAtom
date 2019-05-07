@@ -21,7 +21,7 @@ class KNNRegressor:
         :return: None
         '''
         self.x = X
-        self.y = y
+        self.y = y 
 
     def predict(self, X):
         '''
