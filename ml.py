@@ -21,11 +21,11 @@ class Model:
 
     def most_similar_id(self, id: int):
         try:
-            out = self.w2v.most_similar([str(id)], topn=1)
+            out = self.w2v.wv.most_similar([str(id)], topn=1)
         except KeyError:
             return None
         try:
-            return self.products[int(out[0])]
+            return self.products[int(out[0][0])]
         except KeyError:
             print("WTF")
             return None
