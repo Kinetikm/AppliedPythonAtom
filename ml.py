@@ -20,19 +20,23 @@ class Model:
                 pass
 
     def most_similar_id(self, id: int):
-        out = self.w2v.most_similar([str(id)], topn=1)
-        result = None
         try:
-            result = self.products[int(out[0])]
+            out = self.w2v.most_similar([str(id)], topn=1)
         except KeyError:
-            pass
-        return result
+            return None
+        try:
+            return self.products[int(out[0])]
+        except KeyError:
+            print("WTF")
+            return None
 
     def predict_output_id(self, id: int):
-        out = self.w2v.predict_output_word([str(id)], topn=1)
-        result = None
         try:
-            result = self.products[int(out[0][0])]
+            out = self.w2v.predict_output_word([str(id)], topn=1)
         except KeyError:
-            pass
-        return result
+            return None
+        try:
+            return self.products[int(out[0][0])]
+        except KeyError:
+            print("WTF")
+            return None
