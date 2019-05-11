@@ -1,52 +1,124 @@
-import re
-import sys
-import json
-import gzip
-import logging
-import itertools
-import pymorphy2
-import numpy as np
-import pandas as pd
-from annoy import AnnoyIndex
-from gensim.models.word2vec import Word2Vec
-import pickle as pkl
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import vk_api
+from vk_api.longpoll import VkLongPoll, VkEventType
+from random import randint
+from response import response
+#import MySQLdb
+import datetime
+import requests
+from login import isLogin, isAdmin, login
+from secret import tokenVK #вынес пароль в отдельный файл
+from admin import adminresponce
+import bs4
 
-Product_dict = pkl.load(open('Product_dict.pkl', 'rb'))
-data=pd.read_csv('data.csv',nrows=100000)
-data=data.applymap(str)
-data['id']=data['contact_id']+' '+data['shop_id']+' ' +data['product_category_id']
-data=data.drop(columns=['contact_id','shop_id','product_category_id'])
-model = Word2Vec.load('./hackaton.w2v_gensim3')
-model.similar_by_vector(model['1260627'] )
-data_storage = {i[1]['product_id']:i[1]['id'] for i in data.iterrows()}
-index_img_emb = AnnoyIndex(100)
-index_img_emb.load('./hackaton_annoy_30')
-map_id_hashimg = pkl.load(open('hackaton_map_id_to_hash_products.dict5', 'rb'))
-prod1 = pd.read_csv('prod111.csv')
-prod1.fillna(value='', inplace=True)
-prod1=prod1.applymap(str)
-prod1.drop(prod1.columns[prod1.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
+#from tokens import generateUsers, getTokens
+
+keyb="""{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "Nice answer!"
+      },
+      "color": "positive"
+    },
+      {
+        "action": {
+          "type": "text",
+          "label": "Normal answer."
+        },
+        "color": "positive"
+      }],
+    [{
+      "action": {
+        "type": "text",
+        "label": "Bad answer!"
+      },
+      "color": "default"
+    }]
+  ]
+}"""
+
+def _get_user_name_from_vk_id(user_id):
+    request = requests.get("https://vk.com/id"+str(user_id))
+    bs = bs4.BeautifulSoup(request.text, "html.parser")
+
+    user_name = str(bs.findAll("title")[0])
+    user_name = user_name.replace("<title>","")
+    return user_name.split()[0]
 
 
-def request_id(a=134832):
-    pr = data.loc[data['product_id'] == str(a)]
-    pr.reset_index(inplace=True, drop=False)
-    vector = pr['id'][0]
+def main():
+    badansw=0
+    normalansw=0
+    niceansw=0
 
-    vec = np.zeros(100)
-    for word in vector.split(' '):
-        if word in model:
-            vec += model[word]
+    tok = tokenVK()
+    vk_session = vk_api.VkApi(token=tok)
 
-    data_storage_norm1 = vec
-    annoy_res = list(index_img_emb.get_nns_by_vector(data_storage_norm1, 13, include_distances=True, search_k=10000))
-    print('\n\nСоседи:')
-    a = list()
-    for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 13):
-        image_id = map_id_hashimg[annoy_id]
-        # print(image_id)
-        # print(data_storage[image_id], 1 - annoy_sim ** 2 / 2)
-        a.append(list(prod1.loc[prod1['index'] == str(image_id)]['0']))
+    longpoll = VkLongPoll(vk_session)
+    vk = vk_session.get_api()
 
-    return a
+    for event in longpoll.listen():
+        if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
 
+            if isAdmin(str(event.user_id)):
+                try:
+                    text = (event.text).encode('utf-8')
+                    time = str(datetime.datetime.now())
+                    time = time[:19]
+                    print(str(event.user_id)+"  "+text)
+
+                    res = _get_user_name_from_vk_id(event.user_id)+", "+adminresponce(text)
+                    vk.messages.send(user_id = event.user_id, message = res, random_id = randint(0, 9999),keyboard=keyb)
+
+                except Exception as e:
+                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e.message))
+            elif isLogin(str(event.user_id)):
+                try:
+                    text = (event.text).encode('utf-8')
+                    time = str(datetime.datetime.now())
+                    time = time[:19]
+
+                    print(str(event.user_id)+"  "+text)
+                    if text == "Nice answer!":
+                        niceansw+=1
+                        res="Уже "+str(niceansw)+" nice answers"
+                    elif text == "Bad answer!":
+                        badansw+=1
+                        res="Уже "+str(badansw)+" bad answers"
+                    elif text == "Normal answer.":
+                        normalansw+=1
+                        res="Уже "+str(normalansw)+" normal answers"
+                    else:
+                        text = str(text.encode('base64'))
+                        text = text.replace("\n",'')
+                        res = _get_user_name_from_vk_id(event.user_id)+", "+response(text)#заглушка со стандартнами ответами, потом сюда прикрутим нормальные ответы
+                    vk.messages.send(user_id = event.user_id, message = res, random_id = randint(0, 9999),keyboard=keyb)
+                    #requests.post("http://danr0.pythonanywhere.com/api/req/", data = str(event.user_id)+"$"+str(text)+"$"+time)
+                except Exception as e:
+                #логирование ошибок
+                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e.message))
+            else:
+                try:
+                    text = (event.text).encode('utf-8')
+                    time = str(datetime.datetime.now())
+                    time = time[:19]
+                    res = login(str(event.user_id), text)
+                    vk.messages.send(user_id = event.user_id, message = res, random_id = randint(0, 9999),keyboard=keyb)
+                    print(str(event.user_id)+"  "+text)
+                    #text = str(text.encode('base64'))
+                    #text = text.replace("\n",'')
+                    #requests.post("http://danr0.pythonanywhere.com/api/req/", data = str(event.user_id)+"$"+str(text)+"$"+time)
+                except Exception as e:
+                    #логирование ошибок
+                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e.message))
+
+
+if __name__ == '__main__':
+    main()
