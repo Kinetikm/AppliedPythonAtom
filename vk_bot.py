@@ -48,10 +48,13 @@ class VkBot:
             return f"Готов к консультации, {self._USERNAME}!"
 
         else:
-            res1 = self.model.most_similar_id(int(message))
-            res2 = self.model.predict_output_id(int(message))
-            print(message)
-            return str(res1) + '\n' + str(res2)
+            try:
+                res1 = self.model.most_similar_id(int(message))
+                res2 = self.model.predict_output_id(int(message))
+                print(message)
+                return str(res1) + '\n' + str(res2)
+            except TypeError:
+                return "None"
 
     def _get_time(self):
         request = requests.get("https://my-calend.ru/date-and-time-today")
