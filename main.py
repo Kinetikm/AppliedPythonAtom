@@ -64,7 +64,6 @@ for event in longpoll.listen():
 
             bot = VkBot(event.user_id)
 
-
             if event.text[0] == "/":
                 write_msg(event.user_id, commander.do(event.text[1::]))
             else:

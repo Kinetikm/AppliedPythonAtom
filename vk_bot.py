@@ -13,22 +13,8 @@ class VkBot:
         self._COMMANDS = ["ПРИВЕТ", "ПОГОДА", "ВРЕМЯ", "ПОКА", "КОНСУЛЬТАЦИЯ", "НАЧАТЬ"]
         self._REGISTED_ID = []
 
-    def send_msg(self, send_id, message):
-        """
-        Отправка сообщения через метод messages.send
-        :param send_id: vk id пользователя, который получит сообщение
-        :param message: содержимое отправляемого письма
-        :return: None
-        """
-        return self.vk_api.messages.send(peer_id=send_id,
-                                             message=message,
-                                             keyboard=open("keyboards/default.json", "r", encoding="UTF-8").read())
-
-
-
-
     def _get_user_name_from_vk_id(self, user_id):
-        request = requests.get("https://vk.com/id"+str(user_id))
+        request = requests.get("https://vk.com/id" + str(user_id))
         bs = bs4.BeautifulSoup(request.text, "html.parser")
 
         user_name = self._clean_all_tag_from_str(bs.findAll("title")[0])
@@ -55,7 +41,7 @@ class VkBot:
         elif message.upper() == self._COMMANDS[3]:
             return f"Пока-пока, {self._USERNAME}!"
 
-        #Консультация
+        # Консультация
         elif message.upper() == self._COMMANDS[4]:
             return f"Готов к консультации, {self._USERNAME}!"
 
@@ -117,4 +103,3 @@ class VkBot:
     @staticmethod
     def ml_func():
         return
-
