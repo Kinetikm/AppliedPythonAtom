@@ -50,7 +50,8 @@ class VkBot:
         else:
             res1 = self.model.most_similar_id(int(message))
             res2 = self.model.predict_output_id(int(message))
-            return res1 + "\n" + res2
+            print(message)
+            return str(res1) + '\n' + str(res2)
 
     def _get_time(self):
         request = requests.get("https://my-calend.ru/date-and-time-today")
