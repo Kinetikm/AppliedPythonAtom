@@ -1,5 +1,6 @@
 import bs4 as bs4
 import requests
+from ml import Model
 
 
 class VkBot:
@@ -12,6 +13,7 @@ class VkBot:
 
         self._COMMANDS = ["ПРИВЕТ", "ПОГОДА", "ВРЕМЯ", "ПОКА", "КОНСУЛЬТАЦИЯ", "НАЧАТЬ"]
         self._REGISTED_ID = []
+        self.model = Model()
 
     def _get_user_name_from_vk_id(self, user_id):
         request = requests.get("https://vk.com/id" + str(user_id))
@@ -46,7 +48,9 @@ class VkBot:
             return f"Готов к консультации, {self._USERNAME}!"
 
         else:
-            return "Не понимаю, о чем вы..."
+            res1 = self.model.most_similar_id(int(message))
+            res2 = self.model.predict_output_id(int(message))
+            return res1 + "\n" + res2
 
     def _get_time(self):
         request = requests.get("https://my-calend.ru/date-and-time-today")
