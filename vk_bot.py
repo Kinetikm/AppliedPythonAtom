@@ -5,12 +5,27 @@ import requests
 class VkBot:
 
     def __init__(self, user_id):
-        print("Создан объект бота!")
+        print(f"Создан объект бота для пользователя {user_id}!")
 
         self._USER_ID = user_id
         self._USERNAME = self._get_user_name_from_vk_id(user_id)
 
-        self._COMMANDS = ["ПРИВЕТ", "ПОГОДА", "ВРЕМЯ", "ПОКА"]
+        self._COMMANDS = ["ПРИВЕТ", "ПОГОДА", "ВРЕМЯ", "ПОКА", "КОНСУЛЬТАЦИЯ", "НАЧАТЬ"]
+        self._REGISTED_ID = []
+
+    def send_msg(self, send_id, message):
+        """
+        Отправка сообщения через метод messages.send
+        :param send_id: vk id пользователя, который получит сообщение
+        :param message: содержимое отправляемого письма
+        :return: None
+        """
+        return self.vk_api.messages.send(peer_id=send_id,
+                                             message=message,
+                                             keyboard=open("keyboards/default.json", "r", encoding="UTF-8").read())
+
+
+
 
     def _get_user_name_from_vk_id(self, user_id):
         request = requests.get("https://vk.com/id"+str(user_id))
@@ -23,7 +38,9 @@ class VkBot:
     def new_message(self, message):
 
         # Привет
-        if message.upper() == self._COMMANDS[0]:
+        if message.upper() == self._COMMANDS[0] or message.upper() == self._COMMANDS[5]:
+            if self._USER_ID not in self._REGISTED_ID:
+                self._REGISTED_ID.append(self._USER_ID)
             return f"Привет-привет, {self._USERNAME}!"
 
         # Погода
@@ -38,8 +55,12 @@ class VkBot:
         elif message.upper() == self._COMMANDS[3]:
             return f"Пока-пока, {self._USERNAME}!"
 
+        #Консультация
+        elif message.upper() == self._COMMANDS[4]:
+            return f"Готов к консультации, {self._USERNAME}!"
+
         else:
-            return "Не понимаю о чем вы..."
+            return "Не понимаю, о чем вы..."
 
     def _get_time(self):
         request = requests.get("https://my-calend.ru/date-and-time-today")
@@ -92,3 +113,8 @@ class VkBot:
         result = result + weather.strip()
 
         return result
+
+    @staticmethod
+    def ml_func():
+        return
+
