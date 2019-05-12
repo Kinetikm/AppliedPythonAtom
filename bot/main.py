@@ -25,7 +25,7 @@ prod1.drop(prod1.columns[prod1.columns.str.contains('unnamed', case=False)], axi
 
 
 # i) Рекомендуем похожие товары по id-шнику .возвращает имена  в ответ на id
-def request_id(a=77426):
+def request_id(a=134832):
     pr = data.loc[data['product_id'] == str(a)]
     pr.reset_index(inplace=True, drop=False)
     vector = str(pr['id'])
@@ -36,6 +36,7 @@ def request_id(a=77426):
 
     data_storage_norm1 = vec
     annoy_res = list(index_img_emb.get_nns_by_vector(data_storage_norm1, 13, include_distances=True, search_k=10000))
+    print('\n\nСоседи:')
     a = list()
     for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 13):
         image_id = map_id_hashimg[annoy_id]
@@ -47,7 +48,7 @@ def request_id(a=77426):
 
 
 # iii) Обрабатываем текстовый запрос вместе id-шника. возвращает имена  в ответ на на запрос в виде строки str
-def poisk_id(zapros='пакет'):
+def poisk_id(zapros='Колдрекс'):
     zapros = str(zapros)
     lst = []
     lst_id = []
@@ -67,6 +68,7 @@ def poisk_id(zapros='пакет'):
 
     data_storage_norm1 = vec
     annoy_res = list(index_img_emb.get_nns_by_vector(data_storage_norm1, 13, include_distances=True, search_k=10000))
+    # print('\n\nСоседи:')
     a = list()
     for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 13):
         image_id = map_id_hashimg[annoy_id]
@@ -78,10 +80,10 @@ def poisk_id(zapros='пакет'):
     # Товары, предлагаемые как заменители гарантированно из той же подкатегории
 
 
-def find_similar_subgroup(a=25965):
+def find_similar_subgroup(a=134832):
     pr = data.loc[data['product_id'] == str(a)]
     pr.reset_index(inplace=True, drop=False)
-    vector = str(pr['id'])
+    vector = pr['id'][0]
     group = pr['product_sub_category_id'][0]
     # print(group)
     vec = np.zeros(100)
@@ -90,10 +92,10 @@ def find_similar_subgroup(a=25965):
             vec += model[word]
 
     data_storage_norm1 = vec
-    annoy_res = list(index_img_emb.get_nns_by_vector(data_storage_norm1, 1000, include_distances=True, search_k=10000))
+    annoy_res = list(index_img_emb.get_nns_by_vector(data_storage_norm1, 500, include_distances=True, search_k=10000))
     a = list()
     d = (data.loc[data['product_sub_category_id'] == str(group)])
-    for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 1000):
+    for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 500):
         image_id = map_id_hashimg[annoy_id]
         # print(image_id)
         # print(data_storage[image_id], 1 - annoy_sim ** 2 / 2)
@@ -103,7 +105,7 @@ def find_similar_subgroup(a=25965):
 
 
 # Рекомендуем комплиментарные товары по id-шнику - 1 балл
-def request_id_1(a=77426):
+def request_id_1(a=134832):
     pr = data.loc[data['product_id'] == str(a)]
     pr.reset_index(inplace=True, drop=False)
     vector = str(pr['id'])
@@ -115,6 +117,7 @@ def request_id_1(a=77426):
 
     data_storage_norm1 = vec
     annoy_res = list(index_img_emb1.get_nns_by_vector(data_storage_norm1, 13, include_distances=True, search_k=10000))
+    # print('\n\nСоседи:')
     a = list()
     for annoy_id, annoy_sim in itertools.islice(zip(*annoy_res), 13):
         image_id = map_id_hashimg1[annoy_id]

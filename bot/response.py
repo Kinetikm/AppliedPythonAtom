@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from main import request_id, poisk_id,find_similar_subgroup, request_id_1
 
 def response(text):
     #text = text.decode('utf-8','ignore')
-    text = text.decode('base64')
-    text = text.decode('utf-8','ignore')
+    text = str(text)
     text = text.lower()
     print(text)
     #text = str(text)
@@ -18,6 +18,13 @@ def response(text):
         return u"Это вопрос!"
     if u"кто ты" in text or u"помощь" in text or u"help" in text:
         return "я бот"
-    return u"Я пока такое не умею"
+    #s = poisk_id(zapros=str(text))
+    if text.isdigit():
+        s = "\nпохожие товары: "+str(request_id(a=int(text)))
+        s = s+"\n\nзаменители: "+str(find_similar_subgroup(a=int(text)))
+        s = s+"\n\nкомплиментарные товары: "+str(request_id_1(a=int(text)))
+        return str(s)
+    return str(poisk_id(zapros=text))
+    #return u"Я пока такое не умею"
 
 #print(response("0L/RgNC40LLQtdGC"))

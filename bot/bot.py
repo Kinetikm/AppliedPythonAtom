@@ -8,7 +8,7 @@ from response import response
 import datetime
 import requests
 from login import isLogin, isAdmin, login
-from secret import tokenVK #вынес пароль в отдельный файл
+#from secret import tokenVK #вынес пароль в отдельный файл
 from admin import adminresponce
 import bs4
 
@@ -54,8 +54,9 @@ def main():
     badansw=0
     normalansw=0
     niceansw=0
+    print("start")
 
-    tok = tokenVK()
+    tok = 'd1a707509d3a49d79cd7c42b226d456955da013db30f583082e085bbbafda526a79e11267aa674da7f0f4'
     vk_session = vk_api.VkApi(token=tok)
 
     longpoll = VkLongPoll(vk_session)
@@ -63,23 +64,25 @@ def main():
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
+          
 
             if isAdmin(str(event.user_id)):
                 try:
-                    text = (event.text).encode('utf-8')
+                    text = str(event.text)#.encode('utf-8')
+                    
                     time = str(datetime.datetime.now())
                     time = time[:19]
                     print(str(event.user_id)+"  "+text)
 
-                    res = _get_user_name_from_vk_id(event.user_id)+", "+adminresponce(text)
+                    res = str(_get_user_name_from_vk_id(event.user_id))+", "+adminresponce(text)
                     vk.messages.send(user_id = event.user_id, message = res, random_id = randint(0, 9999),keyboard=keyb)
 
                 except Exception as e:
-                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
-                    print(str(e.message))
+                    #requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e))
             elif isLogin(str(event.user_id)):
                 try:
-                    text = (event.text).encode('utf-8')
+                    text = str(event.text)#.encode('utf-8')
                     time = str(datetime.datetime.now())
                     time = time[:19]
 
@@ -94,18 +97,18 @@ def main():
                         normalansw+=1
                         res="Уже "+str(normalansw)+" normal answers"
                     else:
-                        text = str(text.encode('base64'))
+                        #text = str(text.encode('base64'))
                         text = text.replace("\n",'')
                         res = _get_user_name_from_vk_id(event.user_id)+", "+response(text)#заглушка со стандартнами ответами, потом сюда прикрутим нормальные ответы
                     vk.messages.send(user_id = event.user_id, message = res, random_id = randint(0, 9999),keyboard=keyb)
                     #requests.post("http://danr0.pythonanywhere.com/api/req/", data = str(event.user_id)+"$"+str(text)+"$"+time)
                 except Exception as e:
                 #логирование ошибок
-                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
-                    print(str(e.message))
+                    #requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e))
             else:
                 try:
-                    text = (event.text).encode('utf-8')
+                    text = str(event.text)#.encode('utf-8')
                     time = str(datetime.datetime.now())
                     time = time[:19]
                     res = login(str(event.user_id), text)
@@ -116,9 +119,10 @@ def main():
                     #requests.post("http://danr0.pythonanywhere.com/api/req/", data = str(event.user_id)+"$"+str(text)+"$"+time)
                 except Exception as e:
                     #логирование ошибок
-                    requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
-                    print(str(e.message))
+                    #requests.post("http://danr0.pythonanywhere.com/api/err/", data = str(event.user_id)+"$"+str(e)+"$"+time)
+                    print(str(e))
 
 
 if __name__ == '__main__':
+    print("dd")
     main()

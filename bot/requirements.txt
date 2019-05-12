@@ -1,0 +1,10 @@
+more-itertools
+numpy
+pandas
+annoy
+gensim
+vk-api
+datetime
+random2
+requests
+bs4
