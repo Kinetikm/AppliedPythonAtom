@@ -49,12 +49,16 @@ class VkBot:
 
         else:
             try:
-                res1 = self.model.most_similar_id(int(message))
-                res2 = self.model.predict_output_id(int(message))
-                print(message)
-                return str(res1) + '\n' + str(res2)
-            except TypeError:
-                return "None"
+                res1 = "Похожий товар: " + \
+                       str(self.model.most_similar_id(int(message))) + "\n"
+            except Exception as e:
+                res1 = "Похожий товар не найден " + str(e) + "\n"
+            try:
+                res2 = "Дополнительный товар: " + \
+                       str(self.model.predict_output_id(int(message)))
+            except Exception as e:
+                res2 = "Дополнительный товар не найден " + str(e) + "\n"
+            return res1 + res2
 
     def _get_time(self):
         request = requests.get("https://my-calend.ru/date-and-time-today")
@@ -85,7 +89,7 @@ class VkBot:
         return result
 
     @staticmethod
-    def _get_weather(city: str = "санкт-петербург") -> list:
+    def _get_weather(city: str = "москва") -> list:
 
         request = requests.get("https://sinoptik.com.ru/погода-" + city)
         b = bs4.BeautifulSoup(request.text, "html.parser")
